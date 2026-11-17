@@ -35,12 +35,12 @@ Sources: 8 (S001, S004, S006, S009, S013, S026, S044, S047).
 Sources: 7 (S001, S004, S019, S026, S027, S044, S047).
 - 2014-07: With an easy Fed, stay at the party until the rate moves. "You don’t have to move till they raise rates." (S027)
 - 2015-01: "every bone in my body said this is a bad risk reward, but I can't figure out how it's going to end." (S001) and "I don't know when it's going to happen." (S001)
-- 2019-06: Political cycle timing from his first boss, buy two years before the general election and sell on it (S019, quoting his first boss in 1976, paraphrase).
+- 2022-09: Political cycle timing from his first boss, buy two years before the general election and sell on it (S019, quoting his first boss in 1976, paraphrase).
 - 2023-06: A delay does not change the odds. "I haven't changed mine at all the fact that it hasn't happened yet doesn't change the probability" (S047)
 - 2024-11: On the fiscal reckoning, "My best guess would be a failed auction, but honestly, it could be six months, it could be six years." (S026) He will not trade it short term: "As a practitioner, it's something I can't be obsessed with on a three to six month basis." (S026)
 
 ## 5. Interest rates and bonds
-Sources: 12 (S001, S004, S005, S006, S013, S016, S020, S026, S043, S044, S048, S027).
+Sources: 11 (S001, S004, S005, S006, S013, S016, S020, S026, S043, S044, S048).
 - 1981, told 2015-01: put 50 percent of new capital into 30-year Treasuries at 14 percent because Volcker would not let inflation run (S001).
 - 2009: "I am salivating to short the bond market in major size." (S005) and "I don’t want to be six months early and trash myself, but I’m salivating." (S005)
 - 2018-05 and 2021-02: Long rates are the price that was taken away. "The central bank has bastardized, probably, the most important price in the world, which is the cost of money, particularly at the long end." (S013)
