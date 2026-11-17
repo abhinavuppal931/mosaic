@@ -68,7 +68,7 @@ Built from the Pershing Square Holdings annual and interim letters (2014 to 2026
 - "We generally don't like to invest in controlled companies." (S080)
 - "We believe in independent boards of directors." (S081)
 - Supporting sources: 5 (S032, S038, S066, S080, S081). Confidence: high.
-- His chiseled principles list management and governance as "typically no controlling shareholder" (paraphrase of the S038 and S066 decks). At the 2025 Howard Hughes proposal he capped his own voting power below 50% and offered a majority-of-the-minority vote (S032).
+- His chiseled principles add that there is typically no controlling shareholder (paraphrase of the S038 and S066 decks). At the 2025 Howard Hughes proposal he capped his own voting power below 50% and offered a majority-of-the-minority vote (S032).
 
 ## Asymmetric hedges
 
@@ -116,7 +116,7 @@ Built from the Pershing Square Holdings annual and interim letters (2014 to 2026
 ### 17. Own only simple, predictable, free-cash-flow-generative businesses whose cash you can model for ten to twenty years.
 
 - "If you can't build a model of the next, you know, reasonable period of time of a business, 10, 15, 20 years, I don't think you can come up with the value for it." (S080)
-- "These investments typically end up in the "Don't Know" pile." (S001)
+- "These investments typically end up in the Don't Know pile." (S001)
 - Supporting sources: 12 (S001, S005, S006, S011, S033, S038, S044, S052, S064, S078, S079, S080). Confidence: high.
 
 ### 18. Avoid businesses exposed to things you cannot control, and never pair a great business with a weak balance sheet.
