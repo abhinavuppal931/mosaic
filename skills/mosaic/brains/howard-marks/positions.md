@@ -34,7 +34,7 @@ Sources: 27 (S003, S005, S009, S011, S013, S021, S025, S034, S037, S044, S047, S
 - 2023-10: "This isn't a call for dramatically increased defensiveness." (S021)
 - 2025-01: "the markets, while high-priced and perhaps frothy, don't seem nutty to me." (S013)
 - 2025-04, tariff selloff: "Now, with heretofore unimaginable risks on the table and priced in, it's appropriate to sniff around for bargains: the babies that are being thrown out with the bath water. We're on the case." (S011)
-- 2025-08: moved the U.S. market from elevated to worrisome; the value proposition was less appealing than at year-end 2024, "and even then, it wasn't great" (S009, paraphrase with his words). He said overvaluation can never be proved and no correction is implied soon (S009).
+- 2025-08: moved the U.S. market from elevated to worrisome; the value proposition was less appealing than at year-end 2024, "and even then, it wasn't great" (S009). He said overvaluation can never be proved and no correction is implied soon (S009).
 - Newest, 2025-12 to 2026-04: exuberance around AI is certain, irrationality cannot be known (S005, paraphrase); in private credit, newly elevated skepticism should create better opportunities than those passed up in the boom (S003, paraphrase).
 
 ## 3. The pendulum: psychology swings far more than fundamentals
@@ -201,7 +201,7 @@ Sources: 15 (S020, S021, S033, S034, S037, S047, S051, S054, S064, S076, S081, S
 - 2019-06: "if the Fed wards off a series of little recessions, mightn't that just mean that, when the ability to keep doing so reaches its limit, the one that finally arrives will be a doozy?" (S051)
 - 2007-09: "each bailout encourages risk taking and thus increases the likelihood that another will be needed." (S112) 2008-07: "Capitalism can produce great results, but participants have to be allowed to both win and lose." (S106)
 - 2016-05: "Central bankers can't create economic progress; they can only stimulate activity temporarily." (S064)
-- 2012-09: investors pushed into risk by near-zero rates are, in his late father-in-law's phrase, "handcuff volunteers" (S081, paraphrase).
+- 2012-09: investors pushed into risk by near-zero rates are what his late father-in-law called handcuff volunteers (S081).
 - Humility, 2021-07: "I want to make clear that I don't think I know better than the people who run the Fed." (S034) 2024-01: "I have no idea what the Fed will do." (S020)
 
 ## 18. Inflation
