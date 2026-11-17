@@ -167,14 +167,20 @@ export const capabilityName = (c) => CAPABILITIES[String(c).split(':')[0]] || St
 /** "Leans wait · 7" */
 export const leanChip = (short, score) => `Leans ${short} · ${score}`;
 
-/** "Three agree, three partly, one disagrees." from vote counts. */
-export function voteCounts({ agrees = 0, partly = 0, disagrees = 0 }) {
+/** "Three agree, three partly agree, one disagrees." from agreement counts (core's words as keys). */
+export function voteCounts(c) {
+  const agrees = c.agrees || 0, partly = c['partly agrees'] || 0, disagrees = c.disagrees || 0, abstains = c.abstains || 0, none = c.none || 0;
   const total = agrees + partly + disagrees;
-  if (total && agrees === total) return `All ${word(total)} agree.`;
   const parts = [];
-  if (agrees) parts.push(`${word(agrees)} ${agrees === 1 ? 'agrees' : 'agree'}`);
-  if (partly) parts.push(`${word(partly)} partly ${partly === 1 ? 'agrees' : 'agree'}`);
-  if (disagrees) parts.push(`${word(disagrees)} ${disagrees === 1 ? 'disagrees' : 'disagree'}`);
+  if (total && agrees === total) parts.push(`all ${word(total)} who scored it agree`);
+  else {
+    if (agrees) parts.push(`${word(agrees)} ${agrees === 1 ? 'agrees' : 'agree'}`);
+    if (partly) parts.push(`${word(partly)} partly ${partly === 1 ? 'agrees' : 'agree'}`);
+    if (disagrees) parts.push(`${word(disagrees)} ${disagrees === 1 ? 'disagrees' : 'disagree'}`);
+  }
+  if (abstains) parts.push(`${word(abstains)} called it too hard`);
+  if (none) parts.push(`${word(none)} did not score it`);
+  if (total && agrees === total && !abstains && !none) return `All ${word(total)} agree.`;
   return parts.length ? `${capFirst(parts.join(', '))}.` : '';
 }
 

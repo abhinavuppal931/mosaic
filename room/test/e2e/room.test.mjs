@@ -43,7 +43,7 @@ const READY = {
   'round 1, first cards': () => document.querySelector('.seat.live')?.dataset.seat === 'munger',
   'round 1': () => document.querySelector('.seat.live')?.dataset.seat === 'burry',
   cruxes: () => Boolean(document.querySelector('.crux .sides')),
-  lean: () => Boolean(document.querySelector('.lean-card:not(.sealed)')),
+  lean: null, // lean.json lands during Round 1, but the lean stays sealed until Round 2
   'round 2, first cards': () => /answering Stan Druckenmiller/.test(document.querySelector('.speech .ctx')?.textContent || '') && document.querySelector('.seat.live')?.dataset.seat === 'burry',
   'round 2': () => document.querySelector('.seat.live')?.dataset.seat === 'taleb',
   'round 3, first cards': () => document.querySelector('.seat.live')?.dataset.seat === 'munger',
@@ -91,7 +91,11 @@ test('the live view follows the session files from the brief to the verdict', { 
         assert.equal(await page.locator('.lean-card.sealed').count(), 1, 'the lean stays sealed in round 1');
         assert.equal(await page.locator('.heat .cell:not(.empty)').count(), 8);
       }
-      if (ph.name === 'lean') assert.equal(await page.locator('.lean-card:not(.sealed) .kicker').textContent(), 'Your lean, revealed this round');
+      if (ph.name === 'lean') {
+        await page.waitForTimeout(400);
+        assert.equal(await page.locator('.lean-card.sealed').count(), 1, 'still sealed while Round 1 is on screen');
+      }
+      if (ph.name === 'round 2, first cards') assert.equal(await page.locator('.lean-card:not(.sealed) .kicker').textContent(), 'Your lean, revealed this round');
       if (ph.name === 'cruxes') assert.match(await page.locator('.crux .q').textContent(), /here to stay/);
       if (ph.name === 'round 2, first cards') {
         assert.equal(await page.locator('.seat.live').getAttribute('data-seat'), 'burry');

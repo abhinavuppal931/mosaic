@@ -3,7 +3,7 @@
 // then shows the verdict. Zero dependencies; plain HTML, CSS and JS in public/.
 //
 //   node room/server.js [--session <dir>] [--sessions <dir>] [--home <dir>] [--journal <dir>]
-//                       [--roster <file>] [--port 4731] [--host 127.0.0.1]
+//                       [--roster <file>] [--scoring-config <file>] [--port 4731] [--host 127.0.0.1]
 //
 // With --session it shows that one folder. Otherwise it follows the newest council under the
 // sessions folder (<home>/sessions), so a council started after the Room opens shows up by itself.
@@ -14,7 +14,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readSession, folderSignature, latestSession } from './lib/session.js';
 import { seatResolver } from './lib/seats.js';
-import { buildModel } from './lib/model.js';
+import { buildModel, DEFAULT_CONFIG } from './lib/model.js';
 import { journalStatus, saveSession, listJournal, journalFile, journalKey } from './lib/journal.js';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -44,11 +44,29 @@ export function parseOptions(argv = [], env = process.env) {
     sessions: path.resolve(String(o.sessions || path.join(home, 'sessions'))),
     journal: path.resolve(String(o.journal || env.MOSAIC_JOURNAL || path.join(home, 'journal'))),
     roster: o.roster ? path.resolve(String(o.roster)) : fs.existsSync(rosterDefault) ? rosterDefault : null,
+    scoringConfig: path.resolve(String(o.scoringConfig || path.join(PLUGIN_ROOT, 'scripts', 'scoring.config.json'))),
     port: Number(o.port ?? env.MOSAIC_ROOM_PORT ?? DEFAULT_PORT),
     host: String(o.host || env.MOSAIC_ROOM_HOST || '127.0.0.1'),
     pollMs: Number(o.poll || 400),
     quiet: Boolean(o.quiet),
   };
+}
+
+/**
+ * Core's scoring thresholds (scripts/scoring.config.json); the Room uses agreement.disagreeAtOrBelow.
+ * Falls back to the model's defaults when core is not installed next to the Room.
+ */
+export function loadScoringConfig(file, log = () => {}) {
+  if (!file || !fs.existsSync(file)) return DEFAULT_CONFIG;
+  try {
+    const c = JSON.parse(fs.readFileSync(file, 'utf8'));
+    const t = c?.agreement?.disagreeAtOrBelow;
+    if (typeof t !== 'number') throw new Error('agreement.disagreeAtOrBelow is missing');
+    return { ...DEFAULT_CONFIG, agreement: { ...DEFAULT_CONFIG.agreement, ...c.agreement } };
+  } catch (e) {
+    log(`scoring config at ${file} could not be read (${e.message}); using the defaults`);
+    return DEFAULT_CONFIG;
+  }
 }
 
 function loadRoster(file, log) {
@@ -73,6 +91,7 @@ export async function startServer(opts = {}) {
   const o = { ...parseOptions([], {}), ...opts };
   const log = o.quiet ? () => {} : (m) => process.stderr.write(`[room] ${m}\n`);
   const roster = loadRoster(o.roster, log);
+  const cfg = loadScoringConfig(o.scoringConfig, log);
   const resolve = seatResolver(roster);
   const cache = new Map();
   const clients = new Set();
@@ -110,7 +129,7 @@ export async function startServer(opts = {}) {
     s.journal = { ...journalStatus(o.journal, s.council) };
     let model;
     try {
-      model = buildModel(s, { roster });
+      model = buildModel(s, { roster, cfg });
     } catch (e) {
       state = { ok: false, waiting: true, message: 'The session files could not be read yet.', watching: dir, problems: [{ file: dir, message: e.message }] };
       log(`model error: ${e.stack || e.message}`);
@@ -194,7 +213,7 @@ export async function startServer(opts = {}) {
       const s = readSession(dir, { resolve, cache });
       if (!s.verdict) return send(res, 409, { ok: false, error: 'The council has not reached a verdict yet.' });
       try {
-        const { key, doc } = saveSession(o.journal, s, { roster });
+        const { key, doc } = saveSession(o.journal, s, { roster, cfg });
         log(`journaled ${key} to ${journalFile(o.journal, key)}`);
         tick(true);
         return send(res, 200, { ok: true, key, file: journalFile(o.journal, key), entries: doc.entries.length, nextRecheck: doc.next_recheck });

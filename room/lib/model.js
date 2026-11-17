@@ -34,15 +34,32 @@ export const optShort = (o) => {
 };
 
 /**
- * Weighted mean per option over the seats that scored it (abstentions skipped), rounded to one
- * decimal exactly like core's scripts/lib/scoring.mjs. `state` is { seatKey: { scores, abstain } }.
+ * The thresholds the Room needs from core's scripts/scoring.config.json. The server reads that
+ * file and passes it in; this copy is only the fallback for running the Room without core.
+ */
+export const DEFAULT_CONFIG = { agreement: { disagreeAtOrBelow: 4 } };
+
+/**
+ * The jury: seats that count toward the option scores. Like core's scoringSet, a seat counts
+ * only when it did not abstain and scored every option, so every option is judged by the same seats.
+ */
+export function jury(options, state) {
+  return Object.entries(state)
+    .filter(([, st]) => st && !st.abstain && options.every((o) => isNum(st.scores?.[o.id])))
+    .map(([seat]) => seat);
+}
+
+/**
+ * Weighted mean per option over the jury, rounded to one decimal exactly like core's
+ * scripts/lib/scoring.mjs. `state` is { seatKey: { scores, abstain } }.
  */
 export function councilScores(options, state, weights = {}) {
+  const seats = jury(options, state);
   return options.map((o) => {
     let ws = 0, sum = 0;
     const vals = [];
-    for (const [seat, st] of Object.entries(state)) {
-      if (!st || st.abstain || !isNum(st.scores?.[o.id])) continue;
+    for (const seat of seats) {
+      const st = state[seat];
       const w = weights[seat]?.weight ?? (isNum(weights[seat]) ? weights[seat] : 1);
       ws += w;
       sum += w * st.scores[o.id];
@@ -74,19 +91,35 @@ export function seatTop(scores, options, rec = null) {
 }
 
 /**
- * Where a seat stands on the recommended option (ROOM-DESIGN.md):
- * agrees when its top option is the recommended one, disagrees when it scores the
- * recommended option 4 or below, partly agrees otherwise.
+ * Where a seat stands on the recommended option, in core's words (scores.json
+ * scorecard[].agreement): "agrees" when its top-scored option is the recommended one (ties
+ * count), "disagrees" when it scores the recommended option at or below the configured
+ * threshold, else "partly agrees"; "abstains" for TOO HARD; null with no card or no score on
+ * the recommended option. Derived from scores, never from the VOTE words.
  */
-export function agreementOf(scores, options, rec) {
-  if (!rec || !isNum(scores?.[rec])) return null;
-  if (seatTop(scores, options, rec) === rec) return 'agrees';
-  return scores[rec] <= 4 ? 'disagrees' : 'partly';
+export function agreementOf(st, rec, cfg = DEFAULT_CONFIG) {
+  if (!st) return null;
+  if (st.abstain) return 'abstains';
+  const scores = st.scores || {};
+  if (!rec || !isNum(scores[rec])) return null;
+  const top = Math.max(...Object.values(scores).filter(isNum));
+  if (scores[rec] === top) return 'agrees';
+  if (scores[rec] <= cfg.agreement.disagreeAtOrBelow) return 'disagrees';
+  return 'partly agrees';
 }
-export const AGREEMENT_TEXT = { agrees: 'Agrees', partly: 'Partly agrees', disagrees: 'Disagrees' };
-const normAgreement = (v) => {
-  const s = String(v || '').toLowerCase();
-  return s.startsWith('agree') ? 'agrees' : s.startsWith('partly') ? 'partly' : s.startsWith('disagree') ? 'disagrees' : null;
+export const AGREEMENTS = ['agrees', 'partly agrees', 'disagrees', 'abstains'];
+export const AGREEMENT_TEXT = { agrees: 'Agrees', 'partly agrees': 'Partly agrees', disagrees: 'Disagrees', abstains: 'Too hard to call' };
+/** CSS class for each agreement (null: no score on the recommended option). */
+export const agreementClass = (a) => ({ agrees: 'agrees', 'partly agrees': 'partly', disagrees: 'disagrees', abstains: 'abstain' })[a] || 'none';
+/** Read an agreement value written elsewhere: exact core words, or close variants. */
+export const normAgreement = (v) => {
+  if (v === null || v === undefined) return null;
+  const s = String(v).toLowerCase().replace(/[_-]+/g, ' ').trim();
+  if (/^partly/.test(s)) return 'partly agrees';
+  if (/^disagree/.test(s)) return 'disagrees';
+  if (/^abstain/.test(s)) return 'abstains';
+  if (/^agree/.test(s)) return 'agrees';
+  return `unknown: ${v}`;
 };
 
 /** Heat level 0 to 4 for a score: the fill is a function of the score only. */
@@ -216,7 +249,7 @@ export function beatsOf(s) {
   return beats;
 }
 
-function context(s, roster) {
+function context(s, roster, cfg = DEFAULT_CONFIG) {
   const council = s.council;
   const seats = council.seats.map((k) => ({ ...seatInfo(k, roster), weight: council.weights?.[k]?.weight ?? (isNum(council.weights?.[k]) ? council.weights[k] : 1) }));
   const pos = seatPositions(seats.length);
@@ -224,7 +257,7 @@ function context(s, roster) {
   const options = council.options.map((o) => ({ id: o.id, label: o.label, short: optShort(o), kind: o.kind || 'act' }));
   const factsById = new Map((s.pack?.facts || []).map((f) => [f.id, f]));
   const info = (k) => seats.find((x) => x.key === k) || seatInfo(k, roster);
-  return { s, council, seats, options, factsById, info, roundsTotal: council.mode === 'quick' ? 2 : 3, ev: evidence(s.pack) };
+  return { s, council, seats, options, factsById, info, cfg, recheck: Boolean(council.recheckOf), roundsTotal: council.mode === 'quick' ? 2 : 3, ev: evidence(s.pack) };
 }
 
 function nextText(ctx, beat, beats, bi) {
@@ -250,23 +283,29 @@ function stepText(ctx, beat) {
 }
 
 function leanCard(ctx, totals, revealed) {
-  const { s, options } = ctx;
-  if (!s.lean || !revealed) return { state: 'sealed', label: 'Your lean', title: 'Your lean stays sealed for now', body: 'The council scores the first round without knowing your view, to keep it honest.' };
+  const { s, options, recheck } = ctx;
+  if (!s.lean || !revealed) {
+    return recheck
+      ? { state: 'sealed', label: 'The last verdict', title: 'The last verdict stays sealed for now', body: 'This is a re-check. The council scores the first round without knowing what it decided last time, to keep it honest.' }
+      : { state: 'sealed', label: 'Your lean', title: 'Your lean stays sealed for now', body: 'The council scores the first round without knowing your view, to keep it honest.' };
+  }
   if (s.lean.option === null || s.lean.option === undefined) return { state: 'none', label: 'Your lean', title: 'You did not share a lean', body: 'So there was nothing to sway the council.' };
   const o = options.find((x) => x.id === s.lean.option);
   const ranked = totals.filter((t) => isNum(t.score)).sort((a, b) => b.score - a.score);
   const rank = ranked.findIndex((t) => t.id === o.id) + 1;
   const now = totals.find((t) => t.id === o.id)?.score;
-  const before = s.rounds[1] ? councilScores([o], stateAt(s.rounds, 1), s.council.weights).find((t) => t.id === o.id)?.score : null;
-  let body = 'The first round was scored without knowing your view, to keep it honest.';
+  const before = s.rounds[1] ? councilScores(options, stateAt(s.rounds, 1), s.council.weights).find((t) => t.id === o.id)?.score : null;
+  const shared = recheck ? 'it was shown' : 'your view was shared';
+  let body = recheck ? 'The first round was scored without knowing the last verdict, to keep it honest.' : 'The first round was scored without knowing your view, to keep it honest.';
   if (isNum(before) && isNum(now) && roundNums(s.rounds).some((n) => n >= 2)) {
     const d = r1(now - before);
-    body += d === 0 ? ' Since your view was shared, its score has not moved.' : ` Since your view was shared, that choice ${d > 0 ? 'gained' : 'lost'} ${C.f1(Math.abs(d))}.`;
+    body += d === 0 ? ` Since ${shared}, its score has not moved.` : ` Since ${shared}, that choice ${d > 0 ? 'gained' : 'lost'} ${C.f1(Math.abs(d))}.`;
   }
+  const rankText = rank && isNum(now) ? ` The council ranks it ${C.ordinal(rank)} of ${C.word(ranked.length)} now, at ${C.f1(now)}.` : '';
   return {
     state: 'revealed',
-    label: 'Your lean, revealed this round',
-    title: rank && isNum(now) ? `You leaned toward “${o.label}”. The council ranks it ${C.ordinal(rank)} of ${C.word(ranked.length)}, at ${C.f1(now)}.` : `You leaned toward “${o.label}”.`,
+    label: recheck ? 'The last verdict, revealed this round' : 'Your lean, revealed this round',
+    title: recheck ? `Last time the council backed “${o.label}”.${rankText}` : `You leaned toward “${o.label}”.${rankText.replace(' now,', ',')}`,
     body,
   };
 }
@@ -343,7 +382,8 @@ export function liveBeat(ctx, beats, bi) {
     return { key: c.seat, name: info(c.seat).name, img: info(c.seat).img, initials: info(c.seat).initials, move: n === 1 ? 'opening scores' : mv?.turn || '', text: C.sentence(sayRaw(c, n)), tag: tag && tag[1] ? tag[0] : null, tagText: tag && tag[1] ? C.sentence(tag[1]) : '' };
   });
 
-  const revealed = Boolean(s.lean) && (last || beat.mode === 'vote' || (beat.round ?? 0) >= 2);
+  // The lean (in a re-check, the last verdict) is revealed with Round 2, never during Round 1.
+  const revealed = Boolean(s.lean) && (beat.mode === 'vote' || (beat.round ?? 0) >= 2);
   return {
     mode: beat.mode,
     step: beat.step,
@@ -360,9 +400,16 @@ export function liveBeat(ctx, beats, bi) {
   };
 }
 
+function unitedNote(recO, lo, hi, n, unscored) {
+  if (!n) return `No investor scored “${recO.label}”.`;
+  const range = lo === hi ? (unscored.length ? `Every investor who scored “${recO.label}” gave it ${lo}.` : `Every investor scored “${recO.label}” ${lo}.`) : `Scores for “${recO.label}” ranged from ${lo} to ${hi}.`;
+  if (!unscored.length) return range;
+  return `${range} ${C.joinNames(unscored.map((x) => x.short))} did not score this option.`;
+}
+
 /** The verdict view. Null until verdict.json exists. */
 export function verdictView(ctx, problems) {
-  const { s, council, seats, options, info, ev } = ctx;
+  const { s, council, seats, options, info, ev, cfg, recheck } = ctx;
   const v = s.verdict;
   if (!v) return null;
   const final = stateAt(s.rounds);
@@ -380,25 +427,32 @@ export function verdictView(ctx, problems) {
   const score = (id) => scored.find((x) => x.id === id)?.score;
   const b = score(rec), c = score(run);
 
-  // Agreement per seat, checked against scores.json when core supplies it.
+  // Agreement per seat, derived here and checked against scores.json (core writes the same
+  // field with the same rule). Only a scores.json for the final round is compared: after each
+  // earlier round it holds interim numbers.
   const agreement = {};
-  for (const x of seats) {
-    const st = final[x.key];
-    agreement[x.key] = !st ? null : st.abstain ? 'abstain' : agreementOf(st.scores, options, rec);
+  for (const x of seats) agreement[x.key] = agreementOf(final[x.key], rec, cfg);
+  const lastRound = roundNums(s.rounds).slice(-1)[0];
+  if (s.scores && (s.scores.round === undefined || s.scores.round === lastRound)) {
+    for (const row of s.scores.scorecard || []) {
+      if (!row?.seat || !('agreement' in row) || !(row.seat in agreement)) continue;
+      const theirs = normAgreement(row.agreement);
+      if (theirs !== agreement[row.seat]) problems.push({ file: 'scores.json', message: `agreement for ${row.seat} is ${JSON.stringify(row.agreement)} but the seat scores say ${JSON.stringify(agreement[row.seat])}` });
+    }
+    const ag = s.scores.agreement;
+    if (ag && typeof ag === 'object' && !Array.isArray(ag) && Object.keys(ag).some((k) => AGREEMENTS.includes(k))) {
+      for (const k of AGREEMENTS) {
+        const mine = Object.values(agreement).filter((a) => a === k).length;
+        if (isNum(ag[k]) && ag[k] !== mine) problems.push({ file: 'scores.json', message: `agreement count for "${k}" is ${ag[k]} but the seat scores give ${mine}` });
+      }
+    }
+    if (s.scores.recommended && s.scores.recommended !== computed) problems.push({ file: 'scores.json', message: `scores.json recommends ${s.scores.recommended} but the seat scores put ${computed} first` });
   }
-  const given = {};
-  for (const row of s.scores?.scorecard || []) if (row?.seat && row.agreement !== undefined) given[row.seat] = row.agreement;
-  const ag = s.scores?.agreement;
-  if (Array.isArray(ag)) for (const row of ag) row?.seat && (given[row.seat] = row.agreement ?? row.value);
-  else if (ag && typeof ag === 'object') Object.assign(given, ag);
-  for (const [seat, val] of Object.entries(given)) {
-    const mine = agreement[seat];
-    if (mine && mine !== 'abstain' && normAgreement(val) !== mine) problems.push({ file: 'scores.json', message: `agreement for ${seat} is "${val}" but the seat scores say ${AGREEMENT_TEXT[mine]}` });
-  }
-  const counts = { agrees: 0, partly: 0, disagrees: 0 };
-  for (const a of Object.values(agreement)) if (a in counts) counts[a] += 1;
+  const counts = { agrees: 0, 'partly agrees': 0, disagrees: 0, abstains: 0, none: 0 };
+  for (const x of seats) counts[agreement[x.key] ?? 'none'] += 1;
 
-  const recScores = seats.map((x) => ({ x, v: final[x.key]?.scores?.[rec] })).filter((p) => isNum(p.v));
+  const recScores = seats.map((x) => ({ x, v: final[x.key] && !final[x.key].abstain ? final[x.key].scores?.[rec] : null })).filter((p) => isNum(p.v));
+  const unscored = seats.filter((x) => !recScores.some((p) => p.x.key === x.key));
   const lo = recScores.length ? Math.min(...recScores.map((p) => p.v)) : null;
   const hi = recScores.length ? Math.max(...recScores.map((p) => p.v)) : null;
   const spread = recScores.length ? hi - lo : 0;
@@ -413,7 +467,7 @@ export function verdictView(ctx, problems) {
   const leanId = s.lean?.option;
   const leanO = options.find((o) => o.id === leanId);
   if (leanO && s.rounds[1]) {
-    const before = councilScores([leanO], stateAt(s.rounds, 1), council.weights)[0].score;
+    const before = councilScores(options, stateAt(s.rounds, 1), council.weights).find((t) => t.id === leanO.id)?.score;
     const after = score(leanO.id);
     if (isNum(before) && isNum(after)) {
       const d = r1(after - before);
@@ -423,9 +477,10 @@ export function verdictView(ctx, problems) {
         none: false,
         word: Math.abs(d) < 0.5 ? 'Small' : Math.abs(d) < 1 ? 'Moderate' : 'Large',
         before: C.f1(before), after: C.f1(after), beforePct: before * 10, afterPct: after * 10,
-        note: d === 0
-          ? `Once the council saw you favoured “${leanO.label}”, its score did not move.`
-          : `Once the council saw you favoured “${leanO.label}”, that choice ${d > 0 ? 'gained' : 'lost'} ${C.f1(Math.abs(d))}. ${flips ? 'Enough to change the verdict.' : 'Not enough to change the verdict.'}`,
+        note: (() => {
+          const saw = recheck ? `Once the council saw its last verdict, “${leanO.label}”,` : `Once the council saw you favoured “${leanO.label}”,`;
+          return d === 0 ? `${saw} its score did not move.` : `${saw} that choice ${d > 0 ? 'gained' : 'lost'} ${C.f1(Math.abs(d))}. ${flips ? 'Enough to change the verdict.' : 'Not enough to change the verdict.'}`;
+        })(),
       };
     }
   }
@@ -460,16 +515,17 @@ export function verdictView(ctx, problems) {
     const a = agreement[x.key];
     const top = st && !st.abstain ? seatTop(st.scores, options, rec) : null;
     const topO = options.find((o) => o.id === top);
+    const note = a === 'abstains' ? 'Did not score the choices' : !st ? 'No final card' : a === null ? 'Did not score this option' : top === rec ? 'Top choice' : topO ? `Would rather ${topO.short}` : '';
     return {
       key: x.key, img: x.img, initials: x.initials, name: x.name, short: x.short,
-      agreement: a, vote: a === 'abstain' ? 'Too hard to call' : a ? AGREEMENT_TEXT[a] : 'No card',
-      note: a === 'abstain' ? 'Did not score' : top === rec ? 'Top choice' : topO ? `Would rather ${topO.short}` : 'No scores',
+      agreement: a, cls: agreementClass(a), vote: a ? AGREEMENT_TEXT[a] : 'No vote',
+      note,
       cells: options.map((o) => ({ v: st && !st.abstain && isNum(st.scores[o.id]) ? st.scores[o.id] : null, rec: o.id === rec })),
     };
   });
 
   const total = seats.length + 2;
-  const tiles = voteRows.map((r) => ({ kind: 'seat', key: r.key, img: r.img, initials: r.initials, text: r.short, agreement: r.agreement, alt: `${r.name}, ${r.vote}` }));
+  const tiles = voteRows.map((r) => ({ kind: 'seat', key: r.key, img: r.img, initials: r.initials, text: r.short, agreement: r.agreement, cls: r.cls, alt: `${r.name}, ${r.agreement === null ? r.note : r.vote}` }));
   tiles.splice(Math.floor(total / 2), 0, { kind: 'score', text: C.f1(b) });
   tiles.push({ kind: 'runner', text: runO ? `${C.capFirst(runO.short)} ${C.f1(c)}` : '' });
 
@@ -487,7 +543,7 @@ export function verdictView(ctx, problems) {
     stats: {
       council: { value: C.f1(b), bars: options.map((o) => ({ label: C.capFirst(o.short), v: C.f1(score(o.id)), pct: isNum(score(o.id)) ? score(o.id) * 10 : 0, rec: o.id === rec, runner: o.id === run })) },
       evidence: { word: ev.word, found: ev.found, total: ev.total, note: ev.note },
-      united: { word: spread <= 1 ? 'United' : spread <= 3 ? 'Mostly united' : 'Split', lo, hi, dots, bandLeft: isNum(lo) ? ((lo - 1) / 9) * 100 : 0, bandWidth: isNum(lo) ? ((hi - lo) / 9) * 100 : 0, note: lo === hi ? `Every investor scored “${recO.label}” ${lo}.` : `Scores for “${recO.label}” ranged from ${lo} to ${hi}.` },
+      united: { word: spread <= 1 ? 'United' : spread <= 3 ? 'Mostly united' : 'Split', lo, hi, dots, bandLeft: isNum(lo) ? ((lo - 1) / 9) * 100 : 0, bandWidth: isNum(lo) ? ((hi - lo) / 9) * 100 : 0, note: unitedNote(recO, lo, hi, recScores.length, unscored) },
       bias,
     },
     banner, cmd: council.ticker ? `/mosaic recheck ${council.ticker}` : '/mosaic journal',
@@ -517,10 +573,10 @@ export function verdictView(ctx, problems) {
  * Everything the page draws, from one parsed session payload.
  * @returns {null | { meta, seats, options, beats, live, verdict, phase, evidence, problems }}
  */
-export function buildModel(s, { roster = null } = {}) {
+export function buildModel(s, { roster = null, cfg = DEFAULT_CONFIG } = {}) {
   if (!s?.council) return null;
   const problems = [...(s.problems || [])];
-  const ctx = context(s, roster);
+  const ctx = context(s, roster, cfg);
   const beats = beatsOf(s);
   const live = beats.map((_, i) => liveBeat(ctx, beats, i));
   const verdict = verdictView(ctx, problems);

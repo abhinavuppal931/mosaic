@@ -39,7 +39,12 @@
   "spread": 2,
   "confidence": 8,
   "abstentions": [],
-  "votes": null,
+  "agreement": {
+    "agrees": 4,
+    "partly agrees": 1,
+    "disagrees": 0,
+    "abstains": 0
+  },
   "support": null,
   "unanimousRound1": {
     "unanimous": false
@@ -94,7 +99,11 @@
       "present": true,
       "abstain": false,
       "stance": "No",
-      "vote": null,
+      "agreement": "partly agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
       "scores": {
         "A": 2,
         "B": 7,
@@ -115,7 +124,11 @@
       "present": true,
       "abstain": false,
       "stance": "Conditional yes",
-      "vote": null,
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
       "scores": {
         "A": 3,
         "B": 8,
@@ -136,7 +149,11 @@
       "present": true,
       "abstain": false,
       "stance": "Conditional yes",
-      "vote": null,
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
       "scores": {
         "A": 4,
         "B": 8,
@@ -157,7 +174,11 @@
       "present": true,
       "abstain": false,
       "stance": "Conditional yes",
-      "vote": null,
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
       "scores": {
         "A": 4,
         "B": 9,
@@ -178,7 +199,11 @@
       "present": true,
       "abstain": false,
       "stance": "Yes",
-      "vote": null,
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
       "scores": {
         "A": 7,
         "B": 7,

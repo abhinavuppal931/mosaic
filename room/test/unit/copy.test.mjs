@@ -86,8 +86,10 @@ test('fact values in plain words', () => {
 });
 
 test('vote counts read as a sentence', () => {
-  assert.equal(C.voteCounts({ agrees: 3, partly: 3, disagrees: 1 }), 'Three agree, three partly agree, one disagrees.');
-  assert.equal(C.voteCounts({ agrees: 5, partly: 0, disagrees: 0 }), 'All five agree.');
+  assert.equal(C.voteCounts({ agrees: 3, 'partly agrees': 3, disagrees: 1 }), 'Three agree, three partly agree, one disagrees.');
+  assert.equal(C.voteCounts({ agrees: 5 }), 'All five agree.');
+  assert.equal(C.voteCounts({ agrees: 4, abstains: 1 }), 'All four who scored it agree, one called it too hard.');
+  assert.equal(C.voteCounts({ agrees: 2, disagrees: 1, none: 2 }), 'Two agree, one disagrees, two did not score it.');
 });
 
 test('horizons in words or digits', () => {

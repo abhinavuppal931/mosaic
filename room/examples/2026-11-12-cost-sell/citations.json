@@ -14,6 +14,9 @@
   "warnings": [],
   "files": [
     "round-1.md",
-    "round-2.md"
-  ]
+    "round-2.md",
+    "verdict.md",
+    "verdict.json"
+  ],
+  "verdictChecked": true
 }

@@ -28,12 +28,17 @@ export function cardFields(text) {
   return out;
 }
 
-/** "A 6/10 · B 8/10", "[A] 6/10", "A: 6, B: 7" -> { A: 6, B: 8 }. Out-of-range values are dropped. */
+/**
+ * Option scores, read as tolerantly as core (scripts/lib/cards.mjs): "A 6/10 · B 8/10", "[A] 6/10",
+ * "A: 6, B: 7", "A (full position): 7", "Option A - 7", "A=7", "A 7 out of 10". Out-of-range values are dropped.
+ */
 export function parseOptionScores(s) {
   const out = {};
-  for (const m of String(s || '').matchAll(/\[?\b([A-H])\b\]?\s*[:=]?\s*(\d+(?:\.\d+)?)\s*(?:\/\s*10)?/g)) {
+  const re = /(?:\boption\s+)?\[?\b([A-H])\b\]?(?:\s*\([^)]*\))?\s*[:=\-\u2013]?\s*(\d+(?:\.\d+)?)(?:\s*(?:\/\s*10|out of 10))?/gi;
+  for (const m of String(s || '').matchAll(re)) {
+    const id = m[1].toUpperCase();
     const v = Number(m[2]);
-    if (v >= 0 && v <= 10 && !(m[1] in out)) out[m[1]] = v;
+    if (v >= 0 && v <= 10 && !(id in out)) out[id] = v;
   }
   return out;
 }

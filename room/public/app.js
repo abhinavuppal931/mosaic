@@ -346,10 +346,10 @@ function verdictView(m, d) {
     ? `<span class="big">None</span><span class="note">${h(st.bias.note)}</span>`
     : `<span class="big">${h(st.bias.word)}</span><div class="bars">${bars([{ label: 'Before', v: st.bias.before, pct: st.bias.beforePct, cls: 'before' }, { label: 'After', v: st.bias.after, pct: st.bias.afterPct, cls: 'after' }])}</div><span class="note">${h(st.bias.note)}</span>`;
 
-  const votes = v.votes.map((r) => `<div class="card vote">${face(r, 'av', `${r.name}, simulated seat`)}<span class="nm">${h(r.short)}</span><span class="agree ${h(r.agreement || 'none')}">${h(r.vote)}</span><span class="why">${h(r.note)}</span></div>`).join('');
+  const votes = v.votes.map((r) => `<div class="card vote">${face(r, 'av', `${r.name}, simulated seat`)}<span class="nm">${h(r.short)}</span><span class="agree ${h(r.cls)}">${h(r.vote)}</span><span class="why">${h(r.note)}</span></div>`).join('');
   const sc = v.scorecard;
   const cls = (c) => ['n', c.rec ? 'rec' : '', c.v === null ? '' : c.v >= 7 ? 'hi' : c.v <= 3 ? 'lo' : c.v >= 5 ? 'mid' : ''].join(' ').trim();
-  const rows = sc.rows.map((r) => `<tr><th scope="row"><span class="who">${face(r, '', '')}<span class="fn">${h(r.name)}</span><span class="sn">${h(r.short)}</span></span></th>${r.cells.map((c) => `<td class="${cls(c)}">${c.v ?? '<span class="sr">No score</span>'}</td>`).join('')}<td class="st"><span class="agree ${h(r.agreement || 'none')}">${h(r.vote)}</span></td></tr>`).join('');
+  const rows = sc.rows.map((r) => `<tr><th scope="row"><span class="who">${face(r, '', '')}<span class="fn">${h(r.name)}</span><span class="sn">${h(r.short)}</span></span></th>${r.cells.map((c) => `<td class="${cls(c)}">${c.v ?? '<span class="sr">No score</span>'}</td>`).join('')}<td class="st"><span class="agree ${h(r.cls)}" title="${h(r.note)}">${h(r.vote)}</span></td></tr>`).join('');
   const kills = v.kills.length
     ? `<div class="kills" role="table" aria-label="What would change the call"><span class="h" role="columnheader">If this happens</span><span class="h" role="columnheader">Warning level</span><span class="h r" role="columnheader">Today</span>${v.kills.map((k) => `<span class="m" role="cell" title="${h(k.title)}">${h(k.text)}</span><span class="at" role="cell">${h(k.at)}</span><span class="now" role="cell">${h(k.now)}</span>`).join('')}</div>`
     : '<p class="intro">The council did not set a warning sign for this decision.</p>';
@@ -361,7 +361,7 @@ function verdictView(m, d) {
   const tiles = v.share.tiles.map((t) => t.kind === 'score'
     ? `<div class="tile t-score">${h(t.text)}</div>`
     : t.kind === 'runner' ? `<div class="tile t-runner">${h(t.text)}</div>`
-      : `<div class="tile">${face(t, '', t.alt)}<span class="lb">${h(t.text)}</span><span class="vb c-${h(t.agreement || 'abstain')}"></span></div>`).join('');
+      : `<div class="tile">${face(t, '', t.alt)}<span class="lb">${h(t.text)}</span><span class="vb c-${h(t.cls)}"></span></div>`).join('');
   const n = v.votes.length;
   return `<div class="v-verdict">
   <header class="hdr">
@@ -611,7 +611,7 @@ async function shareCanvas() {
   const size = Math.min((avail - (cols - 1) * gap) / cols, (H - 2 * pad - (rows - 1) * gap) / rows);
   const tx0 = LW + pad + (avail - (cols * size + (cols - 1) * gap)) / 2;
   const ty0 = (H - (rows * size + (rows - 1) * gap)) / 2;
-  const colOf = { agrees: '#A3C4AA', partly: '#E8C88F', disagrees: '#B97A6C', abstain: '#3A3733' };
+  const colOf = { agrees: '#A3C4AA', partly: '#E8C88F', disagrees: '#B97A6C', abstain: '#3A3733', none: '#3A3733' };
   const imgs = await Promise.all(tiles.map((t) => (t.kind === 'seat' && t.img ? loadImage(t.img) : null)));
   tiles.forEach((t, i) => {
     const x = tx0 + (i % cols) * (size + gap);
@@ -658,7 +658,7 @@ async function shareCanvas() {
       c.fillStyle = '#F5F2EC';
       c.font = F(600, 18);
       c.fillText(t.text, x + 10, yy + size - 18);
-      c.fillStyle = colOf[t.agreement] || '#3A3733';
+      c.fillStyle = colOf[t.cls] || '#3A3733';
       c.fillRect(x, yy + size - 7, size, 7);
     }
     c.restore();
