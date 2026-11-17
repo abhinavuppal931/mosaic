@@ -21,7 +21,7 @@ export function cardFields(text) {
     const m = line.match(FIELD);
     if (m && KNOWN.has(m[1].trim().toUpperCase())) {
       cur = m[1].trim().toUpperCase();
-      if (!(cur in out)) out[cur] = m[2].trim();
+      if (!(cur in out)) out[cur] = m[2].replace(/^\*+\s*/, '').trim();
       else cur = null;
     } else if (cur && line.trim()) out[cur] = `${out[cur]}\n${line.trim()}`.trim();
   }

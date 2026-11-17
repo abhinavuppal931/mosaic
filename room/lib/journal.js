@@ -48,10 +48,11 @@ function nextRecheck(verdict, rawPack, now) {
  * One journal entry, shaped like core's buildEntry. Option scores and the recommended option
  * come from the Room's own computation over the seat scores, so they match what the page shows.
  */
-export function buildEntry(session, rawPack, { now = () => Date.now() } = {}) {
+export function buildEntry(session, rawPack, opts = {}) {
+  const now = opts.now || (() => Date.now());
   const { council, verdict, scores, lean } = session;
   if (!verdict) throw new Error('the council has no verdict yet');
-  const model = buildModel(session);
+  const model = buildModel(session, { roster: opts.roster || null });
   const optionScores = model.verdict.optionScores;
   const kill = (Array.isArray(verdict.kill_criteria) ? verdict.kill_criteria : verdict.kill_criteria ? [verdict.kill_criteria] : []).map((x, i) => (typeof x === 'string' ? { id: `K${i + 1}`, text: x } : { id: x.id || `K${i + 1}`, ...x }));
   const snapshot = {};

@@ -1,0 +1,19 @@
+{
+  "option": "B",
+  "label": "RESHAPE THE THESIS",
+  "recommendation": "Add a quarter more only after writing down the size limit.",
+  "conditions": [
+    "No single stock above a fifth of the portfolio"
+  ],
+  "next_steps": [],
+  "premortem": [],
+  "kill_criteria": [],
+  "recheck": {
+    "date": "2027-01-29",
+    "triggers": []
+  },
+  "cheapest_test": "",
+  "sizing_note": "",
+  "ruin_mitigations": [],
+  "wait_for_pitch": null
+}

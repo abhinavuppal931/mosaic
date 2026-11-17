@@ -1,0 +1,94 @@
+{
+  "schema": "mosaic.council/1",
+  "id": "2026-11-17-nvda-buy",
+  "title": "Buy NVIDIA at $182 for a three-year hold?",
+  "job": "decision",
+  "ticker": "NVDA",
+  "decision": "Whether to buy NVIDIA at $182 a share and hold it for three years, and how much to buy now.",
+  "mode": "full",
+  "horizon": "3 years",
+  "trigger": "The stock is 14% off its high and the next results are two days away.",
+  "position": {
+    "owned": false,
+    "portfolioShare": null,
+    "costBasisVsPrice": null
+  },
+  "options": [
+    {
+      "id": "A",
+      "label": "Buy all now",
+      "kind": "act"
+    },
+    {
+      "id": "B",
+      "label": "Start small",
+      "kind": "act"
+    },
+    {
+      "id": "C",
+      "label": "Wait for $150",
+      "kind": "wait",
+      "trigger": "Price at or below $150, the cautious-case value"
+    },
+    {
+      "id": "D",
+      "label": "Pass",
+      "kind": "none"
+    }
+  ],
+  "seats": [
+    "buffett",
+    "munger",
+    "damodaran",
+    "marks",
+    "taleb",
+    "druckenmiller",
+    "burry"
+  ],
+  "weights": {
+    "buffett": {
+      "weight": 2,
+      "reason": "Business quality matters, but price is the question"
+    },
+    "munger": {
+      "weight": 2,
+      "reason": "Folly check on a crowded trade"
+    },
+    "damodaran": {
+      "weight": 3,
+      "reason": "The valuation specialist; the call turns on what the price assumes"
+    },
+    "marks": {
+      "weight": 2,
+      "reason": "Where we are in the cycle"
+    },
+    "taleb": {
+      "weight": 2,
+      "reason": "Ruin guard"
+    },
+    "druckenmiller": {
+      "weight": 2,
+      "reason": "Rates and timing"
+    },
+    "burry": {
+      "weight": 2,
+      "reason": "Bear guard"
+    }
+  },
+  "pack": {
+    "path": "data-pack.json",
+    "hash": "sha256:example-nvda",
+    "coverage": 0.82
+  },
+  "brief": "A first-time buyer of NVIDIA is weighing a full position against a starter, waiting, or passing, two days before results.",
+  "assumptions": [
+    "Horizon three years (stated)",
+    "No existing position (stated)"
+  ],
+  "thesis": null,
+  "lean": {
+    "sealed": true
+  },
+  "recheckOf": null,
+  "started": "2026-11-17T12:00:00Z"
+}

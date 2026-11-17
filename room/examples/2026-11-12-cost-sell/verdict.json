@@ -1,0 +1,92 @@
+{
+  "schema": "mosaic.verdict/1",
+  "label": "CONVICTION EARNED",
+  "call": "The council would sell about a third of the Costco position and keep the rest, because one stock at a quarter of the portfolio [F015] is more risk than the business itself.",
+  "recommended": "B",
+  "why": [
+    {
+      "point": "It has fallen 53% before [F014]. At a quarter of the portfolio, a repeat would hurt far more than the business deserves.",
+      "seat": "taleb"
+    },
+    {
+      "point": "At 55 times earnings [F009] against a 10-year average of 36, much of the next few years' return has already arrived.",
+      "seat": "marks"
+    },
+    {
+      "point": "Keeping two thirds keeps you in a business where nine in ten members renew every year.",
+      "seat": "munger"
+    }
+  ],
+  "minority": {
+    "seat": "buffett",
+    "quote": "You do not sell a wonderful business because it went up.",
+    "would_have_to_be_true": "Buffett would be proven right if growth at existing stores stays above 6% and the price keeps rising with earnings."
+  },
+  "premortem": [
+    "Costco keeps compounding and the third you sold was the best part of your portfolio.",
+    "You sell the third, then sell the rest in a panic during a fall.",
+    "The money from the sale sits idle or goes into something worse."
+  ],
+  "kill_criteria": [
+    {
+      "id": "K1",
+      "text": "Growth at stores open a year or more falls below 4%",
+      "fact": "comp_sales_growth",
+      "op": "<",
+      "value": 0.04
+    },
+    {
+      "id": "K2",
+      "text": "Fewer members renew",
+      "fact": "membership_renewal",
+      "op": "<",
+      "value": 0.88
+    },
+    {
+      "id": "K3",
+      "text": "The price climbs further above its usual level",
+      "fact": "pe",
+      "op": ">",
+      "value": 65
+    }
+  ],
+  "conditions": [
+    "Sell in steps over a few weeks",
+    "Keep the rest unless a kill criterion trips"
+  ],
+  "next_steps": [
+    {
+      "when": "This month",
+      "action": "Sell the third in steps."
+    }
+  ],
+  "recheck": {
+    "date": "2026-12-13",
+    "triggers": [
+      "Costco's next results, expected around 2026-12-11 [F019]"
+    ]
+  },
+  "cheapest_test": "Sell the first tenth this week and see how it feels.",
+  "sizing_note": "Ask what share of everything you own you could watch halve and still sleep.",
+  "behavioral_flags": [
+    {
+      "type": "anchoring",
+      "quote": "I want to lock in the gain"
+    }
+  ],
+  "lean_pull_note": "Selling it all gained 0.4 after the lean was shared; it still ranks last.",
+  "data_health": "Prices, filings, rates and news ok; no analyst estimates.",
+  "amendments": [],
+  "removed_by_citation_check": [],
+  "override_note": "",
+  "share_line": {
+    "seat_lines": {
+      "buffett": "Never sell a wonderful business only because it went up.",
+      "munger": "Trim for sanity, keep the core.",
+      "marks": "Trimming is managing risk, not forecasting.",
+      "taleb": "Size so a halving is survivable.",
+      "burry": "The price assumes perfection."
+    },
+    "sharpest_dissent": "buffett"
+  }
+}

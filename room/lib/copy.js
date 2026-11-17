@@ -173,7 +173,7 @@ export function voteCounts({ agrees = 0, partly = 0, disagrees = 0 }) {
   if (total && agrees === total) return `All ${word(total)} agree.`;
   const parts = [];
   if (agrees) parts.push(`${word(agrees)} ${agrees === 1 ? 'agrees' : 'agree'}`);
-  if (partly) parts.push(`${word(partly)} partly`);
+  if (partly) parts.push(`${word(partly)} partly ${partly === 1 ? 'agrees' : 'agree'}`);
   if (disagrees) parts.push(`${word(disagrees)} ${disagrees === 1 ? 'disagrees' : 'disagree'}`);
   return parts.length ? `${capFirst(parts.join(', '))}.` : '';
 }

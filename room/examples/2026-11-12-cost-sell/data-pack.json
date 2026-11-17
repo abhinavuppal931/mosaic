@@ -1,0 +1,317 @@
+{
+  "schema": "mosaic.datapack/1",
+  "kind": "ticker",
+  "symbol": "COST",
+  "asOf": "2026-11-12",
+  "generatedAt": "2026-11-12T15:01:00.000Z",
+  "hash": "sha256:example-cost",
+  "coverage": {
+    "byCapability": {
+      "profile": "ok",
+      "quote": "ok",
+      "priceHistory": "ok",
+      "financials": "ok",
+      "macro": "ok",
+      "estimates": "missing",
+      "news": "ok"
+    },
+    "core": [
+      "quote",
+      "priceHistory",
+      "financials",
+      "macro",
+      "estimates",
+      "news"
+    ],
+    "score": 0.86,
+    "facts": 20,
+    "missingFacts": 1
+  },
+  "providers": [
+    {
+      "capability": "quote",
+      "source": "yahoo",
+      "status": "ok",
+      "asOf": "2026-11-12",
+      "attempts": []
+    },
+    {
+      "capability": "financials",
+      "source": "sec-edgar",
+      "status": "ok",
+      "asOf": "2026-10-08",
+      "attempts": []
+    },
+    {
+      "capability": "macro:rates",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-10",
+      "attempts": []
+    },
+    {
+      "capability": "macro:inflation",
+      "source": "bls",
+      "status": "ok",
+      "asOf": "2026-10-15",
+      "attempts": []
+    },
+    {
+      "capability": "news",
+      "source": "finnhub",
+      "status": "ok",
+      "asOf": "2026-11-12",
+      "attempts": []
+    },
+    {
+      "capability": "estimates",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "attempts": []
+    }
+  ],
+  "warnings": [
+    "No analyst estimates in the pack."
+  ],
+  "facts": [
+    {
+      "id": "F001",
+      "key": "company_name",
+      "label": "Company name",
+      "value": "COSTCO WHOLESALE CORP",
+      "unit": "text",
+      "source": "sec-edgar",
+      "asOf": "2026-10-08",
+      "status": "ok"
+    },
+    {
+      "id": "F002",
+      "key": "price",
+      "label": "Share price",
+      "value": 1012.4,
+      "unit": "USD/share",
+      "source": "yahoo",
+      "asOf": "2026-11-12",
+      "status": "ok"
+    },
+    {
+      "id": "F003",
+      "key": "market_cap",
+      "label": "Market value",
+      "value": 449000000000,
+      "unit": "USD",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F004",
+      "key": "revenue_ttm",
+      "label": "Sales over the last four quarters",
+      "value": 274000000000,
+      "unit": "USD",
+      "source": "sec-edgar",
+      "asOf": "2026-08-30",
+      "status": "ok"
+    },
+    {
+      "id": "F005",
+      "key": "comp_sales_growth",
+      "label": "Sales growth at stores open a year or more",
+      "value": 0.064,
+      "unit": "ratio",
+      "source": "sec-edgar",
+      "asOf": "2026-08-30",
+      "status": "ok"
+    },
+    {
+      "id": "F006",
+      "key": "membership_renewal",
+      "label": "Membership renewal rate",
+      "value": 0.902,
+      "unit": "ratio",
+      "source": "sec-edgar",
+      "asOf": "2026-08-30",
+      "status": "ok"
+    },
+    {
+      "id": "F007",
+      "key": "gross_margin",
+      "label": "Gross margin",
+      "value": 0.128,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-08-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F008",
+      "key": "roic",
+      "label": "Return on invested capital",
+      "value": 0.21,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-08-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F009",
+      "key": "pe",
+      "label": "Price to earnings",
+      "value": 55.1,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F010",
+      "key": "pe_10y_avg",
+      "label": "Price to earnings, 10-year average",
+      "value": 36.5,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F011",
+      "key": "fcf_yield",
+      "label": "Free cash flow yield",
+      "value": 0.016,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F012",
+      "key": "implied_fcf_growth",
+      "label": "Growth a year the price assumes for ten years",
+      "value": 0.12,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F013",
+      "key": "return_1y",
+      "label": "Price change over the last year",
+      "value": 0.6,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F014",
+      "key": "max_drawdown",
+      "label": "Largest fall from a high over the price history",
+      "value": -0.53,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F015",
+      "key": "portfolio_share",
+      "label": "Share of the portfolio in this stock",
+      "value": 0.24,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-12",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F016",
+      "key": "treasury_10y",
+      "label": "10-year Treasury yield",
+      "value": 4.1,
+      "unit": "percent",
+      "source": "treasury",
+      "asOf": "2026-11-10",
+      "status": "ok"
+    },
+    {
+      "id": "F017",
+      "key": "cpi_yoy",
+      "label": "Inflation over the last year",
+      "value": 2.8,
+      "unit": "percent",
+      "source": "bls",
+      "asOf": "2026-10-15",
+      "status": "ok"
+    },
+    {
+      "id": "F018",
+      "key": "last_report_filed",
+      "label": "Last yearly report filed",
+      "value": "2026-10-08",
+      "unit": "date",
+      "source": "sec-edgar",
+      "asOf": "2026-10-08",
+      "status": "ok"
+    },
+    {
+      "id": "F019",
+      "key": "next_report_expected",
+      "label": "Next quarterly report, expected",
+      "value": "2026-12-11",
+      "unit": "date",
+      "source": "mosaic",
+      "asOf": "2026-10-08",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F020",
+      "key": "estimates_eps_next_year",
+      "label": "Analyst estimates for next year's earnings",
+      "value": null,
+      "unit": "USD/share",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "analyst estimates need a keyed provider"
+    }
+  ],
+  "packs": {},
+  "series": {},
+  "news": [],
+  "disclaimer": "Simulated council for education. Not financial advice."
+}

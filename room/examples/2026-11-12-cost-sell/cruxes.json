@@ -1,0 +1,38 @@
+{
+  "cruxes": [
+    {
+      "question": "Is the risk the price, or the size of the position?",
+      "sides": [
+        {
+          "position": "The price",
+          "seats": [
+            "burry",
+            "marks"
+          ]
+        },
+        {
+          "position": "The size",
+          "seats": [
+            "taleb",
+            "munger"
+          ]
+        },
+        {
+          "position": "Neither",
+          "seats": [
+            "buffett"
+          ]
+        }
+      ]
+    }
+  ],
+  "unanimous": false,
+  "unargued": null,
+  "biasFlags": [
+    {
+      "type": "anchoring",
+      "quote": "I want to lock in the gain"
+    }
+  ],
+  "note": "The room agrees the business is excellent and argues about what to do with the price."
+}

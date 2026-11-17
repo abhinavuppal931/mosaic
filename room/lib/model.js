@@ -22,7 +22,16 @@ export function seatPositions(n) {
   });
 }
 
-export const optShort = (o) => (o ? o.short || C.lowerFirst(o.label) : '');
+/**
+ * The short name of an option for chips and the heatmap ("Leans wait · 7"): an explicit `short`
+ * if the council gives one, "wait" for a wait option, else the label up to its first comma.
+ */
+export const optShort = (o) => {
+  if (!o) return '';
+  if (o.short) return C.lowerFirst(o.short);
+  if (o.kind === 'wait') return 'wait';
+  return C.lowerFirst(String(o.label).split(',')[0].trim());
+};
 
 /**
  * Weighted mean per option over the seats that scored it (abstentions skipped), rounded to one
@@ -109,13 +118,16 @@ export function evidence(pack) {
   const core = pack?.coverage?.core || Object.keys(byCap);
   const notConnected = [...new Set(core.filter((c) => ['missing', 'error'].includes(byCap[c])).map(C.capabilityName))];
   const share = facts.length ? found.length / facts.length : 0;
-  const nc = notConnected.length ? ` ${C.capFirst(C.joinNames(notConnected))} ${notConnected.length === 1 ? 'was' : 'were'} not connected.` : '';
+  const plural = notConnected.length > 1 || (notConnected.length === 1 && /s$/.test(notConnected[0]) && notConnected[0] !== 'news');
+  const ncText = notConnected.length ? `${C.capFirst(C.joinNames(notConnected))} ${plural ? 'were' : 'was'} not connected.` : '';
+  const nc = ncText ? ` ${ncText}` : '';
   return {
     found: found.length,
     total: facts.length,
     word: !facts.length ? 'None' : share >= 0.85 ? 'Strong' : share >= 0.6 ? 'Adequate' : 'Thin',
     note: facts.length ? `${found.length} of ${facts.length} facts found.${nc}` : 'No data pack yet.',
-    notConnectedText: notConnected.length ? `${C.capFirst(C.joinNames(notConnected))} ${notConnected.length === 1 ? 'was' : 'were'} not connected.` : '',
+    notConnectedText: ncText,
+    notConnected,
     foundFacts: found.map((f) => factView(f)),
     missingFacts: missing.map((f) => factView(f)),
   };
@@ -149,7 +161,7 @@ function chipsFor(text, card, factsById, max = 3) {
     const f = factsById.get(id);
     if (!f || f.value === null || f.value === undefined) continue;
     const v = factView(f);
-    out.push({ text: `${v.label} ${v.value}`, title: v.title });
+    out.push({ label: v.label.split(',')[0], value: v.value, text: `${v.label} ${v.value}`, title: v.title });
     if (out.length >= max) break;
   }
   return out;
@@ -252,7 +264,7 @@ function leanCard(ctx, totals, revealed) {
   return {
     state: 'revealed',
     label: 'Your lean, revealed this round',
-    title: rank && isNum(now) ? `You leaned toward “${o.label}”. The council ranks it ${C.ordinal(rank)} of ${ranked.length}, at ${C.f1(now)}.` : `You leaned toward “${o.label}”.`,
+    title: rank && isNum(now) ? `You leaned toward “${o.label}”. The council ranks it ${C.ordinal(rank)} of ${C.word(ranked.length)}, at ${C.f1(now)}.` : `You leaned toward “${o.label}”.`,
     body,
   };
 }
@@ -325,7 +337,7 @@ export function liveBeat(ctx, beats, bi) {
   }
   const turns = pool.slice(-2).map(({ c, n }) => {
     const mv = n === 1 ? null : moveOf(prevCardState(s.rounds, c.seat, n), c, options);
-    const tag = c.abstain ? null : n === 1 ? ['Risk', c.risk] : n === 2 ? ['Concedes', c.concede] : c.amendment ? ['Asks for', c.amendment] : ['For you', c.oneLine];
+    const tag = c.abstain ? null : n === 1 ? ['Risk', c.risk] : n === 2 ? ['Concedes', c.concede] : c.amendment ? ['For you', c.oneLine] : null;
     return { key: c.seat, name: info(c.seat).name, img: info(c.seat).img, initials: info(c.seat).initials, move: n === 1 ? 'opening scores' : mv?.turn || '', text: C.sentence(sayRaw(c, n)), tag: tag && tag[1] ? tag[0] : null, tagText: tag && tag[1] ? C.sentence(tag[1]) : '' };
   });
 
@@ -374,7 +386,9 @@ export function verdictView(ctx, problems) {
   }
   const given = {};
   for (const row of s.scores?.scorecard || []) if (row?.seat && row.agreement !== undefined) given[row.seat] = row.agreement;
-  if (s.scores?.agreement && typeof s.scores.agreement === 'object') Object.assign(given, s.scores.agreement);
+  const ag = s.scores?.agreement;
+  if (Array.isArray(ag)) for (const row of ag) row?.seat && (given[row.seat] = row.agreement ?? row.value);
+  else if (ag && typeof ag === 'object') Object.assign(given, ag);
   for (const [seat, val] of Object.entries(given)) {
     const mine = agreement[seat];
     if (mine && mine !== 'abstain' && normAgreement(val) !== mine) problems.push({ file: 'scores.json', message: `agreement for ${seat} is "${val}" but the seat scores say ${AGREEMENT_TEXT[mine]}` });
@@ -408,8 +422,8 @@ export function verdictView(ctx, problems) {
         word: Math.abs(d) < 0.5 ? 'Small' : Math.abs(d) < 1 ? 'Moderate' : 'Large',
         before: C.f1(before), after: C.f1(after), beforePct: before * 10, afterPct: after * 10,
         note: d === 0
-          ? `Once the council saw you favoured ${leanO.short}, its score did not move.`
-          : `Once the council saw you favoured ${leanO.short}, that choice ${d > 0 ? 'gained' : 'lost'} ${C.f1(Math.abs(d))}. ${flips ? 'Enough to change the verdict.' : 'Not enough to change the verdict.'}`,
+          ? `Once the council saw you favoured “${leanO.label}”, its score did not move.`
+          : `Once the council saw you favoured “${leanO.label}”, that choice ${d > 0 ? 'gained' : 'lost'} ${C.f1(Math.abs(d))}. ${flips ? 'Enough to change the verdict.' : 'Not enough to change the verdict.'}`,
       };
     }
   }
@@ -419,7 +433,7 @@ export function verdictView(ctx, problems) {
   if (heavier.length === 1) {
     const h = heavier[0];
     const reason = council.weights?.[h.key]?.reason;
-    weightNote = `Out of 10. ${h.short}’s score counts ${C.timesWord(h.weight / Math.min(...seats.map((y) => y.weight)))} as much${reason ? ` (${C.lowerFirst(C.clean(reason)).replace(/\.$/, '')})` : ''}.`;
+    weightNote = `Out of 10. ${h.short}’s score counts ${C.timesWord(h.weight / Math.min(...seats.map((y) => y.weight)))} as much${reason ? ` (${C.lowerFirst(C.clean(reason).split(/[;.]/)[0].trim())})` : ''}.`;
   } else if (heavier.length > 1) weightNote = `Out of 10. Scores from ${C.joinNames(heavier.map((x) => x.short))} count more.`;
 
   const factsByKey = new Map((s.pack?.facts || []).map((f) => [f.key, f]));
@@ -471,7 +485,7 @@ export function verdictView(ctx, problems) {
     stats: {
       council: { value: C.f1(b), bars: options.map((o) => ({ label: C.capFirst(o.short), v: C.f1(score(o.id)), pct: isNum(score(o.id)) ? score(o.id) * 10 : 0, rec: o.id === rec, runner: o.id === run })) },
       evidence: { word: ev.word, found: ev.found, total: ev.total, note: ev.note },
-      united: { word: spread <= 1 ? 'United' : spread <= 3 ? 'Mostly united' : 'Split', lo, hi, dots, bandLeft: isNum(lo) ? ((lo - 1) / 9) * 100 : 0, bandWidth: isNum(lo) ? ((hi - lo) / 9) * 100 : 0, note: lo === hi ? `Every investor scored ${recO.short} ${lo}.` : `Scores for ${recO.short} ranged from ${lo} to ${hi}.` },
+      united: { word: spread <= 1 ? 'United' : spread <= 3 ? 'Mostly united' : 'Split', lo, hi, dots, bandLeft: isNum(lo) ? ((lo - 1) / 9) * 100 : 0, bandWidth: isNum(lo) ? ((hi - lo) / 9) * 100 : 0, note: lo === hi ? `Every investor scored “${recO.label}” ${lo}.` : `Scores for “${recO.label}” ranged from ${lo} to ${hi}.` },
       bias,
     },
     banner, cmd: council.ticker ? `/mosaic recheck ${council.ticker}` : '/mosaic journal',
@@ -488,7 +502,7 @@ export function verdictView(ctx, problems) {
     share: {
       question: C.clean(council.title || council.decision || ''),
       label: C.labelCase(v.label),
-      text: `${C.capFirst(recO.short)}, says the council. Scored ${C.f1(b)}${runO ? `, with ${runO.short} next at ${C.f1(c)}` : ''}. ${C.voteCounts(counts)}`,
+      text: `The council backs “${recO.label}”, at ${C.f1(b)} out of 10${runO ? ` against ${C.f1(c)} for “${runO.label}”` : ''}. ${C.voteCounts(counts)}`,
       seatsLine: `Mosaic, a council of ${C.word(seats.length)} investors`,
       tiles,
     },
