@@ -80,7 +80,7 @@ If a source came back thin or failed, find a different copy or replace it. Re-ru
 
 ## Step 4: Extract (map)
 
-Split the sources into batches of about 50,000 to 70,000 words each. Spawn one extraction agent per batch, in **one message**, in parallel: `subagent_type: general-purpose`, `model: sonnet`, with the prompt from `references/extract-prompt.md` (fill in the name, role, question, the batch's source ids and file paths, and the notes file to write). Run at most six at a time; for `--deep`, run them in waves.
+Split the sources into batches of about 50,000 to 70,000 words each (`node skills/newseat/scripts/plan_batches.mjs build/<slug> --words 60000` writes `build/<slug>/batches.json` and prints the batches). Spawn one extraction agent per batch, in **one message**, in parallel: `subagent_type: general-purpose`, `model: sonnet`, with the prompt from `references/extract-prompt.md` (fill in the name, role, question, the batch's source ids and file paths, and the notes file to write). Run at most six at a time; for `--deep`, run them in waves.
 
 Each agent writes `build/<slug>/notes/batch-NN.md` and checks its own quotes. When all are back, check every note quote:
 
@@ -98,7 +98,7 @@ Create `skills/mosaic/brains/<slug>/`. Write `sources.md` with the script, then 
 node skills/newseat/scripts/fetch.mjs build/<slug> --sources-md skills/mosaic/brains/<slug>/sources.md --name "Full Name"
 ```
 
-Then spawn three writer agents in one message, in parallel (`general-purpose`, default model), with the prompt from `references/writer-prompt.md`:
+Then spawn three writer agents in one message, in parallel (`general-purpose`, default model), with the prompt from `references/writer-prompt.md`. For a deep build whose notes run past about 80,000 words, first split the notes by section with `node skills/newseat/scripts/split_notes.mjs build/<slug>` (it writes `build/<slug>/sections/frameworks.md`, `rules.md`, `positions.md`, `selling.md`, `stories.md`, `voice.md`, `limits.md`) and point each writer at only the sections it needs:
 
 - Writer A: `frameworks.md` and `principles.md`.
 - Writer B: `positions.md`, `stories.md` and `selling.md`.
@@ -133,6 +133,8 @@ New agent files load when Claude Code starts, so test with the fallback the coun
 - It owns its question instead of giving generic advice, and gives no price target or personal advice.
 
 If it fails, fix the agent or `_hot.md` and test again, once.
+
+To check every seat at once (brain, agent and smoke answer, with `--lint`), run `node skills/newseat/scripts/check_all.mjs --markdown`.
 
 ## Step 9: Report
 
