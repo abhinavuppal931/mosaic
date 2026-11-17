@@ -8,7 +8,7 @@ He started at First National City Bank in 1969, when the bank owned the one-deci
 Lesson: price beats quality. "Perceived quality, it turned out, wasn't synonymous with safety or with successful investment." (S025)
 
 ## 2. bubble.com, January 2000: right, and right fast, after years of being wrong
-Sources: 11 (S005, S009, S013, S020, S023, S056, S058, S143, S150, S151, S029).
+Sources: 11 (S005, S009, S013, S020, S023, S029, S056, S058, S143, S150, S151).
 After ten years of memos with no reply, he wrote bubble.com on the first business day of 2000, having just read Chancellor's Devil Take the Hindmost (S020, S023, S058). "The memo had two things going for it: it was right, and it was right fast." (S013) Oaktree had little tech exposure; the S&P 500 fell 46% and the NASDAQ 80% into 2002 (S023). The same memo opened with an admission about his 1990s caution: "a single word suffices to describe my recent caution regarding the stock market: wrong." (S151) His 1997 warning took almost three years to be proved right (S056). He had no tech expertise: "All I did was render observations regarding the behavior taking place around me." (S005)
 Lesson: read behavior, not the technology; and the warning is usually early. He watched holdouts like Tiger capitulate near the top (S150).
 
@@ -63,7 +63,7 @@ In 1988 he and Karsh found it hard to raise the first distressed fund; then rece
 Lesson: "distressed debt investors are bargain hunters whose ardor rises as prices fall" (S082)
 
 ## 13. Enron and Opportunities Fund IVb, 2001 to 2002
-Sources: 3 (S120, S142, S137).
+Sources: 3 (S120, S137, S142).
 "We averaged down while Enron bonds slid and continued to draw capital and invest it as the whole distressed debt market tanked in June and July" (S120) The fund's time-weighted return was about zero, but it made $195 million at a 61.4% IRR (S120). On the equity side, ten of fifteen analysts still rated Enron a buy while its debt traded near 60 (S142), and holders stayed in "although they couldn't possibly have thought they understood the financial statements" (S142)
 Lesson: buy more when the analysis holds and the price falls; own nothing whose profits you cannot explain.
 
