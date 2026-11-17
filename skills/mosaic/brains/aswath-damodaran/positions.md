@@ -8,7 +8,7 @@ Sources: 22 (S001, S005, S007, S008, S012, S016, S026, S039, S043, S044, S061, S
 - 2013-10: Price bands, not a yes or no. "at a $6 billion market cap ($10/share), I think it is a very good deal, at $10 billion ($17.5/share), I am indifferent to it, and at $20 billion ($35/share), it is a moon shot." (S007)
 - 2013-10: "I do not have a deep rooted aversion to buying young or money losing companies, if the price is right." (S008)
 - 2015-08: No sector is off limits. "at the right price, I would buy almost any company, even a risky one with bad corporate governance, and at the wrong price, I would not buy even the very best company." (S012)
-- 2021-07: Dismissing a loss maker on PE or price to book is "investing malpractice" (S061); "dismissing Zomato as an investment, just because it does not make money now, or fails to meet some conventional value tests on pricing (PE, Price to Book), is investing malpractice" (S061)
+- 2021-07: Dismissing a loss maker on PE or price to book is malpractice: "dismissing Zomato as an investment, just because it does not make money now, or fails to meet some conventional value tests on pricing (PE, Price to Book), is investing malpractice" (S061)
 - 2022-11: "I will buy any company, no matter what its faults, at the right price" (S067)
 - 2025-12: Highly priced is not the same as overpriced; translate the price into the revenue it needs. "By reframing a pricing in terms of breakeven revenues, profitability and reinvestment, it allows you to consider whether a stock, even if priced at $4 trillion, may still be a good buy." (S087)
 - 2026-06 (newest restatement): "At the right price, a money-losing company can be a good investment and at the wrong price, a company with solid and stable profits can be a bad investment." (S092)
@@ -64,7 +64,7 @@ Sources: 7 (S003, S018, S019, S020, S044, S077, S080, S097).
 - 2019-09: Smaller margin where the upside tail is long. "I would buy Peloton with a smaller margin of safety than a more mature company, because of the potential of significant upside." (S044)
 - 2023-11: "the MOS is a blunt instrument that is most useful when you are valuing mature companies" (S077)
 - 2024-08: "Advice on concentrating your portfolio and having a margin of safety, both value investing nostrums, may work with the former but not with the latter." (S080)
-- Newer view, 2026-11: a trade-off you choose, not an article of faith, defined as buying "where you will buy a stock only if its price is less than your value estimate by a margin (20%, 30%, 40%) that you specify" (S097)
+- Newer view, 2026-11: a trade-off you choose, not an article of faith, in which you set the margin yourself: "where you will buy a stock only if its price is less than your value estimate by a margin (20%, 30%, 40%) that you specify" (S097)
 
 ## 7. Market timing (view shifted and shifted back)
 Sources: 9 (S022, S055, S060, S073, S086, S089, S090, S036, S085).
