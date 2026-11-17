@@ -14,6 +14,6 @@ WHY:
 
 THE RISK I SEE: Standing aside has a cost: "the biggest error an investor can make is the sale of a Wal-Mart or a Microsoft in the early stages of the company's growth." (S012) But these are not the early stages, and the destination leans on the AI build (F007) and one lab that is both customer and partner (F021).
 
-I'M WRONG IF: the next annual report shows cloud prices per unit falling for customers while operating margin holds near 45% (F005); that is scale shared at elephant size, and I'd move B above C.
+I'M WRONG IF: the next annual report shows cloud unit prices falling for customers while operating margin holds near 45% (F005); that is scale shared, and B would beat C.
 
 QUESTION FOR THE INVESTOR: If the price fell 37% again (F020) and the business did not, would you buy more, or sell?
