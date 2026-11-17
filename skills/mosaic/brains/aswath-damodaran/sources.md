@@ -1,0 +1,106 @@
+# Sources: Aswath Damodaran
+
+100 sources (91 blog, 9 paper), 570,871 words. Every quote in this brain carries one of these ids.
+
+Format: id | title | url | date | kind | words
+
+- S001 | The IPO of the decade? My valuation of Facebook | https://aswathdamodaran.blogspot.com/2012/02/ipo-of-decade-my-valuation-of-facebook.html | 2012-02-16 | blog | 7905
+- S002 | Apple: Thoughts on bias, value, excess cash and dividends | https://aswathdamodaran.blogspot.com/2012/03/apple-thoughts-on-bias-value-excess.html | 2012-03-01 | blog | 5372
+- S003 | Passive Value investing: Screening for bargains | https://aswathdamodaran.blogspot.com/2012/06/passive-value-investing-screening-for.html | 2012-06-12 | blog | 5742
+- S004 | Contrarian Value Investing - Going against the flow.... | https://aswathdamodaran.blogspot.com/2012/06/contrarian-investing-going-against-flow.html | 2012-06-17 | blog | 5959
+- S005 | Valuation of the week 1: A Tesla Test | https://aswathdamodaran.blogspot.com/2013/09/valuation-of-week-1-tesla-test.html | 2013-09-04 | blog | 11383
+- S006 | Twitter announces IPO: The Pricing Game begins | https://aswathdamodaran.blogspot.com/2013/09/twitter-announces-ipo-pricing-game.html | 2013-09-18 | blog | 5728
+- S007 | Twitter announces IPO: The Valuation | https://aswathdamodaran.blogspot.com/2013/10/twitter-announces-ipo-valuation.html | 2013-10-05 | blog | 6878
+- S008 | The Twitter IPO: Thoughts on the IPO End Game | https://aswathdamodaran.blogspot.com/2013/10/the-twitter-ipo-thoughts-on-ipo-end-game.html | 2013-10-28 | blog | 4318
+- S009 | Twitter's Bar Mitzvah! Is Social Media coming of age? | https://aswathdamodaran.blogspot.com/2014/11/twitter-bar-mitzvah-is-social-media.html | 2014-11-17 | blog | 3421
+- S010 | Up, up and away! A crowd-valuation of Uber! | https://aswathdamodaran.blogspot.com/2014/12/up-up-and-away-crowd-valuation-of-uber.html | 2014-12-02 | blog | 5560
+- S011 | Illiquidity and Bubbles in Private Share Markets: Testing Mark Cuban's thesis! | https://aswathdamodaran.blogspot.com/2015/03/illiquidity-and-bubbles-in-private.html | 2015-03-20 | blog | 3677
+- S012 | Narrative Resets:  Revisiting a Tech Trio (Apple, Facebook and Twitter) | https://aswathdamodaran.blogspot.com/2015/08/narrative-resets-revisiting-tech-trio.html | 2015-08-12 | blog | 5246
+- S013 | Big Markets, Over Confidence and the Macro Delusion! | https://aswathdamodaran.blogspot.com/2015/08/big-markets-over-confidence-and-macro.html | 2015-08-28 | blog | 3863
+- S014 | What's in a name? Of Umlauts, The Alphabet and World Peace! | https://aswathdamodaran.blogspot.com/2015/09/what-in-name-of-umlauts-alphabets-and.html | 2015-09-09 | blog | 3779
+- S015 | On the Uber Rollercoaster: Narrative Tweaks, Twists and Turns! | https://aswathdamodaran.blogspot.com/2015/10/on-uber-rollercoaster-narrative-tweaks.html | 2015-10-12 | blog | 5751
+- S016 | Dream Big or Stay Focused? Lyft's Counter to Uber! | https://aswathdamodaran.blogspot.com/2015/10/dream-big-or-stay-focused-lyfts-counter.html | 2015-10-19 | blog | 3728
+- S017 | Management Matters: Facebook and Twitter! | https://aswathdamodaran.blogspot.com/2016/02/management-matters-facebook-and-twitter.html | 2016-02-19 | blog | 3619
+- S018 | DCF Myth 3: You cannot do a valuation, when there is too much uncertainty! | https://aswathdamodaran.blogspot.com/2016/05/dcf-myth-3-you-cannot-do-valuation-when.html | 2016-05-02 | blog | 5293
+- S019 | DCF Myth 3.1: The Margin of Safety - Tool for Action or Excuse for Inaction? | https://aswathdamodaran.blogspot.com/2016/05/dcf-myth-31-margin-of-safety-tool-for.html | 2016-05-03 | blog | 4309
+- S020 | DCF Myth 3.2: If you don't look, its not there! | https://aswathdamodaran.blogspot.com/2016/05/dcf-myth-32-if-you-don-look-its-not.html | 2016-05-23 | blog | 5690
+- S021 | Icahn exits, Buffett enters, Whither Apple? Value and Price Effects of Big Name Investing | https://aswathdamodaran.blogspot.com/2016/06/icahn-buffett-and-apple-big-name.html | 2016-06-06 | blog | 4283
+- S022 | Mean Reversion: Gravitational Super Force or Dangerous Delusion? | https://aswathdamodaran.blogspot.com/2016/08/mean-reversion-gravitational-super.html | 2016-08-31 | blog | 5741
+- S023 | Venture Capital: It is a pricing, not a value, game! | https://aswathdamodaran.blogspot.com/2016/10/venture-capital-it-is-pricing-not-value.html | 2016-10-02 | blog | 4273
+- S024 | Active Investing: Rest in Peace or Resurgent Force? | https://aswathdamodaran.blogspot.com/2016/12/active-investing-rest-in-peace-or.html | 2016-12-14 | blog | 7529
+- S025 | Active Investing: Seeking the Elusive Edge! | https://aswathdamodaran.blogspot.com/2016/12/active-investing-seeking-elusive-edge.html | 2016-12-28 | blog | 3627
+- S026 | My Snap Story: Valuing Snap ahead of it's IPO! | https://aswathdamodaran.blogspot.com/2017/02/a-snap-story-valuing-snap-ahead-of-its.html | 2017-02-17 | blog | 6781
+- S027 | Uber's bad week: Doomsday Scenario or Business Reset? | https://aswathdamodaran.blogspot.com/2017/06/ubers-bad-week-doomsday-scenario-or.html | 2017-06-21 | blog | 5075
+- S028 | User/Subscriber Economics: An Alternative View of Uber's Value | https://aswathdamodaran.blogspot.com/2017/06/usersubscriber-economics-alternative.html | 2017-06-28 | blog | 4361
+- S029 | A Tesla 2017 Update: A Disruptive Force and a Debt Puzzle! | https://aswathdamodaran.blogspot.com/2017/08/a-tesla-2017-update-disruptive-force.html | 2017-08-11 | blog | 4021
+- S030 | Deconstructing Amazon Prime: Loss Leader or Value Creator? | https://aswathdamodaran.blogspot.com/2017/10/loss-leader-or-value-creator.html | 2017-10-17 | blog | 3139
+- S031 | Netflix: The Future of Entertainment or House of Cards? | https://aswathdamodaran.blogspot.com/2018/04/netflix-future-of-entertainment-or.html | 2018-04-16 | blog | 3497
+- S032 | Alphabet Soup: Google is Alpha, but where are the Bets? | https://aswathdamodaran.blogspot.com/2018/04/alphabet-soup-google-is-alpha-but-where.html | 2018-04-19 | blog | 2699
+- S033 | Amazon: Glimpses of Shoeless Joe? | https://aswathdamodaran.blogspot.com/2018/04/amazon-glimpses-of-shoeless-joe.html | 2018-04-26 | blog | 2925
+- S034 | Twists and Turns in the Tesla Story : A Boring, Boneheaded Update! | https://aswathdamodaran.blogspot.com/2018/06/twists-and-turns-in-tesla-story-boring.html | 2018-06-28 | blog | 3702
+- S035 | The Privatization of Tesla: Stray Tweet or Game Changing News | https://aswathdamodaran.blogspot.com/2018/08/the-privatization-of-tesla.html | 2018-08-10 | blog | 3660
+- S036 | Trillion Dollar Toppers: Market Triggers, Value Drivers and Pricing Catalysts! | https://aswathdamodaran.blogspot.com/2018/09/trillion-dollar-toppers-market-triggers.html | 2018-09-10 | blog | 3718
+- S037 | Apple and Amazon at a Trillion $: Looking Back and Looking Forward! | https://aswathdamodaran.blogspot.com/2018/09/apple-and-amazon-at-trillion-looking.html | 2018-09-19 | blog | 2801
+- S038 | Amazon and Apple at a Trillion $: A Follow-up on Uncertainty and Catalysts! | https://aswathdamodaran.blogspot.com/2018/09/amazon-and-apple-at-trillion-follow-up.html | 2018-09-21 | blog | 3497
+- S039 | The Perils of Investing Idol Worship: The Kraft Heinz Lessons! | https://aswathdamodaran.blogspot.com/2019/02/the-perils-of-investing-idol-worship.html | 2019-02-27 | blog | 4277
+- S040 | Uber's Coming out Party: Personal Mobility Pioneer or Car Service on Steroids? | https://aswathdamodaran.blogspot.com/2019/04/ubers-coming-out-party-personal.html | 2019-04-15 | blog | 3289
+- S041 | Tesla's Travails: Curfew for a Corporate Teenager? | https://aswathdamodaran.blogspot.com/2019/06/teslas-travails-curfew-for-corporate.html | 2019-06-03 | blog | 4251
+- S043 | Runaway Story or Meltdown in Motion? The Unraveling of the WeWork IPO | https://aswathdamodaran.blogspot.com/2019/09/runaway-story-or-meltdown-in-motion.html | 2019-09-09 | blog | 5991
+- S044 | Insights on VC Pricing: Lessons from Uber, WeWork and Peloton! | https://aswathdamodaran.blogspot.com/2019/09/insights-on-vc-pricing-lessons-from.html | 2019-09-17 | blog | 3926
+- S045 | The Softbank-WeWork End Game: Savior Economics or Sunk Cost Problem? | https://aswathdamodaran.blogspot.com/2019/11/the-softbank-wework-end-game-savior.html | 2019-11-15 | blog | 3094
+- S046 | A coming out party for the world's most valuable company: Aramco's long awaited IPO! | https://aswathdamodaran.blogspot.com/2019/11/a-coming-out-party-for-worlds-most.html | 2019-11-18 | blog | 4519
+- S047 | Regime Change and Value: A Follow up Post on Aramco | https://aswathdamodaran.blogspot.com/2019/11/regime-change-and-value-follow-up-post.html | 2019-11-19 | blog | 2861
+- S048 | A Teaching Manifesto: An Invitation to my Spring 2020 classes | https://aswathdamodaran.blogspot.com/2019/12/a-teaching-manifesto-invitation-to-my.html | 2019-12-19 | blog | 2859
+- S049 | The Market is Huge! Revisiting the Big Market Delusion | https://aswathdamodaran.blogspot.com/2019/12/the-market-is-huge-revisiting-big.html | 2019-12-29 | blog | 3507
+- S051 | A Do-it-yourself (DIY) Valuation of Tesla: Of Investment Regrets and Disagreements! | https://aswathdamodaran.blogspot.com/2020/02/a-do-it-yourself-diy-valuation-of-tesla.html | 2020-02-06 | blog | 3043
+- S054 | A Viral Market Update VIII: A Crisis Test - Value vs Growth, Active vs Passive, Small Cap vs Large! | https://aswathdamodaran.blogspot.com/2020/05/a-viral-market-update-viii-crisis-test.html | 2020-05-13 | blog | 4844
+- S055 | A Viral Market Update IX:  A Do-it-Yourself S&P 500 Valuation | https://aswathdamodaran.blogspot.com/2020/06/a-viral-market-update-ix-do-it-yourself.html | 2020-06-04 | blog | 3724
+- S056 | A Viral Market Update X: A Corporate Life Cycle Perspective | https://aswathdamodaran.blogspot.com/2020/06/a-viral-market-update-x-corporate-life.html | 2020-06-19 | blog | 2828
+- S057 | Value Investing I: The Back Story | https://aswathdamodaran.blogspot.com/2020/10/value-investing-i-back-story.html | 2020-10-23 | blog | 3274
+- S058 | Value Investing II: Tough times for Value Investing - Passing Phase or a Changed World? | https://aswathdamodaran.blogspot.com/2020/10/value-investing-ii-tough-times-for.html | 2020-10-23 | blog | 3517
+- S059 | The Sharing Economy come home: The IPO of Airbnb! | https://aswathdamodaran.blogspot.com/2020/12/the-sharing-economy-come-home-ipo-of.html | 2020-12-02 | blog | 4936
+- S060 | Data Update 2 for 2021: The Price of Risk! | https://aswathdamodaran.blogspot.com/2021/01/data-update-2-for-2021-price-of-risk.html | 2021-01-20 | blog | 3344
+- S061 | The Zomato IPO: A Bet on Big Markets and Platforms! | https://aswathdamodaran.blogspot.com/2021/07/the-zomato-ipo-bet-on-big-markets-and.html | 2021-07-22 | blog | 5794
+- S062 | A DIY (Do-It-Yourself) Valuation of Zomato | https://aswathdamodaran.blogspot.com/2021/08/a-diy-do-it-yourse-valuation-of-zomato.html | 2021-08-02 | blog | 3974
+- S063 | Tesla's Trillion Dollar Moment: A Valuation Revisit! | https://aswathdamodaran.blogspot.com/2021/11/teslas-trillion-dollar-moment-valuation.html | 2021-11-09 | blog | 5506
+- S064 | Managing across the Corporate Life Cycle: CEOs and Stock Prices! | https://aswathdamodaran.blogspot.com/2021/12/managing-across-corporate-life-cycle.html | 2021-12-10 | blog | 5462
+- S065 | Elon's Twitter Play: Valuation and Corporate Governance Consequences | https://aswathdamodaran.blogspot.com/2022/04/elons-twitter-play-valuation-and.html | 2022-04-21 | blog | 3705
+- S067 | META Lesson 1: Corporate Governance | https://aswathdamodaran.blogspot.com/2022/11/meta-lesson-1-corporate-governance.html | 2022-11-04 | blog | 6595
+- S068 | META Lesson 2: Accounting Inconsistencies and Consequences | https://aswathdamodaran.blogspot.com/2022/11/meta-lesson-2-accounting.html | 2022-11-10 | blog | 3340
+- S069 | META Lesson 3: Tell me a story! | https://aswathdamodaran.blogspot.com/2022/11/meta-lesson-3-tell-me-story.html | 2022-11-15 | blog | 6692
+- S070 | Tesla in 2023: A Return to Reality, The Start of the End or Time to Buy? | https://aswathdamodaran.blogspot.com/2023/01/tesla-in-2023-return-to-reality-start.html | 2023-01-26 | blog | 3739
+- S071 | Disagreements and First Principles: The Pushback on my Tesla Valuation | https://aswathdamodaran.blogspot.com/2023/02/disagreements-and-first-principles.html | 2023-02-02 | blog | 3284
+- S072 | AI's Winners, Losers and Wannabes: An NVIDIA Valuation, with the AI Boost! | https://aswathdamodaran.blogspot.com/2023/06/ais-winners-losers-and-wannabes-nvidia.html | 2023-06-23 | blog | 7114
+- S073 | The Price of Risk: With Equity Risk Premiums, Caveat Emptor! | https://aswathdamodaran.blogspot.com/2023/08/the-price-of-risk-with-equity-risk.html | 2023-08-05 | blog | 5088
+- S074 | A Business Upended: Streaming disrupts the Entertainment Business! | https://aswathdamodaran.blogspot.com/2023/09/a-business-upended-streaming-disrupts.html | 2023-09-11 | blog | 6414
+- S076 | Invisible, yet Invaluable: Valuing Intangibles in the Birkenstock IPO! | https://aswathdamodaran.blogspot.com/2023/10/invisible-yet-invaluable-valuing.html | 2023-10-06 | blog | 5569
+- S077 | Tesla in November 2023 : Story twists and turns, with value consequences! | https://aswathdamodaran.blogspot.com/2023/11/tesla-story-turns-and-twists.html | 2023-11-01 | blog | 3650
+- S078 | The Difference Makers: Key Person(s) Valuation | https://aswathdamodaran.blogspot.com/2023/12/the-difference-makers-key-persons.html | 2023-12-10 | blog | 5589
+- S079 | The Seven Samurai: How Big Tech Rescued the Market in 2023! | https://aswathdamodaran.blogspot.com/2024/02/the-seven-samurai-how-big-tech-rescued.html | 2024-02-08 | blog | 3094
+- S080 | The Corporate Life Cycle: Managing, Valuation and Investing Implications! | https://aswathdamodaran.blogspot.com/2024/08/the-corporate-life-cycle-corporate.html | 2024-08-19 | blog | 4013
+- S081 | Beat your Bot: Building your moat against AI | https://aswathdamodaran.blogspot.com/2024/08/beat-your-bot-building-your-moat.html | 2024-08-28 | blog | 2965
+- S082 | The Power of Expectations: Nvidia's Earnings and the Market Reaction! | https://aswathdamodaran.blogspot.com/2024/09/the-expectations-game-aftermath-of.html | 2024-09-05 | blog | 4145
+- S083 | Breaking up Big Tech:  Cui Bono? | https://aswathdamodaran.blogspot.com/2024/10/breaking-up-big-tech-cui-bono.html | 2024-10-18 | blog | 8280
+- S084 | DeepSeek crashes the AI Party: Story Break, Change or Shift? | https://aswathdamodaran.blogspot.com/2025/01/deepseek-crashes-ai-party-story-break.html | 2025-01-31 | blog | 4878
+- S085 | Buy the Dip: The Draw and Dangers of Contrarian Investing! | https://aswathdamodaran.blogspot.com/2025/04/buy-dip-draw-and-dangers-of-contrarian.html | 2025-04-20 | blog | 3294
+- S086 | A “Fairly Highly Valued” Market: A Fed Chair Opines on Stocks, but should we listen? | https://aswathdamodaran.blogspot.com/2025/10/a-fairly-highly-valued-market-fed-chair.html | 2025-10-06 | blog | 5426
+- S087 | Trillion Dollar Market Caps: Fairy Tale Pricing or Business Marvels? | https://aswathdamodaran.blogspot.com/2025/12/trillion-dollar-market-caps-fairy-tale.html | 2025-12-03 | blog | 4275
+- S088 | AI Scenarios: From Doomsday Destruction to Do-Nothing Bots! | https://aswathdamodaran.blogspot.com/2026/03/ai-scenarios-from-economic-doomsday-to.html | 2026-03-04 | blog | 5260
+- S089 | The Price of Risk: An Equity Risk Premium Monologue! | https://aswathdamodaran.blogspot.com/2026/03/the-price-of-risk-equity-risk-premium.html | 2026-03-15 | blog | 2728
+- S090 | Finding your investing lodestar: In Search of an Investment Philosophy | https://aswathdamodaran.blogspot.com/2026/03/finding-your-investing-lodestar-in.html | 2026-03-24 | blog | 5859
+- S091 | To a Trillion(s) Dollars and beyond: A SpaceX IPO Odyssey! | https://aswathdamodaran.blogspot.com/2026/04/to-trillion-dollars-and-beyond-spacex.html | 2026-04-23 | blog | 4279
+- S092 | SpaceX, OpenAI and Anthropic: The S&P 500 Inclusion Question and Investment Consequences! | https://aswathdamodaran.blogspot.com/2026/06/indexology-index-mechanics-and.html | 2026-06-18 | blog | 5336
+- S093 | The Situational Awareness Blow-up: The Collateral Damage from Investing Conviction! | https://aswathdamodaran.blogspot.com/2026/08/the-situational-awareness-blow-up.html | 2026-08-10 | blog | 5603
+- S094 | AI's Bar Mitzvah Moment: From Hype & Hope to Business Questions! | https://aswathdamodaran.blogspot.com/2026/08/ais-bar-mitzvah-moment-from-hype-hope.html | 2026-08-20 | blog | 9352
+- S095 | From Eyeballs to Annual Run Rates (ARR): Buzzy Pricing Metrics and the Anthropic Trade! | https://aswathdamodaran.blogspot.com/2026/10/from-eyeballs-to-annual-run-rates-arr.html | 2026-10-22 | blog | 5377
+- S096 | The Anthropic Prospectus Arrives: My (but not the) IPO valuation! | https://aswathdamodaran.blogspot.com/2026/10/the-anthropic-prospectus-arrives-ipo.html | 2026-10-28 | blog | 5712
+- S097 | The Anthropic Feedback Loop: The Cost of Capital Delusion and Diversion! | https://aswathdamodaran.blogspot.com/2026/11/the-anthropic-feedback-loop-cost-of.html | 2026-11-03 | blog | 7966
+- S098 | Equity Risk Premiums (ERP): Determinants, Estimation and Implications, full paper | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/ERPfull.pdf | 2012-03-23 | paper | 27616
+- S100 | Valuing Young, Start-up and Growth Companies: Estimation Issues and Valuation Challenges | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/younggrowth.pdf | 2009-06-01 | paper | 24110
+- S101 | Valuing Companies with Intangible Assets | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/intangibles.pdf | 2009-01-01 | paper | 12042
+- S102 | Relative Valuation: Multiples and Comparables | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/multiples.pdf | 2005-01-01 | paper | 6967
+- S103 | Probabilistic Approaches: Scenario Analysis, Decision Trees and Simulations | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/probabilistic.pdf | 2007-01-01 | paper | 17214
+- S104 | Country Risk: Determinants, Measures and Implications | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/CountryRisk.pdf | 2012-07-01 | paper | 9702
+- S105 | Strategic Risk Taking: A Framework for Risk Management | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/strategicrisk.pdf | 2007-01-01 | paper | 11146
+- S106 | What is the Riskfree Rate? A Search for the Basic Building Block | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/riskfreerate.pdf | 2008-12-01 | paper | 9818
+- S107 | The Promise and Peril of Real Options | https://www.stern.nyu.edu/~adamodar/pdfiles/papers/realopt.pdf | 2005-07-01 | paper | 22265
