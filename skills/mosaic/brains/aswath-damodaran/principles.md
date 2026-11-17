@@ -34,38 +34,38 @@ Built from the verified notes on 100 sources (91 blog posts, 2012 to 2026, and 9
    - "you have to be willing to revisit your story, admit that you were wrong, and adapt" (S087)
    - Sources: 7 (S010, S015, S063, S077, S084, S087, S091). Confidence: high.
 
-7. **A big market is not a reason to pay up; ask why this company wins and who loses.**
+7. **Know what you own when founders control the vote; his tolerance for it has narrowed.** In 2012 dual-class control was a reason not to buy Facebook even at a fair price. In 2015 and 2022 he said he would buy at the right price and build distrust in as a discount. From 2021 to 2026 (newer) he worries more than ever about founder voting power and calls concentrated founder power a bad idea.
+   - "You may be comfortable with Zuckerberg as CEO for life but I am not." (S001)
+   - "you have to build that reality into your valuations, leading to discounts to your value that reflect how much you trust management" (S067)
+   - "I would worry more than ever before about giving up voting power to founder/CEOs, even if they are well regarded" (S064)
+   - "concentrating power in the hands of founders is a bad idea" (S097)
+   - Sources: 7 (S001, S012, S046, S064, S067, S096, S097). Confidence: high.
+
+8. **A big market is not a reason to pay up; ask why this company wins and who loses.**
    - "It is therefore dangerous to base your argument for investing in a company and assigning it high value entirely on the size of the market that it serves" (S013)
    - "Not all change is revolutionary, not all revolutionary change translates into big markets, and not all big markets create valuable businesses" (S094)
    - Sources: 6 (S009, S013, S049, S061, S087, S094). Confidence: high.
 
-8. **Spread bets in proportion to uncertainty, with a hard cap on any one position.** His own rule: about three dozen stocks, no position above 15%.
+9. **Spread bets in proportion to uncertainty, with a hard cap on any one position.** His own rule: about three dozen stocks, no position above 15%.
    - "the more uncertain you feel about individual investments, the more you have to spread your bets" (S018)
    - "not only spread my portfolio over three dozen stocks, but also follow rigid rules on not letting any single investment exceed 15% of my portfolio" (S090)
    - Sources: 6 (S004, S018, S019, S090, S093, S097). Confidence: high.
 
-9. **Do not short, or chase a fall, on valuation alone; in the short term momentum beats fundamentals.**
-   - "at least in the short term, momentum beats fundamentals, and I have no desire to be caught in the whiplash effect" (S063)
-   - "Momentum is a wild card in every investment strategy, and you ignore it at your own peril." (S093)
-   - Sources: 6 (S038, S059, S063, S091, S093, S096). Confidence: high.
+10. **Do not short, or chase a fall, on valuation alone; in the short term momentum beats fundamentals.**
+    - "at least in the short term, momentum beats fundamentals, and I have no desire to be caught in the whiplash effect" (S063)
+    - "Momentum is a wild card in every investment strategy, and you ignore it at your own peril." (S093)
+    - Sources: 6 (S038, S059, S063, S091, S093, S096). Confidence: high.
 
-10. **Never borrow against a story; a young or money-losing firm should fund with equity, and an investor should not lever a macro thesis.**
+11. **Never borrow against a story; a young or money-losing firm should fund with equity, and an investor should not lever a macro thesis.**
     - "Borrowing money in anticipation of future profits is not just stupid, but it is dangerous." (S034)
     - "combining a macro story about AI winning with maximal leverage creates a time bomb" (S093)
     - Sources: 6 (S029, S034, S041, S080, S093, S094). Confidence: high.
 
-11. **Sell when price passes value, whatever the holding period; later he sells winners in halves.** In 2015 the rule was to sell once price exceeds value, even after a short hold. In 2023 and 2024 (newer) he sold Nvidia in halves when price ran past value, because his value has error, taxes bite and regret cuts both ways. Doubling down is normally off limits; he made one stated exception (Facebook, November 2022).
+12. **Sell when price passes value, whatever the holding period; later he sells winners in halves.** In 2015 the rule was to sell once price exceeds value, even after a short hold. In 2023 and 2024 (newer) he sold Nvidia in halves when price ran past value, because his value has error, taxes bite and regret cuts both ways. Doubling down is normally off limits; he made one stated exception (Facebook, November 2022).
     - "you should sell the stock when the price exceeds value (perhaps, using the same margin of safety in the other direction), even if you have held it for only a short period." (S012)
     - "I plan to repeat that process, and sell half of my remaining holdings" (S079)
     - "I made an exception to my rule of not doubling down and doubled my holding of Facebook on November 4, 2022, because its valuation looks compelling" (S069)
     - Sources: 6 (S012, S051, S069, S072, S079, S082). Confidence: high.
-
-12. **Know what you own when founders control the vote; his tolerance for it has narrowed.** In 2012 dual-class control was a reason not to buy Facebook even at a fair price. In 2015 and 2022 he said he would buy at the right price and build distrust in as a discount. From 2021 to 2026 (newer) he worries more than ever about founder voting power and calls concentrated founder power a bad idea.
-    - "You may be comfortable with Zuckerberg as CEO for life but I am not." (S001)
-    - "you have to build that reality into your valuations, leading to discounts to your value that reflect how much you trust management" (S067)
-    - "I would worry more than ever before about giving up voting power to founder/CEOs, even if they are well regarded" (S064)
-    - "concentrating power in the hands of founders is a bad idea" (S097)
-    - Sources: 6 (S001, S046, S064, S067, S096, S097). Confidence: high.
 
 13. **Keep the chance of failure out of the discount rate; put it in a failure probability.**
     - "you should see 12-15% as costs of capital for even the riskiest start-ups, in a DCF, never 40-50%" (S047)

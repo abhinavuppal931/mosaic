@@ -2,6 +2,8 @@
 
 29 sources (24 letter, 5 blog), 113,833 words. Every quote in this brain carries one of these ids.
 
+Depth: default. Built from 29 free sources, 113,833 words, dated 2002 to 2021: 24 Nomad Investment Partnership letters (January 2002 to December 2013, 110,139 words), taken from a compiled PDF hosted by a third party, and 5 IGY Foundation pages posted in 2021 (3,694 words; four are under 800 words). Thin-source limits: the investing record is the letters alone; there is no Sleep book, so nothing is quoted or paraphrased from a copyrighted book, and no interviews or talks were fetched beyond a 2005 speech attached to the December 2005 letter (S009). The December 2010 annual letter is not in the corpus, and two IGY pages (the Preamble and Short term v long term) were not kept, so ids S025 and S029 are absent. The letters stop when Nomad closed at the end of 2013 and the IGY pages turn to philanthropy, so nothing here covers markets after 2013, AI, crypto or today's rates. The letters circulate widely, but the right to reuse them is not confirmed, so quotes stay short and each carries its source id.
+
 Format: id | title | url | date | kind | words
 
 - S001 | Nomad Investment Partnership Letter to Partners, launch to December 2001 (dated 18 January 2002) | https://suredividend.com/wp-content/uploads/2024/11/Nomad-Letters.pdf | 2002-01-18 | letter | 1905

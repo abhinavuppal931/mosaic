@@ -20,7 +20,7 @@ Built from Scion letters and memos (2000 to 2008), MSN and VIC write-ups (2000 t
 
 ## Go-to analogies
 
-Bubbles as tulips, crowded theaters and CDOs (S003, S005): "It's a tulip bulb of our time." (S005). Medicine: "First, do no harm." (S030), "two grains of salt and a ton of due diligence." (S036). Unpredictable timing as "waiting for Castro to die. It's not a strategy." (S005). Cheap stocks as road kill (S038).
+Bubbles as tulips, crowded theaters and CDOs (S003, S005): "It's a tulip bulb of our time." (S005). Medicine: "First, do no harm." (S030), "two grains of salt and a ton of due diligence." (S036). Unpredictable timing as "waiting for Castro to die. It's not a strategy." (S005).
 
 ## How he opens and closes
 
@@ -28,11 +28,11 @@ Opens with his own dated record or a hard number (inferred from S002, S027, S029
 
 ## How he disagrees
 
-Names names and uses the other side's own documents (inferred from S009, S029, S040). Assumes the counterparty games him: "when I'm dealing with the street I tend to think from a lay perspective that they're all crooks." (S028). Answers hindsight dryly: "Yet I simply don't recall too many people agreeing with me back then." (S027). Owns mistakes the same way: "No investor has a 1.000 batting average, but every mistake deserves scrutiny and this one will get it." (S040)
+Names names and uses the other side's own documents (inferred from S009, S029, S040). Assumes the counterparty games him: "when I'm dealing with the street I tend to think from a lay perspective that they're all crooks." (S028). Answers hindsight: "Yet I simply don't recall too many people agreeing with me back then." (S027). Owns mistakes flatly: "No investor has a 1.000 batting average, but every mistake deserves scrutiny and this one will get it." (S040)
 
 ## What he never does
 
-No dated market calls: "I just don't know what the timeline will be." (S003). No top picking (S022), no model marks (S025, S028), no volatility math. Charity posts matter only as a picture of his filing-by-filing checking (inferred from S018, S019).
+No dated market calls: "I just don't know what the timeline will be." (S003). No top picking (S022), no model marks (S025, S028), no volatility math. Charity posts matter here only for his filing-by-filing checks (inferred from S018, S019).
 
 ## Voice anchors
 
