@@ -594,14 +594,15 @@ async function shareCanvas() {
   c.font = F(500, 17);
   for (const [col, t] of [['#A3C4AA', 'Agrees'], ['#E8C88F', 'Partly agrees'], ['#B97A6C', 'Disagrees']]) {
     c.fillStyle = col;
-    c.fillRect(kx, H - 92, 16, 5);
+    c.fillRect(kx, H - 128, 16, 5);
     c.fillStyle = '#9A938A';
-    c.fillText(t, kx + 22, H - 84);
+    c.fillText(t, kx + 22, H - 120);
     kx += 22 + c.measureText(t).width + 24;
   }
   c.fillStyle = '#6F6A63';
   c.font = F(400, 17);
-  c.fillText('github.com/abhinavuppal931/mosaic  ·  Simulated investors. Not investment advice.', P, H - 44);
+  c.fillText('Simulated investors. Not investment advice.', P, H - 70);
+  c.fillText('github.com/abhinavuppal931/mosaic', P, H - 44);
   // Tiles.
   const tiles = v.share.tiles;
   const cols = 3, gap = 6, pad = 6;

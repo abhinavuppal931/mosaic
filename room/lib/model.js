@@ -1,5 +1,5 @@
 // Turn a parsed session (lib/session.js) into everything the page shows. Pure functions,
-// shared by the server, the page and the tests. Every number comes from the seats' option
+// shared by the server, the journal and the tests. Every number comes from the seats' option
 // scores in the round files; nothing here is typed in by hand.
 import { seatInfo } from './seats.js';
 import * as C from './copy.js';
@@ -235,8 +235,10 @@ function nextText(ctx, beat, beats, bi) {
   const nb = beats[bi + 1];
   if (nb && nb.mode === 'card' && nb.round === beat.round) return `${ctx.info(nb.seat).name} speaks next`;
   const spoken = new Set(s.rounds[beat.round].slice(0, beat.index + 1).map((c) => c.seat));
-  const waiting = council.seats.find((k) => !spoken.has(k));
-  if (waiting) return `${ctx.info(waiting).name} speaks next`;
+  // Mid-round the Room cannot know whom the Chair calls next, so it says how many are left.
+  const waiting = council.seats.filter((k) => !spoken.has(k));
+  if (waiting.length === 1) return `${ctx.info(waiting[0]).name} speaks next`;
+  if (waiting.length) return `${C.capFirst(C.word(waiting.length))} still to speak`;
   return beat.round < ctx.roundsTotal ? `Round ${beat.round + 1} comes next` : 'The verdict comes next';
 }
 

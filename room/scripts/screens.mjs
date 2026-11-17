@@ -5,7 +5,7 @@
 //   node room/scripts/screens.mjs [--out room/test/screens]
 //
 // Needs Playwright with Chromium (not a dependency of the Room; the screenshots are for review).
-// Writes board-*.png (the A3 boards), room-*.png (the Room), compare-*.png (side by side) and
+// Writes room-*.png (the Room), compare-*.png (the A3 board and the Room side by side) and
 // print-*.png (the Download PDF layout), and exits non-zero if a check fails.
 import fs from 'node:fs';
 import os from 'node:os';
@@ -96,5 +96,7 @@ await live.close();
 await done.close();
 boards.close();
 fs.rmSync(tmp, { recursive: true, force: true });
+// The boards appear in the compare images; keep only those, the Room's own shots and the print shots.
+for (const f of fs.readdirSync(OUT)) if (/^board-.*\.png$/.test(f)) fs.rmSync(path.join(OUT, f));
 console.log(failed ? `${failed} page(s) with problems` : 'All pages clean.');
 process.exit(failed ? 1 : 0);

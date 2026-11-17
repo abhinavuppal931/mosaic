@@ -543,5 +543,9 @@ a { color: inherit; }
   .sources button.lnk { color: var(--ink); }
   .foot { padding: 10px 0 0; border-top: 1px solid var(--line); font-size: 10px; break-inside: avoid; }
   .checkin { background: #F6F4F0; }
+  .checkin .btn { display: none !important; }
+  .score td.n { color: #2B2724; }
+  .score td.n.lo { color: #6B655E; }
+  .score td.n.hi { color: #141210; }
   a[href]::after { content: none; }
 }
