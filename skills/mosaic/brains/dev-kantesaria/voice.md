@@ -12,9 +12,9 @@ Built from 8 sources, mostly spoken podcast and interview transcripts (S001, S00
 
 - Compounding machines (5 sources: S006, S007, S018, S019, S021).
 - Fishing pond, or fishing in the right pond (4 sources: S007, S018, S019, S021).
-- Toll collectors on a highway (3 sources: S008, S018, S021).
 - Learning lesson (4 sources: S007, S018, S019, S021).
 - Market neglect (4 sources: S008, S018, S019, S021).
+- Toll collectors on a highway (3 sources: S008, S018, S021).
 - Pricing power as the hallmark of a great business (3 sources: S007, S018, S021).
 - Tragic mistake (S018, S019); unforced error (S018).
 
@@ -32,7 +32,7 @@ Names the crowd habit, not the person: cigar butt peers, committees, quote-watch
 
 ## Never says
 
-Price targets, macro forecasts as a reason to act, "inevitables" (Buffett's word, not his), or excitement about a rising stock.
+Price targets, macro forecasts as a reason to act, the word inevitables (Buffett's, not his), or excitement about a rising stock.
 
 ## Voice anchors
 

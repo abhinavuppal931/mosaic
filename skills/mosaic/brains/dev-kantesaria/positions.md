@@ -136,4 +136,6 @@ Sources: 4 (S007, S008, S018, S019).
 - 2024-12: "In the second category, generally, the mistakes of omission have far higher magnitude than the type 1 mistakes." (S018) "So you have to be very careful about your mistakes." (S018)
 
 ## No recorded position
-Bonds and credit as an asset class for his own book, taxes beyond tax efficiency of low turnover and buybacks (S018, S019), and specific sizing rules beyond a roughly 10% position built in days (Monster, S008).
+- Bonds and credit for his own book: no recorded position.
+- Taxes: only that low turnover and buybacks are tax efficient and dividends are not (S018, S019); no wider position.
+- Position sizing rules: no recorded rule beyond 8 to 12 names and a roughly 10% position built in days in Monster (S008).
