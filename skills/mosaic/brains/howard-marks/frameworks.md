@@ -61,7 +61,7 @@ Built from 105 Oaktree memos, February 1993 to November 2026 (see sources.md). M
 - **Warning sign:** "when prices incorporate unlimited virtue, the eventual result is bound to be disappointment, disillusionment and depreciation." (S086)
 - **Sources:** 12 (S001, S016, S026, S028, S029, S045, S047, S057, S060, S066, S086, S167).
 
-## 7. Second-level thinking *(his name, central to The Most Important Thing, 2011; taught in memos)*
+## 7. Second-level thinking *(his name; taught in his book The Most Important Thing and in memos)*
 
 - **What it is:** thinking that is different from the consensus and better. First-level thinking says a good company is a good buy. Second-level thinking asks what everyone else thinks, what is in the price, and what happens if they are right or you are.
 - **Parts (his question list):** (1) what is the range of likely outcomes; (2) which do I think will occur; (3) what is the probability I'm right; (4) what does the consensus think; (5) how does my expectation differ; (6) how does the current price fit the consensus view and mine; (7) is the consensus psychology in the price too bullish or too bearish; (8) what happens to the price if the consensus is right, and if I am (S028, S068).
