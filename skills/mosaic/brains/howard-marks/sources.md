@@ -2,6 +2,8 @@
 
 105 sources (105 memo), 681,724 words. Every quote in this brain carries one of these ids.
 
+Depth: deep. Built from 105 free sources, 681,724 words, dated February 1993 to November 2026: client memos written at TCW until 1995 and at Oaktree since, fetched from Oaktree's website, the newest from 2026-11-11 (S001). Thin-source limits: the corpus is memos only. 168 memos dating back to October 1990 were listed and 63 were left out to keep the build to the strongest material (including the three earliest, from 1990 to 1992, and the September 2026 Part III of Shall We Repeal the Laws of Economics), so ids skip; the April 1991 memo that first named the pendulum is not here. No interviews, podcasts, talks or video transcripts were fetched, so nothing here is spoken wording. His books, The Most Important Thing (2011) and Mastering the Market Cycle (2018), are copyrighted and are not quoted; ideas taught there, such as second-level thinking, appear only as paraphrase with the book named or where the same idea is in a memo. The memos quote others often (Buffett, Galbraith, Templeton, Twain, his son Andrew, clients) and the 2026 AI memos quote AI tools at length; none of that is quoted as his words. Oaktree publishes the memos free but they are copyrighted by Oaktree and the right to reuse them is not confirmed, so quotes stay short and each carries its source id. Four memos are under 2,500 words (S018, S019, S157, S161).
+
 Format: id | title | url | date | kind | words
 
 - S001 | A Layman Thinks About AI | https://www.oaktreecapital.com/insights/memo/a-layman-thinks-about-ai | 2026-11-11 | memo | 6092

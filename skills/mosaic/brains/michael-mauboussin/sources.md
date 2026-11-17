@@ -2,6 +2,8 @@
 
 100 sources (71 paper, 20 interview, 4 speech, 2 op-ed, 2 blog, 1 lecture), 827,844 words. Every quote in this brain carries one of these ids.
 
+Depth: deep. Built from 100 free sources, 827,844 words, dated 1997 to 2024: 71 research papers (699,443 words, 1997-01 to 2024-04, from his Credit Suisse, Legg Mason and Morgan Stanley Counterpoint Global years), 20 interviews (99,032 words, 2009 to 2020), 4 speeches, 2 op-eds, 2 blog posts and his 2000 Columbia Business School lecture notes. All were fetched from the paper archive on his own website; 211 sources were fetched and 111 were left out to keep the build to the strongest material, so ids skip. Thin-source limits: there are no interviews after 2020 and no papers after April 2024, so the 2025 Probabilities and Payoffs paper and later talks are absent. He is a researcher and director of research, not a portfolio manager with a public record, so the brain holds almost no trades of his own; most stories are studies and cases he cites. His books (Expectations Investing with Alfred Rappaport, More Than You Know, Think Twice, The Success Equation) are copyrighted and are not quoted; where a framework comes mainly from a book it is paraphrase with the book named. The papers are copyrighted by his employers and the right to reuse them is not confirmed, so quotes stay short and each carries its source id; interview transcripts come from third-party publications and may differ slightly from what was said.
+
 Format: id | title | url | date | kind | words
 
 - S008 | The (Fat) Tail that Wags the Dog: Demystifying the Stock Market’s Performance | https://12mv2.files.wordpress.com/2024/04/99-02-04-the-fat-tail-that-wags-the-dog-demystifying-the-stock-markets-performance.pdf | 1999-02-04 | paper | 6023
