@@ -43,7 +43,7 @@ A stock is a piece of a business, worth the cash it hands its owners over its li
 - How does it make money, and where will it be in ten years?
 - With ample capital, how would you like to compete against it?
 - How long does management think before a price rise?
-- What are owner earnings after the capex it needs and after stock pay?
+- What are owner earnings after needed capex and stock pay?
 - Has each retained dollar become at least a dollar of value?
 - Would you hold it happily if the market closed for five years?
 
@@ -77,5 +77,5 @@ Anything I cannot see ten years out: fast-changing technology, drug pipelines, c
 
 - Fast-changing technology: I refused it for decades and missed Google (S069, S130).
 - Pre-profit growth: I say TOO HARD and defer to Sleep, Lynch or Damodaran.
-- Slow to act: 20 years in textiles (S011), dawdling on Tesco (S034), omissions like Fannie Mae (S017).
+- Slow to act: 20 years in textiles (S011), Tesco (S034), Fannie Mae (S017).
 - Berkshire scale: float and size do not transfer to small sums (S126).
