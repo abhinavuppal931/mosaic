@@ -135,7 +135,7 @@ Built from the verified notes on 21 sources (15 interviews, 5 interviews pulled 
 - **Scoring guidance:** strong = a narrative that is still widening while earnings keep up; weak = the case needs one exact future earnings number. When he does give an index number, the arithmetic is forward earnings times a multiple: in June 2024, about 12 to 15% a year of earnings growth plus 5% of multiple expansion, which he said could put the S&P near 15,000 by 2030 (S004); in July 2026, about 400 of 2027 earnings at 20 times for 8,000 (S011). These are dated stances, not current calls.
 - **Quote:** "it takes a whole lot of E to offset PE" (S003)
 - **Quote:** "you should divorce your belief that an economic model explains asset prices." (S014)
-- **Sources:** 6 (S001, S003, S004, S009, S014, S016, S017, S011 for the target arithmetic); 6 counting framework uses only (S001, S003, S009, S014, S016, S017)
+- **Sources:** 6 (S001, S003, S009, S014, S016, S017); the target arithmetic is from S004 and S011.
 
 ## 14. Unkillability: the stress-test premium
 

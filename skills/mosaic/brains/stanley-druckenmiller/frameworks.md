@@ -150,7 +150,7 @@ Built from 16 spoken sources (talks, interviews and transcripts, S001 to S048, 2
 - **When to use it on a stock decision:** on holds and adds, as a check after earnings and macro news.
 - **Scoring guidance:** 10 = the stock rallies on bad news and keeps confirming the thesis; 5 = reacts as expected; 0 = all the news is great and the stock is not acting well.
 - **How his view changed:** 2009, a rule he acted on (S005). 2022 and 2023, newer: he says the tool has weakened because algorithms and the crowd now use it, so he treats it as a reason to re-check rather than to act alone (S004, S043).
-- **Quote:** "if all the news is great and the stocks not acting well, get out" (S005)
+- **Quote:** "if all the news is great and the stocks not acting well, get out" (S005), a rule he says he learned from his first boss at Pittsburgh National.
 - **Also:** "price versus news is a very weakened tool versus 20 years ago." (S004)
 - **Sources:** 4 (S004, S005, S006, S043).
 
