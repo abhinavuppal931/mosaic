@@ -2,19 +2,20 @@
 
 Built from 56 free sources, 2008 to 2026 (technical papers, Edge essays, congressional testimony, lectures, interviews, podcast transcripts and INCERTO and Substack posts). The Incerto books are copyrighted and not quoted. Decision rules, most-supported first. Confidence: high = 3 or more sources, medium = 2, low = 1.
 
-## 1. Survive first: take any risk you like, but never one that can end the game.
 
-- "Take all the risks you want, but make sure you're there tomorrow." (S036)
-- "my work is first about avoiding tail risk. Basically, if you want to do well, you must first survive." (S047)
-- Supporting sources: 9 (S001, S003, S009, S029, S032, S036, S038, S047, S048). Confidence: high.
-- Inferred from S001, S003, S036: on any decision, the ruin check comes before return, valuation or conviction, and a failed ruin check is not offset by a high expected return.
-
-## 2. Avoid leverage; debt turns a forecast error into ruin, while equity lets you survive it.
+## 1. Avoid leverage; debt turns a forecast error into ruin, while equity lets you survive it.
 
 - "If you are leveraged, errors blow you up; if you are not, you can enjoy life." (S029)
 - "I'm not against credit. I'm against leverage." (S031)
 - Supporting sources: 11 (S001, S029, S031, S035, S045, S046, S047, S053, S054, S055, S056). Confidence: high.
 - He allows credit tied to a completed commercial transaction and debt for emergencies (S031); his target is leverage, including leverage used to cure leverage (S045, S055).
+
+## 2. Survive first: take any risk you like, but never one that can end the game.
+
+- "Take all the risks you want, but make sure you're there tomorrow." (S036)
+- "my work is first about avoiding tail risk. Basically, if you want to do well, you must first survive." (S047)
+- Supporting sources: 9 (S001, S003, S009, S029, S032, S036, S038, S047, S048). Confidence: high.
+- Inferred from S001, S003, S036: on any decision, the ruin check comes before return, valuation or conviction, and a failed ruin check is not offset by a high expected return.
 
 ## 3. Trust only advice from people with skin in the game; ask what they hold, not what they think.
 
@@ -64,25 +65,25 @@ Built from 56 free sources, 2008 to 2026 (technical papers, Edge essays, congres
 - "For fat-tailed variables, the mean is almost entirely determined by extremes." (S033)
 - Supporting sources: 8 (S001, S008, S014, S017, S018, S032, S033, S047). Confidence: high.
 
-## 10. Change the exposure, not the forecast: cap the loss so the tail cannot reach you.
-
-- "it is not possible to change the distribution; but it is possible to change the payoff" (S035)
-- "focus on changing payoffs to clip tail exposures" (S013)
-- Supporting sources: 7 (S001, S002, S004, S013, S029, S035, S044). Confidence: high.
-
-## 11. Remove fragility before seeking upside: subtract first, keep slack, do not optimize.
+## 10. Remove fragility before seeking upside: subtract first, keep slack, do not optimize.
 
 - "The first thing to be antifragile is first, you have to eliminate fragilities." (S037)
 - "Avoid Optimization, Learn to Love Redundancy." (S029)
 - Supporting sources: 8 (S003, S029, S035, S037, S045, S047, S053, S054). Confidence: high.
 - If you realize something is fragile, act on it at once (S047).
 
-## 12. More uncertainty calls for less exposure and earlier action, not for waiting on more data.
+## 11. More uncertainty calls for less exposure and earlier action, not for waiting on more data.
 
 - "More uncertainty in a system makes precautionary decisions more obvious." (S017)
 - "If you must panic, panic early." (S037)
 - Supporting sources: 8 (S001, S003, S017, S029, S036, S037, S048, S054). Confidence: high.
 - Inferred from S003, S017: doubt about a model widens the left tail, so a user who says we cannot know the downside has argued for a smaller position, not a larger one.
+
+## 12. Change the exposure, not the forecast: cap the loss so the tail cannot reach you.
+
+- "it is not possible to change the distribution; but it is possible to change the payoff" (S035)
+- "focus on changing payoffs to clip tail exposures" (S013)
+- Supporting sources: 7 (S001, S002, S004, S013, S029, S035, S044). Confidence: high.
 
 ## 13. A clean record so far is not evidence of safety when ruin is possible.
 
@@ -133,18 +134,18 @@ Built from 56 free sources, 2008 to 2026 (technical papers, Edge essays, congres
 - Supporting sources: 6 (S001, S003, S015, S030, S035, S047). Confidence: high.
 - His tension, 2023: "So if you buy into a lot of companies, you lose that skewed attribute." (S047) Inferred from S030, S047: diversify the core broadly, and keep the convex sleeve as many small positions rather than an index.
 
-## 20. Hardwire a maximum loss for the whole book and stay agnostic about everything else.
+## 20. Assume tails are fatter than measured; blame the model, not the world, for a 10-sigma event.
+
+- "Accordingly, the future needs to be dealt with as having thicker tails than what was measured in the past." (S011)
+- "if someone tells you there is a ten-sigma event, it is much more likely that they have the wrong distribution than it is that you really have ten-sigma event." (S032)
+- Supporting sources: 6 (S001, S011, S013, S016, S022, S032). Confidence: high.
+
+## 21. Hardwire a maximum loss for the whole book and stay agnostic about everything else.
 
 - "In a nutshell, we hardwire the curtailments on loss but otherwise assume maximal uncertainty about the returns." (S004)
 - "We note that the stop loss plays a larger role in determining the stochastic properties than the portfolio composition." (S001)
 - Supporting sources: 5 (S001, S002, S004, S035, S038). Confidence: high.
 - His caveat: a stop is only as good as its execution in a gap, so a floor built by structure (numeraire share or bought protection) is sturdier (S004).
-
-## 21. Assume tails are fatter than measured; blame the model, not the world, for a 10-sigma event.
-
-- "Accordingly, the future needs to be dealt with as having thicker tails than what was measured in the past." (S011)
-- "if someone tells you there is a ten-sigma event, it is much more likely that they have the wrong distribution than it is that you really have ten-sigma event." (S032)
-- Supporting sources: 6 (S001, S011, S013, S016, S022, S032). Confidence: high.
 
 ## 22. Value cash flow, not an exit promise; an asset with no yield and any chance of hitting zero is worth zero.
 
@@ -160,39 +161,39 @@ Built from 56 free sources, 2008 to 2026 (technical papers, Edge essays, congres
 - Supporting sources: 4 (S037, S038, S045, S055). Confidence: high.
 - "Citizens should experience anxiety about their own businesses (which they control), not their investments (which they do not control)." (S045)
 
-## 24. Hold a valuation view loosely in either direction; protection matters more than whether the price looks high.
+## 24. Do not demand certainty before protecting against a severe, asymmetric downside.
+
+- "When in doubt, use what protection you can." (S052)
+- "You need evidence of safety, not evidence of lack of safety" (S029)
+- Supporting sources: 4 (S024, S029, S052, S017). Confidence: high.
+
+## 25. Hold a valuation view loosely in either direction; protection matters more than whether the price looks high.
 
 - "If the market delivers a crazy valuation, it can deliver a crazy valuation in any direction." (S038)
 - "you don't have a tail-hedge protection, then your returns are virtually going to be zero" (S038)
 - Supporting sources: 3 (S038, S046, S047). Confidence: high.
 - He likes to buy after dips (S038), and the point of protection is to buy when nobody has dry powder (S038).
 
-## 25. Keep the protection protocol fixed through the news cycle; discipline beats cleverness.
+## 26. Keep the protection protocol fixed through the news cycle; discipline beats cleverness.
 
 - "We didn't change strategy for a second. And we will not change strategy." (S046)
 - "in more than two decades, I never saw him once deviate a micro-inch from a given protocol." (S051)
 - Supporting sources: 3 (S046, S047, S051). Confidence: high.
 - He says Universa's 2023 positioning was identical to 2013 (S047).
 
-## 26. Change the action when the evidence changes, but keep the process.
+## 27. Change the action when the evidence changes, but keep the process.
 
 - "They don't realize that I'm not selling a recipe. I'm selling a process." (S047)
 - "So I realized quickly that I made a mistake with Bitcoin." (S047)
 - Supporting sources: 3 (S037, S047, S048). Confidence: high.
 - He also changed on the covid vaccine, from wait and see to taking it after about a billion doses (S037); and he admits errors on mass hysteria in Fooled by Randomness (S038).
 
-## 27. Antifragility is local; never use it to excuse a tail risk.
+## 28. Antifragility is local; never use it to excuse a tail risk.
 
 - "So just don't take the idea too far. It's very local." (S047)
 - "Antifragility is something that likes volatility and likes variation, likes turmoil, likes stress, up to a point." (S031)
 - Supporting sources: 3 (S009, S031, S047). Confidence: high.
 - "I know, but what kills you doesn't make you stronger." (S037)
-
-## 28. Do not demand certainty before protecting against a severe, asymmetric downside.
-
-- "When in doubt, use what protection you can." (S052)
-- "You need evidence of safety, not evidence of lack of safety" (S029)
-- Supporting sources: 4 (S024, S029, S052, S017). Confidence: high.
 
 ## 29. Be prudent where you are fragile and aggressive where you are robust.
 

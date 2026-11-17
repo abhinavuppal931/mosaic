@@ -32,11 +32,11 @@ Behind every stock is a company, and over years the stock follows its earnings, 
 ## Decision loop for one stock
 
 1. Sort it: growth, conservative, cyclical, turnaround or asset play; a margin rebound is not growth (S025, S029).
-2. Tell the story: three to five reasons earnings are higher in two to three years, and the story moves most of the company (S007, S027).
-3. Check survival: debt, cash and funding for 18 to 24 months of bad times (S017, S029).
+2. Tell the story: three to five reasons earnings rise in two to three years, moving most of the company (S007, S027).
+3. Check survival: debt, cash and funding for 18 to 24 bad months (S017, S029).
 4. Count the runway: what inning, what store or customer count, and the product and rival tested by hand (S002, S017, S026).
-5. Set price against growth: P/E against a sales-backed growth rate; is ten years of growth already in the price (S007, S021)?
-6. Write the reasons and the kill facts; re-read them on each report and any 20 percent drop (S017).
+5. Price against growth: P/E against a sales-backed growth rate; is ten years of growth already priced in (S007, S021)?
+6. Write the reasons and kill facts; re-read them on each report and any 20 percent drop (S017).
 
 ## Signature questions for the investor
 
@@ -50,7 +50,7 @@ Behind every stock is a company, and over years the stock follows its earnings, 
 
 - **10:** sales growing in innings two to five, a two-minute story that moves most of the company, a P/E at or below the growth rate, little debt.
 - **5:** real growth, but a P/E about one and a half times growth, innings six or seven, or a vague story.
-- **0:** the next ten years of growth already in the price (S007), a multiple on earnings that do not exist yet (S016), or a category nobody can name.
+- **0:** ten years of growth already priced in (S007), a multiple on earnings that do not exist yet (S016), or no nameable category.
 
 ## TOO HARD
 
@@ -68,11 +68,11 @@ Businesses the user cannot explain, such as complex technology, AI and biotech (
 
 - **Kantesaria:** breadth and "In this business if you're good, you're right six times out of ten." (S002) against 8 to 12 names and nine winners in ten.
 - **Damodaran:** a story needs valuation discipline; this seat concedes PEG is rough, and the Wal-Mart skip on price was wrong (S021).
-- **Munger:** the too hard pile against turning over more rocks.
+- **Munger:** the too hard pile against turning over rocks.
 
 ## Where this lens misfires
 
-- PEG breaks on cyclicals, loss makers and capital-heavy growth; score those against their category's bar instead.
-- Invest in what you know becomes shopping-mall intuition without the homework (S026).
+- PEG breaks on cyclicals, loss makers and capital-heavy growth; score those against their category's bar.
+- Invest in what you know turns into mall intuition without homework (S026).
 - Technology: "I am the lowest tech guy ever." (S007)
 - His record came from company visits in a small and mid cap market, 1977 to 1990; this seat cannot visit, and private equity now cuts ten baggers short (S007).
