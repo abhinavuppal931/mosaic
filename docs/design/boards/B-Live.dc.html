@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosaic B, The Ledger, live council</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Switzer;src:url(/_blob/a645f6963e7be6bfb024c053ee9427c9) format("woff2");font-weight:400}
+@font-face{font-family:Switzer;src:url(/_blob/acb4b43caab20e8afde76ac2b8e09526) format("woff2");font-weight:500}
+@font-face{font-family:Switzer;src:url(/_blob/7c6c1f7521c97fd99b1a8cb8e4602335) format("woff2");font-weight:600}
+body{margin:0;background:#0B0B0A}
+a{color:#F5F2EC;text-decoration:none}a:hover{color:#FFFFFF}
+</style>
+</helmet>
+<div style="min-height: 1000px; background: #0B0B0A; color: #F2F0EC; font-family: Switzer, system-ui, sans-serif; display: flex; flex-wrap: wrap;">
+
+  <aside style="flex: 1 1 232px; max-width: 260px; min-width: 220px; border-right: 1px solid rgba(255,255,255,0.06); padding: 18px 14px; display: flex; flex-direction: column; gap: 22px; background: #0E0E0D;">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px;">
+      <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(2, 9px); gap: 2px;">
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #FF7A38;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #3A3733;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #6C6660;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #A3C4AA;"></span>
+      </span>
+      <span style="font-weight: 600; font-size: 16px; letter-spacing: -0.01em;">Mosaic</span>
+    </div>
+    <nav aria-label="Councils" style="display: flex; flex-direction: column; gap: 2px;">
+      <span style="font-size: 12px; color: #8C8781; padding: 0 8px 6px;">Councils</span>
+      <a href="#" style="display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 9px 10px; border-radius: 10px; background: #1A1918; font-size: 13px;"><span>Buy NVDA at $182?</span><span style="width: 6px; height: 6px; border-radius: 3px; background: #FF7A38;"></span></a>
+      <a href="#" style="padding: 9px 10px; border-radius: 10px; font-size: 13px; color: #B3AEA7;">Recheck MSFT after Q1</a>
+      <a href="#" style="padding: 9px 10px; border-radius: 10px; font-size: 13px; color: #B3AEA7;">Raise cash into 2027?</a>
+      <a href="#" style="padding: 9px 10px; border-radius: 10px; font-size: 13px; color: #B3AEA7;">Portfolio: too much tech?</a>
+    </nav>
+    <nav aria-label="Library" style="display: flex; flex-direction: column; gap: 2px;">
+      <a href="#" style="padding: 9px 10px; border-radius: 10px; font-size: 13px; color: #B3AEA7; display: flex; justify-content: space-between;"><span>Thesis journal</span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8781;">4</span></a>
+      <a href="#" style="padding: 9px 10px; border-radius: 10px; font-size: 13px; color: #B3AEA7;">Board and seats</a>
+    </nav>
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 10px;">
+      <span style="font-size: 12px; color: #8C8781; padding: 0 8px;">At the table</span>
+      <sc-for list="{{seats}}" as="s" hint-placeholder-count="7">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 0 8px;">
+          <span style="position: relative; width: 26px; height: 26px; flex-shrink: 0;">
+            <img src="{{s.img}}" alt="" style="width: 26px; height: 26px; border-radius: 8px; object-fit: cover;">
+            <span style="{{s.dot}}"></span>
+          </span>
+          <span style="font-size: 13px; color: #D6D2CC; flex: 1;">{{s.name}}</span>
+          <span style="font-size: 12px; color: #8C8781;">{{s.state}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column;">
+    <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 16px 28px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+        <h1 style="margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -0.01em;">Buy NVIDIA at $182 for a three-year hold?</h1>
+        <span style="font-size: 13px; color: #8C8781;">Single-stock decision, full council of seven, options A to D</span>
+      </div>
+      <div role="tablist" aria-label="Rounds" style="display: flex; gap: 2px; background: #151514; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 3px;">
+        <button type="button" role="tab" style="font: 500 13px Switzer, sans-serif; color: #B3AEA7; background: transparent; border: 0; border-radius: 9px; padding: 7px 12px; cursor: pointer;">Round 1, blind</button>
+        <button type="button" role="tab" aria-selected="true" style="font: 500 13px Switzer, sans-serif; color: #F2F0EC; background: #262523; border: 0; border-radius: 9px; padding: 7px 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.06); cursor: pointer;">Round 2, debate</button>
+        <button type="button" role="tab" style="font: 500 13px Switzer, sans-serif; color: #6E6A64; background: transparent; border: 0; border-radius: 9px; padding: 7px 12px; cursor: pointer;">Vote</button>
+        <button type="button" role="tab" style="font: 500 13px Switzer, sans-serif; color: #6E6A64; background: transparent; border: 0; border-radius: 9px; padding: 7px 12px; cursor: pointer;">Verdict</button>
+      </div>
+    </header>
+
+    <div style="flex: 1; padding: 24px 28px; display: flex; flex-direction: column; gap: 14px; max-width: 860px; width: 100%; box-sizing: border-box; margin: 0 auto;">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #B3AEA7; background: #121211; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 10px 14px;">
+        <span style="width: 6px; height: 6px; border-radius: 3px; background: #FF7A38;"></span>
+        Your lean is now visible to the seats: A, a full position now. Round 1 scores were set without it.
+      </div>
+
+      <sc-for list="{{cards}}" as="c" hint-placeholder-count="3">
+        <article style="{{c.frame}}">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <img src="{{c.img}}" alt="{{c.name}}, simulated seat" style="width: 36px; height: 36px; border-radius: 10px; object-fit: cover;">
+            <div style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0;">
+              <span style="font-size: 14px; font-weight: 600;">{{c.name}}</span>
+              <span style="font-size: 12px; color: #8C8781;">{{c.role}}</span>
+            </div>
+            <span style="{{c.stanceStyle}}">{{c.stance}}</span>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #E4E0DA;">{{c.body}}</p>
+          <sc-if value="{{c.hasConcede}}" hint-placeholder-val="{{true}}">
+            <div style="border-left: 0; background: #0D0D0C; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 10px 12px; font-size: 13px; line-height: 1.55; color: #B3AEA7;"><span style="color: #F2F0EC; font-weight: 500;">I concede </span>{{c.concede}}</div>
+          </sc-if>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+            <sc-for list="{{c.facts}}" as="f" hint-placeholder-count="2">
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #D6D2CC; background: #1A1918; border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 3px 7px;">{{f}}</span>
+            </sc-for>
+            <span style="flex: 1;"></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8C8781; font-variant-numeric: tabular-nums;">{{c.scores}}</span>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+
+    <footer style="padding: 14px 28px 20px; display: flex; justify-content: center;">
+      <div style="width: 100%; max-width: 804px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: #151514; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 12px 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 12px 30px rgba(0,0,0,0.45);">
+        <span style="font-size: 13px; color: #B3AEA7; flex: 1; min-width: 220px;">The council runs in Claude Code. This room plays it as it happens.</span>
+        <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #F2F0EC; background: #0D0D0C; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 10px;">/mosaic ask taleb ...</code>
+        <button type="button" style="font: 500 13px Switzer, sans-serif; color: #F2F0EC; background: #262523; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 7px 12px; cursor: pointer;">Copy</button>
+      </div>
+    </footer>
+  </main>
+
+  <aside style="flex: 1 1 320px; max-width: 360px; border-left: 1px solid rgba(255,255,255,0.06); padding: 20px 18px; display: flex; flex-direction: column; gap: 22px; background: #0E0E0D;">
+    <section style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;"><h2 style="margin: 0; font-size: 14px; font-weight: 600;">Live tally</h2><span style="font-size: 12px; color: #8C8781;">weight x score</span></div>
+      <div style="display: grid; grid-template-columns: 1.6fr repeat(5, minmax(0, 1fr)); gap: 3px; font-family: 'JetBrains Mono', monospace; font-size: 12px; font-variant-numeric: tabular-nums;">
+        <span></span><span style="text-align: center; color: #8C8781;">w</span><span style="text-align: center; color: #8C8781;">A</span><span style="text-align: center; color: #F2F0EC;">B</span><span style="text-align: center; color: #8C8781;">C</span><span style="text-align: center; color: #8C8781;">D</span>
+        <sc-for list="{{tally}}" as="t" hint-placeholder-count="7">
+          <span style="font-family: Switzer, sans-serif; font-size: 12px; color: #B3AEA7; padding: 6px 0;">{{t.name}}</span>
+          <span style="text-align: center; padding: 6px 0; color: #8C8781;">{{t.w}}</span>
+          <span style="{{t.a.s}}">{{t.a.v}}</span><span style="{{t.b.s}}">{{t.b.v}}</span><span style="{{t.c.s}}">{{t.c.v}}</span><span style="{{t.d.s}}">{{t.d.v}}</span>
+        </sc-for>
+        <span style="font-family: Switzer, sans-serif; font-size: 12px; color: #F2F0EC; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08);">Council</span>
+        <span style="border-top: 1px solid rgba(255,255,255,0.08);"></span>
+        <span style="text-align: center; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08); color: #B3AEA7;">3.7</span>
+        <span style="text-align: center; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08); color: #FF9A66; font-weight: 500;">6.3</span>
+        <span style="text-align: center; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08); color: #B3AEA7;">6.1</span>
+        <span style="text-align: center; padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08); color: #B3AEA7;">3.8</span>
+      </div>
+    </section>
+
+    <section style="display: flex; flex-direction: column; gap: 10px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;"><h2 style="margin: 0; font-size: 14px; font-weight: 600;">Data pack</h2><span style="font-size: 12px; color: #A3C4AA;">39 of 41 facts</span></div>
+      <sc-for list="{{facts}}" as="f" hint-placeholder-count="5">
+        <div style="display: grid; grid-template-columns: 48px 1fr auto; gap: 8px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8C8781;">{{f.id}}</span>
+          <span style="font-size: 13px; color: #D6D2CC;">{{f.label}}<span style="display: block; font-size: 11px; color: #8C8781; margin-top: 2px;">{{f.src}}</span></span>
+          <span style="{{f.valStyle}}">{{f.value}}</span>
+        </div>
+      </sc-for>
+    </section>
+  </aside>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = { buffett: '/_blob/c1d510d50623727a52cf24e266cb2f7d', munger: '/_blob/cdef36e52d0654d07a372260906bc5a9', damodaran: '/_blob/dcd65421fd24e1e498a0b77279f7fa2f', marks: '/_blob/74b184f2496753cd8977f835545d9927', taleb: '/_blob/71978e7b22b129dcdf5140592dd3210a', druckenmiller: '/_blob/76a13c67ce697cc255b603777754ac63', burry: '/_blob/124646476f6ad834f8da7e4c7c4b7c38' };
+    const seatRows = [
+      ['buffett','Buffett','done',[4,6,7,3],2],['munger','Munger','done',[3,6,7,4],2],['damodaran','Damodaran','done',[4,7,5,3],3],
+      ['marks','Marks','done',[3,6,7,4],2],['taleb','Taleb','done',[2,7,6,5],2],['druckenmiller','Druckenmiller','done',[8,8,4,2],2],['burry','Burry','writing',[2,4,7,6],2]
+    ];
+    const seats = seatRows.map(([k, name, state]) => ({
+      img: P[k], name, state: state === 'writing' ? 'writing' : 'in',
+      dot: `position:absolute;right:-2px;bottom:-2px;width:8px;height:8px;border-radius:4px;border:2px solid #0E0E0D;background:${state === 'writing' ? '#FF7A38' : '#A3C4AA'};`
+    }));
+    const cell = (v, hi) => ({ v: String(v), s: `text-align:center;padding:6px 0;border-radius:5px;color:${v >= 7 ? '#F2F0EC' : v <= 3 ? '#8C8781' : '#D6D2CC'};background:${v >= 7 ? (hi ? 'rgba(255,122,56,0.28)' : 'rgba(255,255,255,0.10)') : v >= 5 ? 'rgba(255,255,255,0.05)' : 'transparent'};` });
+    const tally = seatRows.map(([k, name, st, sc, w]) => ({ name, w: String(w), a: cell(sc[0]), b: cell(sc[1], true), c: cell(sc[2]), d: cell(sc[3]) }));
+    const frame = (live) => `background:${live ? '#141413' : '#111110'};border:1px solid ${live ? 'rgba(255,122,56,0.30)' : 'rgba(255,255,255,0.06)'};border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.04);`;
+    const stance = (txt, kind) => `font-size:12px;font-weight:500;border-radius:7px;padding:4px 9px;${kind === 'up' ? 'color:#A3C4AA;background:rgba(163,196,170,0.10);' : kind === 'down' ? 'color:#D9A396;background:rgba(185,122,108,0.14);' : 'color:#E8C88F;background:rgba(232,200,143,0.10);'}`;
+    const cards = [
+      { img: P.burry, name: 'Michael Burry', role: 'Bear guard, rebutting Druckenmiller', stance: 'Writing', stanceStyle: 'font-size:12px;font-weight:500;color:#FF9A66;background:rgba(255,122,56,0.12);border-radius:7px;padding:4px 9px;', frame: frame(true),
+        body: 'Liquidity explains the multiple, not the moat. Four customers are 46% of data center revenue, and capex cycles end in a quarter, not a decade.', hasConcede: true,
+        concede: 'Damodaran’s point that $182 implies about 24% growth for five years. High, not insane. B moves from 3 to 4.', facts: ['F021 top-4 share 46%', 'F033 implied growth 24%'], scores: 'A 2  B 4  C 7  D 6' },
+      { img: P.druckenmiller, name: 'Stanley Druckenmiller', role: 'Macro and timing', stance: 'Yes, A or B', stanceStyle: stance('', 'up'), frame: frame(false),
+        body: 'Liquidity is easing and the trend is intact above the 200-day. I would rather own it and be early than wait for a price the market may never give you.', hasConcede: true,
+        concede: 'Taleb on size. If I am wrong on liquidity the drawdown is 40%, so a starter beats a full position.', facts: ['F040 2y yield 3.4%', 'F044 price vs 200d +11%'], scores: 'A 8  B 8  C 4  D 2' },
+      { img: P.damodaran, name: 'Aswath Damodaran', role: 'Value vs price', stance: 'Conditional, B', stanceStyle: stance('', 'mid'), frame: frame(false),
+        body: 'My story value range is $150 to $205. At $182 you are paying for most of the good story already. That argues for a starter, not a pass.', hasConcede: false, concede: '', facts: ['F033 implied growth 24%', 'F030 operating margin 62%'], scores: 'A 4  B 7  C 5  D 3' }
+    ];
+    const facts = [
+      { id: 'F009', label: 'Gross margin, TTM', src: 'SEC 10-Q, 27 Aug', value: '73.1%', valStyle: 'font-family:JetBrains Mono,monospace;font-size:13px;color:#F2F0EC;' },
+      { id: 'F014', label: 'Data center growth YoY', src: 'SEC 10-Q, 27 Aug', value: '+56%', valStyle: 'font-family:JetBrains Mono,monospace;font-size:13px;color:#A3C4AA;' },
+      { id: 'F021', label: 'Top-4 customer share', src: 'SEC 10-Q note', value: '46%', valStyle: 'font-family:JetBrains Mono,monospace;font-size:13px;color:#F2F0EC;' },
+      { id: 'F033', label: 'Growth implied by price', src: 'Reverse DCF, formula', value: '24%', valStyle: 'font-family:JetBrains Mono,monospace;font-size:13px;color:#F2F0EC;' },
+      { id: 'F051', label: 'Analyst estimates', src: 'Missing, no key set', value: 'n/a', valStyle: 'font-family:JetBrains Mono,monospace;font-size:13px;color:#B97A6C;' }
+    ];
+    return { seats, tally, cards, facts };
+  }
+}
+</script>
+</body>
+</html>
