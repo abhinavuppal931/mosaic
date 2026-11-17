@@ -1,0 +1,15 @@
+{
+  "name": "mosaic",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A council of simulated investing legends for Claude Code. Zero npm dependencies.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test",
+    "test:core": "node --test tests/core/*.test.mjs",
+    "pack:msft": "node data/cli.mjs pack --ticker MSFT",
+    "pack:macro": "node data/cli.mjs pack --macro"
+  }
+}

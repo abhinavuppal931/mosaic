@@ -1,0 +1,73 @@
+{
+  "$comment": "Mosaic data settings. Copy this file to your Mosaic home as mosaic.config.json to override any part of it (the two are deep-merged; arrays replace). Keys never go here: they come from environment variables or the git-ignored .env.local in your Mosaic home. The SEC contact (your name and email, which the SEC requires) comes from MOSAIC_SEC_CONTACT or from \"providers\": { \"sec-edgar\": { \"contact\": \"Name email\" } } in your own mosaic.config.json (run: node data/cli.mjs setup).",
+  "chains": {
+    "profile": ["sec-edgar", "fmp", "finnhub"],
+    "quote": ["yahoo", "fmp", "finnhub", "massive"],
+    "priceHistory": ["yahoo", "massive", "fmp"],
+    "financials": ["sec-edgar", "fmp"],
+    "ratios": ["fmp", "finnhub"],
+    "insiderTrades": ["sec-edgar", "finnhub", "fmp"],
+    "holdings": ["sec-edgar"],
+    "macroSeries": ["fred", "treasury", "bls", "nyfed"],
+    "news": ["finnhub", "massive", "fmp"],
+    "estimates": ["fmp", "finnhub"]
+  },
+  "providers": {
+    "sec-edgar": { "rps": 8, "contactEnv": "MOSAIC_SEC_CONTACT" },
+    "yahoo": { "rps": 2 },
+    "treasury": { "rps": 4 },
+    "bls": { "rps": 1, "keyEnv": "BLS_API_KEY" },
+    "nyfed": { "rps": 4 },
+    "fred": { "rps": 2, "keyEnv": "FRED_API_KEY" },
+    "fmp": { "rps": 4, "keyEnv": "FMP_API_KEY" },
+    "massive": { "rps": 0.2, "burst": 5, "keyEnv": "MASSIVE_API_KEY" },
+    "finnhub": { "rps": 1, "burst": 10, "keyEnv": "FINNHUB_API_KEY" }
+  },
+  "custom": [],
+  "http": { "timeoutMs": 8000, "retries": 2, "backoffMs": 500 },
+  "cache": {
+    "enabled": true,
+    "ttlSeconds": {
+      "profile": 604800,
+      "quote": 0,
+      "priceHistory": 600,
+      "financials": 86400,
+      "ratios": 600,
+      "insiderTrades": 21600,
+      "holdings": 86400,
+      "macroSeries": 600,
+      "news": 600,
+      "estimates": 3600
+    },
+    "staleMaxSeconds": {
+      "profile": 2592000,
+      "quote": 0,
+      "priceHistory": 604800,
+      "financials": 7776000,
+      "ratios": 86400,
+      "insiderTrades": 604800,
+      "holdings": 7776000,
+      "macroSeries": 604800,
+      "news": 0,
+      "estimates": 604800
+    }
+  },
+  "pack": {
+    "historyYears": 10,
+    "insiderLookbackDays": 365,
+    "insiderMaxFilings": 40,
+    "benchmark": "SPY",
+    "coverageThreshold": 0.5,
+    "macroForTicker": ["ust_3m", "ust_2y", "ust_10y", "policy_rate", "hy_oas"],
+    "macroForMacro": ["ust_3m", "ust_2y", "ust_10y", "ust_30y", "policy_rate", "cpi", "core_cpi", "unemployment", "payrolls", "hy_oas", "vix"]
+  },
+  "valuation": {
+    "discountRate": 0.09,
+    "discountRateLow": 0.08,
+    "discountRateHigh": 0.10,
+    "terminalGrowth": 0.025,
+    "years": 10,
+    "growthCap": 0.25,
+    "scenarioMultipliers": { "bear": 0.5, "base": 1.0, "bull": 1.5 }
+  }
+}

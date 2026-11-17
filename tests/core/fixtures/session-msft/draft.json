@@ -1,0 +1,13 @@
+{
+  "option": "B",
+  "label": "PROCEED WITH CONDITIONS",
+  "recommendation": "A starter position now, adding only when the capex shows up in cash.",
+  "conditions": ["Gross margin holds above 65% [F007]", "Size so a 50% fall costs under 5% of the portfolio"],
+  "next_steps": ["Set the starter size by the survivable-loss rule this week"],
+  "premortem": ["Capex returns disappoint and margins compress", "Multiple contracts as rates stay high", "A concentration loss forces a sale at the bottom"],
+  "kill_criteria": [{ "text": "Gross margin below 65%", "fact": "gross_margin", "op": "<", "value": 0.65 }],
+  "recheck": { "date": "2027-01-29", "triggers": ["Next 10-Q, expected around 2027-01-27 [F008]"] },
+  "cheapest_test": "Watch one more quarter of capex against operating cash flow.",
+  "sizing_note": "At any size, the record shows a 37% fall [F005]; the question is whether you could hold through that.",
+  "ruin_mitigations": []
+}
