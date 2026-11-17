@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosaic C, The Mosaic, live council</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Switzer;src:url(/_blob/a645f6963e7be6bfb024c053ee9427c9) format("woff2");font-weight:400}
+@font-face{font-family:Switzer;src:url(/_blob/acb4b43caab20e8afde76ac2b8e09526) format("woff2");font-weight:500}
+@font-face{font-family:Switzer;src:url(/_blob/7c6c1f7521c97fd99b1a8cb8e4602335) format("woff2");font-weight:600}
+body{margin:0;background:#0E0F10}
+a{color:#F3F3F1}a:hover{color:#FFFFFF}
+@media (max-width:760px){
+.council{grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-auto-rows:190px!important}
+.council .live{grid-row:span 3!important}
+.council .live p{font-size:18px!important}
+}
+</style>
+</helmet>
+<div style="min-height: 1000px; background: #0E0F10; color: #F3F3F1; font-family: Switzer, system-ui, sans-serif; display: flex; flex-direction: column;">
+  <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 18px 36px;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(3, 7px); gap: 2px;">
+        <span style="width: 7px; height: 7px; border-radius: 2px; background: #FF7A38;"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: #3B3D40;"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: #A3C4AA;"></span>
+        <span style="width: 7px; height: 7px; border-radius: 2px; background: #5E6064;"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: #E8C88F;"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: #3B3D40;"></span>
+        <span style="width: 7px; height: 7px; border-radius: 2px; background: #B97A6C;"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: #5E6064;"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: #FF7A38;"></span>
+      </span>
+      <span style="font-weight: 600; font-size: 17px; letter-spacing: -0.01em;">Mosaic</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+      <span style="font-size: 13px; color: #9C9EA2;">Round 2 of 3, debate</span>
+      <span aria-hidden="true" style="display: flex; gap: 3px;">
+        <sc-for list="{{progress}}" as="p" hint-placeholder-count="7"><span style="{{p}}"></span></sc-for>
+      </span>
+      <button type="button" style="font: 500 13px Switzer, sans-serif; color: #F3F3F1; background: #1A1B1D; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 8px 12px; cursor: pointer;">Data pack</button>
+    </div>
+  </header>
+
+  <main style="flex: 1; display: flex; flex-wrap: wrap; gap: 24px; padding: 12px 36px 36px; align-items: stretch;">
+    <section style="flex: 1 1 380px; max-width: 480px; display: flex; flex-direction: column; gap: 22px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 13px; color: #9C9EA2;">Single-stock decision, you lean A</span>
+        <h1 style="margin: 0; font-size: 46px; line-height: 1.04; font-weight: 600; letter-spacing: -0.035em;">Buy NVIDIA at $182 for a three-year hold?</h1>
+      </div>
+
+      <div style="background: #151618; border: 1px solid rgba(255,255,255,0.06); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;"><h2 style="margin: 0; font-size: 14px; font-weight: 600;">The mosaic so far</h2><span style="font-size: 12px; color: #9C9EA2;">seats by option</span></div>
+        <div style="display: grid; grid-template-columns: 28px repeat(7, minmax(0, 1fr)); gap: 5px; align-items: center;">
+          <span></span>
+          <sc-for list="{{heads}}" as="h" hint-placeholder-count="7"><img src="{{h}}" alt="" style="width: 100%; aspect-ratio: 1; border-radius: 8px; object-fit: cover; filter: saturate(0.8);"></sc-for>
+          <sc-for list="{{grid}}" as="g" hint-placeholder-count="32"><span style="{{g.s}}">{{g.v}}</span></sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding-top: 4px; border-top: 1px solid rgba(255,255,255,0.06);">
+          <sc-for list="{{totals}}" as="t" hint-placeholder-count="4">
+            <div style="display: flex; flex-direction: column; gap: 4px; padding-top: 10px;">
+              <span style="font-size: 12px; color: #9C9EA2;">{{t.l}}</span>
+              <span style="{{t.s}}">{{t.v}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="background: #151618; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 12px; color: #9C9EA2;">Crux the room is fighting over</span>
+          <span style="font-size: 15px; font-weight: 500;">Is data center demand a cycle or a new base?</span>
+        </div>
+        <div style="background: #151618; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+          <span style="font-size: 12px; color: #9C9EA2;">Second crux</span>
+          <span style="font-size: 15px; font-weight: 500;">Does a 70% gross margin survive custom chips?</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="council" aria-label="The council" style="flex: 999 1 640px; min-width: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 210px; gap: 14px;">
+      <article class="live" style="grid-column: span 2; grid-row: span 2; position: relative; border-radius: 26px; overflow: hidden; background: #151618; box-shadow: 0 0 0 1px rgba(255,122,56,0.35), 0 30px 60px rgba(0,0,0,0.5);">
+        <img src="{{live.img}}" alt="Michael Burry, simulated seat, speaking" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%;">
+        <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,15,16,0) 30%, rgba(14,15,16,0.86) 62%, #0E0F10 100%);"></div>
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 12px; font-weight: 600; color: #140A04; background: #FF7A38; border-radius: 7px; padding: 3px 8px;">Speaking</span>
+            <span style="font-size: 15px; font-weight: 600;">Michael Burry</span>
+            <span style="font-size: 13px; color: #9C9EA2;">Bear guard, answering Druckenmiller</span>
+          </div>
+          <p style="margin: 0; font-size: 20px; line-height: 1.42; font-weight: 500; letter-spacing: -0.01em;">Liquidity explains the multiple, not the moat. Four customers are 46% of data center revenue, and capex cycles end in a quarter, not a decade.</p>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #D9DAD7; background: rgba(255,255,255,0.08); border-radius: 6px; padding: 3px 7px;">F021 top-4 share 46%</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #D9DAD7; background: rgba(255,255,255,0.08); border-radius: 6px; padding: 3px 7px;">F033 implied growth 24%</span>
+          </div>
+        </div>
+      </article>
+      <sc-for list="{{tiles}}" as="t" hint-placeholder-count="6">
+        <article style="position: relative; border-radius: 22px; overflow: hidden; background: #151618; box-shadow: 0 0 0 1px rgba(255,255,255,0.06);">
+          <img src="{{t.img}}" alt="{{t.name}}, simulated seat" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: saturate(0.7) brightness(0.8);">
+          <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,15,16,0) 40%, rgba(14,15,16,0.92) 100%);"></div>
+          <div style="position: absolute; left: 14px; right: 14px; bottom: 12px; display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 14px; font-weight: 600;">{{t.name}}</span>
+            <span style="display: flex; align-items: center; justify-content: space-between; gap: 8px;"><span style="font-size: 12px; color: #B9BBBE;">{{t.role}}</span><span style="{{t.chip}}">{{t.stance}}</span></span>
+          </div>
+          <span aria-hidden="true" style="{{t.edge}}"></span>
+        </article>
+      </sc-for>
+      <article style="grid-column: span 2; border-radius: 22px; padding: 22px 24px; background: linear-gradient(160deg, rgba(255,122,56,0.16), rgba(255,122,56,0.03) 60%), #151618; box-shadow: 0 0 0 1px rgba(255,122,56,0.22); display: flex; flex-direction: column; justify-content: space-between; gap: 12px;">
+        <span style="font-size: 12px; color: #FF9A66;">Your lean, revealed this round</span>
+        <span style="font-size: 22px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.25;">You leaned A, a full position now. The room disagrees: A sits at 3.7.</span>
+        <span style="font-size: 13px; color: #B9BBBE; line-height: 1.5;">Round 1 was scored blind to your lean. After the reveal, scores moved 0.3 toward it.</span>
+      </article>
+    </section>
+  </main>
+  <footer style="padding: 0 36px 18px; font-size: 12px; color: #8E9094; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+    <span>Seats are simulations built from public work, not endorsements.</span><span>Not investment advice</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = { buffett: '/_blob/c1d510d50623727a52cf24e266cb2f7d', munger: '/_blob/cdef36e52d0654d07a372260906bc5a9', damodaran: '/_blob/dcd65421fd24e1e498a0b77279f7fa2f', marks: '/_blob/74b184f2496753cd8977f835545d9927', taleb: '/_blob/71978e7b22b129dcdf5140592dd3210a', druckenmiller: '/_blob/76a13c67ce697cc255b603777754ac63', burry: '/_blob/124646476f6ad834f8da7e4c7c4b7c38' };
+    const order = ['buffett','munger','damodaran','marks','taleb','druckenmiller','burry'];
+    const sc = { buffett:[4,6,7,3], munger:[3,6,7,4], damodaran:[4,7,5,3], marks:[3,6,7,4], taleb:[2,7,6,5], druckenmiller:[8,8,4,2], burry:[2,4,7,6] };
+    const tone = (v) => v >= 7 ? 'background:rgba(255,122,56,0.85);color:#140A04;' : v >= 5 ? 'background:rgba(255,122,56,0.30);color:#F3F3F1;' : 'background:#1E1F22;color:#8E9094;';
+    const grid = [];
+    ['A','B','C','D'].forEach((opt, i) => {
+      grid.push({ v: opt, s: 'font-size:12px;color:#9C9EA2;text-align:center;' });
+      order.forEach(k => grid.push({ v: String(sc[k][i]), s: `font-family:JetBrains Mono,monospace;font-size:12px;text-align:center;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;${tone(sc[k][i])}` }));
+    });
+    const totals = [['A Full', '3.7', false], ['B Starter', '6.3', true], ['C Wait', '6.1', false], ['D Pass', '3.8', false]]
+      .map(([l, v, top]) => ({ l, v, s: `font-family:JetBrains Mono,monospace;font-size:22px;letter-spacing:-0.02em;color:${top ? '#FF9A66' : '#F3F3F1'};` }));
+    const stance = { up: 'color:#A3C4AA;background:rgba(163,196,170,0.14);', mid: 'color:#E8C88F;background:rgba(232,200,143,0.14);', down: 'color:#D9A396;background:rgba(185,122,108,0.18);' };
+    const edgeC = { up: '#A3C4AA', mid: '#E8C88F', down: '#B97A6C' };
+    const tiles = [
+      ['buffett','Warren Buffett','Owner economics','C 7','mid'],
+      ['munger','Charlie Munger','Folly check','C 7','mid'],
+      ['damodaran','Aswath Damodaran','Value vs price','B 7','up'],
+      ['marks','Howard Marks','Risk and cycle','C 7','mid'],
+      ['taleb','Nassim Taleb','Ruin guard','B 7','up'],
+      ['druckenmiller','Stan Druckenmiller','Macro and timing','A 8','up']
+    ].map(([k, name, role, st, kind]) => ({
+      img: P[k], name, role, stance: st,
+      chip: `font-family:JetBrains Mono,monospace;font-size:11px;border-radius:6px;padding:2px 6px;${stance[kind]}`,
+      edge: `position:absolute;left:14px;right:14px;top:12px;height:3px;border-radius:2px;background:${edgeC[kind]};opacity:0.9;`
+    }));
+    const progress = [1,1,1,0.5,0,0,0].map(f => `width:14px;height:6px;border-radius:2px;background:${f === 1 ? '#F3F3F1' : f > 0 ? '#FF7A38' : '#2A2B2E'};`);
+    return { heads: order.map(k => P[k]), grid, totals, tiles, live: { img: P.burry }, progress };
+  }
+}
+</script>
+</body>
+</html>

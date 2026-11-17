@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosaic A v3, The Table, live council</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:wght@700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Switzer;src:url(/_blob/a645f6963e7be6bfb024c053ee9427c9) format("woff2");font-weight:400}
+@font-face{font-family:Switzer;src:url(/_blob/acb4b43caab20e8afde76ac2b8e09526) format("woff2");font-weight:500}
+@font-face{font-family:Switzer;src:url(/_blob/7c6c1f7521c97fd99b1a8cb8e4602335) format("woff2");font-weight:600}
+body{margin:0;background:#080706}
+.fact{cursor:help}
+.fact:hover{background:rgba(255,122,56,0.18)!important}
+.seatrow{display:contents}
+.panels{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr) minmax(0,0.8fr);gap:16px}
+@media (max-width:760px){
+.hdr{padding:14px 16px!important}
+.hdr .q,.hdr .prog,.hdr .dp{display:none!important}
+.stage{height:auto!important;padding-bottom:16px;margin-top:0!important}
+.stage .bg{height:310px!important}
+.seatrow{display:flex;gap:14px;overflow-x:auto;padding:18px 16px 6px;position:relative;z-index:3;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+.seat{position:static!important;transform:none!important;flex:0 0 auto;width:72px}
+.seat .ring{width:60px!important;height:60px!important}
+.seat .meta .role{display:none}
+.seat.live{order:-1}
+.speech{position:relative!important;left:auto!important;bottom:auto!important;transform:none!important;width:auto!important;margin:12px 16px 0}
+.speech .say{font-size:19px!important}
+.qmob{display:block!important;padding-top:28px!important}
+.panels{grid-template-columns:minmax(0,1fr);padding:0 16px!important}
+.foot{padding:14px 16px!important}
+}
+</style>
+</helmet>
+<div style="min-height: 1180px; background: #080706; color: #F5F2EC; font-family: Switzer, system-ui, sans-serif; display: flex; flex-direction: column;">
+
+  <header class="hdr" style="position: relative; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 40px; background: linear-gradient(180deg, rgba(8,7,6,0.92), rgba(8,7,6,0));">
+    <div style="display: flex; align-items: center; gap: 18px; min-width: 0;">
+      <span style="display: flex; align-items: center; gap: 10px;">
+        <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(2, 9px); gap: 2px;">
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #FF7A38;"></span>
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #3A3733;"></span>
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #6C6660;"></span>
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #A3C4AA;"></span>
+        </span>
+        <span style="font-family: 'Brygada 1918', serif; font-weight: 700; font-size: 21px; letter-spacing: -0.01em;">Mosaic</span>
+      </span>
+      <span class="q" style="width: 1px; height: 18px; background: rgba(255,255,255,0.12);"></span>
+      <span class="q" style="font-size: 15px; font-weight: 500; letter-spacing: -0.01em; color: #E9E4DC; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Buy NVIDIA at $182 for a three-year hold?</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div class="prog" style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
+        <span style="font-size: 12px; color: #B5AEA4; white-space: nowrap;">Round 2 of 3, debate<span style="color: #6F6A63;">  ·  Next: Howard Marks</span></span>
+        <span aria-label="Step 4 of 7" style="display: flex; gap: 3px;">
+          <sc-for list="{{steps}}" as="s" hint-placeholder-count="7"><span title="{{s.label}}" style="{{s.style}}"></span></sc-for>
+        </span>
+      </div>
+      <span style="display: flex; align-items: center; gap: 7px; font-size: 12px; color: #B5AEA4; white-space: nowrap;"><span style="width: 7px; height: 7px; border-radius: 4px; background: #A3C4AA; box-shadow: 0 0 0 4px rgba(163,196,170,0.14);"></span>Live</span>
+      <button type="button" class="dp" style="font: 500 13px Switzer, sans-serif; color: #F5F2EC; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); border-radius: 10px; padding: 8px 12px; cursor: pointer; white-space: nowrap;">Sources, 39 of 41 facts</button>
+    </div>
+  </header>
+
+  <section class="stage" aria-label="The council table" style="position: relative; height: 640px; margin-top: -72px;">
+    <div class="bg" aria-hidden="true" style="position: absolute; inset: 0 0 auto 0; height: 640px; overflow: hidden;">
+      <img src="{{scene}}" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; display: block;">
+      <div style="position: absolute; inset: 0; background: radial-gradient(70% 60% at 50% 45%, rgba(8,7,6,0) 40%, rgba(8,7,6,0.75) 100%), linear-gradient(180deg, rgba(8,7,6,0.55) 0%, rgba(8,7,6,0) 22%, rgba(8,7,6,0) 70%, #080706 100%);"></div>
+      <div style="{{beam}}"></div>
+    </div>
+
+    <div class="qmob" style="display: none; position: relative; z-index: 3; padding: 4px 16px 0;">
+      <span style="font-size: 12px; color: #B5AEA4;">Single-stock decision</span>
+      <h1 style="margin: 4px 0 0; font-weight: 600; font-size: 26px; line-height: 1.15; letter-spacing: -0.03em;">Buy NVIDIA at $182 for a three-year hold?</h1>
+    </div>
+
+    <div class="seatrow" role="list" aria-label="Seats at the table">
+      <sc-for list="{{seats}}" as="seat" hint-placeholder-count="7">
+        <div class="{{seat.cls}}" role="listitem" style="{{seat.wrap}}">
+          <div class="ring" style="{{seat.ring}}">
+            <img src="{{seat.img}}" alt="{{seat.name}}, simulated seat" style="{{seat.imgStyle}}">
+          </div>
+          <div class="meta" style="display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center;">
+            <span style="{{seat.nameStyle}}">{{seat.short}}</span>
+            <span class="role" style="font-size: 11px; color: #9A938A;">{{seat.role}}</span>
+            <span style="{{seat.chip}}">{{seat.lean}}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <article class="speech" style="position: absolute; z-index: 3; left: 50%; bottom: 28px; transform: translateX(-50%); width: min(700px, 90%); box-sizing: border-box; background: linear-gradient(180deg, rgba(30,26,22,0.78), rgba(16,14,12,0.86)); -webkit-backdrop-filter: blur(18px) saturate(1.2); backdrop-filter: blur(18px) saturate(1.2); border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 20px 24px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 30px 80px rgba(0,0,0,0.7);">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 10px;">
+        <span style="display: flex; align-items: center; gap: 10px;">
+          <span style="display: flex; gap: 3px; align-items: flex-end; height: 14px;" aria-hidden="true">
+            <span style="width: 3px; height: 8px; border-radius: 2px; background: #FF7A38;"></span>
+            <span style="width: 3px; height: 14px; border-radius: 2px; background: #FF7A38;"></span>
+            <span style="width: 3px; height: 10px; border-radius: 2px; background: #FF7A38;"></span>
+            <span style="width: 3px; height: 5px; border-radius: 2px; background: #FF7A38;"></span>
+          </span>
+          <span style="font-weight: 600; font-size: 15px;">Michael Burry</span>
+          <span style="font-size: 13px; color: #9A938A;">answering Stan Druckenmiller</span>
+        </span>
+        <span style="font-size: 12px; color: #B5AEA4;">Raised start small from 3 to 4</span>
+      </div>
+      <p class="say" style="margin: 0; font-size: 21px; line-height: 1.45; font-weight: 500; letter-spacing: -0.015em;">Cheap money explains this price, not the business. Four customers make up 46% of data center sales, and spending booms like this can end in a single quarter.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;">
+        <span class="fact" title="10-Q filed 27 August 2026" style="font-size: 12px; color: #FFB28A; background: rgba(255,122,56,0.10); border: 1px solid rgba(255,122,56,0.20); border-radius: 7px; padding: 4px 8px;">Four biggest customers: 46% of data center sales</span>
+        <span class="fact" title="Reverse discounted cash flow at a 9% discount rate" style="font-size: 12px; color: #FFB28A; background: rgba(255,122,56,0.10); border: 1px solid rgba(255,122,56,0.20); border-radius: 7px; padding: 4px 8px;">Price assumes 24% growth a year for five years</span>
+      </div>
+    </article>
+  </section>
+
+  <section class="panels" style="padding: 8px 40px 28px; position: relative; z-index: 3;">
+    <div style="background: #11100E; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;">
+        <span style="font-size: 14px; font-weight: 600;">The mosaic so far</span>
+        <span style="font-size: 12px; color: #8A837A;">Each investor's score, out of 10</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 74px repeat(7, minmax(0, 1fr)); gap: 5px; align-items: center;">
+        <span></span>
+        <sc-for list="{{heads}}" as="h" hint-placeholder-count="7"><img src="{{h.img}}" alt="{{h.name}}" title="{{h.name}}" style="width: 100%; aspect-ratio: 1; border-radius: 8px; object-fit: cover; object-position: 50% 20%; display: block;"></sc-for>
+        <sc-for list="{{grid}}" as="g" hint-placeholder-count="32"><span title="{{g.t}}" style="{{g.s}}">{{g.v}}</span></sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);">
+        <sc-for list="{{totals}}" as="t" hint-placeholder-count="4">
+          <span style="display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 11px; color: #8A837A; white-space: nowrap;">{{t.label}}</span><span style="{{t.s}}">{{t.v}}</span></span>
+        </sc-for>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; font-size: 11px; color: #8A837A;">
+        <span style="display: flex; align-items: center; gap: 6px;">Low<sc-for list="{{legend}}" as="l" hint-placeholder-count="5"><span style="{{l}}"></span></sc-for>High</span>
+        <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 11px; height: 11px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px #F5F2EC;"></span>Their top choice</span>
+      </div>
+    </div>
+
+    <div style="background: #11100E; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline;">
+        <span style="font-size: 14px; font-weight: 600;">Earlier this round</span>
+        <span style="font-size: 12px; color: #8A837A;">2 turns</span>
+      </div>
+      <sc-for list="{{turns}}" as="t" hint-placeholder-count="2">
+        <div style="display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.05);">
+          <img src="{{t.img}}" alt="" style="width: 32px; height: 32px; border-radius: 16px; object-fit: cover; object-position: 50% 20%; flex: 0 0 auto;">
+          <div style="display: flex; flex-direction: column; gap: 5px; min-width: 0;">
+            <span style="font-size: 13px; font-weight: 600;">{{t.name}}<span style="font-weight: 400; color: #8A837A;">  {{t.move}}</span></span>
+            <span style="font-size: 13px; line-height: 1.5; color: #C9C2B8;">{{t.text}}</span>
+            <span style="font-size: 12px; line-height: 1.45; color: #9A938A;">{{t.concede}}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      <div style="background: #11100E; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 12px; color: #8A837A;">The big disagreement</span>
+        <span style="font-size: 15px; font-weight: 500; line-height: 1.4;">Is AI chip demand here to stay, or a boom that will cool?</span>
+        <span style="font-size: 13px; color: #B5AEA4; line-height: 1.5;">Here to stay: Druckenmiller, Damodaran. Will cool: Burry, Marks, Munger.</span>
+      </div>
+      <div style="background: linear-gradient(180deg, rgba(255,122,56,0.10), rgba(255,122,56,0.02)); border: 1px solid rgba(255,122,56,0.22); border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;">
+        <span style="font-size: 12px; color: #FF9A66;">Your lean, revealed this round</span>
+        <span style="font-size: 15px; font-weight: 500; line-height: 1.4;">You leaned toward buying the full position now. The council ranks it third of four, at {{scoreA}}.</span>
+        <span style="font-size: 13px; color: #B5AEA4; line-height: 1.5;">The first round was scored without knowing your view, to keep it honest. Since your view was shared, that choice gained 0.3.</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot" style="margin-top: auto; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 40px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: #8A837A;">
+    <span>The investors are simulations built from their public work. Not affiliated with or endorsed by them.</span>
+    <span>Grades a decision process. Not investment advice.</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = { buffett: '/_blob/c1d510d50623727a52cf24e266cb2f7d', munger: '/_blob/343d8fbfd84bc2af4cc2b71933b4e6cf', damodaran: '/_blob/dcd65421fd24e1e498a0b77279f7fa2f', marks: '/_blob/74b184f2496753cd8977f835545d9927', taleb: '/_blob/71978e7b22b129dcdf5140592dd3210a', druckenmiller: '/_blob/76a13c67ce697cc255b603777754ac63', burry: '/_blob/124646476f6ad834f8da7e4c7c4b7c38' };
+    const SCENE = '/_blob/e7be29f0682f4a8ffed35e6bb70a254a';
+    // One seat array drives every number on the board. Round 2 scores (Buffett moves B to 6 in Round 3).
+    const S = [
+      { k: 'buffett', name: 'Warren Buffett', short: 'Buffett', role: 'Owner economics', w: 2, sc: [4, 5, 7, 3], pos: [9.6, 34] },
+      { k: 'munger', name: 'Charlie Munger', short: 'Munger', role: 'Folly check', w: 2, sc: [3, 6, 7, 4], pos: [23.3, 30] },
+      { k: 'damodaran', name: 'Aswath Damodaran', short: 'Damodaran', role: 'Value vs price', w: 3, sc: [4, 7, 5, 3], pos: [36.6, 28] },
+      { k: 'marks', name: 'Howard Marks', short: 'Marks', role: 'Risk and cycle', w: 2, sc: [3, 6, 7, 4], pos: [50.1, 26.5] },
+      { k: 'taleb', name: 'Nassim Taleb', short: 'Taleb', role: 'Ruin guard', w: 2, sc: [2, 7, 6, 5], pos: [63.5, 28] },
+      { k: 'druckenmiller', name: 'Stan Druckenmiller', short: 'Druckenmiller', role: 'Macro and timing', w: 2, sc: [7, 8, 4, 2], pos: [77.1, 30] },
+      { k: 'burry', name: 'Michael Burry', short: 'Burry', role: 'Bear guard', w: 2, sc: [2, 4, 7, 6], pos: [90.6, 34], live: true }
+    ];
+    const L = ['A', 'B', 'C', 'D'];
+    const SHORT = ['buy now', 'start small', 'wait', 'pass'];
+    const W = S.reduce((a, s) => a + s.w, 0);
+    const council = L.map((_, i) => S.reduce((a, s) => a + s.w * s.sc[i], 0) / W);
+    const top = (s) => s.sc.indexOf(Math.max(...s.sc));
+    const seats = S.map((s) => {
+      const t = top(s);
+      const live = !!s.live;
+      const size = live ? 116 : 92;
+      return {
+        cls: live ? 'seat live' : 'seat',
+        name: s.name, short: s.short, role: s.role, img: P[s.k],
+        lean: `Leans ${SHORT[t]} · ${s.sc[t]}`,
+        wrap: `position:absolute;left:${s.pos[0]}%;top:${s.pos[1]}%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:9px;z-index:${live ? 3 : 2};`,
+        ring: live
+          ? `width:${size}px;height:${size}px;border-radius:50%;padding:3px;background:conic-gradient(from 200deg,#FF7A38,#FFC4A3,#FF7A38);box-shadow:0 0 0 7px rgba(255,122,56,0.12),0 0 60px rgba(255,122,56,0.35),0 24px 50px rgba(0,0,0,0.7);`
+          : `width:${size}px;height:${size}px;border-radius:50%;padding:2px;background:linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,255,255,0.04));box-shadow:0 20px 40px rgba(0,0,0,0.65);`,
+        imgStyle: `width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 22%;display:block;${live ? '' : 'filter:saturate(0.8) brightness(0.8);'}`,
+        nameStyle: `font-size:${live ? 15 : 13}px;font-weight:600;color:${live ? '#F5F2EC' : '#DDD6CC'};text-shadow:0 2px 12px rgba(0,0,0,0.9);white-space:nowrap;`,
+        chip: `font-size:11px;font-weight:500;white-space:nowrap;color:${live ? '#080706' : '#E9E4DC'};background:${live ? '#FF7A38' : 'rgba(20,18,16,0.72)'};border:1px solid ${live ? '#FF7A38' : 'rgba(255,255,255,0.10)'};border-radius:7px;padding:3px 8px;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);`
+      };
+    });
+    const liveSeat = S.find((s) => s.live);
+    const beam = `position:absolute;left:${liveSeat.pos[0]}%;top:-10%;width:260px;height:${liveSeat.pos[1] + 18}%;transform:translateX(-50%);background:radial-gradient(50% 100% at 50% 0%,rgba(255,154,102,0.22),rgba(255,122,56,0) 70%);filter:blur(6px);pointer-events:none;`;
+    const fill = (v) => v >= 8 ? ['#FF7A38', '#080706'] : v >= 7 ? ['#E2672C', '#080706'] : v >= 6 ? ['#8A4220', '#F5F2EC'] : v >= 4 ? ['#3A2A20', '#D8CFC4'] : ['#1C1916', '#8A837A'];
+    const cell = 'font-family:JetBrains Mono,monospace;font-size:12px;font-weight:500;text-align:center;aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:7px;';
+    const optName = ['Buy now', 'Start small', 'Wait', 'Pass'];
+    const grid = [];
+    L.forEach((o, i) => {
+      grid.push({ v: optName[i], t: '', s: 'font-size:12px;color:#B5AEA4;white-space:nowrap;' });
+      S.forEach((s) => {
+        const [bg, fg] = fill(s.sc[i]);
+        const pick = top(s) === i;
+        grid.push({ v: String(s.sc[i]), t: `${s.name}: ${optName[i]} scored ${s.sc[i]} of 10`, s: `${cell}background:${bg};color:${fg};${pick ? 'box-shadow:inset 0 0 0 1.5px #F5F2EC;' : ''}` });
+      });
+    });
+    const best = council.indexOf(Math.max(...council));
+    const totals = L.map((o, i) => ({ label: optName[i], v: council[i].toFixed(1), s: `font-family:JetBrains Mono,monospace;font-size:20px;font-variant-numeric:tabular-nums;color:${i === best ? '#FF9A66' : '#F5F2EC'};` }));
+    const legend = [1, 4, 6, 7, 8].map((v) => `width:14px;height:11px;border-radius:3px;background:${fill(v)[0]};`);
+    const labels = ['Brief', 'Data', 'Round 1, blind', 'Round 2, debate', 'Round 3, final scores', 'Vote', 'Verdict'];
+    const steps = labels.map((label, i) => ({ label, style: `width:${i === 3 ? 26 : 16}px;height:4px;border-radius:2px;background:${i < 3 ? '#F5F2EC' : i === 3 ? '#FF7A38' : 'rgba(255,255,255,0.14)'};` }));
+    const turns = [
+      { img: P.druckenmiller, name: 'Stan Druckenmiller', move: 'lowered buy now to 7', text: 'Money is getting cheaper and the trend is still up, with the price above its 200-day average. I would rather own it early than wait for a price the market may never give you.', concede: 'Concedes to Taleb on size: if he is wrong, the fall could be 40%, so a small start beats a full position.' },
+      { img: P.damodaran, name: 'Aswath Damodaran', move: 'kept start small at 7', text: 'I value it at $150 to $205 a share. At $182 you are paying for most of the good story already. That argues for a starter, not a pass.', concede: 'Holds firm on price. Agrees with Marks that the cycle is a risk.' }
+    ];
+    const heads = S.map((s) => ({ img: P[s.k], name: s.name }));
+    return { scene: SCENE, seats, beam, grid, legend, steps, turns, heads, totals, scoreA: council[0].toFixed(1) };
+  }
+}
+</script>
+</body>
+</html>
