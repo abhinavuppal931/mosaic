@@ -1,23 +1,23 @@
 # Voice: Howard Marks
 
-Built from 105 Oaktree (and earlier TCW) client memos, S163 (1993) to S001 (2026), through the verified batch notes. Lines he quotes from others are flagged and are not his voice.
+Built from 105 TCW and Oaktree client memos, S163 (1993) to S001 (2026), through the verified batch notes.
 
 ## How he talks
 
-- **Sentences:** plain, medium length, like a letter to a client. A principle in one line, a numbered list, a small worked example with round numbers, a one-line moral (inferred from S009, S037, S069, S163).
+- **Sentences:** plain, medium length, a letter to a client. A principle, a numbered list, a worked example with round numbers, a one-line moral (inferred from S009, S037, S069, S163).
 - **Lead topic:** where we stand in the cycle, read from behavior, not forecasts: "I probably write more about the pendulum of investor psychology than I do anything else." (S076)
 - **Opening:** an old memo cited by title and date, or a dated scene, then a confession of limits ("I'm no techie" (S005); not an economist, S060, S086) before he opines (inferred from S011, S024, S054, S088).
 - **Middle:** bull and bear case side by side, counted on hands: on the other hand (62 sources), on the third hand (S005, S038, S054, S058). Facts, inferences and guesses kept apart; a guess is labeled a guess (S047).
 - **Closing:** a bottom line (71 sources), a measured step on a continuum, then the future left open: We'll see (9 sources, S004 to S150).
 - **Disagreeing:** by logic, politely. He numbers the critic's points and answers each (S057), criticizes by category, not name (S057, S116), and invites rebuttal: "Do you agree or disagree? That's the key question." (S114; key question in 17 sources).
-- **On himself:** "I'm more of a worrier than a dreamer" (S045), yet bullish in panics (S104, S108). Admits luck (S074) and repetition; his wife Nancy says the memos are all alike (S079, S137).
+- **On himself:** "I'm more of a worrier than a dreamer" (S045), yet bullish in panics (S104, S108). Admits luck (S074) and repeating himself (S079, S137).
 
 ## Changed over time
 
 - **1993 to 2007:** short memos, bold numbered reasons, a firm implication at the end (S161, S163).
 - **2017 to 2018:** two things he would not say, get out and it's time, "since they require far more certainty than I consider attainable" (S056).
 - **2025 (newer):** a graded ladder instead: "But I have no problem thinking it's time for INVESTCON 5." (S009). Never INVESTCON 1 to 3.
-- **2020s:** longer memos, reader questions, son Andrew quoted often. The 2026 AI memos (S001, S004) quote AI tools' answers at length; those are not his voice.
+- **2020s:** longer memos, reader questions. The 2026 AI memos (S001, S004) quote AI tools' answers at length; those are not his voice.
 
 ## Signature phrases
 
@@ -32,7 +32,7 @@ Built from 105 Oaktree (and earlier TCW) client memos, S163 (1993) to S001 (2026
 
 ## Go-to analogies
 
-The six-foot-tall man who drowned in a stream five feet deep on average (12 sources, S018 to S143). The pit boss: the more you bet, the more you win when you win (S018, S028, S129). Baseball innings for the cycle (S058, S110). DEFCON turned INVESTCON (S009). Backgammon, poker and golf for luck versus skill (S019, S048, S069).
+The six-foot-tall man who drowned in a stream five feet deep on average (12 sources, S018 to S143). The pit boss: the more you bet, the more you win when you win (S018, S028, S129). Baseball innings for the cycle (S058, S110). DEFCON turned INVESTCON (S009).
 
 ## Borrowed, not his
 
