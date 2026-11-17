@@ -1,0 +1,85 @@
+# Sources: Charlie Munger
+
+79 sources (14 speech, 8 interview, 14 transcript, 34 letter, 1 testimony, 8 op-ed), 563,035 words. Every quote in this brain carries one of these ids.
+
+Format: id | title | url | date | kind | words
+
+- S001 | A Lesson on Elementary Worldly Wisdom (USC Business School, with Q&A) | https://fs.blog/great-talks/a-lesson-on-worldly-wisdom/ | 1994-04-19 | speech | 13445
+- S002 | The Psychology of Human Misjudgment (revised written version of the 1995 Harvard talk) | https://fs.blog/great-talks/psychology-human-misjudgment/ | 1995-06-20 | speech | 24655
+- S003 | How to Guarantee a Life of Misery (Harvard School commencement) | https://fs.blog/great-talks/guarantee-life-misery-charlie-munger/ | 1986-06-09 | speech | 2048
+- S004 | Academic Economics: Strengths and Faults After Considering Interdisciplinary Needs (Santa Barbara) | https://fs.blog/great-talks/academic-economics-charlie-munger/ | 2003-10-03 | speech | 11550
+- S005 | USC Law School Commencement Address | https://singjupost.com/full-transcript-charlie-mungers-speech-at-usc-commencement-2007/ | 2007-05-13 | speech | 5330
+- S006 | Caltech Conversation with Charlie Munger | https://www.rev.com/blog/transcripts/investor-charlie-munger-caltech-interview-transcript-december-16 | 2020-12-14 | interview | 8159
+- S007 | Acquired Podcast interview with Charlie Munger | https://www.acquired.fm/episodes/charlie-munger | 2023-10-25 | interview | 10913
+- S008 | Michigan Ross conversation with Dean Scott DeRue | https://hedgefundalpha.com/conferences/charlie-munger-bitcoin/ | 2017-11-30 | interview | 8610
+- S009 | Fireside chat with Todd Combs (Knowledge Project Outliers) | https://fs.blog/knowledge-project-podcast/outliers-munger-combs/ | 2022-04-01 | interview | 8238
+- S014 | Poor Charlie's Almanack Talk One: Harvard School Commencement Speech with 2006 commentary (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 1986-06-13 | speech | 3058
+- S015 | Poor Charlie's Almanack Talk Two Revisited and Worldly Wisdom Updated Q&A (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 2006-01-01 | speech | 1308
+- S016 | Poor Charlie's Almanack Talk Three: A Lesson on Elementary Worldly Wisdom Revisited (Stanford Law) (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 1996-04-19 | speech | 18193
+- S017 | Poor Charlie's Almanack Talk Four: Practical Thought About Practical Thought (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 1996-07-20 | speech | 6574
+- S018 | Poor Charlie's Almanack Talk Five: The Need for More Multidisciplinary Skills from Professionals (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 1998-01-01 | speech | 5041
+- S019 | Poor Charlie's Almanack Talk Six: Investment Practices of Leading Charitable Foundations (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 1998-10-14 | speech | 7705
+- S020 | Poor Charlie's Almanack Talk Eight: The Great Financial Scandal of 2003 (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 2000-06-01 | speech | 4817
+- S021 | Poor Charlie's Almanack Talk Ten: USC Gould School of Law Commencement Address with commentary (Stripe Press free online edition) | https://www.stripe.press/poor-charlies-almanack/book | 2007-05-13 | speech | 6884
+- S022 | Daily Journal Annual Meeting Q&A 2016 | https://hedgefundalpha.com/conferences/charlie-mungers-2016-daily-journal-annual-meeting-transcript/ | 2016-02-10 | transcript | 2761
+- S023 | Daily Journal Annual Meeting Q&A 2020 | https://sungcap.com/charlie-munger-daily-journal-2020-transcript/ | 2020-02-12 | transcript | 13607
+- S024 | Daily Journal Annual Meeting Q&A 2021 | https://sungcap.com/charlie-munger-daily-journal-2021-transcript/ | 2021-02-24 | transcript | 13002
+- S025 | Daily Journal Annual Meeting Q&A 2023 | https://www.kingswell.io/p/charlie-munger-q-and-a-2023-daily | 2023-02-15 | transcript | 16761
+- S026 | Wesco Financial Chairman's Letter to Shareholders for 1997 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-1997-letter-to-shareholders.pdf | 1998-03-15 | letter | 4205
+- S027 | Wesco Financial Chairman's Letter to Shareholders for 1998 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-1998-letter-to-shareholders.pdf | 1999-03-15 | letter | 3853
+- S028 | Wesco Financial Chairman's Letter to Shareholders for 1999 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-1999-letter-to-shareholders.pdf | 2000-03-15 | letter | 2986
+- S029 | Wesco Financial Chairman's Letter to Shareholders for 2000 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2000-letter-to-shareholders.pdf | 2001-03-15 | letter | 2742
+- S030 | Wesco Financial Chairman's Letter to Shareholders for 2001 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2001-letter-to-shareholders.pdf | 2002-03-15 | letter | 3126
+- S031 | Wesco Financial Chairman's Letter to Shareholders for 2002 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2002-letter-to-shareholders.pdf | 2003-03-15 | letter | 3635
+- S032 | Wesco Financial Chairman's Letter to Shareholders for 2003 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2003-letter-to-shareholders.pdf | 2004-03-15 | letter | 3259
+- S033 | Wesco Financial Chairman's Letter to Shareholders for 2004 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2004-letter-to-shareholders.pdf | 2005-03-15 | letter | 3732
+- S034 | Wesco Financial Chairman's Letter to Shareholders for 2005 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2005-letter-to-shareholders.pdf | 2006-03-15 | letter | 3717
+- S035 | Wesco Financial Chairman's Letter to Shareholders for 2006 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2006-letter-to-shareholders.pdf | 2007-03-15 | letter | 3493
+- S036 | Wesco Financial Chairman's Letter to Shareholders for 2007 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2007-letter-to-shareholders.pdf | 2008-03-15 | letter | 4102
+- S037 | Wesco Financial Chairman's Letter to Shareholders for 2008 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2008-letter-to-shareholders.pdf | 2009-03-15 | letter | 4550
+- S038 | Wesco Financial Chairman's Letter to Shareholders for 2009 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-2009-letter-to-shareholders.pdf | 2010-03-15 | letter | 4312
+- S039 | Blue Chip Stamps Letter to Shareholders for 1977 | https://worldlypartners.com/wp-content/uploads/2024/01/bcs-1977-letter-to-shareholders.pdf | 1978-03-15 | letter | 4324
+- S040 | Blue Chip Stamps Letter to Shareholders for 1978 | https://worldlypartners.com/wp-content/uploads/2024/01/bcs-1978-letter-to-shareholders.pdf | 1979-03-15 | letter | 2170
+- S041 | Blue Chip Stamps Letter to Shareholders for 1979 | https://worldlypartners.com/wp-content/uploads/2024/01/bcs-1979-letter-to-shareholders.pdf | 1980-03-15 | letter | 4344
+- S042 | Blue Chip Stamps Letter to Shareholders for 1980 | https://worldlypartners.com/wp-content/uploads/2024/01/bcs-1980-letter-to-shareholders.pdf | 1981-03-15 | letter | 7492
+- S043 | Blue Chip Stamps Letter to Shareholders for 1981 | https://worldlypartners.com/wp-content/uploads/2024/01/bcs-1981-letter-to-shareholders.pdf | 1982-03-15 | letter | 9931
+- S044 | Blue Chip Stamps Letter to Shareholders for 1982 | https://worldlypartners.com/wp-content/uploads/2024/01/bcs-1982-letter-to-shareholders.pdf | 1983-03-15 | letter | 8087
+- S045 | Daily Journal Annual Meeting 2016: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2016-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks-latticework-investing.pdf | 2016-02-10 | transcript | 10366
+- S046 | Daily Journal Annual Meeting 2017: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2017-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks-santangels-review.pdf | 2017-02-14 | transcript | 17153
+- S047 | Daily Journal Annual Meeting 2018: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2018-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks.pdf | 2018-02-14 | transcript | 14563
+- S048 | Daily Journal Annual Meeting 2019: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2019-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks.pdf | 2019-02-13 | transcript | 14369
+- S049 | Daily Journal Annual Meeting 2020: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2020-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks.pdf | 2020-02-12 | transcript | 13386
+- S050 | Daily Journal Annual Meeting 2021: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2021-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks.pdf | 2021-02-24 | transcript | 25225
+- S051 | Daily Journal Annual Meeting 2022: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2022-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks.pdf | 2022-02-16 | transcript | 13896
+- S052 | Daily Journal Annual Meeting 2023: Transcript of Charlie Munger's Remarks | https://worldlypartners.com/wp-content/uploads/2024/01/2023-daily-journal-corp-annual-meeting-transcript-of-charlie-mungers-remarks.pdf | 2023-02-15 | transcript | 21259
+- S053 | Daily Journal 2017 Post-Meeting Fireside Chat with Charlie Munger | https://worldlypartners.com/wp-content/uploads/2024/01/2017-daily-journal-corp-post-annual-meeting-fireside-chat-with-charlie-munger-transcript-latticework-investing.pdf | 2017-02-14 | transcript | 15646
+- S054 | Testimony of Charles Munger to the US House of Representatives on savings and loan matters | https://worldlypartners.com/wp-content/uploads/2024/04/1984-Charlie-Munger-Testimony.pdf | 1984-01-01 | testimony | 3527
+- S055 | Opinion piece on the stock market | https://worldlypartners.com/wp-content/uploads/2024/01/1984-opinion-piece-on-the-stock-market.pdf | 1984-01-01 | op-ed | 1668
+- S056 | Letter resigning Mutual Savings from the US League of Savings Institutions | https://worldlypartners.com/wp-content/uploads/2024/01/1989-resignation-of-mutual-savings-from-us-league-of-savings-institutions-letter-by-charlie.pdf | 1989-01-01 | letter | 674
+- S057 | A Perverse Use of Antitrust Law | https://worldlypartners.com/wp-content/uploads/2024/01/2000-a-perverse-use-of-antitrust-law.pdf | 2000-01-01 | op-ed | 1140
+- S058 | Talk to the Breakfast Meeting of the Philanthropy Roundtable | https://worldlypartners.com/wp-content/uploads/2024/01/2000-talk-of-charlie-munger-to-breakfast-meeting-of-the-philanthropy-round-table.pdf | 2000-01-01 | speech | 2891
+- S059 | Optimism Has No Place in Accounting | https://worldlypartners.com/wp-content/uploads/2024/01/2002-optimism-has-no-place-in-accounting.pdf | 2002-01-01 | op-ed | 695
+- S060 | Sacrificing to Restore Market Confidence | https://worldlypartners.com/wp-content/uploads/2024/01/2009-sacrificing-to-restore-market-confidence.pdf | 2009-01-01 | op-ed | 953
+- S061 | Basically, It's Over | https://worldlypartners.com/wp-content/uploads/2024/01/2010-basically-its-over.pdf | 2010-01-01 | op-ed | 1595
+- S062 | A Parody About the Great Recession | https://worldlypartners.com/wp-content/uploads/2024/01/2011-a-parody-about-the-great-recession.pdf | 2011-01-01 | op-ed | 2848
+- S063 | Vice Chairman's Thoughts: Past and Future | https://worldlypartners.com/wp-content/uploads/2024/01/2014-vice-chairmans-thoughts-past-and-future.pdf | 2014-01-01 | op-ed | 2431
+- S064 | Why America Should Ban Crypto | https://worldlypartners.com/wp-content/uploads/2024/01/2023-why-america-should-ban-crypto.pdf | 2023-02-01 | op-ed | 403
+- S065 | Charlie Munger Unplugged: interview with the Wall Street Journal | https://worldlypartners.com/wp-content/uploads/2024/01/2019-charlie-munger-unplugged-interview-with-wsj.pdf | 2019-05-01 | interview | 9932
+- S066 | Wesco Financial Chairman's Letter to Shareholders for 1983 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1984-02-03 | letter | 3155
+- S067 | Wesco Financial Chairman's Letter to Shareholders for 1984 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1985-02-12 | letter | 5249
+- S068 | Wesco Financial Chairman's Letter to Shareholders for 1985 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1986-02-13 | letter | 5014
+- S069 | Wesco Financial Chairman's Letter to Shareholders for 1986 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1987-02-13 | letter | 3887
+- S070 | Wesco Financial Chairman's Letter to Shareholders for 1987 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1988-02-26 | letter | 4196
+- S071 | Wesco Financial Chairman's Letter to Shareholders for 1988 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1989-02-24 | letter | 9948
+- S072 | Wesco Financial Chairman's Letter to Shareholders for 1989 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1990-03-05 | letter | 9996
+- S073 | Wesco Financial Chairman's Letter to Shareholders for 1990 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1991-03-08 | letter | 12033
+- S074 | Wesco Financial Chairman's Letter to Shareholders for 1991 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1992-03-09 | letter | 2878
+- S075 | Wesco Financial Chairman's Letter to Shareholders for 1992 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1993-03-25 | letter | 3088
+- S076 | Wesco Financial Chairman's Letter to Shareholders for 1993 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1994-03-23 | letter | 5297
+- S077 | Wesco Financial Chairman's Letter to Shareholders for 1994 | https://www.safalniveshak.com/wp-content/uploads/2013/12/Charlie-Munger-Wesco-Letters-1983-1995.pdf | 1995-03-09 | letter | 4913
+- S078 | Wesco Financial Chairman's Letter to Shareholders for 1995 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-1995-letter-to-shareholders.pdf | 1996-03-15 | letter | 4138
+- S079 | Wesco Financial Chairman's Letter to Shareholders for 1996 | https://worldlypartners.com/wp-content/uploads/2024/01/wesco-1996-letter-to-shareholders.pdf | 1997-03-07 | letter | 4143
+- S080 | CNBC Charlie Munger: A Life of Wit and Wisdom (final interview with Becky Quick) | https://www.cnbc.com/2023/11/30/full-transcript-from-cnbcs-charlie-munger-a-life-of-wit-and-wisdom-.html | 2023-11-14 | interview | 7119
+- S081 | CNBC Interview with Becky Quick after the Daily Journal annual meeting | https://www.cnbc.com/amp/2019/02/15/cnbc-transcript-berkshire-hathaway-vice-chairman-charlie-munger-speaks-with-cnbcs-becky-quick.html | 2019-02-13 | interview | 5229
+- S082 | Yahoo Finance Influencers interview with Andy Serwer | https://www.gurufocus.com/news/2129560/ | 2019-05-09 | interview | 7394
+- S083 | Wesco Financial 2000 Annual Meeting: Excerpts of Charlie Munger's Remarks (Outstanding Investor Digest) | https://worldlypartners.com/wp-content/uploads/2024/01/2000-wesco-annual-meeting-excerpts-of-charlie-mungers-remarks-outstanding-investor-digest.pdf | 2000-05-01 | transcript | 14019
