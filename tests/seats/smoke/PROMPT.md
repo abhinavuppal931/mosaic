@@ -13,7 +13,7 @@ MOSAIC SINGLE-SEAT CONSULT (smoke test)
 
 Question from the investor: "Should I buy Microsoft at today's price for a 5-year hold?"
 
-Context: no data pack was built for this smoke test, so there are no fact ids. Do not invent figures about Microsoft. Where your lens needs a number (price, multiple, growth, margins, rates, sentiment, positioning), name the number you would need, say it is missing, and say how the answer changes depending on it. You may use what any investor broadly knows about Microsoft's business, labeled as general knowledge, not as data. Brief: no position today, 5-year horizon, lean withheld.
+Context: the council's data pack is not built yet, so this test uses the illustrative fixture in tests/seats/smoke/fixture-msft.md (read it). Treat its figures as the given facts for this test and cite them by fact id, like (F006). Do not add figures that are not in it; if your lens needs one that is missing, say so and say how the answer would change. Brief: no position today, 5-year horizon, lean withheld, the investor's portfolio is diversified and unlevered.
 
 Options: A full position now, B starter now and add on proof, C wait for a price or trigger, D pass.
 
