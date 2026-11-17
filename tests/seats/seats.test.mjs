@@ -45,7 +45,7 @@ test('every seat has an agent file in the plugin shape', () => {
     const file = path.join(ROOT, 'agents', `${s.agent}.md`);
     assert.ok(fs.existsSync(file), file);
     const text = read(file);
-    const front = text.match(/^---\n([\s\S]*?)\n---\n/);
+    const front = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n/);
     assert.ok(front, `${s.agent} has frontmatter`);
     assert.match(front[1], new RegExp(`^name: ${s.agent}$`, 'm'));
     assert.match(front[1], /^tools: Read, Grep, Glob$/m);
