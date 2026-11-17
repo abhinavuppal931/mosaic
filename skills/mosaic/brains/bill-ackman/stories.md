@@ -8,7 +8,7 @@ Bought a 14% stake from September 2011 because "Pershing Square began buying CP 
 Lesson: find the fixable underperformer and the proven operator, then take it to the vote. He offers it as proof activism is long-term: "CP is a paradigmatic example of the long-term sustainable business performance enhancements and shareholder value creation we have achieved in our core activist holdings." (S004) His regret is selling: "we had to sell our Canadian Pacific to raise capital to pay for investors who are leaving." (S039)
 
 ## 2. Valeant: the biggest loss, 2015 to 2017
-Sources: 18 (S002, S003, S004, S005, S008, S009, S011, S012, S013, S024, S025, S026, S039, S046, S050, S052, S067, S087).
+Sources: 19 (S002, S003, S004, S005, S008, S009, S011, S012, S013, S024, S025, S026, S039, S046, S050, S052, S066, S067, S087).
 After the 2014 Allergan bid he bought Valeant in 2015 at an average $196 as a passive holder, trusting management: "We have not sought to influence Valeant’s governance or operations because of our confidence in the company’s management team led by Mike Pearson." (S011) Drug pricing, the Philidor pharmacy and lost market access sent it down 83% from cost (S067). He joined the board, replaced the CEO and refinanced, then sold in 2017 (S003, S025). "Clearly, our investment in Valeant was a huge mistake." (S004) and "In retrospect, we misjudged the prior management team and this contributed to our loss." (S004) Later: "We lost $4 billion." (S087)
 Lesson: a passive stake in an acquisition machine that needs capital markets and trust sits outside the principles. "The highly acquisitive nature of Valeant’s business required flawless capital allocation and operational execution, and therefore, a larger than normal degree of reliance on management." (S004) It led to the stone-tablet principles and a smaller, investment-centric firm (S009, S066).
 
@@ -28,7 +28,7 @@ In November 2008 he bought about 25% of a mall owner trading at 34 cents, reason
 Lesson: asymmetry plus small size, "So in the worst-case scenario, we lose 1.5%. In the best case, we can make a fortune." (S041), and when the market will not recognize a business, control can change the structure (S037, S064).
 
 ## 6. Chipotle: board seats, a recruited CEO, and the sale after he left, 2016 to 2025
-Sources: 18 (S004, S005, S013, S016, S026, S027, S028, S029, S033, S034, S035, S038, S039, S041, S065, S066, S078, S079).
+Sources: 19 (S004, S005, S013, S016, S026, S027, S028, S029, S033, S034, S035, S038, S039, S041, S065, S066, S078, S079, S081).
 Bought 9.9% at $405 in September 2016 after the food-safety collapse, refreshed the board within months and recruited Brian Niccol in 2018 (S033, S065). "We recruited Brian Nichol to run that business." (S081) The firm added at 21% below cost once the new CEO was named (S065), and EPS compounded about 35% a year through 2024 (S038). After Niccol left in 2024 and same-store sales turned negative, it sold the rest in November 2025 and admitted "We did not adequately adjust our assumptions and required returns following these changes" (S038)
 Lesson: buy from sellers who think management will never change, pick the CEO, add on proof; when the operator who made the thesis leaves, re-underwrite at once.
 
@@ -59,7 +59,7 @@ Lesson: the investment is the person who can close the gap; when the gap is clos
 
 ## 12. Air Products: the recruited operator, 2013 to 2017
 Sources: 8 (S001, S003, S023, S025, S026, S027, S067, S081).
-The board adopted a poison pill, then agreed to add three directors; a nine-month search chose his nominee Seifi Ghasemi, and margins went from about 15% to 22% (S067, S027). Sold in 2017 at a 104.7% total return: "We recently sold our remaining shares of Air Products ("APD"), concluding a highly successful activist investment." (S027)
+The board adopted a poison pill, then agreed to add three directors; a nine-month search chose his nominee Seifi Ghasemi, and margins went from about 15% to 22% (S067, S027). Sold in 2017 at a 104.7% total return, "concluding a highly successful activist investment." (S027)
 Lesson: contested start, cooperative finish; the right operator plus a supportive board closes a margin gap fast.
 
 ## 13. Netflix: sold on lost predictability, bought back at half price, 2022 and 2026
@@ -73,7 +73,7 @@ Bought at about 16 times earnings and privately pushed a breakup; the company an
 Lesson: leave when management's action contradicts the reason you bought, and weigh the cost of a second campaign against a new idea.
 
 ## 15. Allergan with Valeant: the hostile bid, 2014
-Sources: 6 (S001, S013, S023, S046, S050, S051).
+Sources: 7 (S001, S013, S023, S046, S050, S051, S052).
 Built a 9.7% stake through a joint venture with Valeant at an average $128, forced a special meeting and sued; Allergan sold to Actavis at about $227.51 a share (S023). He called it a different tool from activism: "it was in the context of a hostile takeover which we consider to be a fundamentally different type of situation." (S013)
 Lesson: the gain was large, but the partnership is where the Valeant trust began (S052, paraphrase).
 
@@ -88,7 +88,7 @@ Bought at about $91 in spring 2024 with two outcomes in mind: "We were confident
 Lesson: underwriting a turnaround means underwriting the prior management's damage, not just the new team.
 
 ## 18. Pershing Square Tontine, UMG and SPARC, 2020 to 2023
-Sources: 9 (S007, S008, S017, S036, S055, S056, S057, S064, S071).
+Sources: 10 (S007, S008, S009, S017, S036, S055, S056, S057, S064, S071).
 The $4 billion SPAC agreed to buy part of Universal Music in 2021, the SEC objected to the structure, and the funds took the UMG stake on the original terms; PSTH returned its cash in 2022 (S017, S055). "PSTH’s failed business combination with Universal Music Group was a significant disappointment in 2021." (S008) He then built SPARC to fix the flaws, and still found no deal that met the bar (S064).
 Lesson: when a structure fails, return the capital and fix the structure; keeping your word on terms built the reputation that won the UMG deal (S036, S009).
 
