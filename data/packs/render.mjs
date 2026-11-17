@@ -45,6 +45,12 @@ export function renderPackMarkdown(pack) {
   out.push('| Id | Fact | Value | Period | Source | As of | Status |', '|---|---|---|---|---|---|---|');
   for (const f of pack.facts) out.push(`| ${f.id} | ${esc(f.label)} | ${esc(formatValue(f))} | ${esc(f.period || '')} | ${f.source || '-'} | ${f.asOf || '-'} | ${f.status} |`);
   out.push('');
+  const noted = pack.facts.filter((f) => f.value !== null && f.note);
+  if (noted.length) {
+    out.push('## Notes', '');
+    for (const f of noted) out.push(`- ${f.id} ${f.label}: ${f.note}`);
+    out.push('');
+  }
   const derived = pack.facts.filter((f) => f.derived && f.value !== null);
   if (derived.length) {
     out.push('## Formulas', '');

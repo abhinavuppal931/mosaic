@@ -20,6 +20,10 @@ export function main(argv) {
     return 64;
   }
   const rosterFile = typeof args.roster === 'string' ? args.roster : paths({ home: args.home }).roster;
+  if (!fs.existsSync(rosterFile)) {
+    process.stderr.write(`error: roster not found at ${rosterFile} (built by /newseat; pass --roster <file> to use another)\n`);
+    return 1;
+  }
   const roster = loadRoster(rosterFile);
   const s = readSession(path.resolve(dir), seatResolver(roster));
   const result = scoreCouncil({

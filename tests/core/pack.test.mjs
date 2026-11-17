@@ -141,7 +141,7 @@ describe('ticker pack (zero-key stack, MSFT fixtures)', () => {
     assert.match(md, /## Data health/);
     assert.match(md, /MISSING/);
     assert.match(md, /## Seat evidence/);
-    assert.ok(!/—/.test(md), 'no em dashes in user-facing copy');
+    assert.ok(!/\u2014/.test(md), 'no em dashes in user-facing copy');
   });
 });
 

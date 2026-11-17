@@ -148,6 +148,9 @@ describe('scripts', () => {
     assert.match(r.out, /B \(3x8 \+ 2x6 \+ 2x5\) \/ 7 = 6\.6/);
     assert.equal(JSON.parse(fs.readFileSync(path.join(dir, 'scores.json'), 'utf8')).label, 'PROCEED WITH CONDITIONS');
     assert.equal((await capture(() => scoreCli([]))).code, 64);
+    const noRoster = await capture(() => scoreCli([dir, '--roster', path.join(tmp(), 'nope.json')]));
+    assert.equal(noRoster.code, 1);
+    assert.match(noRoster.err, /roster not found/);
   });
 
   test('check-citations.mjs exits 0 when clean, 1 when not, and writes citations.json', async () => {

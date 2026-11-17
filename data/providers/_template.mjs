@@ -15,9 +15,8 @@
 // - Never put the key in a log line or in returned data.
 //
 // ctx = { http: {getJson, getText, postJson}, key, config, now(), remember(key, ttlSeconds, fn) }
-// Import path below assumes the file lives in data/providers/; adjust it if you keep
-// your adapter elsewhere.
-import { result } from '../lib/contract.mjs';
+// No imports needed, so the file works wherever you keep it.
+const result = (data, meta) => ({ data, meta });
 
 const BASE = 'https://api.example.com/v1';
 

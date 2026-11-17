@@ -14,7 +14,7 @@ const SEAT_PACKS = JSON.parse(fs.readFileSync(new URL('./seat-packs.json', impor
 const CORE = {
   ticker: ['profile', 'quote', 'priceHistory', 'financials', 'insiderTrades', 'macro', 'news', 'estimates'],
   macro: ['macro'],
-  portfolio: ['profile', 'priceHistory', 'macro'],
+  portfolio: ['priceHistory', 'macro'],
 };
 const WEIGHT = { ok: 1, fallback: 1, stale: 0.5, missing: 0, error: 0 };
 
@@ -104,7 +104,6 @@ function coverageOf(kind, raw) {
       note(`profile:${h.ticker}`, h.profile);
       note(`priceHistory:${h.ticker}`, h.history);
     }
-    delete byCapability[`profile:${raw.holdings[0]?.ticker}`];
   }
   const macro = Object.entries(raw.macro || {});
   for (const [id, r] of macro) note(`macro:${id}`, r);

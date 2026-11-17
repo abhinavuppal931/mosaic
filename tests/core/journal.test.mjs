@@ -107,7 +107,7 @@ describe('recheck diff', () => {
     assert.match(md, /TRIPPED: Gross margin below 65% \(now 0\.63 \[F007\]\)/);
     assert.match(md, /Free cash flow yield: 1\.6% to 3\.1% \[F004\]/);
     assert.match(md, /A new 10-K or 10-Q has been filed/);
-    assert.ok(!/—/.test(md));
+    assert.ok(!/\u2014/.test(md));
   });
 
   test('kill criteria with a missing fact are unknown, never assumed fine', () => {

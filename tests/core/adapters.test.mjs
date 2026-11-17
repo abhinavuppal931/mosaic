@@ -335,3 +335,31 @@ test('fixtures were recorded on the date the tests pin', () => {
   assert.equal(new Date(NOW).toISOString().slice(0, 10), '2026-11-17');
   assert.ok(FREE_ROUTES.length > 10);
 });
+
+describe('custom adapter (template copied into a user folder)', () => {
+  test('loads from the user config and passes the contract test', async () => {
+    const fs = await import('node:fs');
+    const os = await import('node:os');
+    const path = await import('node:path');
+    const { loadConfig, loadSeries } = await import('../../data/lib/config.mjs');
+    const { loadAdapters } = await import('../../data/providers/index.mjs');
+    const { createRouter } = await import('../../data/router.mjs');
+    const { createEnv } = await import('../../data/lib/env.mjs');
+    const { fakeFetch } = await import('./helpers/fake-fetch.mjs');
+    const home = fs.mkdtempSync(path.join(os.tmpdir(), 'mosaic-custom-'));
+    fs.copyFileSync(new URL('../../data/providers/_template.mjs', import.meta.url), path.join(home, 'myvendor.mjs'));
+    fs.writeFileSync(path.join(home, 'mosaic.config.json'), JSON.stringify({ custom: [{ id: 'myvendor', module: './myvendor.mjs' }], chains: { quote: ['myvendor', 'yahoo'] } }));
+    const config = loadConfig({ userConfigPath: path.join(home, 'mosaic.config.json') });
+    config.cache.enabled = false;
+    const { adapters, problems } = await loadAdapters(config);
+    assert.deepEqual(problems, []);
+    const fetchImpl = fakeFetch([{ match: /api\.example\.com\/v1\/quote/, body: { price: 12.5, currency: 'USD', timestamp: 1794862801 } }]);
+    const router = createRouter({ config, adapters, env: createEnv({ env: { MYVENDOR_API_KEY: 'mv-secret' } }), series: loadSeries(), fetchImpl, now: () => NOW, sleep: async () => {} });
+    const rep = await checkProvider(adapters.get('myvendor'), { router, symbol: 'TEST' });
+    assert.deepEqual(rep.results.map((r) => [r.capability, r.result]), [['quote', 'pass']]);
+    const q = await router.get('quote', 'TEST');
+    assert.equal(q.meta.source, 'myvendor');
+    assert.equal(fetchImpl.calls[0].init.headers.authorization, 'Bearer mv-secret');
+    assert.ok(!fetchImpl.calls[0].url.includes('mv-secret'));
+  });
+});

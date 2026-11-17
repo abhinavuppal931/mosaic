@@ -1,0 +1,14 @@
+{
+  "name": "mosaic",
+  "owner": { "name": "Abs", "url": "https://github.com/abhinavuppal931" },
+  "description": "Mosaic: a council of simulated investing legends for Claude Code.",
+  "plugins": [
+    {
+      "name": "mosaic",
+      "source": "./",
+      "description": "A council of simulated investing legends that debates your investment decision on one sourced data pack and returns a graded verdict with the dissent kept. Education, not investment advice.",
+      "category": "finance",
+      "homepage": "https://github.com/abhinavuppal931/mosaic"
+    }
+  ]
+}
