@@ -2,6 +2,8 @@
 
 100 sources (91 blog, 9 paper), 570,871 words. Every quote in this brain carries one of these ids.
 
+Depth: deep. Built from 100 free sources, 570,871 words, dated 2005 to 2026: 91 posts from his Musings on Markets blog (February 2012 to November 2026, 429,991 words) and 9 papers from his NYU Stern page (2005 to 2012, 140,880 words). Thin-source limits: his books (among them Investment Valuation, Narrative and Numbers, The Little Book of Valuation and The Corporate Life Cycle) are copyrighted and not quoted; where a framework is taught mainly there, the brain uses only what the blog posts and papers say. His class videos, lecture notes, interviews, podcasts and datasets were not fetched, and nothing on the blog before 2012 is in the corpus. The papers are the oldest sources, so where his view moved the newer blog posts win. Ids S042, S050, S052, S053, S066, S075 and S099 were assigned but not kept, so they are absent. The posts and papers are free on his own pages, but the right to reuse them is not confirmed, so quotes stay short and each carries its source id.
+
 Format: id | title | url | date | kind | words
 
 - S001 | The IPO of the decade? My valuation of Facebook | https://aswathdamodaran.blogspot.com/2012/02/ipo-of-decade-my-valuation-of-facebook.html | 2012-02-16 | blog | 7905

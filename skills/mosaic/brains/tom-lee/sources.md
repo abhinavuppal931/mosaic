@@ -1,0 +1,27 @@
+# Sources: Tom Lee
+
+21 sources (15 interview, 1 speech, 5 interview (fetch tool)), 207,478 words. Every quote in this brain carries one of these ids.
+
+Format: id | title | url | date | kind | words
+
+- S001 | Prof G Markets: The Bull Case for 2026 with Tom Lee | https://podscripts.co/podcasts/prof-g-markets/the-bull-case-for-2026-ft-tom-lee | 2025-12-12 | interview | 11411
+- S002 | The Compound and Friends: Tom Lee Says It's Still Early | https://podscripts.co/podcasts/the-compound-and-friends/tom-lee-says-its-still-early | 2025-08-22 | interview | 15241
+- S003 | Big Technology Podcast: Is AI Actually Saving The Stock Market with Tom Lee | https://podscripts.co/podcasts/big-technology-podcast/is-ai-actually-saving-the-stock-market-with-tom-lee | 2025-06-25 | interview | 10192
+- S004 | Odd Lots: Why Tom Lee Thinks We Could See S&P 15,000 by 2030 | https://podscripts.co/podcasts/odd-lots/why-tom-lee-thinks-we-could-see-sp-15000-by-2030 | 2024-06-24 | interview | 8570
+- S005 | The Compound and Friends: Entering Year Two of the Bull Market with Tom Lee | https://podscripts.co/podcasts/the-compound-and-friends/entering-year-two-of-the-bull-market-with-tom-lee | 2023-10-20 | interview | 11882
+- S006 | The Compound and Friends: Tom Lee Strikes Back | https://podscripts.co/podcasts/the-compound-and-friends/tom-lee-strikes-back | 2024-09-27 | interview | 17167
+- S007 | The Compound and Friends: Tom Lee to the Rescue | https://podscripts.co/podcasts/the-compound-and-friends/tom-lee-to-the-rescue | 2025-03-07 | interview | 16476
+- S008 | The Compound and Friends: The Four Most Important Market Indicators with Tom Lee | https://podscripts.co/podcasts/the-compound-and-friends/the-four-most-important-market-indicators-with-josh-and-tom-lee | 2019-11-13 | interview | 3912
+- S009 | Bankless: The World's Largest ETH Holder, Tom Lee on Treasuries, Ethereum Dominance, and Wall Street | https://podscripts.co/podcasts/bankless/the-worlds-largest-eth-holder-tom-lee-on-treasuries-ethereum-dominance-and-wall-street | 2025-08-06 | interview | 10402
+- S010 | Prof G Markets: Tom Lee, The Correction Is Over | https://podscripts.co/podcasts/prof-g-markets/tom-lee-the-correction-is-over-stocks-are-about-to-surge | 2026-11-04 | interview | 7013
+- S011 | Prof G Markets: Tom Lee's Case for S&P 8,000 Has One Big Catch | https://podscripts.co/podcasts/prof-g-markets/tom-lees-case-for-sp-8000-has-one-big-catch | 2026-07-03 | interview | 9621
+- S012 | Prof G Markets: The Market's Biggest Risks and Opportunities in 2025 with Tom Lee | https://podscripts.co/podcasts/prof-g-markets/the-markets-biggest-risks-and-opportunities-in-2025-ft-tom-lee | 2024-12-12 | interview | 11031
+- S013 | Bankless: Tom Lee and Arthur Hayes, How Crypto Flips Wall Street (Token2049 debate) | https://podscripts.co/podcasts/bankless/tom-lee-arthur-hayes-how-crypto-flips-wall-street | 2025-10-13 | interview | 11413
+- S014 | Bankless: What's Next for Bitmine after 5% of ETH, Chairman Tom Lee | https://podscripts.co/podcasts/bankless/whats-next-for-bitmine-after-5-of-eth-chairman-tom-lee | 2026-08-24 | interview | 10446
+- S015 | BitMine Chairman's Message (October 2026): The Crypto Bull Market Is Underway | https://www.bitminetech.io/chairmans-message | 2026-10-07 | speech | 3462
+- S016 | The Pomp Podcast: Why Bitcoin's Rally Is Just Getting Started with Tom Lee | https://exa.ai/library/podcast/xkpx1gl453n/episode/mn1qnpfd9jh | 2025-10-23 | interview (fetch tool) | 11116
+- S017 | On the Brink with Castle Island: Tom Lee of Fundstrat | https://exa.ai/library/podcast/cq3hkc7vn25/episode/yw47gjjqrhm | 2019-10-30 | interview (fetch tool) | 9628
+- S018 | The Master Investor Podcast: Tom Lee, A New 10 Year Bull Market Has Begun | https://exa.ai/library/podcast/m5gv3637mkk/episode/qnj0kpsygrc | 2025-08-28 | interview (fetch tool) | 5821
+- S019 | Coin Stories: Tom Lee on Bullish Macro Outlook, Optimal Bitcoin Allocation, and S&P to 15,000 | https://exa.ai/library/podcast/v9ktjsrz3j6/episode/ps762cymsjp | 2024-07-22 | interview (fetch tool) | 6851
+- S020 | The Scoop: Tom Lee on why boomers are buying gold while millennials are trading bitcoin | https://exa.ai/library/podcast/ntb4bqs14mr/episode/ntk9j1btrzm | 2020-08-06 | interview (fetch tool) | 7011
+- S021 | Bankless: What's Next for Markets, Macro Expert Tom Lee | https://rosetta.to/u/bankless/what-s-next-for-markets-macro-expert-tom-lee | 2024-08-07 | interview | 8812

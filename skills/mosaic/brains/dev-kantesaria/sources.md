@@ -2,6 +2,8 @@
 
 8 sources (5 transcript, 2 interview, 1 interview (fetch tool)), 58,339 words. Every quote in this brain carries one of these ids.
 
+Depth: quick. Built from 8 free sources, 58,339 words, dated July 2019 to December 2024: 5 podcast and interview transcripts (46,074 words), 2 written interviews (6,642 words) and 1 podcast transcript taken through a fetch tool copy (S021, 5,623 words). Thin-source limits: Valley Forge's letters are not public, so there are no letters here, and no book by him exists to quote; any idea that circulates only in copyrighted books or paid newsletters is left out. S018 and S019 are unlabeled machine transcripts, so only lines clearly in his voice are used; S020 garbles some names (FICO appears as Flaco), and quotes copy the source as written; S006 is a reporter's write-up, so its unquoted points are paraphrase of the reporting. His fullest answer on selling in S007 sits behind a paywall and is not captured. Ids S002 to S005 and S009 to S017 were not kept and are absent. Nothing here covers events after December 2024, including the 2025 FHFA VantageScore decision. The transcripts are hosted by third parties and the right to reuse them is not confirmed, so quotes stay short and each carries its source id.
+
 Format: id | title | url | date | kind | words
 
 - S001 | ValueTalks interview with Dev Kantesaria | https://hedgefundalpha.com/profiles/interview-with-dev-kantesaria-valley-forge-capital-management/ | 2019-09-01 | transcript | 938

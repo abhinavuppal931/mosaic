@@ -136,7 +136,7 @@ Built from the Scion Value Fund and Scion Capital letters and memos (2000 to 200
 
 - **What it is:** he expects to be early and builds that in. The value case can be firm while the date is unknown, so the structure of the bet must survive the wait.
 - **Parts:** (1) separate the value call from the timing call; (2) use a clock where one exists (mortgage resets: "maximum stress during the latter half of 2007", S025); (3) where no clock exists, use long tenor (two-year puts, S005) or skip the bet; (4) expect no payoff in year one and maybe not year two (S025); (5) never bet on a specific date for a debt crisis.
-- **When to use it:** on any bear case. The question is not only "is it overvalued" but "can the position survive being right two years early".
+- **When to use it:** on any bear case. The question is not only whether it is overvalued but whether the position can survive being right two years early.
 - **Scoring guidance:** 10 = a dated trigger and a position that can be held through it. 5 = no trigger but limited carry. 0 = the bear case needs a fall soon and the position bleeds while waiting.
 - **Quote:** "While I am not certain of the time frame, I am very certain of the value." (S022) In 2025: "In most situations like this, there's no good way to time it. And shorting it is just a high-risk endeavor." (S005)
 - **Sources:** 6 (S001, S003, S005, S022, S025, S039).
