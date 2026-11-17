@@ -136,6 +136,24 @@ Faces: illustrated premium 3D-style likenesses, one style bible, generated local
 - Smoke: run a full council on one example ticker end to end in Claude Code, check-citations passes, the Room plays it, PDF and share card export.
 - Visual: Playwright screenshots of every Room screen at 1440 and 390 widths in both states (live and finished), compared with the approved mockup.
 
-## 11. Attribution
+## 11. Repo layout and ownership (parallel builders must not collide)
+
+```
+.claude-plugin/plugin.json, marketplace.json   core session (ABH-328)
+skills/mosaic/SKILL.md, references/            core session
+skills/mosaic/roster.json                      brains session (ABH-329) owns; core reads it, tests use a fixture
+skills/mosaic/brains/<slug>/                   brains session
+skills/newseat/                                brains session
+agents/seat-<key>.md                           brains session
+data/ (providers/, router.mjs, packs/, cli.mjs) core session
+scripts/check-citations.mjs                    core session
+tests/                                         each session its own subfolder
+room/                                          Room session (ABH-331), after the design is approved
+sessions/example-*/                            core session writes the formats; Room session finishes the examples
+```
+
+Session file formats (`council.json`, `round-N.md`, `cruxes.json`, `draft.json`, `verdict.json`, `data-pack.json`, `journal/<TICKER>.json`) are defined by the core session in `skills/mosaic/references/live-room.md` and are the contract the Room reads. Verify the plugin manifest and agent naming against the current Claude Code plugin docs; if plugin agents are namespaced, the protocol must spawn them by their namespaced names.
+
+## 12. Attribution
 
 Adapted from nateherkai/roast-room (MIT, AI Automation Society): keep its license notice for adapted files. Ideas from virattt/ai-hedge-fund (MIT). Mosaic is MIT.
