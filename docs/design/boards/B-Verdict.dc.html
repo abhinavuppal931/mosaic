@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosaic B, The Ledger, verdict</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Switzer;src:url(/_blob/a645f6963e7be6bfb024c053ee9427c9) format("woff2");font-weight:400}
+@font-face{font-family:Switzer;src:url(/_blob/acb4b43caab20e8afde76ac2b8e09526) format("woff2");font-weight:500}
+@font-face{font-family:Switzer;src:url(/_blob/7c6c1f7521c97fd99b1a8cb8e4602335) format("woff2");font-weight:600}
+body{margin:0;background:#0B0B0A}
+a{color:#F2F0EC}a:hover{color:#FFFFFF}
+</style>
+</helmet>
+<div style="min-height: 1300px; background: #0B0B0A; color: #F2F0EC; font-family: Switzer, system-ui, sans-serif;">
+  <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 16px 32px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+      <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(2, 9px); gap: 2px;">
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #FF7A38;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #3A3733;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #6C6660;"></span>
+        <span style="width: 9px; height: 9px; border-radius: 2px; background: #A3C4AA;"></span>
+      </span>
+      <span style="font-weight: 600; font-size: 16px;">Mosaic</span>
+      <span style="font-size: 13px; color: #8C8781;">Councils / Buy NVDA at $182? / Verdict</span>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button type="button" style="font: 500 13px Switzer, sans-serif; color: #F2F0EC; background: #1A1918; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 8px 13px; cursor: pointer;">Replay debate</button>
+      <button type="button" style="font: 500 13px Switzer, sans-serif; color: #F2F0EC; background: #1A1918; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 8px 13px; cursor: pointer;">Share card</button>
+      <button type="button" style="font: 600 13px Switzer, sans-serif; color: #0B0B0A; background: #F2F0EC; border: 0; border-radius: 10px; padding: 8px 13px; cursor: pointer;">Export PDF</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1240px; margin: 0 auto; padding: 32px 28px 56px; display: flex; flex-direction: column; gap: 20px;">
+    <section style="display: flex; flex-wrap: wrap; gap: 20px;">
+      <div style="flex: 999 1 560px; min-width: 0; background: #121211; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 26px 28px; display: flex; flex-direction: column; gap: 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);">
+        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+          <span style="font-size: 13px; font-weight: 600; color: #0B0B0A; background: #E8C88F; border-radius: 7px; padding: 4px 10px;">Proceed with conditions</span>
+          <span style="font-size: 13px; color: #8C8781;">Recommended option B, decided 17 Nov 2026</span>
+        </div>
+        <h1 style="margin: 0; font-size: 34px; line-height: 1.15; font-weight: 600; letter-spacing: -0.02em; max-width: 720px;">Start a small position now. Add only if data center growth stays above 40% through two more quarters.</h1>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #B3AEA7; max-width: 680px;">A close call: B edges C, 6.3 to 6.1. The council agrees on the business and splits on the price, four seats preferring to wait and three backing a starter. Damodaran's valuation weight tipped it. A starter keeps you in the trade while the evidence catches up with the multiple.</p>
+      </div>
+      <div style="flex: 1 1 320px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;">
+        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="4">
+          <div style="background: #121211; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <span style="font-size: 12px; color: #8C8781;">{{k.label}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 28px; letter-spacing: -0.03em; font-variant-numeric: tabular-nums;">{{k.value}}</span>
+            <span style="height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); overflow: hidden;"><span style="{{k.bar}}"></span></span>
+            <span style="font-size: 12px; color: #B3AEA7;">{{k.note}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="background: #121211; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600;">Final scorecard</h2>
+        <span style="font-size: 12px; color: #8C8781;">Round 3 scores, weighted. Abstentions excluded. Each seat also scores the recommended option on its own lens.</span>
+      </div>
+      <div style="overflow-x: auto;">
+        <div style="min-width: 760px; display: grid; grid-template-columns: 2.2fr 0.6fr repeat(4, minmax(0, 1fr)) 2fr 1.1fr; gap: 0; font-variant-numeric: tabular-nums;">
+          <span style="font-size: 12px; color: #8C8781; padding: 8px 0;">Seat</span>
+          <span style="font-size: 12px; color: #8C8781; padding: 8px 0; text-align: center;">Weight</span>
+          <span style="font-size: 12px; color: #8C8781; padding: 8px 0; text-align: center;">A Full</span>
+          <span style="font-size: 12px; color: #F2F0EC; padding: 8px 0; text-align: center;">B Starter</span>
+          <span style="font-size: 12px; color: #8C8781; padding: 8px 0; text-align: center;">C Wait</span>
+          <span style="font-size: 12px; color: #8C8781; padding: 8px 0; text-align: center;">D Pass</span>
+          <span style="font-size: 12px; color: #8C8781; padding: 8px 0 8px 16px;">Lens score on B</span>
+          <span style="font-size: 12px; color: #8C8781; padding: 8px 0;">Vote</span>
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+            <span style="display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid rgba(255,255,255,0.05);"><img src="{{r.img}}" alt="" style="width: 26px; height: 26px; border-radius: 8px; object-fit: cover;"><span style="font-size: 13px;">{{r.name}}</span></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: center; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.05); color: #8C8781;">{{r.w}}</span>
+            <span style="{{r.a.s}}">{{r.a.v}}</span><span style="{{r.b.s}}">{{r.b.v}}</span><span style="{{r.c.s}}">{{r.c.v}}</span><span style="{{r.d.s}}">{{r.d.v}}</span>
+            <span style="display: flex; align-items: center; gap: 10px; padding: 9px 0 9px 16px; border-top: 1px solid rgba(255,255,255,0.05);"><span style="font-size: 12px; color: #B3AEA7; width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{r.dim}}</span><span style="flex: 1; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.06); overflow: hidden;"><span style="{{r.lensBar}}"></span></span><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; width: 18px; text-align: right;">{{r.lens}}</span></span>
+            <span style="padding: 9px 0; border-top: 1px solid rgba(255,255,255,0.05);"><span style="{{r.voteStyle}}">{{r.vote}}</span></span>
+          </sc-for>
+          <span style="font-size: 13px; font-weight: 600; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12);">Council</span>
+          <span style="border-top: 1px solid rgba(255,255,255,0.12);"></span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: center; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); color: #B3AEA7;">3.7</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; text-align: center; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); color: #FF9A66; font-weight: 500;">6.3</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: center; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); color: #B3AEA7;">6.1</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: center; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); color: #B3AEA7;">3.8</span>
+          <span style="border-top: 1px solid rgba(255,255,255,0.12);"></span>
+          <span style="border-top: 1px solid rgba(255,255,255,0.12);"></span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px;">
+      <div style="background: #121211; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600;">Kill criteria, tracked in your journal</h2>
+        <div style="display: grid; grid-template-columns: 1.6fr 0.8fr 0.8fr 0.6fr; gap: 0; font-size: 13px;">
+          <span style="color: #8C8781; font-size: 12px; padding: 6px 0;">Metric</span><span style="color: #8C8781; font-size: 12px; padding: 6px 0;">Breaks at</span><span style="color: #8C8781; font-size: 12px; padding: 6px 0;">Now</span><span style="color: #8C8781; font-size: 12px; padding: 6px 0;">Fact</span>
+          <sc-for list="{{kills}}" as="k" hint-placeholder-count="3">
+            <span style="padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.05);">{{k.m}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.05); color: #D9A396;">{{k.at}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.05);">{{k.now}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.05); color: #8C8781;">{{k.f}}</span>
+          </sc-for>
+        </div>
+        <span style="font-size: 13px; color: #B3AEA7; background: #0D0D0C; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 10px 12px;">Next recheck after Q4 earnings, late February 2027: <code style="font-family: 'JetBrains Mono', monospace; color: #F2F0EC;">/mosaic recheck NVDA</code></span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="background: #121211; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 600;">Minority report</h2>
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <img src="{{burry}}" alt="Michael Burry, simulated seat" style="width: 40px; height: 40px; border-radius: 10px; object-fit: cover; flex-shrink: 0;">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <span style="font-size: 15px; line-height: 1.55;">"The crowd is paying for a capex cycle as if it were an annuity."</span>
+              <span style="font-size: 13px; color: #B3AEA7;">Would have to be true for B to fail: hyperscaler capex falls in 2027.</span>
+            </div>
+          </div>
+        </div>
+        <div style="background: #121211; border: 1px solid rgba(255,255,255,0.06); border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 600;">Pre-mortem</h2>
+          <span style="font-size: 14px; color: #B3AEA7; line-height: 1.5;">Capex pause pulls orders forward and revenue misses two quarters running.</span>
+          <span style="font-size: 14px; color: #B3AEA7; line-height: 1.5;">Custom silicon takes inference share and gross margin slips under 70%.</span>
+          <span style="font-size: 14px; color: #B3AEA7; line-height: 1.5;">Export rules widen and a top-four customer cuts orders.</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Data health" style="display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 12px; color: #8C8781; padding: 4px 4px 0;">
+      <span>SEC EDGAR, 10-Q filed 27 Aug 2026</span><span>Prices best effort, 17 Nov close</span><span>Treasury, BLS</span><span style="color: #B97A6C;">Estimates and news missing</span>
+      <span style="flex: 1;"></span>
+      <span>Seats are simulations built from public work, not endorsements. Not investment advice.</span>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = { buffett: '/_blob/c1d510d50623727a52cf24e266cb2f7d', munger: '/_blob/cdef36e52d0654d07a372260906bc5a9', damodaran: '/_blob/dcd65421fd24e1e498a0b77279f7fa2f', marks: '/_blob/74b184f2496753cd8977f835545d9927', taleb: '/_blob/71978e7b22b129dcdf5140592dd3210a', druckenmiller: '/_blob/76a13c67ce697cc255b603777754ac63', burry: '/_blob/124646476f6ad834f8da7e4c7c4b7c38' };
+    const bar = (v, c) => `display:block;height:100%;width:${v * 10}%;background:${c};border-radius:2px;`;
+    const kpis = [
+      { label: 'Conviction', value: '6.3', note: 'Option B, out of 10', bar: bar(6.3, '#FF7A38') },
+      { label: 'Evidence', value: '8.4', note: '39 of 41 facts present', bar: bar(8.4, '#A3C4AA') },
+      { label: 'Spread', value: '4', note: 'Burry 4, Druckenmiller 8', bar: bar(4, '#6C6660') },
+      { label: 'Lean pull', value: '+0.3', note: 'toward your lean after reveal', bar: bar(0.6, '#E8C88F') }
+    ];
+    const cell = (v, hi) => ({ v: String(v), s: `font-family:JetBrains Mono,monospace;font-size:13px;text-align:center;padding:12px 0;border-top:1px solid rgba(255,255,255,0.05);color:${v >= 7 ? '#F2F0EC' : v <= 3 ? '#77726C' : '#C9C4BD'};background:${hi ? (v >= 7 ? 'rgba(255,122,56,0.22)' : v >= 5 ? 'rgba(255,122,56,0.10)' : 'rgba(255,122,56,0.03)') : (v >= 7 ? 'rgba(255,255,255,0.06)' : 'transparent')};` });
+    const vote = (v) => `font-size:12px;font-weight:500;border-radius:7px;padding:4px 9px;${v === 'Endorse' ? 'color:#A3C4AA;background:rgba(163,196,170,0.10);' : v === 'Dissent' ? 'color:#D9A396;background:rgba(185,122,108,0.14);' : 'color:#E8C88F;background:rgba(232,200,143,0.10);'}`;
+    const rows = [
+      ['buffett','Warren Buffett',2,[4,6,7,3],'Moat and owner economics',8,'Endorse'],
+      ['munger','Charlie Munger',2,[3,6,7,4],'Folly check',6,'Endorse'],
+      ['damodaran','Aswath Damodaran',3,[4,7,5,3],'Value vs price',6,'Endorse'],
+      ['marks','Howard Marks',2,[3,6,7,4],'Risk and cycle',5,'Amend'],
+      ['taleb','Nassim Taleb',2,[2,7,6,5],'Ruin and convexity',7,'Endorse'],
+      ['druckenmiller','Stanley Druckenmiller',2,[8,8,4,2],'Macro and timing',8,'Amend'],
+      ['burry','Michael Burry',2,[2,4,7,6],'Bear case',3,'Dissent']
+    ].map(([k, name, w, sc, dim, lens, v]) => ({
+      img: P[k], name, w: String(w), a: cell(sc[0]), b: cell(sc[1], true), c: cell(sc[2]), d: cell(sc[3]),
+      dim, lens: String(lens), lensBar: bar(lens, lens <= 4 ? '#B97A6C' : '#8C8781'), vote: v, voteStyle: vote(v)
+    }));
+    const kills = [
+      { m: 'Gross margin, two quarters', at: '< 70%', now: '73.1%', f: 'F009' },
+      { m: 'Data center growth YoY', at: '< 40%', now: '+56%', f: 'F014' },
+      { m: 'Top-4 customer share', at: '> 55%', now: '46%', f: 'F021' }
+    ];
+    return { kpis, rows, kills, burry: P.burry };
+  }
+}
+</script>
+</body>
+</html>

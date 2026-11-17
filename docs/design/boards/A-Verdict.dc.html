@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosaic A, The Table, verdict</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:wght@500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Switzer;src:url(/_blob/a645f6963e7be6bfb024c053ee9427c9) format("woff2");font-weight:400}
+@font-face{font-family:Switzer;src:url(/_blob/acb4b43caab20e8afde76ac2b8e09526) format("woff2");font-weight:500}
+@font-face{font-family:Switzer;src:url(/_blob/7c6c1f7521c97fd99b1a8cb8e4602335) format("woff2");font-weight:600}
+body{margin:0;background:#080706}
+a{color:#FF7A38}a:hover{color:#FFA070}
+</style>
+</helmet>
+<div style="min-height: 1500px; background: radial-gradient(90% 40% at 50% 0%, rgba(255,122,56,0.09) 0%, rgba(255,122,56,0) 60%), #080706; color: #F5F2EC; font-family: Switzer, system-ui, sans-serif;">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 20px 40px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div style="display: flex; align-items: center; gap: 20px; min-width: 0;">
+      <span style="font-family: 'Brygada 1918', serif; font-weight: 700; font-size: 22px;">Mosaic</span>
+      <span style="width: 1px; height: 18px; background: rgba(255,255,255,0.10);"></span>
+      <span style="font-size: 14px; color: #B5AEA4;">Buy NVIDIA at $182 for a three-year hold?</span>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button type="button" style="font: 500 13px Switzer, sans-serif; color: #F5F2EC; background: #171513; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 9px 14px; cursor: pointer;">Save to journal</button>
+      <button type="button" style="font: 500 13px Switzer, sans-serif; color: #F5F2EC; background: #171513; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 9px 14px; cursor: pointer;">Share card</button>
+      <button type="button" style="font: 600 13px Switzer, sans-serif; color: #140A04; background: #FF7A38; border: 0; border-radius: 10px; padding: 9px 14px; cursor: pointer;">Download PDF</button>
+    </div>
+  </header>
+
+  <main style="max-width: 1160px; margin: 0 auto; padding: 56px 24px 64px; display: flex; flex-direction: column; gap: 40px;">
+
+    <section style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-end; justify-content: space-between;">
+      <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px;">
+        <span style="font-size: 13px; color: #8A837A;">The council's verdict, Tuesday 17 November 2026, full council of seven</span>
+        <h1 style="margin: 0; font-family: 'Brygada 1918', serif; font-weight: 700; font-size: 64px; line-height: 1.02; letter-spacing: -0.02em;">Proceed with conditions.</h1>
+        <p style="margin: 0; font-family: 'Brygada 1918', serif; font-size: 22px; line-height: 1.45; color: #D9D3CA; max-width: 680px;">Take option B: a starter position now, and add only if data center growth holds above 40% for the next two quarters. The business earned the seat. The price has not earned a full one.</p>
+      </div>
+      <div style="flex: 1 1 300px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; overflow: hidden;">
+        <sc-for list="{{stats}}" as="st" hint-placeholder-count="4">
+          <div style="background: #0F0E0C; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px;">
+            <span style="font-size: 12px; color: #8A837A;">{{st.label}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 24px; font-variant-numeric: tabular-nums; letter-spacing: -0.02em;">{{st.value}}</span>
+            <span style="font-size: 12px; color: #B5AEA4;">{{st.note}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-label="Votes" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+      <sc-for list="{{votes}}" as="v" hint-placeholder-count="7">
+        <div style="background: #11100E; border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;">
+          <img src="{{v.img}}" alt="{{v.name}}, simulated seat" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 2px rgba(255,255,255,0.08);">
+          <span style="font-size: 13px; font-weight: 500;">{{v.name}}</span>
+          <span style="{{v.voteStyle}}">{{v.vote}}</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8A837A;">{{v.final}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+      <div style="background: #11100E; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px;">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600;">Option scores</h2>
+        <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="display: flex; justify-content: space-between; gap: 12px;">
+              <span style="{{o.labelStyle}}">{{o.label}}</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-variant-numeric: tabular-nums;">{{o.score}}</span>
+            </div>
+            <span style="height: 6px; border-radius: 3px; background: rgba(255,255,255,0.05); overflow: hidden;"><span style="{{o.bar}}"></span></span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #6F6A63;">{{o.math}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 24px;">
+        <div style="background: #11100E; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 14px;">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 600;">What carried the room</h2>
+          <sc-for list="{{why}}" as="w" hint-placeholder-count="3">
+            <div style="display: flex; gap: 12px; align-items: flex-start;">
+              <img src="{{w.img}}" alt="" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+              <div style="display: flex; flex-direction: column; gap: 3px;">
+                <span style="font-size: 14px; line-height: 1.5;">{{w.point}}</span>
+                <span style="font-size: 12px; color: #8A837A;">{{w.who}}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="background: linear-gradient(180deg, rgba(185,122,108,0.10), rgba(185,122,108,0.02)); border: 1px solid rgba(185,122,108,0.25); border-radius: 16px; padding: 22px 24px; display: flex; flex-direction: column; gap: 12px;">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 600;">The dissent, kept</h2>
+          <p style="margin: 0; font-family: 'Brygada 1918', serif; font-size: 19px; line-height: 1.45;">"The crowd is paying for a capex cycle as if it were an annuity."</p>
+          <span style="font-size: 13px; color: #B5AEA4;">Michael Burry seat. Would have to be true: hyperscaler capex keeps rising through 2028.</span>
+        </div>
+      </div>
+    </section>
+
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+      <div style="border-top: 1px solid rgba(255,255,255,0.10); padding-top: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600;">Pre-mortem: how this fails by 2027</h2>
+        <span style="font-size: 14px; line-height: 1.55; color: #B5AEA4;">Hyperscaler capex pauses for two quarters and orders are pulled forward.</span>
+        <span style="font-size: 14px; line-height: 1.55; color: #B5AEA4;">Custom silicon takes inference share and gross margin falls below 70%.</span>
+        <span style="font-size: 14px; line-height: 1.55; color: #B5AEA4;">Export rules widen and a top-four customer cuts orders.</span>
+      </div>
+      <div style="border-top: 1px solid rgba(255,255,255,0.10); padding-top: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600;">I'm wrong if</h2>
+        <span style="font-size: 14px; line-height: 1.55; color: #B5AEA4;">Gross margin below 70% two quarters running <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #FF9A66;">F009</span></span>
+        <span style="font-size: 14px; line-height: 1.55; color: #B5AEA4;">Data center growth under 40% year over year <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #FF9A66;">F014</span></span>
+        <span style="font-size: 14px; line-height: 1.55; color: #B5AEA4;">Top-four customer share above 55% <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #FF9A66;">F021</span></span>
+      </div>
+      <div style="border-top: 1px solid rgba(255,122,56,0.45); padding-top: 16px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600;">Next check</h2>
+        <span style="font-family: 'Brygada 1918', serif; font-size: 26px;">After Q4 earnings</span>
+        <span style="font-size: 14px; line-height: 1.55; color: #B5AEA4;">Late February 2027. Run /mosaic recheck NVDA and the council starts from what changed.</span>
+      </div>
+    </section>
+
+    <section aria-label="Data health" style="display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; padding: 14px 18px; background: #0D0C0A; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; font-size: 13px; color: #B5AEA4;">
+      <span style="color: #F5F2EC; font-weight: 500;">Evidence</span>
+      <span>SEC EDGAR fundamentals, as of 10-Q filed 27 Aug 2026</span>
+      <span>Prices, best effort, as of 17 Nov close</span>
+      <span>Treasury and BLS macro</span>
+      <span style="color: #B97A6C;">News and estimates missing (no key)</span>
+    </section>
+  </main>
+
+  <footer style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 14px 40px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: #8A837A;">
+    <span>Seats are simulations built from public work. Not affiliated with or endorsed by the people they depict.</span>
+    <span>Grades a decision process. Not investment advice.</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const P = { buffett: '/_blob/c1d510d50623727a52cf24e266cb2f7d', munger: '/_blob/cdef36e52d0654d07a372260906bc5a9', damodaran: '/_blob/dcd65421fd24e1e498a0b77279f7fa2f', marks: '/_blob/74b184f2496753cd8977f835545d9927', taleb: '/_blob/71978e7b22b129dcdf5140592dd3210a', druckenmiller: '/_blob/76a13c67ce697cc255b603777754ac63', burry: '/_blob/124646476f6ad834f8da7e4c7c4b7c38' };
+    const stats = [
+      { label: 'Conviction', value: '6.3', note: 'Option B, out of 10' },
+      { label: 'Evidence', value: '8.4', note: '41 facts, 2 missing' },
+      { label: 'Spread', value: '4', note: 'Burry 4 to Druckenmiller 8' },
+      { label: 'Lean pull', value: '+0.3', note: 'toward your lean, A' }
+    ];
+    const v = [
+      ['buffett','Buffett','Endorse','6'],['munger','Munger','Endorse','6'],['damodaran','Damodaran','Endorse','7'],
+      ['marks','Marks','Amend','6'],['taleb','Taleb','Endorse','7'],['druckenmiller','Druckenmiller','Amend','8'],['burry','Burry','Dissent','4']
+    ];
+    const votes = v.map(([k, name, vote, f]) => ({
+      img: P[k], name, vote, final: `B scored ${f}/10`,
+      voteStyle: `font-size:12px;font-weight:500;border-radius:6px;padding:3px 8px;${vote === 'Endorse' ? 'color:#A3C4AA;background:rgba(163,196,170,0.10);' : vote === 'Dissent' ? 'color:#D9A396;background:rgba(185,122,108,0.14);' : 'color:#E8C88F;background:rgba(232,200,143,0.10);'}`
+    }));
+    const opts = [
+      ['B  Starter now, add on proof', 6.3, '(2x6 + 2x6 + 3x7 + 2x6 + 2x7 + 2x8 + 2x4) / 15'],
+      ['C  Wait for a pullback to $150', 6.1, '(2x7 + 2x7 + 3x5 + 2x7 + 2x6 + 2x4 + 2x7) / 15'],
+      ['A  Full position now', 3.7, '(2x4 + 2x3 + 3x4 + 2x3 + 2x2 + 2x8 + 2x2) / 15'],
+      ['D  Pass', 3.8, '(2x3 + 2x4 + 3x3 + 2x4 + 2x5 + 2x2 + 2x6) / 15']
+    ].map(([label, s, math], i) => ({
+      label, math, score: s.toFixed(1),
+      labelStyle: `font-size:14px;${i === 0 ? 'color:#F5F2EC;font-weight:600;' : 'color:#B5AEA4;'}`,
+      bar: `display:block;height:100%;width:${s * 10}%;border-radius:3px;background:${i === 0 ? '#FF7A38' : '#4A4540'};`
+    }));
+    const why = [
+      { img: P.damodaran, point: 'At $182 the price assumes 24% growth for five years. Achievable, but it leaves no margin of safety for a full position.', who: 'Damodaran seat, reverse DCF on F033' },
+      { img: P.buffett, point: 'A wonderful business you can explain in one line, with returns on capital above 70%.', who: 'Buffett seat, owner economics on F011' },
+      { img: P.taleb, point: 'Sizing is the hedge. A starter you can lose without flinching keeps you in the game if the cycle turns.', who: 'Taleb seat, ruin check' }
+    ];
+    return { stats, votes, opts, why };
+  }
+}
+</script>
+</body>
+</html>

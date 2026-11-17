@@ -1,0 +1,30 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-11-17T12:10:00Z" },
+  "title": "Mosaic Room: three directions",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 1440, "h": 1000, "title": "A. The Table: live council", "expand": "fill" },
+    "A-Verdict.dc.html": { "x": 1520, "y": 0, "w": 1440, "h": 1500, "title": "A. The Table: verdict", "expand": "fill" },
+    "B-Live.dc.html": { "x": 0, "y": 1900, "w": 1440, "h": 1000, "title": "B. The Ledger: live council", "expand": "fill" },
+    "B-Verdict.dc.html": { "x": 1520, "y": 1900, "w": 1440, "h": 1300, "title": "B. The Ledger: verdict", "expand": "fill" },
+    "C-Live.dc.html": { "x": 0, "y": 3800, "w": 1440, "h": 1000, "title": "C. The Mosaic: live council", "expand": "fill" },
+    "C-Verdict.dc.html": { "x": 1520, "y": 3800, "w": 1440, "h": 1120, "title": "C. The Mosaic: verdict and share card", "expand": "fill" },
+    "A2-Live.dc.html": { "x": 0, "y": 5500, "w": 1440, "h": 1180, "title": "A v2. The Table: live council", "expand": "fill" },
+    "A2-Verdict.dc.html": { "x": 1520, "y": 5500, "w": 1440, "h": 2320, "title": "A v2. The Table: verdict", "expand": "fill" },
+    "A3-Live.dc.html": { "x": 0, "y": 8200, "w": 1440, "h": 1180, "title": "A v3. The Table: live council", "expand": "fill" },
+    "A3-Verdict.dc.html": { "x": 1520, "y": 8200, "w": 1440, "h": 2400, "title": "A v3. The Table: verdict", "expand": "fill" }
+  },
+  "order": ["A3-Live.dc.html", "A3-Verdict.dc.html", "A2-Live.dc.html", "A2-Verdict.dc.html", "Main.dc.html", "A-Verdict.dc.html", "B-Live.dc.html", "B-Verdict.dc.html", "C-Live.dc.html", "C-Verdict.dc.html"],
+  "notes": {
+    "rowA": { "x": 0, "y": -280, "text": "A. The Table: cinematic, the council seated around one table", "kind": "title1", "maxW": 2960 },
+    "rowB": { "x": 0, "y": 1620, "text": "B. The Ledger: an analyst's instrument, transcript plus live tally", "kind": "title1", "maxW": 2960 },
+    "rowA2": { "x": 0, "y": 5220, "text": "A v2. The Table, rebuilt from your notes and the review panel: 3D chamber, seats-by-option grid, clean scorecard", "kind": "title1", "maxW": 2960 },
+    "rowA3": { "x": 0, "y": 7920, "text": "A v3. Approved direction: white actions, sans headlines, visual stats, plain-English copy", "kind": "title1", "maxW": 2960 },
+    "rowC": { "x": 0, "y": 3520, "text": "C. The Mosaic: every seat a tile, the verdict assembles as votes land", "kind": "title1", "maxW": 2960 }
+  },
+  "designSystems": [
+    { "title": "Abs Design System", "namespace": "absdesignsystem_eb017c", "artifact": "https://claude.ai/artifact/4cvMtnTyyV7pufbgSyauxZ", "version": "1794914806-403d", "copiedAt": "2026-11-17T12:10:00Z" }
+  ]
+}
