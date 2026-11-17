@@ -72,7 +72,7 @@ test('no em or en dashes in brains, agents, roster or the newseat skill', () => 
   const files = [ROSTER, ...mdFiles(path.join(ROOT, 'agents'))];
   for (const s of roster.seats) files.push(...mdFiles(path.join(BRAINS, s.slug)));
   for (const dir of ['skills/newseat', 'skills/newseat/references']) files.push(...mdFiles(path.join(ROOT, dir)));
-  for (const f of files) assert.ok(!/[–—]/.test(read(f)), `${path.relative(ROOT, f)} has an em or en dash`);
+  for (const f of files) assert.ok(!/[\u2013\u2014]/.test(read(f)), `${path.relative(ROOT, f)} has an em or en dash`);
 });
 
 test('every quoted source id exists in that brain', () => {
