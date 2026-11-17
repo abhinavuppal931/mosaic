@@ -7,3 +7,6 @@ sessions/*
 !sessions/.gitkeep
 !sessions/example-*/
 
+journal/*
+!journal/.gitkeep
+mosaic.config.local.json

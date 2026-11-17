@@ -1,0 +1,10 @@
+{
+  "$comment": "Thesis journal settings. A change is material when it moves by the absolute threshold for its unit, or by the relative threshold while also moving at least relativeFloorShare of the absolute threshold (so a yield that doubles from 1.5% to 3% counts, and noise near zero does not). Units without an absolute threshold use the relative one alone. ratio units are fractions (0.02 = 2 points); percent units are already in percent.",
+  "material": {
+    "relative": 0.1,
+    "relativeFloorShare": 0.25,
+    "absolute": { "ratio": 0.02, "percent": 0.25, "percentage points": 0.25, "x": 2.0 }
+  },
+  "recheckFallbackDaysAfterReport": 2,
+  "recheckDefaultDays": 90
+}

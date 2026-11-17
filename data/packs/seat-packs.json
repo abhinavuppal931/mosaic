@@ -1,0 +1,143 @@
+{
+  "$comment": "Per-seat evidence packs: which facts each seat leads with, and heuristic checks drawn from each investor's published rules (see docs/research/hedge-fund-and-data.md). Thresholds are heuristics for debate, not the investor's own numbers unless the brain cites them. Patterns ending in * match every fact key with that prefix. evidenceGrade maps the share of a seat's facts that are present to the best evidence grade the seat may claim.",
+  "evidenceGrade": { "strong": 0.85, "adequate": 0.6 },
+  "defaults": {
+    "macro": ["macro_*"],
+    "portfolio": ["weight_*", "holdings_count", "largest_weight", "top5_weight", "hhi", "effective_holdings", "largest_industry_weight", "avg_pairwise_correlation", "highly_correlated_pairs", "portfolio_max_drawdown_3y", "portfolio_volatility_3y", "loss_if_largest_halves", "loss_if_largest_zero", "risk_coverage"]
+  },
+  "seats": {
+    "buffett": {
+      "ticker": {
+        "metrics": ["roe", "roe_avg", "roe_min", "roic", "roic_avg", "operating_margin", "operating_margin_stdev", "gross_margin_stdev", "debt_to_equity", "interest_coverage", "fcf_conversion", "fcf_conversion_avg_5y", "owner_earnings", "owner_earnings_yield", "bvps_cagr", "diluted_shares_change_5y", "dcf_value_bear", "dcf_value_base", "dcf_value_bull", "price_to_dcf_base", "pe"],
+        "checks": [
+          { "metric": "roe_avg", "op": ">=", "value": 0.15, "label": "Average ROE of 15% or more across the record" },
+          { "metric": "roe_min", "op": ">=", "value": 0.1, "label": "No fiscal year with ROE below 10%" },
+          { "metric": "debt_to_equity", "op": "<", "value": 0.5, "label": "Debt below half of equity" },
+          { "metric": "operating_margin", "op": ">=", "value": 0.15, "label": "Operating margin of 15% or more" },
+          { "metric": "operating_margin_stdev", "op": "<", "value": 0.05, "label": "Steady operating margins (stdev under 5 points)" },
+          { "metric": "fcf_conversion_avg_5y", "op": ">=", "value": 0.8, "label": "Earnings turn into cash (FCF at least 80% of net income)" },
+          { "metric": "price_to_dcf_base", "op": "<", "value": 1.0, "label": "Price below the base-case DCF value" }
+        ]
+      }
+    },
+    "munger": {
+      "ticker": {
+        "metrics": ["roic", "roic_avg", "roe_avg", "gross_margin_trend", "operating_margin_trend", "debt_to_equity", "goodwill_to_assets", "sbc_to_revenue", "diluted_shares_change_5y", "accruals_ratio", "insider_net_value", "receivables_vs_revenue_growth", "pe", "implied_fcf_growth"],
+        "checks": [
+          { "metric": "gross_margin_trend", "op": ">=", "value": 0, "label": "Gross margin not eroding over the record" },
+          { "metric": "operating_margin_trend", "op": ">=", "value": 0, "label": "Operating margin not eroding over the record" },
+          { "metric": "goodwill_to_assets", "op": "<", "value": 0.3, "label": "Goodwill under 30% of assets (growth not bought)" },
+          { "metric": "sbc_to_revenue", "op": "<", "value": 0.05, "label": "Stock comp under 5% of revenue" },
+          { "metric": "diluted_shares_change_5y", "op": "<=", "value": 0.02, "label": "No meaningful dilution over five years" },
+          { "metric": "accruals_ratio", "op": "<", "value": 0.05, "label": "Earnings backed by cash (low accruals)" }
+        ]
+      }
+    },
+    "damodaran": {
+      "ticker": {
+        "metrics": ["implied_fcf_growth", "implied_fcf_growth_low_discount", "implied_fcf_growth_high_discount", "revenue_cagr_5y", "revenue_cagr_10y", "operating_margin", "operating_margin_trend", "sales_to_capital_5y", "roic", "dcf_value_bear", "dcf_value_base", "dcf_value_bull", "price_to_dcf_base", "ev_ebit", "ps", "pe", "forward_pe", "macro_ust_10y"],
+        "checks": [
+          { "metric": "implied_vs_history_gap", "op": "<=", "value": 0, "label": "Price implies no more growth than the company has delivered" },
+          { "metric": "price_to_dcf_base", "op": "<=", "value": 1.0, "label": "Price at or below the base-case value" }
+        ]
+      }
+    },
+    "marks": {
+      "ticker": {
+        "metrics": ["price_percentile_history", "pe_percentile_own_history", "pe_median_own_history", "pe", "current_drawdown", "return_1y", "implied_fcf_growth", "macro_hy_oas", "macro_curve_10y_2y", "macro_curve_10y_3m", "macro_policy_rate", "max_drawdown"],
+        "checks": [
+          { "metric": "pe_percentile_own_history", "op": "<=", "value": 0.5, "label": "P/E in the cheaper half of its own history" },
+          { "metric": "price_percentile_history", "op": "<", "value": 0.9, "label": "Price not at the top tenth of its own history" }
+        ]
+      }
+    },
+    "taleb": {
+      "ticker": {
+        "metrics": ["max_drawdown", "current_drawdown", "volatility_1y", "volatility_5y", "return_skew_5y", "return_excess_kurtosis_5y", "worst_day_5y", "net_debt_to_ebitda", "interest_coverage", "debt_to_equity", "current_ratio", "net_debt"],
+        "checks": [
+          { "metric": "net_debt_to_ebitda", "op": "<", "value": 2.0, "label": "Net debt under two years of EBITDA" },
+          { "metric": "interest_coverage", "op": ">=", "value": 8, "label": "EBIT covers interest at least eight times" },
+          { "metric": "max_drawdown", "op": ">", "value": -0.6, "label": "History shows no fall worse than 60%" },
+          { "metric": "return_excess_kurtosis_5y", "op": "<", "value": 10, "label": "Daily return tails not extreme (excess kurtosis under 10)" }
+        ]
+      }
+    },
+    "druckenmiller": {
+      "ticker": {
+        "metrics": ["macro_curve_10y_2y", "macro_curve_10y_3m", "macro_policy_rate", "macro_policy_rate_change_1y", "macro_ust_10y", "macro_ust_10y_change_1y", "macro_hy_oas", "price_vs_200d_average", "return_6m", "return_1y", "relative_strength_1y", "revenue_growth_yoy", "revenue_growth_acceleration", "eps_growth_yoy", "next_report_expected"],
+        "checks": [
+          { "metric": "price_vs_200d_average", "op": ">", "value": 0, "label": "Price above its 200-day average (trend intact)" },
+          { "metric": "revenue_growth_acceleration", "op": ">", "value": 0, "label": "Revenue growth accelerating" },
+          { "metric": "relative_strength_1y", "op": ">", "value": 0, "label": "Beating the market over 12 months" }
+        ]
+      }
+    },
+    "burry": {
+      "ticker": {
+        "metrics": ["fcf_yield", "fcf_yield_after_sbc", "ev_ebit", "net_debt", "accruals_ratio", "diluted_shares_change_5y", "sbc_to_revenue", "insider_net_value", "insider_open_market_buys", "short_interest", "receivables_vs_revenue_growth", "inventory_vs_revenue_growth", "price_percentile_history", "current_drawdown"],
+        "checks": [
+          { "metric": "fcf_yield", "op": ">=", "value": 0.08, "label": "FCF yield of 8% or more" },
+          { "metric": "ev_ebit", "op": "<", "value": 7, "label": "EV/EBIT under 7" },
+          { "metric": "accruals_ratio", "op": "<", "value": 0.05, "label": "Low accruals (no earnings quality red flag)" },
+          { "metric": "receivables_vs_revenue_growth", "op": "<", "value": 0.1, "label": "Receivables not outrunning revenue by 10 points" }
+        ]
+      }
+    },
+    "lynch": {
+      "ticker": {
+        "metrics": ["lynch_category", "eps_cagr_5y", "eps_growth_yoy", "revenue_growth_yoy", "pe", "peg", "debt_to_equity", "inventory_vs_revenue_growth", "insider_open_market_buys", "insider_net_value"],
+        "checks": [
+          { "metric": "peg", "op": "<", "value": 1.0, "label": "PEG under 1" },
+          { "metric": "peg", "op": "<", "value": 2.0, "label": "PEG under 2" },
+          { "metric": "inventory_vs_revenue_growth", "op": "<", "value": 0.05, "label": "Inventory not piling up faster than sales" }
+        ]
+      }
+    },
+    "ackman": {
+      "ticker": {
+        "metrics": ["fcf_yield", "ev_fcf", "roic", "operating_margin", "operating_margin_max", "net_debt_to_ebitda", "buyback_yield", "dividend_yield", "insider_net_value", "price_percentile_history", "current_drawdown"],
+        "checks": [
+          { "metric": "fcf_yield", "op": ">=", "value": 0.04, "label": "FCF yield of 4% or more" },
+          { "metric": "net_debt_to_ebitda", "op": "<", "value": 3.0, "label": "Net debt under three years of EBITDA" }
+        ]
+      }
+    },
+    "kantesaria": {
+      "ticker": {
+        "metrics": ["roic", "roic_avg", "gross_margin", "gross_margin_trend", "gross_margin_stdev", "capex_to_revenue", "rd_to_revenue", "fcf_margin", "fcf_yield_after_sbc", "sbc_to_revenue", "current_drawdown", "price_percentile_history"],
+        "checks": [
+          { "metric": "roic_avg", "op": ">=", "value": 0.2, "label": "Average ROIC of 20% or more" },
+          { "metric": "gross_margin_trend", "op": ">=", "value": 0, "label": "Gross margin holding or rising (pricing power)" },
+          { "metric": "capex_to_revenue", "op": "<", "value": 0.1, "label": "Capital light (capex under 10% of revenue)" },
+          { "metric": "rd_to_revenue", "op": "<", "value": 0.15, "label": "No heavy R&D dependence (under 15% of revenue)" }
+        ]
+      }
+    },
+    "sleep": {
+      "ticker": {
+        "metrics": ["revenue_cagr_10y", "revenue_cagr_5y", "gross_margin_trend", "operating_margin_trend", "capex_to_revenue", "rd_to_revenue", "roic_avg", "diluted_shares_change_5y", "fiscal_years_available"],
+        "checks": [
+          { "metric": "revenue_cagr_10y", "op": ">=", "value": 0.1, "label": "Revenue compounding at 10% or more over the record" },
+          { "metric": "diluted_shares_change_5y", "op": "<=", "value": 0.02, "label": "Owners not diluted" }
+        ]
+      }
+    },
+    "mauboussin": {
+      "ticker": {
+        "metrics": ["implied_fcf_growth", "implied_fcf_growth_low_discount", "implied_fcf_growth_high_discount", "implied_vs_history_gap", "revenue_cagr_5y", "revenue_cagr_10y", "fcf_cagr_5y", "roic", "roic_avg", "volatility_1y", "max_drawdown"],
+        "checks": [
+          { "metric": "implied_vs_history_gap", "op": "<=", "value": 0, "label": "Expectations in the price at or below the company's own record" }
+        ]
+      }
+    },
+    "tomlee": {
+      "ticker": {
+        "metrics": ["return_1y", "return_6m", "relative_strength_1y", "price_vs_200d_average", "revenue_growth_yoy", "revenue_growth_acceleration", "macro_policy_rate", "macro_curve_10y_2y"],
+        "checks": [
+          { "metric": "relative_strength_1y", "op": ">", "value": 0, "label": "Leading the market over 12 months" },
+          { "metric": "revenue_growth_acceleration", "op": ">", "value": 0, "label": "Growth accelerating" }
+        ]
+      }
+    }
+  }
+}

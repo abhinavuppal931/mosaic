@@ -1,0 +1,14 @@
+{
+  "$comment": "Canonical macro series. Each provider maps the canonical id to its own series id. A provider that has no mapping is skipped for that series. transform: 'yoy' turns an index level into a year-over-year percent change after fetching.",
+  "ust_3m": { "label": "3-month Treasury yield", "units": "percent", "frequency": "daily", "providers": { "fred": "DGS3MO", "treasury": "3 Mo" } },
+  "ust_2y": { "label": "2-year Treasury yield", "units": "percent", "frequency": "daily", "providers": { "fred": "DGS2", "treasury": "2 Yr" } },
+  "ust_10y": { "label": "10-year Treasury yield", "units": "percent", "frequency": "daily", "providers": { "fred": "DGS10", "treasury": "10 Yr" } },
+  "ust_30y": { "label": "30-year Treasury yield", "units": "percent", "frequency": "daily", "providers": { "fred": "DGS30", "treasury": "30 Yr" } },
+  "policy_rate": { "label": "Effective federal funds rate", "units": "percent", "frequency": "daily", "providers": { "fred": "DFF", "nyfed": "effr" } },
+  "cpi": { "label": "CPI, all items (index, not seasonally adjusted)", "units": "index", "frequency": "monthly", "transform": "yoy", "providers": { "fred": "CPIAUCNS", "bls": "CUUR0000SA0" } },
+  "core_cpi": { "label": "Core CPI, less food and energy (index, not seasonally adjusted)", "units": "index", "frequency": "monthly", "transform": "yoy", "providers": { "fred": "CPILFENS", "bls": "CUUR0000SA0L1E" } },
+  "unemployment": { "label": "Unemployment rate", "units": "percent", "frequency": "monthly", "providers": { "fred": "UNRATE", "bls": "LNS14000000" } },
+  "payrolls": { "label": "Nonfarm payrolls (thousands)", "units": "thousands", "frequency": "monthly", "providers": { "fred": "PAYEMS", "bls": "CES0000000001" } },
+  "hy_oas": { "label": "High-yield credit spread (ICE BofA US HY OAS)", "units": "percent", "frequency": "daily", "providers": { "fred": "BAMLH0A0HYM2" } },
+  "vix": { "label": "CBOE volatility index (VIX)", "units": "index", "frequency": "daily", "providers": { "fred": "VIXCLS" } }
+}
