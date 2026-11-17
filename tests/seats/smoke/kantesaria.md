@@ -1,2 +1,0 @@
-# Kantesaria: Toll-booth quality gate
-TOO HARD: Microsoft sits in the big tech group I exclude rather than score down, because AI capital spending and R&D payoffs I cannot predict now drive its next decade, so "It doesn't have the predictability that we like to see." (S021) I concede that exclusion has cost me before, "For me, a big omission was the big tech companies." (S018), and I abstain on A to D and the pillar score.

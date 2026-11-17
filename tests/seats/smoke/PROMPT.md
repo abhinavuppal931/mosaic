@@ -29,7 +29,7 @@ WHY: three or four points, each citing a framework or rule from your brain with 
 THE RISK I SEE: one or two lines
 I'M WRONG IF: one checkable fact
 QUESTION FOR THE INVESTOR: one question
-(Or answer TOO HARD with one line on why, if this is outside your circle.)
+(Or, if this is outside your circle, answer TOO HARD: keep the header, write STANCE: TOO HARD, then a short THE CALL, a WHY of two or three points with source ids saying which of your tests it fails, and WHAT WOULD BRING IT INSIDE MY CIRCLE: the fact, price or dislocation that would change that. No option scores.)
 
 No price targets, no personal advice, no em dashes.
 ```
