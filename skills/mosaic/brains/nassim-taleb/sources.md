@@ -2,6 +2,8 @@
 
 56 sources (32 paper, 2 essay, 3 interview, 2 lecture, 2 testimony, 5 transcript, 2 op-ed, 7 blog, 1 speech), 453,102 words. Every quote in this brain carries one of these ids.
 
+Depth: default. Built from 56 free sources, 453,102 words, dated 2008 to 2026: 32 technical papers (342,860 words, mostly arXiv and the Technical Incerto), 2 Edge essays, 2 congressional testimonies (2009 and 2011), 2 lectures, 1 speech, 8 interviews and podcast transcripts (62,767 words, 2010 to 2025), 2 op-eds and 7 Medium and Substack posts. S001 alone is 160,842 words: it is the third edition text of Statistical Consequences of Fat Tails (copyright 2025) filed under its 2020 arXiv date, and its derivation chapters were skimmed, not read in full. Thin-source limits: the Incerto books (Fooled by Randomness, The Black Swan, Antifragile, Skin in the Game) and Dynamic Hedging are copyrighted and not quoted, so frameworks taught mainly there are paraphrase. The corpus has no Universa letters or Spitznagel material, no posts from X, and only a handful of spoken sources on investing (S031, S036, S037, S038, S046, S047, S053, S054), so his investing practice is seen second hand and he gives no stock calls. Several papers are on medicine, masks, war and elections and are used only for method. S034, S040, S057 and S058 were assigned but not kept, so they are absent. The papers and posts are free to read, but the right to reuse them is not confirmed, so quotes stay short and each carries its source id.
+
 Format: id | title | url | date | kind | words
 
 - S001 | Statistical Consequences of Fat Tails: Real World Preasymptotics, Epistemology, and Applications (Technical Incerto Vol 1) | https://arxiv.org/pdf/2001.10488 | 2020-01-24 | paper | 160842

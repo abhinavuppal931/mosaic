@@ -1,0 +1,92 @@
+# Sources: Warren Buffett
+
+86 sources (68 letter, 2 lecture, 2 speech, 1 testimony, 4 op-ed, 1 paper, 4 interview, 4 transcript), 1,050,061 words. Every quote in this brain carries one of these ids.
+
+Format: id | title | url | date | kind | words
+
+- S001 | Berkshire Hathaway An Owner's Manual | https://www.berkshirehathaway.com/ownman.pdf | 1996-06-01 | letter | 4907
+- S002 | Thanksgiving Message from Warren Buffett | https://www.berkshirehathaway.com/news/nov1025.pdf | 2025-11-10 | letter | 3605
+- S003 | Berkshire Hathaway Chairman's Letter for 1977 | https://www.berkshirehathaway.com/letters/1977.html | 1978-02-28 | letter | 3056
+- S004 | Berkshire Hathaway Chairman's Letter for 1978 | https://www.berkshirehathaway.com/letters/1978.html | 1979-02-28 | letter | 4364
+- S005 | Berkshire Hathaway Chairman's Letter for 1979 | https://www.berkshirehathaway.com/letters/1979.html | 1980-02-28 | letter | 6655
+- S006 | Berkshire Hathaway Chairman's Letter for 1980 | https://www.berkshirehathaway.com/letters/1980.html | 1981-02-28 | letter | 7479
+- S007 | Berkshire Hathaway Chairman's Letter for 1981 | https://www.berkshirehathaway.com/letters/1981.html | 1982-02-28 | letter | 6609
+- S008 | Berkshire Hathaway Chairman's Letter for 1982 | https://www.berkshirehathaway.com/letters/1982.html | 1983-02-28 | letter | 7843
+- S009 | Berkshire Hathaway Chairman's Letter for 1983 | https://www.berkshirehathaway.com/letters/1983.html | 1984-02-28 | letter | 11453
+- S010 | Berkshire Hathaway Chairman's Letter for 1984 | https://www.berkshirehathaway.com/letters/1984.html | 1985-02-28 | letter | 12606
+- S011 | Berkshire Hathaway Chairman's Letter for 1985 | https://www.berkshirehathaway.com/letters/1985.html | 1986-02-28 | letter | 13593
+- S012 | Berkshire Hathaway Chairman's Letter for 1986 | https://www.berkshirehathaway.com/letters/1986.html | 1987-02-28 | letter | 13692
+- S013 | Berkshire Hathaway Chairman's Letter for 1987 | https://www.berkshirehathaway.com/letters/1987.html | 1988-02-28 | letter | 12490
+- S014 | Berkshire Hathaway Chairman's Letter for 1988 | https://www.berkshirehathaway.com/letters/1988.html | 1989-02-28 | letter | 11670
+- S015 | Berkshire Hathaway Chairman's Letter for 1989 | https://www.berkshirehathaway.com/letters/1989.html | 1990-02-28 | letter | 14419
+- S016 | Berkshire Hathaway Chairman's Letter for 1990 | https://www.berkshirehathaway.com/letters/1990.html | 1991-02-28 | letter | 16027
+- S017 | Berkshire Hathaway Chairman's Letter for 1991 | https://www.berkshirehathaway.com/letters/1991.html | 1992-02-28 | letter | 9131
+- S018 | Berkshire Hathaway Chairman's Letter for 1992 | https://www.berkshirehathaway.com/letters/1992.html | 1993-02-28 | letter | 11207
+- S019 | Berkshire Hathaway Chairman's Letter for 1993 | https://www.berkshirehathaway.com/letters/1993.html | 1994-02-28 | letter | 11032
+- S020 | Berkshire Hathaway Chairman's Letter for 1994 | https://www.berkshirehathaway.com/letters/1994.html | 1995-02-28 | letter | 9597
+- S021 | Berkshire Hathaway Chairman's Letter for 1995 | https://www.berkshirehathaway.com/letters/1995.html | 1996-02-28 | letter | 11910
+- S022 | Berkshire Hathaway Chairman's Letter for 1996 | https://www.berkshirehathaway.com/letters/1996.html | 1997-02-28 | letter | 11599
+- S023 | Berkshire Hathaway Chairman's Letter for 1997 | https://www.berkshirehathaway.com/letters/1997.html | 1998-02-28 | letter | 11805
+- S024 | Berkshire Hathaway Chairman's Letter for 2004 | https://www.berkshirehathaway.com/letters/2004ltr.pdf | 2005-02-28 | letter | 14659
+- S025 | Berkshire Hathaway Chairman's Letter for 2005 | https://www.berkshirehathaway.com/letters/2005ltr.pdf | 2006-02-28 | letter | 13234
+- S026 | Berkshire Hathaway Chairman's Letter for 2006 | https://www.berkshirehathaway.com/letters/2006ltr.pdf | 2007-02-28 | letter | 14331
+- S027 | Berkshire Hathaway Chairman's Letter for 2007 | https://www.berkshirehathaway.com/letters/2007ltr.pdf | 2008-02-28 | letter | 12167
+- S028 | Berkshire Hathaway Chairman's Letter for 2008 | https://www.berkshirehathaway.com/letters/2008ltr.pdf | 2009-02-28 | letter | 17648
+- S029 | Berkshire Hathaway Chairman's Letter for 2009 | https://www.berkshirehathaway.com/letters/2009ltr.pdf | 2010-02-28 | letter | 15810
+- S030 | Berkshire Hathaway Chairman's Letter for 2010 | https://www.berkshirehathaway.com/letters/2010ltr.pdf | 2011-02-28 | letter | 21953
+- S031 | Berkshire Hathaway Chairman's Letter for 2011 | https://www.berkshirehathaway.com/letters/2011ltr.pdf | 2012-02-28 | letter | 15974
+- S032 | Berkshire Hathaway Chairman's Letter for 2012 | https://www.berkshirehathaway.com/letters/2012ltr.pdf | 2013-02-28 | letter | 18548
+- S033 | Berkshire Hathaway Chairman's Letter for 2013 | https://www.berkshirehathaway.com/letters/2013ltr.pdf | 2014-02-28 | letter | 18153
+- S034 | Berkshire Hathaway Chairman's Letter for 2014 | https://www.berkshirehathaway.com/letters/2014ltr.pdf | 2015-02-28 | letter | 29529
+- S035 | Berkshire Hathaway Chairman's Letter for 2015 | https://www.berkshirehathaway.com/letters/2015ltr.pdf | 2016-02-28 | letter | 21617
+- S036 | Berkshire Hathaway Chairman's Letter for 2016 | https://www.berkshirehathaway.com/letters/2016ltr.pdf | 2017-02-28 | letter | 16111
+- S037 | Berkshire Hathaway Chairman's Letter for 2017 | https://www.berkshirehathaway.com/letters/2017ltr.pdf | 2018-02-28 | letter | 12389
+- S038 | Berkshire Hathaway Chairman's Letter for 2018 | https://www.berkshirehathaway.com/letters/2018ltr.pdf | 2019-02-28 | letter | 10443
+- S039 | Berkshire Hathaway Chairman's Letter for 2019 | https://www.berkshirehathaway.com/letters/2019ltr.pdf | 2020-02-28 | letter | 11536
+- S040 | Berkshire Hathaway Chairman's Letter for 2020 | https://www.berkshirehathaway.com/letters/2020ltr.pdf | 2021-02-28 | letter | 11759
+- S041 | Berkshire Hathaway Chairman's Letter for 2021 | https://www.berkshirehathaway.com/letters/2021ltr.pdf | 2022-02-28 | letter | 9833
+- S042 | Berkshire Hathaway Chairman's Letter for 2022 | https://www.berkshirehathaway.com/letters/2022ltr.pdf | 2023-02-28 | letter | 8002
+- S043 | Berkshire Hathaway Chairman's Letter for 2023 | https://www.berkshirehathaway.com/letters/2023ltr.pdf | 2024-02-28 | letter | 11305
+- S044 | Berkshire Hathaway Chairman's Letter for 2024 | https://www.berkshirehathaway.com/letters/2024ltr.pdf | 2025-02-28 | letter | 8740
+- S045 | Berkshire Hathaway Chairman's Letter for 1998 | https://www.berkshirehathaway.com/letters/1998pdf.pdf | 1999-02-28 | letter | 12466
+- S046 | Berkshire Hathaway Chairman's Letter for 1999 | https://www.berkshirehathaway.com/letters/final1999pdf.pdf | 2000-02-28 | letter | 13423
+- S047 | Berkshire Hathaway Chairman's Letter for 2000 | https://www.berkshirehathaway.com/letters/2000pdf.pdf | 2001-02-28 | letter | 13328
+- S048 | Berkshire Hathaway Chairman's Letter for 2001 | https://www.berkshirehathaway.com/letters/2001pdf.pdf | 2002-02-28 | letter | 12271
+- S049 | Berkshire Hathaway Chairman's Letter for 2002 | https://www.berkshirehathaway.com/letters/2002pdf.pdf | 2003-02-28 | letter | 14572
+- S050 | Berkshire Hathaway Chairman's Letter for 2003 | https://www.berkshirehathaway.com/letters/2003ltr.pdf | 2004-02-28 | letter | 13161
+- S051 | Buffett Partnership: Annual Letter to Limited Partners on 1957 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1958-01-01 | letter | 1297
+- S052 | Buffett Partnership: Annual Letter to Limited Partners on 1958 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1959-01-01 | letter | 1345
+- S053 | Buffett Partnership: Annual Letter to Limited Partners on 1959 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1960-01-01 | letter | 915
+- S054 | Buffett Partnership: Annual Letter to Limited Partners on 1960 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1961-01-30 | letter | 2569
+- S056 | Buffett Partnership: Annual Letter to Partners on 1961 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1962-01-24 | letter | 4396
+- S059 | Buffett Partnership: Annual Letter to Partners on 1962 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1963-01-18 | letter | 5494
+- S062 | Buffett Partnership: Annual Letter to Partners on 1963 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1964-01-18 | letter | 5549
+- S064 | Buffett Partnership: Annual Letter to Partners on 1964 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1965-01-18 | letter | 7013
+- S067 | Buffett Partnership: Annual Letter to Partners on 1965 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1966-01-20 | letter | 5600
+- S069 | Buffett Partnership: Annual Letter to Partners on 1966 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1967-01-25 | letter | 3833
+- S072 | Buffett Partnership: Annual Letter to Partners on 1967 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1968-01-24 | letter | 1978
+- S074 | Buffett Partnership: Annual Letter to Partners on 1968 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1969-01-22 | letter | 2669
+- S076 | Buffett Partnership: October Letter to Partners 1969 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1969-10-09 | letter | 4946
+- S077 | Buffett Partnership: December Letter to Partners 1969 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1969-12-26 | letter | 2144
+- S078 | Buffett Partnership: Annual Letter to Partners on 1969 | https://www.ivey.uwo.ca/media/2975913/buffett-partnership-letters.pdf | 1970-02-25 | letter | 5490
+- S079 | Warren Buffett Lecture at the University of Florida | https://www.rbcpa.com/wp-content/uploads/2016/12/Buffett_UofFL_19981015.pdf | 1998-10-15 | lecture | 14720
+- S080 | Three Lectures by Warren Buffett at Notre Dame | https://www.rbcpa.com/wp-content/uploads/2016/12/BuffettNotreDamebyWhitneyTilson.pdf | 1991-04-01 | lecture | 28658
+- S082 | The Superinvestors of Graham-and-Doddsville | https://www.lapasserelle.com/courses/advanced_finance/documents/TheSuperinvestorsofGraham-and-Doddsville-WarrenE.Buffett.pdf | 1984-05-17 | speech | 6365
+- S083 | Financial Crisis Inquiry Commission Interview of Warren Buffett | https://dericbownds.net/uploaded_images/Buffett_FCIC_transcript.pdf | 2010-05-26 | testimony | 20702
+- S085 | Warren Buffett on the Stock Market (Fortune 2001) | https://www.rbcpa.com/wp-content/uploads/2016/12/Buffett_Fortune_20011210.pdf | 2001-12-10 | speech | 4804
+- S086 | Why Stocks Beat Gold and Bonds (Fortune) | https://www.rbcpa.com/wp-content/uploads/2016/12/WEB_Fortune_20120209.pdf | 2012-02-09 | op-ed | 1978
+- S087 | Buy American. I Am. (New York Times op-ed) | https://www.rbcpa.com/warren-e-buffett/ny-times-op-ed-october-17-2008-buy-american-i-am/ | 2008-10-17 | op-ed | 737
+- S088 | Stop Coddling the Super-Rich (New York Times op-ed) | https://www.rbcpa.com/warren-e-buffett/stop-coddling-the-super-rich-web-op-ed-in-new-york-times-81511/ | 2011-08-15 | op-ed | 1007
+- S089 | The Greenback Effect (New York Times op-ed) | https://www.rbcpa.com/warren-e-buffett/ny-times-op-ed-the-greenback-effect/ | 2009-08-19 | op-ed | 1031
+- S090 | How Inflation Swindles the Equity Investor (Fortune) | https://www.rbcpa.com/warren-e-buffett/how-inflation-swindles-the-equity-investor-article-written-by-web-in-fortune-may-1977/ | 1977-05-01 | paper | 6971
+- S093 | Warren Buffett on CNBC for Three Hours | https://www.rbcpa.com/warren-e-buffett/warren-speaks-for-3-hours-on-cnbc-march-3-2008-here-is-transcript/ | 2008-03-03 | interview | 19887
+- S097 | CNBC Discussion with Becky Quick | https://www.rbcpa.com/warren-e-buffett/transcript-of-warren-buffetts-discussion-on-cnbc-on-march-9-2009-with-becky-quick/ | 2009-03-09 | interview | 25555
+- S105 | CNBC Interview with Warren Buffett | https://www.rbcpa.com/wp-content/uploads/2016/12/WEB_CNBC_Transcript_20100301.pdf | 2010-03-01 | interview | 29980
+- S116 | CNBC Interview with Warren Buffett | https://www.rbcpa.com/wp-content/uploads/2016/12/WEB_CNBC_Transcript_20160229.pdf | 2016-02-29 | interview | 29006
+- S117 | Warren Buffett Thanksgiving Message 2023 | https://www.berkshirehathaway.com/news/nov2123.pdf | 2023-11-21 | letter | 690
+- S118 | Warren Buffett Thanksgiving Message 2024 | https://www.berkshirehathaway.com/news/nov2524.pdf | 2024-11-25 | letter | 1540
+- S119 | Warren Buffett Thanksgiving Message 2026 | https://www.berkshirehathaway.com/news/nov1626.pdf | 2026-11-16 | letter | 368
+- S122 | Berkshire Hathaway Annual Meeting 1998 Transcript | https://www.good-investing.net/berkshire-hathaway-annual-meeting/transcripts/1998-transcript/ | 1998-05-04 | transcript | 53499
+- S126 | Berkshire Hathaway Annual Meeting 2008 Transcript | https://www.good-investing.net/berkshire-hathaway-annual-meeting/transcripts/2008-transcript/ | 2008-05-03 | transcript | 45342
+- S130 | Berkshire Hathaway Annual Meeting 2019 Transcript | https://www.good-investing.net/berkshire-hathaway-annual-meeting/transcripts/2019-transcript/ | 2019-05-04 | transcript | 48203
+- S134 | Berkshire Hathaway Annual Meeting 2025 Transcript | https://www.good-investing.net/berkshire-hathaway-annual-meeting/transcripts/2025-transcript/ | 2025-05-03 | transcript | 34069
