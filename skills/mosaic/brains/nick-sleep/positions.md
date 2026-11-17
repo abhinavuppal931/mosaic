@@ -13,7 +13,7 @@ Sources: 7 (S003, S012, S016, S019, S020, S022, S023).
 ## 2. Holding period and turnover
 Sources: 15 (S001, S002, S004, S006, S009, S010, S011, S012, S014, S015, S016, S017, S018, S022, S023).
 - 2002-06: Short holding periods elsewhere are the opening. "Rich pickings, we suspect, for the patient." (S002)
-- Older view, 2003 to 2006: expected holding period of about five years; "expects to own for about 260 weeks versus 20 weeks for other holders" is his framing in S011 (paraphrase). Three trades a month in 2006 (S010).
+- Older view, 2004 to 2006: an expected holding period of about five years, about 260 weeks against 20 weeks for other holders (S006, S011, paraphrase). Three trades a month in 2006 (S010).
 - 2008-06: "The average holding period for the US stocks held in Nomad (excluding Berkshire Hathaway) is fifty-one days!" (S014) He expected to hold about twenty-five times longer.
 - 2009-12: The second way to invest is to buy one great business and keep deciding not to sell. "it requires daily decisions not to sell the shares as well!" (S017)
 - Newer view, 2012-12 to 2013-06: Inactivity is the method. "We have, broadly, the businesses we want in Nomad and see little advantage to fiddling." (S022) and "Our portfolio inaction continues and we are delighted to report that purchase and sale transactions have all but ground to a halt." (S023)
@@ -49,7 +49,7 @@ Sources: 11 (S002, S003, S004, S005, S006, S012, S014, S015, S017, S022, S023).
 ## 6. Index and benchmark
 Sources: 11 (S001, S004, S006, S011, S014, S016, S017, S018, S021, S022, S023).
 - 2002-01: "Nomad is an absolute return fund and reference here to an index is simply to place our performance, short term as it is, in context." (S001)
-- 2006-12: "the index is not our benchmark." (S011) The index is "one, of many, opportunity sets." (S011, paraphrased framing)
+- 2006-12: "the index is not our benchmark." (S011) Treating the index as a risk-free home leads to over-diversification and opinions on everything; "it is one, of many, opportunity sets." (S011)
 - 2008-06: "Index envy is not a route to outsized returns" (S014)
 - 2009-06: For an investor who wants diversification, "Real diversification is offered by index funds at a fraction of the price of active management." (S016)
 - 2012-06: "Zak and I spend almost no time thinking about stock market indices." (S021)
@@ -108,7 +108,7 @@ Sources: 6 (S003, S005, S014, S015, S017, S022).
 - 2002-12: "During the late summer and autumn, when investors were at their most depressed, we made several new investments" (S003)
 - 2008-06: "When investments go from hated and reasonable to despised and cheap something is normally up in the markets." (S014)
 - 2008-12, after a 45% loss in the year: "the rational mind will anchor on the notion that today the birds in the bush are very large indeed." (S015) He reopened the fund and he and Zak were among the largest subscribers.
-- 2009-12: "great businesses have been "on sale" and were, in our opinion, the investment opportunity of the credit crisis period." (S017, partial; the words on sale were in quotes in the source)
+- 2009-12: Great businesses went on sale in the credit crisis, and he called that the investment opportunity of the period (S017, paraphrase).
 - 2011-12: A weak economy helps cost leaders. "the worse it gets for the economy, the better it gets for our firms from a competitive position." (S020)
 
 ## 14. Leverage and margin
