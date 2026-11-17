@@ -16,8 +16,8 @@
 // may be written as a comma. Exit code 1 when anything needs fixing.
 //
 // --lint (use it on a finished brain) also fails on: any em or en dash; a cited quote over 45
-// words; a quoted passage of 8 or more words with no source id on the same line (quotation
-// marks mean verbatim, so an unsourced quote is either a missing id or an invented line).
+// words; a quoted passage of 8 or more words not followed by its source id (quotation marks mean
+// verbatim, so an unattributed quote is either a missing id or an invented line).
 import fs from "node:fs";
 import path from "node:path";
 
@@ -56,7 +56,8 @@ const found = (q, id) => {
 let ok = 0;
 const wrong = [], missing = [], lint = [];
 const perFile = {};
-const re = /["“]([^"“”\n]{12,600})["”][^\n"“]{0,40}?[(\[]((?:S\d{3})(?:\s*[,;]\s*S\d{3})*)/g;
+// the id may follow a short label inside the brackets, as the council round prompts write it: "..." (Moat, S022)
+const re = /["“]([^"“”\n]{12,600})["”][^\n"“]{0,40}?[(\[](?:[^()\[\]\n"“”0-9]{0,80}?(?:[,:;]\s*|\s))?((?:S\d{3})(?:\s*[,;]\s*S\d{3})*)/g;
 const anyQuote = /["“]([^"“”\n]{12,600})["”]/g;
 for (const f of files) {
   const rel = path.relative(process.cwd(), f);
@@ -81,7 +82,9 @@ for (const f of files) {
     if (/[\u2014\u2013]/.test(line)) lint.push(`${where}  em or en dash`);
     for (const m of line.matchAll(anyQuote)) {
       if (cited.has(m.index)) continue;
-      if (norm(m[1]).split(" ").length >= 8 && !/S\d{3}/.test(line)) lint.push(`${where}  quoted passage with no source id: "${m[1].slice(0, 80)}"`);
+      if (/^\s|\s$/.test(m[1])) continue; // the gap between two quoted terms, not a quote
+      const after = line.slice(m.index + m[0].length, m.index + m[0].length + 90);
+      if (norm(m[1]).split(" ").length >= 8 && !/S\d{3}/.test(after)) lint.push(`${where}  quoted passage not attributed to a source id: "${m[1].slice(0, 80)}"`);
     }
   });
 }

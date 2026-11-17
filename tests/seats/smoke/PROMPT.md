@@ -1,37 +1,26 @@
 # Single-seat smoke test
 
-Each seat answers the same question alone, so a reviewer can judge voice and distinctness side by side. Run it with the general-purpose fallback the council uses before plugin agents load:
+Every seat answers the same question alone, so a reviewer can judge voice and distinctness side by side: "Should I buy Microsoft at today's price for a 5-year hold?"
+
+The session folder `session-msft/` is a normal council session in the core format:
+
+- `brief.md` and `council.json`: the decision, four options, all 13 seats and their weights. A real council seats at most nine; this test seats all 13 so every seat is exercised.
+- `data-pack.json` and `data-pack.md`: the live MSFT pack from the core session's fixtures (as of 2026-11-17, 135 facts, coverage 73%).
+- `round-1.md`: the 13 Round 1 cards, saved verbatim under `## <short name>` headings.
+
+## How the cards were made
+
+Each seat got the Round 1 prompt from `skills/mosaic/references/round-prompts.md` exactly as the Chair sends it (blind, lean withheld), with the general-purpose fallback lines first:
 
 ```
-Read agents/seat-<key>.md and follow it as your instructions for this whole task. Then answer the consult below. Write your answer, and nothing else, to tests/seats/smoke/<key>.md. Do not write any other file.
+Read <plugin root>/agents/seat-<key>.md and follow it as your instructions for this whole task. Your brain is <plugin root>/skills/mosaic/brains/<slug>/. Only read files.
 ```
 
-The consult (same for all 13 seats):
+Each card was then checked against that seat's fetched corpus with `node skills/newseat/scripts/check_quotes.mjs build/<slug> <card> --lint`, and every fact id against `data-pack.md`.
 
-```
-MOSAIC SINGLE-SEAT CONSULT (smoke test)
+## How to check them
 
-Question from the investor: "Should I buy Microsoft at today's price for a 5-year hold?"
-
-Context: the council's data pack is not built yet, so this test uses the illustrative fixture in tests/seats/smoke/fixture-msft.md (read it). Treat its figures as the given facts for this test and cite them by fact id, like (F006). Do not add figures that are not in it; if your lens needs one that is missing, say so and say how the answer would change. Brief: no position today, 5-year horizon, lean withheld, the investor's portfolio is diversified and unlevered.
-
-Options: A full position now, B starter now and add on proof, C wait for a price or trigger, D pass.
-
-Answer in this shape, in your own voice, first person, under 450 words:
-
-# <Seat short name>: <role>
-STANCE: one line
-OPTION SCORES: A x/10, B x/10, C x/10, D x/10
-PILLAR SCORE (<your dimension>): x/10
-CONVICTION: 1 to 5 | EVIDENCE: strong / adequate / thin | RUIN RISK: none / possible / likely | DOOR: one-way / two-way
-THE CALL: two or three sentences
-WHY: three or four points, each citing a framework or rule from your brain with its source id; quote only lines that are verbatim in your brain
-THE RISK I SEE: one or two lines
-I'M WRONG IF: one checkable fact
-QUESTION FOR THE INVESTOR: one question
-(Or, if this is outside your circle, answer TOO HARD: keep the header, write STANCE: TOO HARD, then a short THE CALL, a WHY of two or three points with source ids saying which of your tests it fails, and WHAT WOULD BRING IT INSIDE MY CIRCLE: the fact, price or dislocation that would change that. No option scores.)
-
-No price targets, no personal advice, no em dashes.
-```
-
-Each answer is checked with `node skills/newseat/scripts/check_quotes.mjs build/<slug> tests/seats/smoke/<key>.md --lint` (needs the seat's fetched corpus in `build/`).
+- `node --test tests/seats/` parses the 13 cards with the core parser, runs the council math and runs the core citation checker against the real brains (these three tests skip when the core scripts are not present).
+- `node scripts/score.mjs tests/seats/smoke/session-msft --no-write` prints the Round 1 math.
+- `node scripts/check-citations.mjs tests/seats/smoke/session-msft --no-write` checks every quote and fact id.
+- `node skills/newseat/scripts/check_all.mjs --markdown` checks each card's quotes against the seat's corpus (needs `build/`).
