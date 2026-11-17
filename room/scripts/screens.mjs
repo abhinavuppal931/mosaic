@@ -33,6 +33,9 @@ const boards = await startBoardServer(0);
 const boardUrl = `http://127.0.0.1:${boards.address().port}`;
 const live = await startServer({ session: liveDir, port: 0, quiet: true, journal: path.join(tmp, 'journal') });
 const done = await startServer({ session: NVDA, port: 0, quiet: true, journal: path.join(tmp, 'journal') });
+// The 13-seat smoke session from the seats build (Round 1 only), when it is in the repo.
+const SMOKE = path.resolve(ROOM, '..', 'tests', 'seats', 'smoke', 'session-msft');
+const smoke = fs.existsSync(path.join(SMOKE, 'council.json')) ? await startServer({ session: SMOKE, port: 0, quiet: true, journal: path.join(tmp, 'journal') }) : null;
 const browser = await chromium.launch();
 let failed = 0;
 
@@ -74,6 +77,7 @@ for (const w of [1440, 390]) {
   await shoot(`${live.url}/#/live`, `room-live-${w}.png`, w, '.v-live .speech');
   await shoot(`${done.url}/#/verdict`, `room-verdict-${w}.png`, w, '.v-verdict .hero');
   await compare(`board-live-${w}.png`, `room-live-${w}.png`, `compare-live-${w}.png`, w);
+  if (smoke) await shoot(`${smoke.url}/#/live`, `room-smoke-13-seats-live-${w}.png`, w, '.v-live .speech');
   await compare(`board-verdict-${w}.png`, `room-verdict-${w}.png`, `compare-verdict-${w}.png`, w);
 }
 
@@ -94,6 +98,7 @@ for (const [name, width] of [['a4', 794], ['letter', 816]]) {
 await browser.close();
 await live.close();
 await done.close();
+if (smoke) await smoke.close();
 boards.close();
 fs.rmSync(tmp, { recursive: true, force: true });
 // The boards appear in the compare images; keep only those, the Room's own shots and the print shots.

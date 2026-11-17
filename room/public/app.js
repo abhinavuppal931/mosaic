@@ -193,7 +193,8 @@ function liveView(m, d) {
     <p class="say">${h(sp.say)}</p>${chips ? `<div class="facts">${chips}</div>` : ''}
   </article>`;
 
-  return `<div class="v-live${talking}">
+  const dense = m.seats.length >= 10 ? ' dense' : '';
+  return `<div class="v-live${talking}${dense}">
   <header class="hdr">
     <div class="hdr-left">${brand()}<span class="vbar"></span><span class="hq" title="${h(m.meta.question)}">${h(m.meta.question)}</span></div>
     <div class="hdr-right">
@@ -673,6 +674,30 @@ function shareText() {
   return [`Mosaic council on “${m.meta.question}”`, `${v.label}. ${v.call}`, v.share.text, 'Simulated investors. Not investment advice. github.com/abhinavuppal931/mosaic'].join('\n');
 }
 
+/** Copy text: the clipboard API, or a selection copy when the API refuses (for example when the
+ * page has lost focus to a download). Resolves to true when the text was copied. */
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;left:0;top:0;opacity:0;pointer-events:none';
+    document.body.appendChild(ta);
+    ta.select();
+    let ok = false;
+    try {
+      ok = document.execCommand('copy');
+    } catch {
+      ok = false;
+    }
+    ta.remove();
+    return ok;
+  }
+}
+
 function downloadBlob(blob, name) {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -689,13 +714,7 @@ async function share() {
   const blob = await shareCanvas();
   const name = `mosaic-${S.data.model.id}.png`;
   downloadBlob(blob, name);
-  let copied = false;
-  try {
-    await navigator.clipboard.writeText(shareText());
-    copied = true;
-  } catch {
-    copied = false;
-  }
+  const copied = await copyText(shareText());
   window.__mosaicLastShare = { size: blob.size, name, text: shareText(), copied };
   toast(copied ? 'Share card saved as an image. A short summary is on your clipboard.' : 'Share card saved as an image.');
 }
@@ -722,7 +741,7 @@ document.addEventListener('click', (e) => {
   else if (act === 'copy-image') copyImage().catch(() => toast('The share card could not be made.', false));
   else if (act === 'pdf') window.print();
   else if (act === 'replay') (S.replay === null ? startReplay() : stopReplay());
-  else if (act === 'cmd') navigator.clipboard?.writeText(el.textContent).then(() => toast('Command copied.'), () => {});
+  else if (act === 'cmd') copyText(el.textContent).then((ok) => toast(ok ? 'Command copied.' : 'Could not copy. Select the command and copy it by hand.', ok));
 });
 
 document.addEventListener('keydown', (e) => {

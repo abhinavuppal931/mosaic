@@ -122,11 +122,19 @@ a { color: inherit; }
 .seat .nm { font-size: 13px; font-weight: 600; color: #DDD6CC; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9); white-space: nowrap; }
 .seat.live .nm { font-size: 15px; color: var(--ink); }
 .seat .role { font-size: 11px; color: var(--mute); text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9); white-space: nowrap; }
-.chip { font-size: 11px; font-weight: 500; white-space: nowrap; max-width: var(--chip-max, none); overflow: hidden; text-overflow: ellipsis; color: var(--ink-2); background: rgba(20, 18, 16, 0.72); border: 1px solid var(--line-2); border-radius: 7px; padding: 3px 8px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.chip.lean { display: inline-flex; gap: 0.3em; }
+.chip { font-size: 11px; font-weight: 500; white-space: nowrap; color: var(--ink-2); background: rgba(20, 18, 16, 0.72); border: 1px solid var(--line-2); border-radius: 7px; padding: 3px 8px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.chip.lean { display: inline-flex; gap: 0.3em; max-width: var(--chip-max, none); overflow: hidden; }
 .chip.lean .o { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .seat.live .chip { color: var(--bg); background: var(--amber); border-color: var(--amber); }
 .seat.waiting .chip { color: var(--mute); }
+
+/* Ten or more seats share the seven chairs: smaller rings, no role line. */
+.dense .ring { --size: 66px; }
+.dense .seat.live .ring { --size: 86px; }
+.dense .seat .role { display: none; }
+.dense .seat .nm { font-size: 12px; }
+.dense .seat.live .nm { font-size: 13px; }
+.dense .seat .chip { font-size: 10px; padding: 2px 6px; }
 
 /* The talking frame: the speaker's ring turns slowly and breathes. Speaker only. */
 @property --spin { syntax: '<angle>'; inherits: false; initial-value: 200deg; }
@@ -445,7 +453,7 @@ a { color: inherit; }
   .seatrow { order: 2; display: flex; gap: 14px; overflow-x: auto; padding: 18px 16px 10px; position: relative; z-index: 3; scrollbar-width: none; scroll-snap-type: x proximity; -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
   .seatrow::-webkit-scrollbar { display: none; }
   .seat { position: static; transform: none; flex: 0 0 auto; min-width: 76px; scroll-snap-align: start; }
-  .seat .ring, .seat.live .ring { --size: 60px; }
+  .seat .ring, .seat.live .ring, .dense .seat .ring, .dense .seat.live .ring { --size: 60px; }
   .seat .nm, .seat.live .nm { font-size: 12px; }
   .seat .chip { font-size: 10px; padding: 2px 6px; }
   .seat.live { order: -1; }

@@ -170,10 +170,14 @@ test('every control on the verdict works', { skip, timeout: 90_000 }, async () =
     assert.ok(!/[—–]/.test(clip));
 
     // Copy image (copies, or saves the card when the browser will not copy images).
+    // Clear the toast first, so the wait sees this action's message and not Share's.
+    const clearToast = () => page.evaluate(() => (document.querySelector('#toast').textContent = ''));
+    await clearToast();
     await page.locator('[data-act="copy-image"]').click();
-    await page.waitForFunction(() => /Share card (copied|saved)|would not copy/.test(document.querySelector('#toast').textContent));
+    await page.waitForFunction(() => /Share card copied as an image|card was saved instead/.test(document.querySelector('#toast').textContent));
 
     // The recheck command copies.
+    await clearToast();
     await page.locator('[data-act="cmd"]').click();
     await page.waitForFunction(() => /Command copied/.test(document.querySelector('#toast').textContent));
     assert.equal(await page.evaluate(() => navigator.clipboard.readText()), '/mosaic recheck NVDA');
