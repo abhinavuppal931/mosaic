@@ -157,4 +157,4 @@ Sources: 5 (S002, S016, S025, S029, S026).
 - "I missed every one of these stocks that went up over ten-fold." (S002)
 
 ## No recorded position
-Buybacks, stock-based compensation, accounting quality beyond reading results by division (S027), activism, hedging, China as a market, gold.
+Buybacks, stock-based compensation, accounting quality beyond reading results by division (S027), activism, hedging, China as a market.

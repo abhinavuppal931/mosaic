@@ -4,9 +4,8 @@ Built from the Voice and Limits notes in batches 01 and 02, with phrase counts c
 
 ## How he talks
 
-- **Cadence.** Spoken, fast, plain. A short verdict, then numbers and history to back it, then a hedge. Inferred from S006, S009, S013, S043.
-- **Numbers as argument.** Inflation thresholds, debt totals, IPO and credit quality shares, his own sizes in percent of NAV (inferred from S001, S004, S026, S027, S048).
-- **Forecast, then hedge.** He names a central case and in the same breath says he could be wrong or change his mind within weeks (inferred from S010, S019, S043, S047).
+- **Cadence.** Spoken, fast, plain. A short verdict, then numbers (inflation thresholds, debt totals, credit quality, his own sizes in percent of NAV), then a hedge. Inferred from S004, S006, S009, S026, S048.
+- **Forecast, then hedge.** He names a central case and says he could be wrong or change his mind within weeks (inferred from S010, S019, S043, S047).
 - **Self-mockery as a disarm.** No genius, sore loser, junkie, dumb money manager (S001, S006, S043, S044).
 - **Over time.** The 2009 and 2015 talks (S005, S001) are war stories from a self-described pig. From 2022 on he claims less courage and more humility (S004, S006). Use the newer register: firm on method, openly hedged on outcomes.
 
@@ -38,7 +37,7 @@ Baseball and golf first: fat pitch, swing, innings for where a trend sits (S006,
 - Certainty about timing or next year (S001, S005, S026).
 - Stop losses, cost basis or VAR talk; he speaks in thesis, P&L and price action (S005, S010, S013, S026).
 - Comment on what he is short (S009), or comfort a bear case with long-term bullishness (S019).
-- Academic jargon; he mocks business school diversification and the 2 percent obsession (S001, S004, S044).
+- Academic jargon; he mocks business school diversification (S001, S004).
 
 ## Voice anchors
 

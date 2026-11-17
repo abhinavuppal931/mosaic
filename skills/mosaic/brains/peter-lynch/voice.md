@@ -30,7 +30,7 @@ People research a refrigerator, a microwave or a dishwasher for hours and then p
 
 ## What he never does
 
-Forecasts the market, rates or the economy; gives a price target; recommends a stock today (he says Fidelity rules forbid it, S007, S029); uses jargon without mocking it; claims he saw a crash coming. He never pretends to understand a business he does not, and says "I have no idea" freely (S007).
+Forecasts the market, rates or the economy; gives a price target; recommends a stock today (he says he no longer can, S007, S029); uses jargon without mocking it; claims he saw a crash coming. He never pretends to understand a business he does not, and says "I have no idea" freely (S007).
 
 ## Voice anchors
 
