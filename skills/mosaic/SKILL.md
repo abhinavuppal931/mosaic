@@ -56,7 +56,7 @@ Record the **trigger** in the brief. Keep the **lean** out of every file the sea
    node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs" pack --portfolio "<session>/holdings.json" --session "<session>" --home "<home>"
    ```
 
-   It writes `data-pack.json` (what seats cite) and `data-pack.md` (the human view). If it prints "no SEC User-Agent set", ask the user for a name and email once and run `node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs" setup --user-agent "<name> <email>" --home "<home>"`, then rebuild. Never print or echo a key or the contents of `.env.local`.
+   It writes `data-pack.json` (what seats cite) and `data-pack.md` (the human view). If it prints "no SEC contact set", the SEC needs the user's name and email once. Never put them on a command line (argv lands in shell history and process lists). Either ask the user and write them with your file tools into `<home>/mosaic.config.json` as `{ "providers": { "sec-edgar": { "contact": "<name> <email>" } } }` (merge with what is there; the file is git-ignored), or tell the user to run `node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs" setup --home "<home>"` in their own terminal, which asks for it, or to set `MOSAIC_SEC_CONTACT`. Then rebuild the pack. Never print or echo a key, the contact, or the contents of `.env.local`.
 3. Read the pack's `coverage`, `warnings` and data-health table. Put a one-line data health summary in the brief ("prices: yahoo ok; fundamentals: EDGAR ok; news and estimates missing"). If coverage is below 50%, tell the user the verdict will likely be INSUFFICIENT EVIDENCE and offer to proceed or stop.
 4. **Never compute a number the pack could compute, and never let a seat do so.** If the decision needs a number the pack lacks, it stays missing; seats must write "outside the pack, unverified" for any number not in it.
 5. Write `brief.md` and `council.json` (`references/live-room.md`). Tell the user once: "Watch it live with `/mosaic room`."
@@ -98,26 +98,28 @@ Write `draft-resolution.md` and `draft.json`: the recommended option, conditions
 
 Spawn every seat with the Round 3 prompt. Save `round-3.md`, add `## Chair` listing each amendment, adopted or not, and why. No fourth round. Quick mode skips Round 3 when `score.mjs` prints "Round 3 can be skipped".
 
-## Step 8: Verify
+## Step 8: Verify the rounds
 
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/scripts/check-citations.mjs" "<session>" --home "<home>"
 ```
 
-It checks every quoted line attributed to a source id against that seat's brain and every fact id against the pack, and writes `citations.json`. Remove every failing quote or claim from the verdict and say so in the Chair notes. Treat "cites a MISSING fact" warnings as unsupported claims. If Node cannot run, check quotes yourself by searching the seat's brain folder for the exact words and treat any you cannot find as unverified.
+It checks every quoted line attributed to a source id against that seat's brain and every fact id against the pack, and writes `citations.json`. Nothing that fails may go into the verdict; say so in the Chair notes. Treat "cites a MISSING fact" warnings as unsupported claims. If Node cannot run, check quotes yourself by searching the seat's brain folder for the exact words and treat any you cannot find as unverified.
 
-## Step 9: Verdict and journal
+## Step 9: Verdict, verified, then journaled
 
-1. `node "${CLAUDE_PLUGIN_ROOT}/scripts/score.mjs" "<session>" --home "<home>"` writes the final `scores.json`. Use its label, overrides, option math, spread, confidence, evidence grade and lean pull as given. Do not recompute them.
-2. Write `verdict.md` from `references/report-template.md`, then `verdict.json` last (the Room treats it as the end of the council).
-3. Journal it: `node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs" add "<session>" --home "<home>"`.
-4. Chat summary, under 200 words: the label and the call, option scores on one line, the three arguments that carried the room (one line each, with the seat), the sharpest dissent (one line, with the seat), kill criteria, the re-check date, evidence quality and lean pull, the path to `verdict.md`, and the footer line from the template.
+1. `node "${CLAUDE_PLUGIN_ROOT}/scripts/score.mjs" "<session>" --home "<home>"` writes the final `scores.json`. Use its label, overrides, option math, spread, confidence, evidence grade, lean pull and each seat's `agreement` as given. Do not recompute them. Agreement comes from scores, not from a seat's VOTE words; quote the words separately. Fix every item in its `problems` (send a card back once) before writing the verdict.
+2. Write `verdict.md` from `references/report-template.md`. The call is attributed to the council ("The council would..."), never an instruction, and the disclaimer line sits directly under it.
+3. Check the verdict: run `check-citations.mjs` again, now that `verdict.md` exists. Remove every quote or fact id it fails, rerun until it passes, and list what you removed in `verdict.json` `removed_by_citation_check`.
+4. Write `verdict.json` last (the Room treats it as the end of the council), then run `check-citations.mjs` once more: it also reads every string in `verdict.json`.
+5. Journal it: `node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs" add "<session>" --home "<home>"`.
+6. Chat summary, under 200 words: the label and the council's call, then on the next line exactly "Mosaic grades how a decision was made. It is not investment advice.", then option scores on one line, the three arguments that carried the room (one line each, with the seat), the sharpest dissent (one line, with the seat), kill criteria, the re-check date, evidence quality and lean pull, and the path to `verdict.md`.
 
 ## Recheck (`recheck <TICKER>`)
 
 1. `node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs" show <TICKER> --home "<home>"`. If there is no journal, offer a full council instead.
 2. New session folder, new pack (`pack --ticker`), then `node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs" diff <TICKER> --pack "<session>/data-pack.json" --out "<session>" --home "<home>"`. It writes `changes.json` and `changes.md`.
-3. Run a quick council with the same options and the last verdict's seats (four at most, keep a guard). The brief leads with `changes.md`: tripped kill criteria first, then material changes, then gaps. The lean for a recheck is the last verdict's recommended option; it is still withheld from Round 1.
+3. Run a quick council with the same options and the last verdict's seats (four at most, keep a guard). The brief leads with `changes.md`: tripped kill criteria first, then material changes, then gaps. `changes.md` deliberately names no label or option. The lean for a recheck is the last verdict's recommended option, so it is withheld from Round 1 like any lean: the brief, the Round 1 prompt and every file written before Round 1 is saved must not mention the last verdict's label or option. Reveal it in Round 2 through `lean.json`.
 4. Verdict as usual, plus a "What changed" section; journal it (the journal keeps every verdict).
 
 ## Board settings (`board`)

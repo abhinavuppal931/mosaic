@@ -127,10 +127,10 @@ ONE LINE FOR THE INVESTOR: the thing from your lens they must not forget.
 Use the Round 1 prompt with these lines added after "Read:":
 
 ```
-This is a RECHECK of a thesis the council judged on [date] ([label] on option [X]). Read [session]/changes.md first: kill criteria that tripped, material changes since the last pack, and data that went missing. Judge whether the thesis still holds on today's pack. Cite the new pack's fact ids.
+This is a RECHECK of a thesis the council last judged on [date]. Read [session]/changes.md first: kill criteria that tripped, material changes since the last pack, and data that went missing. Judge whether the thesis holds on today's pack, fresh. Cite the new pack's fact ids.
 ```
 
-Round 2 reveals the lean as the last verdict's recommended option ("the council's last call"), with the same rules.
+Never put the last verdict's label or option in a Round 1 recheck prompt or brief: in a recheck that option is the lean. Round 2 reveals it as the lean ("the council's last call: option [X], [label]") through `lean.json`, with the same rules as any lean.
 
 ---
 

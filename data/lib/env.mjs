@@ -46,20 +46,3 @@ export function createEnv({ files = [], env = process.env } = {}) {
     },
   };
 }
-
-/** Upsert KEY=value in an env file without touching other lines. Creates the file 0600. */
-export function writeEnvValue(file, key, value) {
-  let lines = [];
-  try {
-    lines = fs.readFileSync(file, 'utf8').split(/\r?\n/);
-  } catch {
-    lines = ['# Mosaic local settings. Git-ignored. Never commit this file.'];
-  }
-  const safe = String(value).replace(/[\r\n]/g, ' ').trim();
-  const entry = `${key}="${safe.replace(/"/g, "'")}"`;
-  const i = lines.findIndex((l) => new RegExp(`^(?:export\\s+)?${key}\\s*=`).test(l.trim()));
-  if (i >= 0) lines[i] = entry;
-  else lines.push(entry);
-  const text = lines.filter((l, idx) => l !== '' || idx < lines.length - 1).join('\n') + '\n';
-  fs.writeFileSync(file, text, { mode: 0o600 });
-}

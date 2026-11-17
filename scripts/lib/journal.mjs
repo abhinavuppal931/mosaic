@@ -144,6 +144,9 @@ export function evalKill(k, snap) {
 
 /**
  * What changed between the last journal entry's pack and a new pack.
+ * Seats read this in Round 1 of a recheck, so it never names the last verdict's label or
+ * option: in a recheck that option is the lean, which stays sealed until Round 2. The Chair
+ * reads the label and option from the journal itself (`journal.mjs show`).
  * @returns {{ from: object, to: object, newFiling: boolean, changes: object[], material: object[], newlyMissing: object[], newlyAvailable: object[], killCriteria: object[] }}
  */
 export function diffPacks(entry, newPack, cfg = DEFAULT_CONFIG) {
@@ -175,7 +178,7 @@ export function diffPacks(entry, newPack, cfg = DEFAULT_CONFIG) {
   changes.sort((x, y) => Number(y.material) - Number(x.material) || Math.abs(y.relative ?? 0) - Math.abs(x.relative ?? 0));
   return {
     schema: 'mosaic.changes/1',
-    from: { date: entry?.date ?? null, packAsOf: entry?.pack?.asOf ?? null, hash: entry?.pack?.hash ?? null, label: entry?.label ?? null, recommended: entry?.recommended ?? null },
+    from: { date: entry?.date ?? null, packAsOf: entry?.pack?.asOf ?? null, hash: entry?.pack?.hash ?? null },
     to: { packAsOf: newPack.asOf, hash: newPack.hash },
     samePack: entry?.pack?.hash === newPack.hash,
     newFiling: Boolean(before.last_report_filed && after.last_report_filed && before.last_report_filed.value !== after.last_report_filed.value),
@@ -196,10 +199,10 @@ const fmt = (v, unit) => {
   return Number.isInteger(v) ? String(v) : v.toFixed(2);
 };
 
-/** "What changed since the last pack", for the recheck council's brief. */
+/** "What changed since the last pack", for the recheck council's brief. Names no option or label. */
 export function renderChanges(d, key) {
   const out = [`# What changed since the last pack: ${key}`, ''];
-  out.push(`Last verdict ${d.from.date ?? '-'}: ${d.from.label ?? '-'} on option ${d.from.recommended ?? '-'} (pack as of ${d.from.packAsOf ?? '-'}). New pack as of ${d.to.packAsOf}.`, '');
+  out.push(`Last council ${d.from.date ?? '-'} (pack as of ${d.from.packAsOf ?? '-'}). New pack as of ${d.to.packAsOf}.`, '');
   if (d.samePack) out.push('The new pack is identical to the last one: nothing has changed in the data.', '');
   if (d.newFiling) out.push('A new 10-K or 10-Q has been filed since the last pack.', '');
   out.push('## Kill criteria', '');

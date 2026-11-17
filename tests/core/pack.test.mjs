@@ -146,7 +146,7 @@ describe('ticker pack (zero-key stack, MSFT fixtures)', () => {
 });
 
 describe('degraded packs', () => {
-  test('no SEC User-Agent: fundamentals missing, warning says so, nothing invented', async () => {
+  test('no SEC contact: fundamentals missing, warning says so, nothing invented', async () => {
     const pack = await msftPack({ env: {} });
     assert.equal(pack.coverage.byCapability.financials, 'error');
     assert.equal(fact(pack, 'revenue').value, null);
@@ -165,7 +165,7 @@ describe('degraded packs', () => {
 
   test('a fallback is labelled on the facts it fed', async () => {
     const { router, config, series } = await makeRouter({
-      env: { MOSAIC_SEC_USER_AGENT: 'Mosaic/0.1 t t@example.com', FMP_API_KEY: 'k' },
+      env: { MOSAIC_SEC_CONTACT: 'T t@example.com', FMP_API_KEY: 'k' },
       routes: [{ match: /chart\/MSFT\?range=5d/, status: 500, body: 'x' }, { match: /stable\/quote/, file: 'synthetic/fmp-quote.json' }, ...(await import('./helpers/setup.mjs')).FREE_ROUTES, { match: /financialmodelingprep/, body: [] }],
     });
     const pack = await buildPack({ kind: 'ticker', router, config, series, symbol: 'MSFT', now: () => NOW });

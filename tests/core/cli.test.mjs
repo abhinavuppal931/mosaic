@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { FIXTURES, blockNetwork, fakeFetch } from './helpers/fake-fetch.mjs';
-import { FREE_ROUTES, NOW, SEC_UA } from './helpers/setup.mjs';
+import { FREE_ROUTES, NOW, SEC_CONTACT } from './helpers/setup.mjs';
 import { main as dataCli } from '../../data/cli.mjs';
 import { main as scoreCli } from '../../scripts/score.mjs';
 import { main as citeCli } from '../../scripts/check-citations.mjs';
@@ -14,7 +14,7 @@ import { main as journalCli } from '../../scripts/journal.mjs';
 const ROSTER = path.join(FIXTURES, 'roster.json');
 const BRAINS = path.join(FIXTURES, 'brains');
 const SESSION = path.join(FIXTURES, 'session-msft');
-const KEY_VARS = ['FMP_API_KEY', 'FRED_API_KEY', 'FINNHUB_API_KEY', 'MASSIVE_API_KEY', 'POLYGON_API_KEY', 'BLS_API_KEY', 'MOSAIC_SEC_USER_AGENT', 'MOSAIC_HOME'];
+const KEY_VARS = ['FMP_API_KEY', 'FRED_API_KEY', 'FINNHUB_API_KEY', 'MASSIVE_API_KEY', 'POLYGON_API_KEY', 'BLS_API_KEY', 'MOSAIC_SEC_CONTACT', 'MOSAIC_HOME'];
 const saved = {};
 const tmp = () => fs.mkdtempSync(path.join(os.tmpdir(), 'mosaic-cli-'));
 /** Injected seams: recorded responses, the fixture date, and a virtual clock so rate limits cost no time. */
@@ -64,7 +64,7 @@ describe('data/cli.mjs', () => {
   test('pack --ticker writes data-pack.json and data-pack.md', async () => {
     const home = tmp();
     const session = path.join(tmp(), 's');
-    fs.writeFileSync(path.join(home, '.env.local'), `MOSAIC_SEC_USER_AGENT="${SEC_UA}"\n`);
+    fs.writeFileSync(path.join(home, '.env.local'), `MOSAIC_SEC_CONTACT="${SEC_CONTACT}"\n`);
     const r = await capture(() => dataCli(['pack', '--ticker', 'msft', '--session', session, '--home', home, '--no-cache'], seams()));
     assert.equal(r.code, 0, r.err);
     const pack = JSON.parse(fs.readFileSync(path.join(session, 'data-pack.json'), 'utf8'));
@@ -74,10 +74,10 @@ describe('data/cli.mjs', () => {
     assert.ok(!r.out.includes('tests@example.com'), 'the SEC contact is never printed');
   });
 
-  test('pack without a SEC User-Agent says how to fix it', async () => {
+  test('pack without a SEC contact says how to fix it', async () => {
     const r = await capture(() => dataCli(['pack', '--ticker', 'MSFT', '--home', tmp(), '--no-cache'], seams()));
     assert.equal(r.code, 0);
-    assert.match(r.err, /no SEC User-Agent set/);
+    assert.match(r.err, /no SEC contact set/);
     assert.match(r.out, /financials\s+error/);
   });
 
@@ -110,18 +110,33 @@ describe('data/cli.mjs', () => {
     assert.equal(unknown.code, 64);
   });
 
-  test('setup stores the SEC User-Agent in .env.local and never echoes it', async () => {
+  test('setup asks for the SEC contact, stores it in the user config, and never echoes it', async () => {
     const home = tmp();
-    const r = await capture(() => dataCli(['setup', '--user-agent', 'Jane Doe jane@example.com', '--home', home]));
+    const asked = [];
+    const r = await capture(() => dataCli(['setup', '--home', home], { prompt: async (q) => (asked.push(q), 'Jane Doe jane@example.com') }));
     assert.equal(r.code, 0);
+    assert.match(asked[0], /name and email/);
     assert.ok(!r.out.includes('jane@example.com'));
-    assert.match(fs.readFileSync(path.join(home, '.env.local'), 'utf8'), /MOSAIC_SEC_USER_AGENT="Mosaic\/0\.1 Jane Doe jane@example\.com"/);
-    const bad = await capture(() => dataCli(['setup', '--user-agent', 'no email here', '--home', home]));
+    const cfg = JSON.parse(fs.readFileSync(path.join(home, 'mosaic.config.json'), 'utf8'));
+    assert.equal(cfg.providers['sec-edgar'].contact, 'Jane Doe jane@example.com');
+    const bad = await capture(() => dataCli(['setup', '--home', home], { prompt: async () => 'no email here' }));
     assert.equal(bad.code, 64);
     const st = await capture(() => dataCli(['setup', '--status', '--home', home]));
-    assert.match(st.out, /MOSAIC_SEC_USER_AGENT\s+set/);
+    assert.match(st.out, /SEC contact\s+set \(user config\)/);
     assert.match(st.out, /FMP_API_KEY\s+not set/);
     assert.ok(!st.out.includes('jane@example.com'));
+  });
+
+  test('setup refuses a contact on the command line and explains the alternatives without a terminal', async () => {
+    const home = tmp();
+    const argv = await capture(() => dataCli(['setup', '--user-agent', 'Jane jane@example.com', '--home', home]));
+    assert.equal(argv.code, 64);
+    assert.ok(!fs.existsSync(path.join(home, 'mosaic.config.json')));
+    // node --test runs files with piped stdio, so there is no terminal to ask on here.
+    const noTty = await capture(() => dataCli(['setup', '--home', home], { prompt: null }));
+    assert.equal(noTty.code, 1);
+    assert.match(noTty.out, /Set MOSAIC_SEC_CONTACT=/);
+    assert.ok(!fs.existsSync(path.join(home, 'mosaic.config.json')));
   });
 
   test('providers lists key status by name only; paths prints JSON', async () => {
@@ -145,7 +160,8 @@ describe('scripts', () => {
     const r = await capture(() => scoreCli([dir, '--roster', ROSTER]));
     assert.equal(r.code, 0);
     assert.match(r.out, /Round 3: PROCEED WITH CONDITIONS on option B/);
-    assert.match(r.out, /B \(3x8 \+ 2x6 \+ 2x5\) \/ 7 = 6\.6/);
+    assert.match(r.out, /B \(3x9 \+ 2x6 \+ 2x4\) \/ 7 = 6\.7/);
+    assert.match(r.out, /on option B: 1 agree, 1 partly agree, 1 disagree \(from scores\)/);
     assert.equal(JSON.parse(fs.readFileSync(path.join(dir, 'scores.json'), 'utf8')).label, 'PROCEED WITH CONDITIONS');
     assert.equal((await capture(() => scoreCli([]))).code, 64);
     const noRoster = await capture(() => scoreCli([dir, '--roster', path.join(tmp(), 'nope.json')]));

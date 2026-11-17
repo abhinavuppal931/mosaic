@@ -110,6 +110,14 @@ describe('recheck diff', () => {
     assert.ok(!/\u2014/.test(md));
   });
 
+  test('the diff never names the last verdict\'s label or option (it is the recheck lean)', () => {
+    const d = diffPacks(entry(), newPack());
+    assert.deepEqual(Object.keys(d.from).sort(), ['date', 'hash', 'packAsOf']);
+    const md = renderChanges(d, 'MSFT');
+    assert.ok(!/PROCEED WITH CONDITIONS|option B|on option/.test(md), md);
+    assert.match(md, /Last council 2026-11-17 \(pack as of 2026-11-17\)/);
+  });
+
   test('kill criteria with a missing fact are unknown, never assumed fine', () => {
     assert.equal(evalKill({ text: 't', fact: 'gross_margin', op: '<', value: 0.65 }, snapshotFacts({ facts: [] })).result, 'unknown');
   });

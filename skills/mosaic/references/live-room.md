@@ -2,6 +2,8 @@
 
 Every council writes one folder, `<sessions>/YYYY-MM-DD-<slug>/` (find `<sessions>` with `node <plugin root>/data/cli.mjs paths`). The Room watches that folder and plays the council as files appear; it makes no AI calls. Write each file at the moment listed, as plain UTF-8: JSON without comments or trailing commas, Markdown with the headings shown. A complete finished example lives in `tests/core/fixtures/session-msft/`.
 
+In a recheck, no file written before Round 1 is saved (`brief.md`, `changes.md`, `changes.json`, `council.json`) names the last verdict's label or option; `lean.json` reveals it in Round 2.
+
 Seat names in JSON use roster keys (`buffett`); Markdown headings use the roster's `short` name (`## Buffett`). Dates are `YYYY-MM-DD`; times are ISO 8601 UTC. Money is never shown in dollars for the user's own position: use percents.
 
 Adapted from Roast Room's live-room contract (MIT, Copyright (c) 2026 AI Automation Society; see NOTICE).
@@ -20,9 +22,9 @@ Adapted from Roast Room's live-room contract (MIT, Copyright (c) 2026 AI Automat
 | Lean reveal | `lean.json` | Chair | The lean reveal moment |
 | Round 2 | `round-2.md`, then `scores.json` | Chair, `score.mjs` | Debate cards, rebuttal arrows, moves |
 | Draft | `draft-resolution.md`, `draft.json` | Chair | The proposal |
-| Round 3 | `round-3.md`, then `scores.json` | Chair, `score.mjs` | Votes land |
+| Round 3 | `round-3.md`, then `scores.json` | Chair, `score.mjs` | Votes land (agreement from scores) |
 | Verify | `citations.json` | `scripts/check-citations.mjs` | Verified quote and fact counts |
-| Verdict | `verdict.md`, then `verdict.json` **last** | Chair | The verdict; `verdict.json` means the council is over |
+| Verdict | `verdict.md`, `citations.json` again (now covering the verdict), then `verdict.json` **last** | Chair, `check-citations.mjs` | The verdict; `verdict.json` means the council is over |
 | Journal | `<journal>/<KEY>.json` | `scripts/journal.mjs add` | Journal screen |
 
 A folder with `council.json` but no `verdict.json`, untouched for three hours, is an abandoned council.
@@ -158,7 +160,25 @@ Written after `round-1.md` is saved, never before. `option` is null when the use
 
 ## scores.json (`mosaic.scores/1`)
 
-Written by `scripts/score.mjs`; rewritten after each round. Fields: `round`, `roundsRun`, `options[]` (`id`, `label`, `kind`, `score`, `spread`, `math`), `recommended`, `band`, `label`, `underlyingLabel`, `overrides[]` (`type` pass/wait/ruin_cap/one_way_cap/insufficient, `note`, plus `seats`, `trigger`, `applied` where relevant), `spread`, `confidence`, `abstentions[]`, `votes` (`endorse`, `amend`, `dissent`; null before Round 3), `support`, `unanimousRound1`, `needsRound3`, `leanPull` (`option`, `value`, `rawShift`, `perSeat[]`, `flagged`), `evidence` (`coverage`, `citedShare`, `whyPoints`, `score`, `grade`), `thesisStrength` (stress tests), `scorecard[]` (`seat`, `short`, `dimension`, `weight`, `present`, `abstain`, `stance`, `vote`, `scores`, `pillar`, `conviction`, `evidence`, `ruin`, `door`, `movedOnTop`), `problems[]`. The Room shows these numbers as written; it does not recompute them.
+Written by `scripts/score.mjs`; rewritten after each round. The Room shows these numbers as written; it does not recompute them.
+
+| Field | Meaning |
+|---|---|
+| `round`, `roundsRun` | The round scored (the last that ran) and every round with cards |
+| `options[]` | `id`, `label`, `kind`, `score`, `spread`, `math` (e.g. `B (3x9 + 2x6 + 2x4) / 7 = 6.7`) |
+| `recommended`, `band`, `label`, `underlyingLabel` | The top option, its band, the final label, and the label INSUFFICIENT EVIDENCE replaced |
+| `overrides[]` | `type` (pass, wait, ruin_cap, one_way_cap, insufficient), `note`, plus `seats`, `trigger`, `applied` where relevant |
+| `spread`, `confidence`, `support` | See `scoring.md`; `support` is null before Round 3 |
+| `abstentions[]` | Seats that answered TOO HARD |
+| `agreement` | Counts: `{ "agrees": n, "partly agrees": n, "disagrees": n, "abstains": n }` |
+| `unanimousRound1`, `needsRound3` | The Round 1 unanimity check and the quick-mode Round 3 rule |
+| `leanPull` | `option`, `value`, `rawShift`, `perSeat[]`, `flagged` |
+| `evidence` | `coverage`, `citedShare`, `whyPoints`, `score`, `grade` |
+| `thesisStrength` | Stress tests only |
+| `scorecard[]` | Per seat: `seat`, `short`, `dimension`, `weight`, `present`, `abstain`, `stance`, **`agreement`**, `ownVote`, `ownLine`, `amendment`, `scoresCarriedFrom`, `scores`, `pillar`, `conviction`, `evidence`, `ruin`, `door`, `movedOnTop` |
+| `problems[]` | Unreadable or partial score lines (with the line the seat wrote), carried-forward scores, unreadable flags, missing cards, a WAIT without a trigger |
+
+**`scorecard[].agreement`** is derived from the seat's scores on the recommended option, never from its VOTE words: `"agrees"` when its top-scored option is the recommended one (ties at the top count), `"disagrees"` when it scores the recommended option 4 or below, otherwise `"partly agrees"`; `"abstains"` for TOO HARD; null when there is no recommended option. The field name and these four values are stable; the Room relies on them. The seat's own words stay separate and verbatim: `ownVote` (its VOTE line, e.g. "Endorse with amendment"), `amendment` (AMENDMENT OR DISSENT) and `ownLine` (ONE LINE FOR THE INVESTOR). `scoresCarriedFrom` is the earlier round whose scores were reused when the seat's card in this round had none readable (also listed in `problems`).
 
 ## draft.json
 
@@ -183,7 +203,7 @@ Skip in quick mode when Round 3 is skipped. `wait_for_pitch` is `{ "trigger": ".
 
 ## citations.json (`mosaic.citations/1`)
 
-Written by `scripts/check-citations.mjs`: `ok`, `stats` (`factCitations`, `factIdsUnknown`, `factIdsMissingData`, `quotesVerified`, `quotesInternal`, `quotesUnverified`, `uncitedNumbers`), `errors[]` and `warnings[]` (`type`, `file`, `seat`, `id`, `quote`, `detail`), `files[]`.
+Written by `scripts/check-citations.mjs`: `ok`, `stats` (`factCitations`, `factIdsUnknown`, `factIdsMissingData`, `quotesVerified`, `quotesInternal`, `quotesUnverified`, `uncitedNumbers`), `errors[]` and `warnings[]` (`type`, `file`, `seat`, `id`, `quote`, `detail`), `files[]` (round files, `draft-resolution.md`, `verdict.md`, and `verdict.json` as the text of all its string values), and `verdictChecked` (true once a verdict file existed when it ran). The final `citations.json` must have `verdictChecked: true`.
 
 ## verdict.json (`mosaic.verdict/1`), written last
 
@@ -191,7 +211,7 @@ Written by `scripts/check-citations.mjs`: `ok`, `stats` (`factCitations`, `factI
 {
   "schema": "mosaic.verdict/1",
   "label": "PROCEED WITH CONDITIONS",
-  "call": "One or two sentences naming the option.",
+  "call": "The council would ... (one or two sentences naming the option, attributed to the council, never an instruction).",
   "recommended": "B",
   "why": [{ "point": "One line with fact ids.", "seat": "buffett", "framework": "Economic castle" }],
   "minority": { "seat": "burry", "quote": "Copied from a card.", "would_have_to_be_true": "One line." },
@@ -214,15 +234,15 @@ Written by `scripts/check-citations.mjs`: `ok`, `stats` (`factCitations`, `factI
 }
 ```
 
-`label` matches `scores.json`. Put the three strongest arguments first in `why` and at most three `next_steps`. Kill criteria with `fact`, `op` and `value` are checked automatically by `/mosaic recheck`; others are checked by the Chair. `share_line` feeds the share card (one line per seat, the sharpest dissent).
+`label` matches `scores.json`. `call` always starts "The council would" (or similar attribution) and never instructs the investor. Put the three strongest arguments first in `why` and at most three `next_steps`. Kill criteria with `fact`, `op` and `value` are checked automatically by `/mosaic recheck`; others are checked by the Chair. `share_line` feeds the share card (one line per seat, the sharpest dissent).
 
 ## verdict.md
 
-From `report-template.md`. Ends with the disclaimer footer.
+From `report-template.md`. The disclaimer line "Mosaic grades how a decision was made. It is not investment advice." sits directly under the call, and the footer repeats the full disclaimer.
 
 ## changes.json (`mosaic.changes/1`) and changes.md (rechecks)
 
-Written by `scripts/journal.mjs diff`: `from` (last verdict date, pack as-of, hash, label, recommended), `to` (new pack as-of, hash), `samePack`, `newFiling`, `changes[]` (`key`, `label`, `unit`, `before`, `after`, `delta`, `relative`, `material`, `id` in the new pack), `material[]`, `newlyMissing[]`, `newlyAvailable[]`, `killCriteria[]` (each kill criterion with `result`: tripped | holding | unknown | manual, and `current`). `changes.md` is the readable version the recheck brief leads with.
+Written by `scripts/journal.mjs diff`: `from` (last council date, pack as-of, hash; deliberately no label or option, because in a recheck the last verdict's option is the lean and seats read this before Round 2), `to` (new pack as-of, hash), `samePack`, `newFiling`, `changes[]` (`key`, `label`, `unit`, `before`, `after`, `delta`, `relative`, `material`, `id` in the new pack), `material[]`, `newlyMissing[]`, `newlyAvailable[]`, `killCriteria[]` (each kill criterion with `result`: tripped | holding | unknown | manual, and `current`). `changes.md` is the readable version the recheck brief leads with.
 
 ## journal/<KEY>.json (`mosaic.journal/1`)
 

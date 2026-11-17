@@ -68,9 +68,13 @@ export function checkSession({ session, brainsDir, roster, resolve }) {
     .concat(['draft-resolution.md', 'verdict.md'].filter((f) => fs.existsSync(path.join(session, f))));
   const brief = norm(read('brief.md') || '');
   let seen = '';
+  // verdict.json is checked as the text of all its string values.
+  const verdictJson = read('verdict.json');
+  if (verdictJson) files.push('verdict.json');
+  const textOf = (file) => (file === 'verdict.json' ? jsonStrings(JSON.parse(verdictJson)).join('\n') : read(file));
 
   for (const file of files) {
-    const text = read(file);
+    const text = textOf(file);
     // Fact ids
     for (const m of text.matchAll(FACT_IN_BRACKETS)) {
       for (const id of m[1].match(/\bF\d{3,4}\b/g) || []) {
@@ -123,5 +127,12 @@ export function checkSession({ session, brainsDir, roster, resolve }) {
     seen += ' ' + norm(text);
   }
 
-  return { schema: 'mosaic.citations/1', ok: errors.length === 0, stats, errors, warnings, files };
+  return { schema: 'mosaic.citations/1', ok: errors.length === 0, stats, errors, warnings, files, verdictChecked: files.some((f) => f.startsWith('verdict.')) };
+}
+
+function jsonStrings(v, out = []) {
+  if (typeof v === 'string') out.push(v);
+  else if (Array.isArray(v)) v.forEach((x) => jsonStrings(x, out));
+  else if (v && typeof v === 'object') Object.values(v).forEach((x) => jsonStrings(x, out));
+  return out;
 }

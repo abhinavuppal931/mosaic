@@ -1,7 +1,7 @@
 {
   "schema": "mosaic.verdict/1",
   "label": "PROCEED WITH CONDITIONS",
-  "call": "Start small in Microsoft now and add only when the capex shows up in cash flow.",
+  "call": "The council would start small in Microsoft now and add only when the capex shows up in cash flow.",
   "recommended": "B",
   "why": [{ "point": "Returns on capital near 30% [F002].", "seat": "buffett", "framework": "Economic castle" }],
   "minority": { "seat": "burry", "quote": "the yield [F004] does not pay for the risk; wait.", "would_have_to_be_true": "FCF yield stays under 2% for a year." },
@@ -11,7 +11,7 @@
   "recheck": { "date": "2027-01-29", "triggers": ["Next 10-Q, expected around 2027-01-27 [F008]"] },
   "cheapest_test": "Watch one more quarter of capex against operating cash flow.",
   "sizing_note": "The record shows a 37% fall [F005]. Ask what share of your portfolio you could watch halve and still hold.",
-  "lean_pull_note": "Scores moved 0.2 points toward the investor's lean after the reveal.",
+  "lean_pull_note": "Scores moved 0.1 points toward the investor's lean after the reveal.",
   "data_health": "Prices from Yahoo (best effort), fundamentals from SEC EDGAR, no news or estimates.",
   "override_note": ""
 }

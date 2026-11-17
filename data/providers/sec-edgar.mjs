@@ -1,7 +1,7 @@
 // SEC EDGAR (data.sec.gov): company profile, XBRL fundamentals (companyfacts), insider
 // trades (Form 4) and 13F-HR holdings for a manager. Free, no key. The SEC requires a
-// descriptive User-Agent with contact details; `node data/cli.mjs setup` stores it in the
-// git-ignored .env.local as MOSAIC_SEC_USER_AGENT.
+// User-Agent with contact details: a name and email from MOSAIC_SEC_CONTACT or from the
+// user's mosaic.config.json (`node data/cli.mjs setup` writes the latter).
 import fs from 'node:fs';
 import { ProviderError, result, isoDate } from '../lib/contract.mjs';
 
@@ -14,12 +14,17 @@ const DAY = 86_400_000;
 const pad = (cik) => String(cik).replace(/\D/g, '').padStart(10, '0');
 const days = (a, b) => (Date.parse(b) - Date.parse(a)) / DAY;
 
+/** The User-Agent the SEC asks for: the client name plus the user's contact. */
+export function secUserAgent(contact) {
+  return `Mosaic/0.1 (${contact})`;
+}
+
 function headers(ctx) {
-  const ua = ctx.config?.userAgent || '';
-  if (!/\S+@\S+\.\S+/.test(ua)) {
-    throw new ProviderError('sec-edgar: the SEC needs a User-Agent with your contact email. Run: node data/cli.mjs setup', { kind: 'config', provider: 'sec-edgar' });
+  const contact = ctx.config?.contact || '';
+  if (!/\S+@\S+\.\S+/.test(contact)) {
+    throw new ProviderError('sec-edgar: the SEC needs your name and email as a contact. Set MOSAIC_SEC_CONTACT, or run: node data/cli.mjs setup', { kind: 'config', provider: 'sec-edgar' });
   }
-  return { 'user-agent': ua, accept: 'application/json, text/xml, */*' };
+  return { 'user-agent': secUserAgent(contact), accept: 'application/json, text/xml, */*' };
 }
 
 async function tickerMap(ctx) {

@@ -70,7 +70,10 @@ export function createRouter(o) {
   function ctxFor(adapter, key) {
     const c = pcfg(adapter.id);
     const config = { ...c };
-    if (c.userAgentEnv) config.userAgent = env.get(c.userAgentEnv);
+    // A contact string (the SEC asks for a name and email) comes from an env var or the
+    // user's config file, never from the command line.
+    const contact = (c.contactEnv && env.get(c.contactEnv)) || c.contact || '';
+    if (contact) config.contact = String(contact).replace(/[\r\n]/g, ' ').trim();
     return {
       http: httpFor(adapter.id),
       key,

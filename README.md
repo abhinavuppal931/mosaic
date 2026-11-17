@@ -2,7 +2,7 @@
 
 A council of investing legends for Claude Code. Bring an investment decision; thirteen simulated investors (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry by default; Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee on call) argue it over three rounds from one shared, sourced fact sheet. A Chair returns a graded verdict that keeps the dissent, with a pre-mortem, kill criteria and a date to re-check, and remembers it for next time.
 
-> **Simulated council for education. Not financial advice.** Every seat is a simulation built from that investor's public work. It is not the person, is not affiliated with or endorsed by them, and does not speak for them. Verbatim quotes appear only with a source id. Mosaic grades your reasoning and decision process, never a security: no price targets (valuation is a range and "what the price implies"), and position sizing appears only as education about survivable loss. Numbers carry their as-of dates; verify them against the filings before acting.
+> **Mosaic grades how a decision was made. It is not investment advice.** Every seat is a simulation built from that investor's public work. It is not the person, is not affiliated with or endorsed by them, and does not speak for them. Verbatim quotes appear only with a source id. Mosaic grades your reasoning and decision process, never a security: no price targets (valuation is a range and "what the price implies"), and position sizing appears only as education about survivable loss. Numbers carry their as-of dates; verify them against the filings before acting.
 
 ## Why it is different
 
@@ -88,13 +88,13 @@ Out of the box Mosaic uses free sources only:
 
 Ratios (P/E, ROIC, FCF yield, margins, leverage, reverse DCF and the rest) are computed locally from the filings, with the formula stored on every fact.
 
-The SEC asks every client to identify itself. Once:
+The SEC asks every client to identify itself with a name and email. Once, in a terminal:
 
 ```bash
-node data/cli.mjs setup --user-agent "Your Name you@example.com"
+node data/cli.mjs setup
 ```
 
-This writes `MOSAIC_SEC_USER_AGENT` to `.env.local` in your Mosaic home (git-ignored, readable only by you). In a plugin install, `/mosaic` asks for it on first run and does this for you.
+It asks for your name and email and saves them to `mosaic.config.json` in your Mosaic home (git-ignored, readable only by you). They are never taken from the command line, so they stay out of shell history. You can instead set `MOSAIC_SEC_CONTACT="Your Name you@example.com"` in your environment or in `.env.local`. In a plugin install, `/mosaic` asks on first run and saves it for you.
 
 Try it:
 
@@ -167,9 +167,9 @@ For macro series, map your series ids to Mosaic's canonical ids in `data/series.
 2. **Data pack**: `node data/cli.mjs pack` writes `data-pack.json` and a readable `data-pack.md` with a data-health table and per-seat evidence.
 3. **Round 1, blind**: every seat answers in parallel on the evidence alone. A seat may say TOO HARD and abstain.
 4. **Round 2, debate**: the lean is revealed; seats rebut each other, concede, and rescore.
-5. **Draft and Round 3**: conditions, pre-mortem, kill criteria, re-check date; seats endorse, amend or dissent.
+5. **Draft and Round 3**: conditions, pre-mortem, kill criteria, re-check date; seats rescore the options and endorse, amend or dissent in their own words. Whether each seat agrees is derived from its scores.
 6. **Verify**: `scripts/check-citations.mjs` checks every quote against the seat's brain and every fact id against the pack.
-7. **Verdict**: `scripts/score.mjs` computes the label and the numbers; the Chair writes `verdict.md` and journals it.
+7. **Verdict**: `scripts/score.mjs` computes the label and the numbers; the Chair writes `verdict.md`, checks it with `check-citations.mjs` again, writes `verdict.json`, and journals it.
 
 Session file formats (the contract the Room reads) are in `skills/mosaic/references/live-room.md`.
 

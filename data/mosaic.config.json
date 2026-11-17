@@ -1,5 +1,5 @@
 {
-  "$comment": "Mosaic data settings. Copy this file to your Mosaic home as mosaic.config.json to override any part of it (the two are deep-merged; arrays replace). Keys never go here: they come from environment variables or the git-ignored .env.local in your Mosaic home.",
+  "$comment": "Mosaic data settings. Copy this file to your Mosaic home as mosaic.config.json to override any part of it (the two are deep-merged; arrays replace). Keys never go here: they come from environment variables or the git-ignored .env.local in your Mosaic home. The SEC contact (your name and email, which the SEC requires) comes from MOSAIC_SEC_CONTACT or from \"providers\": { \"sec-edgar\": { \"contact\": \"Name email\" } } in your own mosaic.config.json (run: node data/cli.mjs setup).",
   "chains": {
     "profile": ["sec-edgar", "fmp", "finnhub"],
     "quote": ["yahoo", "fmp", "finnhub", "massive"],
@@ -13,7 +13,7 @@
     "estimates": ["fmp", "finnhub"]
   },
   "providers": {
-    "sec-edgar": { "rps": 8, "userAgentEnv": "MOSAIC_SEC_USER_AGENT" },
+    "sec-edgar": { "rps": 8, "contactEnv": "MOSAIC_SEC_CONTACT" },
     "yahoo": { "rps": 2 },
     "treasury": { "rps": 4 },
     "bls": { "rps": 1, "keyEnv": "BLS_API_KEY" },

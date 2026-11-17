@@ -11,6 +11,7 @@ import { paths } from '../data/lib/paths.mjs';
 import { loadRoster, seatResolver } from './lib/roster.mjs';
 import { readSession } from './lib/session.mjs';
 import { scoreCouncil } from './lib/scoring.mjs';
+import { isMain } from '../data/lib/entry.mjs';
 
 export function main(argv) {
   const args = parseArgs(argv, { booleans: ['json', 'noWrite'] });
@@ -40,6 +41,8 @@ export function main(argv) {
     console.log(`Round ${result.round}: ${result.label}${result.underlyingLabel ? ` (underlying ${result.underlyingLabel})` : ''} on option ${result.recommended ?? '-'}`);
     for (const o of result.options) console.log(`  ${o.math}`);
     console.log(`  spread ${result.spread ?? '-'} · confidence ${result.confidence ?? '-'}/10 · evidence ${result.evidence.grade} (coverage ${Math.round(result.evidence.coverage * 100)}%, cited ${Math.round(result.evidence.citedShare * 100)}%)${result.leanPull ? ` · lean pull ${result.leanPull.value ?? '-'} toward ${result.leanPull.option}${result.leanPull.flagged ? ' (FLAGGED)' : ''}` : ''}`);
+    const ag = result.agreement;
+    console.log(`  on option ${result.recommended ?? '-'}: ${ag.agrees} agree, ${ag['partly agrees']} partly agree, ${ag.disagrees} disagree (from scores)`);
     if (result.abstentions.length) console.log(`  abstained (TOO HARD): ${result.abstentions.join(', ')}`);
     for (const o of result.overrides) console.log(`  override ${o.type}: ${o.note}`);
     if (result.unanimousRound1?.unanimous) console.log(`  Round 1 was unanimous on ${result.unanimousRound1.option}: make the strongest unargued case a crux in Round 2`);
@@ -49,5 +52,4 @@ export function main(argv) {
   return 0;
 }
 
-const invoked = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
-if (invoked) process.exit(main(process.argv.slice(2)));
+if (isMain(import.meta.url)) process.exit(main(process.argv.slice(2)));

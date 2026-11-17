@@ -12,6 +12,7 @@ import { parseArgs } from '../data/lib/args.mjs';
 import { paths } from '../data/lib/paths.mjs';
 import { loadRoster, seatResolver } from './lib/roster.mjs';
 import { checkSession } from './lib/citations.mjs';
+import { isMain } from '../data/lib/entry.mjs';
 
 export function main(argv) {
   const args = parseArgs(argv, { booleans: ['json', 'noWrite'] });
@@ -33,6 +34,7 @@ export function main(argv) {
   if (args.json) console.log(JSON.stringify(report, null, 2));
   else {
     const s = report.stats;
+    if (!report.verdictChecked) console.log('note: no verdict.md or verdict.json yet; run this again after writing the verdict');
     console.log(`fact ids cited: ${s.factCitations} (unknown ${s.factIdsUnknown}, pointing at missing data ${s.factIdsMissingData}); quotes verified: ${s.quotesVerified}; quotes of earlier rounds or the brief: ${s.quotesInternal}; unverified: ${s.quotesUnverified}; numbers without a fact id: ${s.uncitedNumbers}`);
     for (const e of report.errors) console.log(`  FAIL ${e.type} [${e.file}${e.seat ? ` ${e.seat}` : ''}] ${e.id || ''} ${e.quote ? `"${e.quote}" ` : ''}${e.detail}`);
     for (const w of report.warnings) console.log(`  warn ${w.type} [${w.file}${w.seat ? ` ${w.seat}` : ''}] ${w.id || ''} ${w.detail}`);
@@ -40,5 +42,4 @@ export function main(argv) {
   return report.ok ? 0 : 1;
 }
 
-const invoked = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
-if (invoked) process.exit(main(process.argv.slice(2)));
+if (isMain(import.meta.url)) process.exit(main(process.argv.slice(2)));

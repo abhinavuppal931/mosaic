@@ -2,7 +2,7 @@
 // on any URL it does not know.
 import { test, describe, before } from 'node:test';
 import assert from 'node:assert/strict';
-import { makeRouter, FREE_ROUTES, NOW, SEC_UA } from './helpers/setup.mjs';
+import { makeRouter, FREE_ROUTES, NOW, SEC_CONTACT } from './helpers/setup.mjs';
 import { fixture, blockNetwork } from './helpers/fake-fetch.mjs';
 import { normalizeCompanyFacts, parseForm4, parse13F } from '../../data/providers/sec-edgar.mjs';
 import { parseCurveCsv } from '../../data/providers/treasury.mjs';
@@ -96,18 +96,26 @@ describe('sec-edgar', () => {
     assert.equal(r.attempts[0].status, 'empty');
   });
 
-  test('without a User-Agent EDGAR fails with a config error that names the fix', async () => {
+  test('without a contact EDGAR fails with a config error that names the fix', async () => {
     const { router } = await makeRouter({ env: {} });
     const r = await router.get('financials', 'MSFT', {}, only('sec-edgar'));
     assert.equal(r.meta.status, 'error');
     assert.equal(r.attempts[0].kind, 'config');
+    assert.match(r.attempts[0].note, /MOSAIC_SEC_CONTACT/);
     assert.match(r.attempts[0].note, /cli\.mjs setup/);
   });
 
-  test('sends the configured User-Agent', async () => {
+  test('sends a User-Agent built from the contact in MOSAIC_SEC_CONTACT', async () => {
     const { router, fetchImpl } = await makeRouter();
     await router.get('profile', 'MSFT', {}, only('sec-edgar'));
-    assert.ok(fetchImpl.calls.every((c) => c.init.headers['user-agent'] === SEC_UA));
+    assert.ok(fetchImpl.calls.every((c) => c.init.headers['user-agent'] === `Mosaic/0.1 (${SEC_CONTACT})`));
+  });
+
+  test('the contact can come from the user config file instead of the environment', async () => {
+    const { router, fetchImpl } = await makeRouter({ env: {}, overrides: { providers: { 'sec-edgar': { contact: 'Config User config@example.com' } } } });
+    const r = await router.get('profile', 'MSFT', {}, only('sec-edgar'));
+    assert.equal(r.meta.status, 'ok');
+    assert.equal(fetchImpl.calls[0].init.headers['user-agent'], 'Mosaic/0.1 (Config User config@example.com)');
   });
 });
 

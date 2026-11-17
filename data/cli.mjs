@@ -5,7 +5,7 @@
 //   node data/cli.mjs pack --macro [--session <dir>]
 //   node data/cli.mjs pack --portfolio holdings.json [--session <dir>]
 //   node data/cli.mjs check-provider <id> [--symbol AAPL] [--series ust_10y]
-//   node data/cli.mjs setup [--user-agent "Your Name you@example.com"] [--status]
+//   node data/cli.mjs setup [--status]
 //   node data/cli.mjs providers
 //   node data/cli.mjs paths
 //
@@ -16,21 +16,22 @@ import path from 'node:path';
 import readline from 'node:readline/promises';
 import { parseArgs } from './lib/args.mjs';
 import { paths as resolvePaths } from './lib/paths.mjs';
-import { loadConfig, loadSeries } from './lib/config.mjs';
-import { createEnv, writeEnvValue } from './lib/env.mjs';
+import { loadConfig, loadSeries, writeUserConfigValue } from './lib/config.mjs';
+import { createEnv } from './lib/env.mjs';
 import { loadAdapters } from './providers/index.mjs';
 import { createRouter } from './router.mjs';
 import { buildPack } from './packs/build.mjs';
 import { renderPackMarkdown } from './packs/render.mjs';
 import { readHoldings } from './packs/portfolio.mjs';
 import { checkProvider } from './lib/contract-test.mjs';
+import { isMain } from './lib/entry.mjs';
 
 const HELP = `Mosaic data CLI
 
   pack --ticker <SYMBOL> | --macro | --portfolio <holdings.json>   build a data pack
        [--session <dir>]  write data-pack.json and data-pack.md there (default: print a summary)
   check-provider <id> [--symbol AAPL] [--series <canonical id>]   contract-test one adapter
-  setup [--user-agent "Name email"] [--status]                       store the SEC User-Agent, show key status
+  setup [--status]                                                   ask for and store your SEC contact; show what is set
   providers                                                          list providers and whether keys are set
   paths                                                              print where sessions, journal and cache live
 
@@ -54,8 +55,8 @@ async function cmdPack(args, inject) {
   const ctx = await context(args, inject);
   warnProblems(ctx.problems);
   const holdings = kind === 'portfolio' ? readHoldings(path.resolve(args.portfolio)) : undefined;
-  if (kind !== 'macro' && !ctx.env.get(ctx.config.providers['sec-edgar']?.userAgentEnv || 'MOSAIC_SEC_USER_AGENT')) {
-    process.stderr.write('Note: no SEC User-Agent set, so EDGAR is skipped. Run: node data/cli.mjs setup\n');
+  if (kind !== 'macro' && !contactSource(ctx.config, ctx.env)) {
+    process.stderr.write('Note: no SEC contact set, so EDGAR is skipped. Set MOSAIC_SEC_CONTACT or run: node data/cli.mjs setup\n');
   }
   const pack = await buildPack({ kind, router: ctx.router, config: ctx.config, series: loadSeries(), symbol: kind === 'ticker' ? args.ticker.toUpperCase() : undefined, holdings, ...(inject.now ? { now: inject.now } : {}) });
   if (args.session && args.session !== true) {
@@ -93,31 +94,55 @@ async function cmdCheckProvider(args, inject) {
   return report.results.some((r) => r.result === 'fail') ? 1 : 0;
 }
 
-async function cmdSetup(args) {
+const CONTACT_PATH = ['providers', 'sec-edgar', 'contact'];
+const CONTACT_PROMPT = 'The SEC asks every client to identify itself. Your name and email (e.g. "Jane Doe jane@example.com"): ';
+
+/** Where the SEC contact is set: 'env', 'config' or null. Never returns the value. */
+function contactSource(config, env) {
+  const c = config.providers['sec-edgar'] || {};
+  if (c.contactEnv && env.get(c.contactEnv)) return 'env';
+  if (c.contact) return 'config';
+  return null;
+}
+
+/**
+ * Store the SEC contact. It is never read from the command line (argv lands in shell
+ * history and process lists): `setup` asks on the terminal and writes it to the user's
+ * mosaic.config.json; or the user sets MOSAIC_SEC_CONTACT themselves.
+ */
+async function cmdSetup(args, inject) {
   const p = resolvePaths({ home: args.home, pluginData: args.pluginData });
   const config = loadConfig({ userConfigPath: p.userConfig });
-  const uaEnv = config.providers['sec-edgar']?.userAgentEnv || 'MOSAIC_SEC_USER_AGENT';
+  const contactEnv = config.providers['sec-edgar']?.contactEnv || 'MOSAIC_SEC_CONTACT';
   if (args.status) return status(p, config);
-  let ua = typeof args.userAgent === 'string' ? args.userAgent : '';
-  if (!ua && process.stdin.isTTY) {
-    const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-    ua = await rl.question('The SEC asks every client to identify itself. Enter your name and email (e.g. "Jane Doe jane@example.com"): ');
+  if (args.userAgent || args.contact) throw usage('setup does not take your name or email as an argument; run it in a terminal and it will ask, or set ' + contactEnv);
+  const ask = inject.prompt || (process.stdin.isTTY ? askTerminal : null);
+  if (!ask) {
+    console.log(`No terminal to ask on. Set ${contactEnv}="Your Name you@example.com" in your environment or in ${p.envFile}, or add "providers": { "sec-edgar": { "contact": "Your Name you@example.com" } } to ${p.userConfig}.`);
+    return 1;
+  }
+  const contact = String((await ask(CONTACT_PROMPT)) || '').replace(/[\r\n]/g, ' ').trim();
+  if (!/\S+@\S+\.\S+/.test(contact)) throw usage('the SEC contact must include an email address, e.g. "Jane Doe jane@example.com"');
+  writeUserConfigValue(p.userConfig, CONTACT_PATH, contact);
+  ensureGitignore(p.home);
+  console.log(`Saved your SEC contact to ${p.userConfig} (git-ignored, readable only by you). EDGAR is ready.`);
+  return 0;
+}
+
+async function askTerminal(question) {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  try {
+    return await rl.question(question);
+  } finally {
     rl.close();
   }
-  ua = String(ua).trim();
-  if (!/\S+@\S+\.\S+/.test(ua)) throw usage('the SEC User-Agent must include a contact email, e.g. --user-agent "Jane Doe jane@example.com"');
-  fs.mkdirSync(p.home, { recursive: true });
-  writeEnvValue(p.envFile, uaEnv, ua.startsWith('Mosaic') ? ua : `Mosaic/0.1 ${ua}`);
-  ensureGitignore(p.home);
-  console.log(`Saved ${uaEnv} to ${p.envFile} (git-ignored). EDGAR is ready.`);
-  return 0;
 }
 
 function status(p, config) {
   const env = createEnv({ files: [p.envFile] });
-  console.log(`Mosaic home: ${p.home}\nSettings file: ${p.envFile}${fs.existsSync(p.envFile) ? '' : ' (not created yet)'}`);
-  const uaEnv = config.providers['sec-edgar']?.userAgentEnv || 'MOSAIC_SEC_USER_AGENT';
-  console.log(`  ${uaEnv.padEnd(24)} ${env.has(uaEnv) ? 'set' : 'not set (run setup)'}`);
+  console.log(`Mosaic home: ${p.home}\nKeys file: ${p.envFile}${fs.existsSync(p.envFile) ? '' : ' (not created yet)'}\nUser config: ${p.userConfig}${fs.existsSync(p.userConfig) ? '' : ' (not created yet)'}`);
+  const src = contactSource(config, env);
+  console.log(`  ${'SEC contact'.padEnd(24)} ${src === 'env' ? `set (${config.providers['sec-edgar'].contactEnv})` : src === 'config' ? 'set (user config)' : 'not set (run setup)'}`);
   for (const [id, c] of Object.entries(config.providers)) if (c.keyEnv) console.log(`  ${c.keyEnv.padEnd(24)} ${env.has(c.keyEnv) ? 'set' : 'not set'}  (${id})`);
   return 0;
 }
@@ -126,7 +151,8 @@ function ensureGitignore(home) {
   const gi = path.join(home, '.gitignore');
   if (!fs.existsSync(path.join(home, '.git'))) return;
   const text = fs.existsSync(gi) ? fs.readFileSync(gi, 'utf8') : '';
-  if (!/^\.env\.local$/m.test(text) && !/^\.env\*$/m.test(text)) fs.appendFileSync(gi, `${text.endsWith('\n') || !text ? '' : '\n'}.env.local\n`);
+  const need = ['.env.local', '/mosaic.config.json'].filter((line) => !new RegExp(`^${line.replace(/[.*/]/g, '\\$&')}$`, 'm').test(text));
+  if (need.length) fs.appendFileSync(gi, `${text.endsWith('\n') || !text ? '' : '\n'}${need.join('\n')}\n`);
 }
 
 async function cmdProviders(args, inject) {
@@ -158,7 +184,7 @@ function usage(msg) {
 
 /**
  * @param {string[]} argv
- * @param {{ fetchImpl?: typeof fetch, now?: () => number, clock?: () => number, sleep?: (ms: number) => Promise<void> }} [inject] test seams
+ * @param {{ fetchImpl?: typeof fetch, now?: () => number, clock?: () => number, sleep?: (ms: number) => Promise<void>, prompt?: (q: string) => Promise<string> }} [inject] test seams
  */
 export async function main(argv, inject = {}) {
   const args = parseArgs(argv, { booleans: ['macro', 'noCache', 'verbose', 'status', 'help'] });
@@ -170,7 +196,7 @@ export async function main(argv, inject = {}) {
     }
     if (cmd === 'pack') return await cmdPack(args, inject);
     if (cmd === 'check-provider') return await cmdCheckProvider(args, inject);
-    if (cmd === 'setup') return await cmdSetup(args);
+    if (cmd === 'setup') return await cmdSetup(args, inject);
     if (cmd === 'providers') return await cmdProviders(args, inject);
     if (cmd === 'paths') return cmdPaths(args);
     throw usage(`unknown command "${cmd}"`);
@@ -181,5 +207,4 @@ export async function main(argv, inject = {}) {
   }
 }
 
-const invoked = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
-if (invoked) main(process.argv.slice(2)).then((code) => process.exit(code));
+if (isMain(import.meta.url)) main(process.argv.slice(2)).then((code) => process.exit(code));

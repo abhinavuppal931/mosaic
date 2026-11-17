@@ -10,9 +10,13 @@ The last round that ran (Round 3 if it ran, else Round 2, else Round 1). Fields 
 
 A seat that answers `STANCE: TOO HARD` (or `OPTION SCORES: n/a`) abstains. It is listed in `abstentions`, shown in the scorecard, and excluded from every average. If every seat abstains, the label is INSUFFICIENT EVIDENCE.
 
+## Readable cards
+
+A seat counts toward the option math only if its card scores **every** option. Every option is averaged over that same set of seats, so no option is judged by a different jury. Score lines are read tolerantly (`A 7/10`, `A: 7`, `A (full position): 7`, `Option A - 7`, `A 7 out of 10`). A seat whose line still cannot be read for every option is left out and listed in `problems` with the line it wrote; send that card back once. If a later round's card has no readable scores, the seat's earlier scores are reused only with a flag: `scoresCarriedFrom` on its scorecard row and a line in `problems`. Flags (`RUIN RISK`, `EVIDENCE`, `DOOR`) match whole words and respect negation: "unlikely" and "not likely" read as `possible`, never as `likely`; a flag that cannot be read is listed in `problems`.
+
 ## Option score (conviction)
 
-For each option, over the seats that scored it:
+For each option, over the seats in the scoring set:
 
 `option score = sum(weight x score) / sum(weight)`, rounded to one decimal.
 
@@ -31,7 +35,7 @@ For each option, over the seats that scored it:
 
 1. **Top option is "don't act"** (`kind: none`): the label is PASS, with a note that the council's best option is not to act.
 2. **WAIT FOR THE PITCH**: the top option is a `wait` option scoring 4.5 or more, or the Chair sets `wait_for_pitch.trigger` in `draft.json` (a good business whose price or trigger is not met). It always names the trigger; a missing trigger is reported as a problem.
-3. **Ruin cap**: any scoring seat ending at `RUIN RISK: likely` caps the label at RESHAPE THE THESIS, unless `draft.json` lists that seat in `ruin_mitigations` with `endorsed: true` and the seat did not vote Dissent in Round 3. One seat at ruin outweighs six enthusiastic seats.
+3. **Ruin cap**: any scoring seat ending at `RUIN RISK: likely` caps the label at RESHAPE THE THESIS, unless `draft.json` lists that seat in `ruin_mitigations` with `endorsed: true` and the seat's agreement (below) is not `disagrees`. One seat at ruin outweighs six enthusiastic seats.
 4. **One-way door cap**: when more than half of the scoring seats call it a one-way door and the spread on the recommended option is 4 or more, the label is capped at PROCEED WITH CONDITIONS and the cheapest test comes first.
 5. **INSUFFICIENT EVIDENCE** replaces the label when the pack's coverage score is below 50%, or when more than half of the scoring seats rate their evidence `thin`. `scores.json` keeps the `underlyingLabel` so the report can say what the council would have said with better data.
 
@@ -44,8 +48,14 @@ Caps only lower a label; they never raise one, and they do not apply to WAIT FOR
 - **Council confidence** (1 to 10): average CONVICTION x 2, rounded, minus 1 when the spread is 5 or more.
 - **Evidence quality**: `0.5 x pack coverage + 0.5 x share of WHY points (Rounds 1 and 2) that cite at least one fact id`. High at 0.75 or more, medium at 0.5 or more, else low.
 - **Lean pull**: how far the seats moved toward the investor's lean after the reveal. Per seat: (final score minus Round 1 score on the leaned option) minus the average of the same change on the other options. Weighted mean over seats that scored the leaned option in both rounds. Flagged at 1.0 or more: the report then names the seats that moved and the arguments they gave. `rawShift` is the plain change on the leaned option.
-- **Votes and support** (Round 3): endorse, amend and dissent counts; support is the weighted mean of FINAL SCORE (how well the resolution captured the room, not whether the idea is good).
-- **Scorecard**: one row per seat with its weight, dimension (from the roster), stance, vote, option scores, pillar score, conviction, evidence, ruin and door flags, and how far it moved on the recommended option. Any pillar score at 4 or below gets a named fix in the conditions, even when the label is good.
+- **Agreement** (every round, derived from scores, never from the VOTE words), per seat against the recommended option:
+  - `agrees` when the seat's top-scored option is the recommended one (a tie at the top counts);
+  - `disagrees` when the seat scores the recommended option 4 or below;
+  - `partly agrees` otherwise; `abstains` for TOO HARD.
+
+  `scores.json` carries it as `scorecard[].agreement` and the counts as `agreement`. The seat's own words stay separate and verbatim: `ownVote` (its VOTE line), `amendment` and `ownLine`. When the words and the scores disagree, the report shows both and the label follows the scores.
+- **Support** (Round 3): the weighted mean of FINAL SCORE (how well the resolution captured the room, not whether the idea is good).
+- **Scorecard**: one row per seat with its weight, dimension (from the roster), stance, agreement, its own VOTE words, option scores, pillar score, conviction, evidence, ruin and door flags, and how far it moved on the recommended option. Any pillar score at 4 or below gets a named fix in the conditions, even when the label is good.
 - **Thesis strength** (stress tests): the score of option A, "act on the thesis as written".
 
 ## Checks during the council

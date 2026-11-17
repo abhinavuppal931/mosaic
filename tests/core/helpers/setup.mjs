@@ -8,7 +8,8 @@ import { fakeFetch } from './fake-fetch.mjs';
 /** 2026-11-17T12:00:00Z, the day the fixtures were recorded. */
 export const NOW = Date.parse('2026-11-17T12:00:00Z');
 
-export const SEC_UA = 'Mosaic/0.1 tests tests@example.com';
+/** A test SEC contact (name and email), as MOSAIC_SEC_CONTACT would hold it. */
+export const SEC_CONTACT = 'Mosaic Tests tests@example.com';
 
 /** Routes that make the zero-key stack answer for MSFT from recorded fixtures. */
 export const FREE_ROUTES = [
@@ -34,7 +35,7 @@ export const FREE_ROUTES = [
 /**
  * @param {{ routes?: object[], env?: Record<string,string>, overrides?: object, cacheDir?: string, now?: ()=>number, log?: Function }} [o]
  */
-export async function makeRouter({ routes = FREE_ROUTES, env = { MOSAIC_SEC_USER_AGENT: SEC_UA }, overrides, cacheDir, now = () => NOW, log } = {}) {
+export async function makeRouter({ routes = FREE_ROUTES, env = { MOSAIC_SEC_CONTACT: SEC_CONTACT }, overrides, cacheDir, now = () => NOW, log } = {}) {
   const config = loadConfig({ overrides: { http: { retries: 1, backoffMs: 1 }, pack: { historyYears: 5 }, ...(overrides || {}) } });
   if (!cacheDir) config.cache.enabled = false;
   const { adapters } = await loadAdapters(config);

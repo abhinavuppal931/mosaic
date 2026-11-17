@@ -36,6 +36,26 @@ describe('clean session', () => {
 });
 
 describe('failures', () => {
+  test('the verdict is checked too: verdict.md and every string in verdict.json', () => {
+    const r = run(SESSION);
+    assert.equal(r.verdictChecked, true);
+    assert.ok(r.files.includes('verdict.md') && r.files.includes('verdict.json'));
+    const dir = copySession();
+    const v = JSON.parse(fs.readFileSync(path.join(dir, 'verdict.json'), 'utf8'));
+    v.why.push({ point: 'Debt is tiny [F777].', seat: 'buffett' });
+    fs.writeFileSync(path.join(dir, 'verdict.json'), JSON.stringify(v));
+    const bad = run(dir);
+    assert.equal(bad.ok, false);
+    assert.ok(bad.errors.some((e) => e.file === 'verdict.json' && e.id === 'F777'));
+  });
+
+  test('before the verdict exists the report says it was not checked', () => {
+    const dir = copySession();
+    fs.rmSync(path.join(dir, 'verdict.md'));
+    fs.rmSync(path.join(dir, 'verdict.json'));
+    assert.equal(run(dir).verdictChecked, false);
+  });
+
   test('an unknown fact id fails', () => {
     const dir = copySession();
     fs.appendFileSync(path.join(dir, 'round-2.md'), '\n## Taleb\n\nSEAT: Taleb\nWHY:\n1. Leverage is 9x [F404].\n');

@@ -37,6 +37,33 @@ export function loadConfig({ userConfigPath, defaultPath = DEFAULT_CONFIG_PATH, 
   return cfg;
 }
 
+/**
+ * Set one value in the user's mosaic.config.json (creating the file if needed), keeping
+ * everything else. Written readable only by the user.
+ * @param {string} file
+ * @param {string[]} keyPath e.g. ['providers', 'sec-edgar', 'contact']
+ */
+export function writeUserConfigValue(file, keyPath, value) {
+  let cfg = {};
+  if (fs.existsSync(file)) {
+    cfg = readJson(file);
+    if (!isObj(cfg)) throw new Error(`${file} is not a JSON object`);
+  }
+  let node = cfg;
+  for (const k of keyPath.slice(0, -1)) {
+    if (!isObj(node[k])) node[k] = {};
+    node = node[k];
+  }
+  node[keyPath[keyPath.length - 1]] = value;
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  fs.writeFileSync(file, JSON.stringify(cfg, null, 2) + '\n', { mode: 0o600 });
+  try {
+    fs.chmodSync(file, 0o600);
+  } catch {
+    // best effort on filesystems without POSIX modes
+  }
+}
+
 export function loadSeries(file = SERIES_PATH) {
   const s = readJson(file);
   delete s.$comment;

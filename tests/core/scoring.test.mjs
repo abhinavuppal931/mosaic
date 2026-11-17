@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { FIXTURES } from './helpers/fake-fetch.mjs';
-import { parseCard, parseOptionScores, splitCards, factIds, parseRound } from '../../scripts/lib/cards.mjs';
+import { parseCard, parseOptionScores, splitCards, factIds, parseRound, pickWord } from '../../scripts/lib/cards.mjs';
 import { scoreCouncil, band, capLabel, optionScores, pickRecommended, unanimityCheck, leanPull, carryForward, DEFAULT_CONFIG } from '../../scripts/lib/scoring.mjs';
 import { loadRoster, seatResolver } from '../../scripts/lib/roster.mjs';
 import { readSession } from '../../scripts/lib/session.mjs';
@@ -19,7 +19,9 @@ const OPTIONS = [
   { id: 'C', label: 'Wait', kind: 'wait', trigger: 'price below 400' },
   { id: 'D', label: 'Pass', kind: 'none' },
 ];
-const card = (scores, extra = {}) => ({ abstain: false, scores, conviction: 4, evidence: 'adequate', ruin: 'none', door: 'two-way', pillar: 6, why: [], whyCited: 0, ...extra });
+// A seat card that scores every option: options the test does not name get 0.
+const card = (scores, extra = {}) => ({ abstain: false, scores: { A: 0, B: 0, C: 0, D: 0, ...scores }, conviction: 4, evidence: 'adequate', ruin: 'none', door: 'two-way', pillar: 6, why: [], whyCited: 0, ...extra });
+const partialCard = (scores, extra = {}) => ({ ...card({}, extra), scores, scoresRaw: extra.scoresRaw ?? null });
 const council = (seats, weights = {}) => ({ job: 'decision', options: OPTIONS, seats, weights: Object.fromEntries(seats.map((s) => [s, { weight: weights[s] ?? 1 }])) });
 
 describe('card parser', () => {
@@ -28,6 +30,30 @@ describe('card parser', () => {
     assert.deepEqual(parseOptionScores('[A] 6/10 [B] 3/10'), { A: 6, B: 3 });
     assert.deepEqual(parseOptionScores('A: 6, B: 7'), { A: 6, B: 7 });
     assert.deepEqual(parseOptionScores('A 11/10'), {});
+  });
+
+  test('score lines written loosely still parse', () => {
+    assert.deepEqual(parseOptionScores('A (full position): 7 · B (starter): 8/10'), { A: 7, B: 8 });
+    assert.deepEqual(parseOptionScores('Option A - 7, Option B - 5'), { A: 7, B: 5 });
+    assert.deepEqual(parseOptionScores('A=7 B=6.5'), { A: 7, B: 6.5 });
+    assert.deepEqual(parseOptionScores('A 7 out of 10, B 3 out of 10'), { A: 7, B: 3 });
+    const c = parseCard('STANCE: Yes\nOPTION SCORES: A (full position): 7, B (starter): 9');
+    assert.deepEqual(c.scores, { A: 7, B: 9 });
+    assert.equal(c.scoresRaw, 'A (full position): 7, B (starter): 9');
+  });
+
+  test('flags match whole words and respect negation', () => {
+    const ruin = (t) => parseCard(`RUIN RISK: ${t}`).ruin;
+    assert.equal(ruin('likely'), 'likely');
+    assert.equal(ruin('unlikely'), 'possible');
+    assert.equal(ruin('not likely'), 'possible');
+    assert.equal(ruin('Possible, not likely'), 'possible');
+    assert.equal(ruin('none'), 'none');
+    assert.equal(ruin('likely if levered'), 'likely');
+    assert.equal(ruin('impossible to say'), null);
+    assert.equal(parseCard('EVIDENCE: not strong, thin').evidence, 'thin');
+    assert.equal(parseCard('DOOR: two way').door, 'two-way');
+    assert.equal(pickWord('very unlikely', ['likely']), null);
   });
 
   test('a full Round 1 card', () => {
@@ -116,16 +142,22 @@ describe('scoreCouncil', () => {
     const s = readSession(SESSION, resolve);
     const r = scoreCouncil({ council: s.council, rounds: s.rounds, lean: s.lean.option, coverage: s.pack.coverage.score, draft: s.draft, roster });
     assert.equal(r.round, 3);
-    assert.deepEqual(r.options.map((o) => o.score), [4.4, 6.6, 6.3, 3.9]);
-    assert.equal(r.options[1].math, 'B (3x8 + 2x6 + 2x5) / 7 = 6.6');
+    assert.deepEqual(r.options.map((o) => o.score), [4.4, 6.7, 6.3, 3.9]);
+    assert.equal(r.options[1].math, 'B (3x9 + 2x6 + 2x4) / 7 = 6.7');
     assert.equal(r.recommended, 'B');
     assert.equal(r.label, 'PROCEED WITH CONDITIONS');
-    assert.equal(r.spread, 3);
-    assert.equal(r.confidence, 7); // mean conviction 3.67 x 2, carried forward from Round 2
-    assert.deepEqual(r.votes, { endorse: 1, amend: 1, dissent: 1 });
+    assert.equal(r.spread, 5);
+    assert.equal(r.confidence, 6); // mean conviction 3.67 x 2 = 7, minus 1 for spread 5; carried from Round 2
+    // Derived from scores on B: Buffett's top is B; Taleb's top is C and B is 6; Burry gives B a 4.
+    assert.deepEqual(r.agreement, { agrees: 1, 'partly agrees': 1, disagrees: 1, abstains: 0 });
+    const row = (k) => r.scorecard.find((x) => x.seat === k);
+    assert.deepEqual([row('buffett').agreement, row('taleb').agreement, row('burry').agreement], ['agrees', 'partly agrees', 'disagrees']);
+    assert.equal(row('burry').ownVote, 'Dissent');
+    assert.match(row('burry').amendment, /does not pay for the risk/);
+    assert.equal(row('taleb').ownLine, 'survive first.');
     assert.equal(r.support, 6.3); // (3x8 + 2x6 + 2x4) / 7
     assert.equal(r.leanPull.option, 'A');
-    assert.equal(r.leanPull.value, 0.2);
+    assert.equal(r.leanPull.value, 0.1);
     assert.equal(r.leanPull.flagged, false);
     assert.equal(r.evidence.citedShare, 0.833);
     assert.equal(r.evidence.grade, 'high');
@@ -159,12 +191,16 @@ describe('scoreCouncil', () => {
     assert.deepEqual(r.overrides[0].seats, ['c']);
   });
 
-  test('ruin cap lifts when that seat endorses a mitigation (and did not dissent)', () => {
-    const rounds = { 1: { a: card({ A: 9 }), c: card({ A: 8 }, { ruin: 'likely' }) }, 3: { a: card({ A: 9 }, { vote: 'endorse' }), c: card({ A: 8 }, { ruin: 'likely', vote: 'amend' }) } };
+  test('ruin cap lifts when that seat endorses a mitigation and its scores do not disagree', () => {
+    const rounds = { 1: { a: card({ A: 9 }), c: card({ A: 8 }, { ruin: 'likely' }) }, 3: { a: card({ A: 9 }), c: card({ A: 8 }, { ruin: 'likely', vote: 'dissent' }) } };
     const draft = { ruin_mitigations: [{ seat: 'c', mitigation: 'cap size at 5%', endorsed: true }] };
+    // The seat's scores agree with A, so the endorsed mitigation counts, whatever its VOTE words say.
     assert.equal(scoreCouncil({ council: council(['a', 'c']), rounds, draft }).label, 'CONVICTION EARNED');
-    rounds[3].c.vote = 'dissent';
-    assert.equal(scoreCouncil({ council: council(['a', 'c']), rounds, draft }).label, 'RESHAPE THE THESIS');
+    rounds[3].c = card({ A: 4, B: 6 }, { ruin: 'likely' }); // now it disagrees with the recommended option
+    const r = scoreCouncil({ council: council(['a', 'c'], { a: 3 }), rounds, draft });
+    assert.equal(r.recommended, 'A');
+    assert.equal(r.scorecard.find((x) => x.seat === 'c').agreement, 'disagrees');
+    assert.equal(r.label, 'RESHAPE THE THESIS');
   });
 
   test('one-way door cap: majority one-way and spread of 4 or more', () => {
@@ -230,6 +266,41 @@ describe('scoreCouncil', () => {
     assert.equal(scoreCouncil({ council: council(['a', 'b']), rounds: ruin }).needsRound3, true);
   });
 
+  test('agreement is derived from scores, never from the VOTE line', () => {
+    const rounds = { 3: { a: card({ A: 8, B: 6 }, { vote: 'dissent', voteText: 'Dissent' }), b: card({ A: 5, B: 7 }, { vote: 'endorse' }), c: card({ A: 3, B: 4 }, { vote: 'endorse' }), d: { abstain: true, scores: {} } } };
+    const r = scoreCouncil({ council: council(['a', 'b', 'c', 'd'], { a: 3 }), rounds });
+    assert.equal(r.recommended, 'A'); // A (3x8 + 5 + 3) / 5 = 6.4 against B (3x6 + 7 + 4) / 5 = 5.8
+    const by = Object.fromEntries(r.scorecard.map((x) => [x.seat, x.agreement]));
+    assert.deepEqual(by, { a: 'agrees', b: 'partly agrees', c: 'disagrees', d: 'abstains' });
+    assert.equal(r.scorecard[0].ownVote, 'Dissent');
+  });
+
+  test('ties for a seat\'s top option count as agreeing', () => {
+    const r = scoreCouncil({ council: council(['a']), rounds: { 1: { a: card({ A: 7, B: 7 }) } } });
+    assert.equal(r.scorecard[0].agreement, 'agrees');
+  });
+
+  test('a seat missing a score is left out of every option and reported, never averaged on a different set', () => {
+    const rounds = { 1: { a: card({ A: 8, B: 2 }), b: partialCard({ A: 2 }, { scoresRaw: 'A 2/10 · B (starter)' }) } };
+    const r = scoreCouncil({ council: council(['a', 'b']), rounds });
+    assert.equal(r.options[0].math, 'A (1x8) / 1 = 8.0');
+    assert.equal(r.options[1].math, 'B (1x2) / 1 = 2.0');
+    assert.ok(r.problems.some((p) => /b: no readable score for option B, C, D in round 1 \(OPTION SCORES line: "A 2\/10 · B \(starter\)"\)/.test(p)));
+  });
+
+  test('scores carried from an earlier round are flagged', () => {
+    const rounds = { 1: { a: card({ A: 8 }) }, 2: { a: { ...card({}), scores: {}, scoresRaw: 'see above' } } };
+    const r = scoreCouncil({ council: council(['a']), rounds });
+    assert.equal(r.options[0].score, 8);
+    assert.equal(r.scorecard[0].scoresCarriedFrom, 1);
+    assert.ok(r.problems.some((p) => /round 2 card has no readable scores; using its round 1 scores/.test(p)));
+  });
+
+  test('unreadable flags are reported', () => {
+    const r = scoreCouncil({ council: council(['a']), rounds: { 1: { a: card({ A: 8 }, { ruin: null }) } } });
+    assert.ok(r.problems.some((p) => /a: RUIN unreadable/.test(p)));
+  });
+
   test('a missing card is reported as a problem', () => {
     const r = scoreCouncil({ council: council(['a', 'b']), rounds: { 1: { a: card({ A: 7 }) } } });
     assert.match(r.problems[0], /no card in round 1 for: b/);
@@ -263,7 +334,7 @@ describe('unanimity, carry-forward and lean pull', () => {
     assert.equal(lp.value, 2.5);
     assert.equal(lp.rawShift, 2);
     assert.equal(lp.flagged, true);
-    assert.equal(leanPull('A', { a: card({ B: 5 }) }, { a: card({ B: 6 }) }, {}, OPTIONS, DEFAULT_CONFIG).value, null);
+    assert.equal(leanPull('A', { a: partialCard({ B: 5 }) }, { a: partialCard({ B: 6 }) }, {}, OPTIONS, DEFAULT_CONFIG).value, null);
   });
 });
 

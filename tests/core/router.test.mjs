@@ -10,9 +10,9 @@ import { createRouter } from '../../data/router.mjs';
 import { createHttp } from '../../data/lib/http.mjs';
 import { createLimiter } from '../../data/lib/ratelimit.mjs';
 import { createCache } from '../../data/lib/cache.mjs';
-import { createEnv, parseEnvFile, writeEnvValue } from '../../data/lib/env.mjs';
+import { createEnv, parseEnvFile } from '../../data/lib/env.mjs';
 import { redactUrl, redactText, registerSecret, clearSecrets } from '../../data/lib/redact.mjs';
-import { loadConfig, deepMerge } from '../../data/lib/config.mjs';
+import { loadConfig, deepMerge, writeUserConfigValue } from '../../data/lib/config.mjs';
 import { loadAdapters } from '../../data/providers/index.mjs';
 import { ProviderError, validateAdapter, result } from '../../data/lib/contract.mjs';
 import { resolveHome, isPluginCache } from '../../data/lib/paths.mjs';
@@ -273,16 +273,18 @@ describe('keys and redaction', () => {
     assert.deepEqual(parseEnvFile("A='x y'\nbad line\nB=2"), { A: 'x y', B: '2' });
   });
 
-  test('writeEnvValue upserts one line and keeps the file private', () => {
+  test('writeUserConfigValue sets one value, keeps the rest, and keeps the file private', () => {
     const dir = tmp();
-    const f = path.join(dir, '.env.local');
-    writeEnvValue(f, 'MOSAIC_SEC_USER_AGENT', 'Mosaic/0.1 a@b.co');
-    writeEnvValue(f, 'OTHER', '1');
-    writeEnvValue(f, 'MOSAIC_SEC_USER_AGENT', 'Mosaic/0.1 c@d.co');
-    const text = fs.readFileSync(f, 'utf8');
-    assert.equal((text.match(/MOSAIC_SEC_USER_AGENT/g) || []).length, 1);
-    assert.match(text, /c@d\.co/);
+    const f = path.join(dir, 'mosaic.config.json');
+    fs.writeFileSync(f, JSON.stringify({ chains: { quote: ['fmp'] } }));
+    writeUserConfigValue(f, ['providers', 'sec-edgar', 'contact'], 'A a@b.co');
+    writeUserConfigValue(f, ['providers', 'sec-edgar', 'contact'], 'C c@d.co');
+    const cfg = JSON.parse(fs.readFileSync(f, 'utf8'));
+    assert.deepEqual(cfg, { chains: { quote: ['fmp'] }, providers: { 'sec-edgar': { contact: 'C c@d.co' } } });
     if (process.platform !== 'win32') assert.equal(fs.statSync(f).mode & 0o777, 0o600);
+    const merged = loadConfig({ userConfigPath: f });
+    assert.equal(merged.providers['sec-edgar'].contact, 'C c@d.co');
+    assert.equal(merged.providers['sec-edgar'].rps, 8);
   });
 
   test('a key never appears in router output, even inside an error message', async () => {
@@ -326,12 +328,17 @@ describe('config, registry and paths', () => {
   });
 
   test('home: --home, then MOSAIC_HOME, then a clone, then plugin data, then ~/.mosaic', () => {
-    assert.equal(resolveHome({ home: '/h', env: {} }), '/h');
-    assert.equal(resolveHome({ env: { MOSAIC_HOME: '/m' } }), '/m');
-    assert.equal(resolveHome({ env: {}, pluginRoot: '/code/mosaic' }), '/code/mosaic');
-    const cached = '/u/.claude/plugins/cache/mosaic/mosaic/0.1.0';
+    // Platform-neutral: every expectation goes through path.resolve / path.join.
+    const r = (p) => path.resolve(p);
+    assert.equal(resolveHome({ home: r('/h'), env: {} }), r('/h'));
+    assert.equal(resolveHome({ env: { MOSAIC_HOME: r('/m') } }), r('/m'));
+    const clone = r('/code/mosaic');
+    assert.equal(resolveHome({ env: {}, pluginRoot: clone }), clone);
+    const cached = path.join(r('/u'), '.claude', 'plugins', 'cache', 'mosaic', 'mosaic', '0.1.0');
+    const data = path.join(r('/u'), '.claude', 'plugins', 'data', 'mosaic-mosaic');
     assert.ok(isPluginCache(cached));
-    assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: '/u/.claude/plugins/data/mosaic-mosaic' }), '/u/.claude/plugins/data/mosaic-mosaic');
+    assert.ok(!isPluginCache(clone));
+    assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: data }), data);
     assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: '${CLAUDE_PLUGIN_DATA}' }), path.join(os.homedir(), '.mosaic'));
   });
 });

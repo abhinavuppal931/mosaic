@@ -13,6 +13,7 @@ import { parseArgs } from '../data/lib/args.mjs';
 import { paths } from '../data/lib/paths.mjs';
 import { readJson } from './lib/session.mjs';
 import { journalKey, buildEntry, appendEntry, readJournal, listJournal, diffPacks, renderChanges } from './lib/journal.mjs';
+import { isMain } from '../data/lib/entry.mjs';
 
 export function main(argv, { now = () => Date.now() } = {}) {
   const args = parseArgs(argv, { booleans: ['json'] });
@@ -71,5 +72,4 @@ export function main(argv, { now = () => Date.now() } = {}) {
   }
 }
 
-const invoked = process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname);
-if (invoked) process.exit(main(process.argv.slice(2)));
+if (isMain(import.meta.url)) process.exit(main(process.argv.slice(2)));

@@ -39,7 +39,12 @@ export function carryForward(rounds) {
       const prev = last[seat] || {};
       const merged = { ...card };
       for (const k of ['conviction', 'evidence', 'ruin', 'door', 'pillar']) if (merged[k] === null || merged[k] === undefined) merged[k] = prev[k] ?? null;
-      if (!card.abstain && !Object.keys(card.scores || {}).length && prev.scores && Object.keys(prev.scores).length) merged.scores = prev.scores;
+      if (!card.abstain && !Object.keys(card.scores || {}).length && prev.scores && Object.keys(prev.scores).length) {
+        // Reusing an earlier round's scores is allowed only with a flag the report must show.
+        merged.scores = prev.scores;
+        merged.scoresCarriedFrom = prev.scoresCarriedFrom ?? prev.round ?? null;
+      }
+      merged.round = n;
       out[n][seat] = merged;
       last[seat] = merged;
     }
@@ -47,21 +52,48 @@ export function carryForward(rounds) {
   return out;
 }
 
-/** Weighted mean per option over scoring seats. */
-export function optionScores(options, cards, weights) {
+/**
+ * Seats that count toward the option math: not abstaining, and scoring every option.
+ * Every option is averaged over this same set, so no option is judged by a different jury.
+ */
+export function scoringSet(options, cards) {
+  const ids = options.map((o) => o.id);
+  const full = [];
+  const partial = [];
+  for (const [seat, c] of Object.entries(cards)) {
+    if (c.abstain) continue;
+    const have = ids.filter((id) => isNum(c.scores?.[id]));
+    if (have.length === ids.length) full.push(seat);
+    else partial.push({ seat, missing: ids.filter((id) => !have.includes(id)), raw: c.scoresRaw ?? null });
+  }
+  return { full, partial };
+}
+
+/** Weighted mean per option over the seats in `seats` (default: the full scoring set). */
+export function optionScores(options, cards, weights, seats = scoringSet(options, cards).full) {
   return options.map((o) => {
-    const parts = [];
-    for (const [seat, c] of Object.entries(cards)) {
-      if (c.abstain || !isNum(c.scores?.[o.id])) continue;
-      const w = weights[seat]?.weight ?? weights[seat] ?? 1;
-      parts.push({ seat, w, s: c.scores[o.id] });
-    }
+    const parts = seats.map((seat) => ({ seat, w: weights[seat]?.weight ?? weights[seat] ?? 1, s: cards[seat].scores[o.id] }));
     const wsum = parts.reduce((s, p) => s + p.w, 0);
     const score = wsum ? r1(parts.reduce((s, p) => s + p.w * p.s, 0) / wsum) : null;
     const math = parts.length ? `${o.id} (${parts.map((p) => `${p.w}x${p.s}`).join(' + ')}) / ${wsum} = ${score?.toFixed(1)}` : `${o.id} no scores`;
     const vals = parts.map((p) => p.s);
     return { ...o, score, math, spread: vals.length ? Math.max(...vals) - Math.min(...vals) : null, seats: Object.fromEntries(parts.map((p) => [p.seat, p.s])) };
   });
+}
+
+/**
+ * How a seat stands on the recommended option, derived from its scores (never from its
+ * VOTE words): "agrees" when its top option is the recommended one (ties included),
+ * "disagrees" when it scores the recommended option 4 or below, else "partly agrees".
+ */
+export function agreementOf(card, recommended, cfg = DEFAULT_CONFIG) {
+  if (!card || card.abstain) return 'abstains';
+  const scores = card.scores || {};
+  if (!recommended || !isNum(scores[recommended])) return null;
+  const top = Math.max(...Object.values(scores).filter(isNum));
+  if (scores[recommended] === top) return 'agrees';
+  if (scores[recommended] <= cfg.agreement.disagreeAtOrBelow) return 'disagrees';
+  return 'partly agrees';
 }
 
 /** Highest score; ties go to the smaller spread, then the earlier option. */
@@ -156,13 +188,21 @@ export function scoreCouncil(input, cfg = DEFAULT_CONFIG) {
   const lastN = ran[ran.length - 1];
   const final = rounds[lastN];
   const weights = council.weights || {};
-  const scoringSeats = Object.entries(final).filter(([, c]) => !c.abstain && Object.keys(c.scores || {}).length);
+  const problems = [];
+  const set = scoringSet(council.options, final);
+  for (const p of set.partial) {
+    problems.push(`${p.seat}: no readable score for option ${p.missing.join(', ')} in round ${lastN}${p.raw ? ` (OPTION SCORES line: "${String(p.raw).slice(0, 120)}")` : ' (no OPTION SCORES line)'}; seat left out of the option math, send the card back`);
+  }
+  const scoringSeats = set.full.map((seat) => [seat, final[seat]]);
+  for (const [seat, c] of scoringSeats) {
+    if (c.scoresCarriedFrom) problems.push(`${seat}: round ${lastN} card has no readable scores; using its round ${c.scoresCarriedFrom} scores`);
+    for (const k of ['conviction', 'evidence', 'ruin', 'door']) if (c[k] === null || c[k] === undefined) problems.push(`${seat}: ${k.toUpperCase()} unreadable or missing in every round`);
+  }
   const abstentions = Object.entries(final).filter(([, c]) => c.abstain).map(([s]) => s);
 
-  const scored = optionScores(council.options, final, weights);
+  const scored = optionScores(council.options, final, weights, set.full);
   const top = pickRecommended(scored);
   const overrides = [];
-  const problems = [];
   let label;
   let underlying = null;
 
@@ -182,8 +222,9 @@ export function scoreCouncil(input, cfg = DEFAULT_CONFIG) {
     }
 
     // Ruin cap: any scoring seat at RUIN RISK likely, unless it endorsed a mitigation.
+    // A mitigation counts only if the seat endorsed it and, by its own scores, does not disagree.
     const mitigated = new Set((draft?.ruin_mitigations || []).filter((m) => m.endorsed).map((m) => m.seat));
-    const ruinSeats = scoringSeats.filter(([s, c]) => c.ruin === 'likely' && !(mitigated.has(s) && (lastN < 3 || c.vote !== 'dissent'))).map(([s]) => s);
+    const ruinSeats = scoringSeats.filter(([s, c]) => c.ruin === 'likely' && !(mitigated.has(s) && agreementOf(c, top.id, cfg) !== 'disagrees')).map(([s]) => s);
     if (ruinSeats.length && bandRank(label, cfg) >= 0) {
       const before = label;
       label = capLabel(label, cfg.labels.ruinCap, cfg);
@@ -215,8 +256,12 @@ export function scoreCouncil(input, cfg = DEFAULT_CONFIG) {
   if (confidence !== null && spread !== null && spread >= cfg.confidence.spreadPenaltyAt) confidence -= 1;
   if (confidence !== null) confidence = Math.min(10, Math.max(1, confidence));
 
-  const votes = lastN >= 3 ? { endorse: 0, amend: 0, dissent: 0 } : null;
-  if (votes) for (const c of Object.values(final)) if (c.vote && c.vote in votes) votes[c.vote] += 1;
+  // Agreement is derived from scores on the recommended option, never from the VOTE words.
+  const agreement = { agrees: 0, 'partly agrees': 0, disagrees: 0, abstains: 0 };
+  for (const seat of council.seats) {
+    const a = final[seat] ? agreementOf(final[seat], top?.id, cfg) : null;
+    if (a && a in agreement) agreement[a] += 1;
+  }
   const supportParts = lastN >= 3 ? scoringSeats.filter(([, c]) => isNum(c.finalScore)).map(([s, c]) => ({ w: weights[s]?.weight ?? 1, v: c.finalScore })) : [];
   const support = supportParts.length ? r1(supportParts.reduce((s, p) => s + p.w * p.v, 0) / supportParts.reduce((s, p) => s + p.w, 0)) : null;
 
@@ -233,7 +278,11 @@ export function scoreCouncil(input, cfg = DEFAULT_CONFIG) {
       present: Boolean(c),
       abstain: Boolean(c?.abstain),
       stance: c?.stance ?? null,
-      vote: c?.vote ?? null,
+      agreement: c ? agreementOf(c, top?.id, cfg) : null,
+      ownVote: c?.voteText ?? null,
+      ownLine: c?.ownLine ?? null,
+      amendment: c?.amendment ?? null,
+      scoresCarriedFrom: c?.scoresCarriedFrom ?? null,
       scores: c?.scores ?? {},
       pillar: c?.pillar ?? null,
       conviction: c?.conviction ?? null,
@@ -259,7 +308,7 @@ export function scoreCouncil(input, cfg = DEFAULT_CONFIG) {
     spread,
     confidence,
     abstentions,
-    votes,
+    agreement,
     support,
     unanimousRound1: rounds[ran[0]] && ran[0] === 1 ? unanimityCheck(rounds[1], cfg) : null,
     needsRound3: Boolean(top) && lastN === 2 && ((spread ?? 0) > cfg.quick.round3IfSpreadAbove || scoringSeats.some(([, c]) => c.ruin === 'likely')),

@@ -40,12 +40,17 @@ const KNOWN = [
 ];
 const isKnown = (n) => KNOWN.includes(n.trim().toUpperCase());
 
-/** "A 6/10 · B 8/10", "[A] 6/10", "A: 6, B: 7" -> { A: 6, B: 8 } */
+/**
+ * Option scores, read tolerantly. Accepts "A 6/10 · B 8/10", "[A] 6/10", "A: 6, B: 7",
+ * "A (full position): 7", "Option A - 7", "A=7", "A 7 out of 10". Scores outside 0 to 10 are ignored.
+ */
 export function parseOptionScores(s) {
   const out = {};
-  for (const m of String(s || '').matchAll(/\[?\b([A-H])\b\]?\s*[:=]?\s*(\d+(?:\.\d+)?)\s*(?:\/\s*10)?/g)) {
+  const re = /(?:\boption\s+)?\[?\b([A-H])\b\]?(?:\s*\([^)]*\))?\s*[:=\-\u2013]?\s*(\d+(?:\.\d+)?)(?:\s*(?:\/\s*10|out of 10))?/gi;
+  for (const m of String(s || '').matchAll(re)) {
+    const id = m[1].toUpperCase();
     const v = Number(m[2]);
-    if (v >= 0 && v <= 10 && !(m[1] in out)) out[m[1]] = v;
+    if (v >= 0 && v <= 10 && !(id in out)) out[id] = v;
   }
   return out;
 }
@@ -56,10 +61,29 @@ const num = (s, max) => {
   const v = Number(m[1]);
   return v >= 0 && v <= max ? v : null;
 };
-const pickWord = (s, words) => {
-  const t = String(s || '').toLowerCase();
-  return words.find((w) => t.startsWith(w)) || words.find((w) => t.includes(w)) || null;
-};
+
+/**
+ * The first allowed word that appears as a whole word and is not negated ("not likely").
+ * `aliases` maps other whole words to an allowed value (e.g. "unlikely" -> "possible").
+ * Returns null when nothing matches, so the caller can flag the card.
+ */
+export function pickWord(s, words, aliases = {}) {
+  const t = String(s || '').toLowerCase().replace(/[\u2010-\u2015]/g, '-');
+  let best = null;
+  const consider = (word, value) => {
+    const re = new RegExp(`(^|[^a-z-])(not\\s+|no\\s+)?${word.replace(/[-]/g, '[- ]')}(?![a-z])`, 'g');
+    for (const m of t.matchAll(re)) {
+      if (m[2]) continue;
+      const at = m.index + m[1].length;
+      if (!best || at < best.at) best = { at, value };
+    }
+  };
+  for (const w of words) consider(w, w);
+  for (const [w, v] of Object.entries(aliases)) consider(w, v);
+  return best ? best.value : null;
+}
+
+const RUIN_ALIASES = { unlikely: 'possible', 'not likely': 'possible', remote: 'possible', low: 'possible', no: 'none', zero: 'none' };
 
 /** Parse one card into structured fields. Unknown or absent fields are null. */
 export function parseCard(text) {
@@ -72,16 +96,21 @@ export function parseCard(text) {
   const why = get('WHY');
   const whyPoints = why ? splitPoints([why.value, ...why.lines].filter(Boolean)) : [];
   const vote = pickWord(val('VOTE'), ['endorse with amendment', 'endorse', 'dissent']);
+  const parsedScores = abstain ? {} : parseOptionScores(optLine);
   return {
     stance,
     abstain,
-    scores: abstain ? {} : parseOptionScores(optLine),
+    scores: parsedScores,
+    scoresRaw: optLine,
     pillar: num(val('FINAL PILLAR SCORE') ?? val('PILLAR SCORE'), 10),
     conviction: num(val('CONVICTION') ?? val('CONFIDENCE'), 5),
-    evidence: pickWord(val('EVIDENCE'), ['strong', 'adequate', 'thin']),
-    ruin: pickWord(val('RUIN RISK'), ['none', 'possible', 'likely']),
-    door: pickWord(val('DOOR'), ['one-way', 'two-way', 'one way', 'two way'])?.replace(' ', '-') ?? null,
+    evidence: pickWord(val('EVIDENCE'), ['strong', 'adequate', 'thin'], { weak: 'thin', moderate: 'adequate' }),
+    ruin: pickWord(val('RUIN RISK'), ['none', 'possible', 'likely'], RUIN_ALIASES),
+    door: pickWord(val('DOOR'), ['one-way', 'two-way']),
     vote: vote === 'endorse with amendment' ? 'amend' : vote,
+    voteText: val('VOTE'),
+    ownLine: val('ONE LINE FOR THE INVESTOR'),
+    amendment: val('AMENDMENT OR DISSENT') || null,
     finalScore: num(val('FINAL SCORE'), 10),
     moved: val('MOVED'),
     call: val('THE CALL'),
