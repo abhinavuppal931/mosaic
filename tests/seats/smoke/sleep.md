@@ -1,0 +1,19 @@
+# Sleep: Long runway, scale shared
+STANCE: A wonderful business at a crowded price; I'd do the work now and wait for the despised moment.
+OPTION SCORES: A 2/10, B 4/10, C 7/10, D 5/10
+PILLAR SCORE (Runway and reinvestment): 5/10
+CONVICTION: 3 | EVIDENCE: thin | RUIN RISK: none | DOOR: two-way
+
+THE CALL: I'd wait (C). The runway is real, but at about $3.7 trillion (F002) this is already the elephant, and 31x forward earnings (F006) against 13% consensus growth (F013) pays for roughly the destination everyone can already see. I'd put it on my list of wonderful compounders and buy when the renters panic, not while 95% of them say buy (F014).
+
+WHY:
+- Scale economics shared (S007). "Most companies pursue scale efficiencies, but few share them. It's the sharing that makes the model so powerful." (S007) A 45% operating margin (F005) tells me the savings have mostly gone to the margin line, not the customer. The figure I'd need to argue otherwise, what cloud customers pay per unit over time, is not in the pack; if it showed prices falling as Azure grows 35% (F004), my pillar score would rise.
+- Split growth from maintenance (S011). Capital spending nearly doubled to $88 billion (F007), leaving $57 billion of free cash flow, a 1.5% yield (F008). Even if every dollar of it were growth, the cash cow underneath is $145 billion of operating cash flow (F007), under 4% of the market value (F002). The maintenance split is missing, and the AI build has no proven return yet (growth spending can fail, S011). This is not Amazon in 2006, priced as if it would stop growing.
+- Read the price and the crowd (S011, S005). "Good investing is a minority sport" (S011), and here the minority is the doubter. With the market at a CAPE of 38 (F018) and credit spreads near 20-year tights (F017), I concede "as prices rise prospective returns go down." (S005) Character is fine, not founder grade: a 30% return on capital (F011) and a share count falling 0.5% a year (F012), though $12 billion of stock pay (F009) eats into the $40 billion returned.
+- Do the work, then wait (S006, S014). "Even though prices are generally high, the trick is to do the work today, so that we are ready." (S006) It fell 37% in 2022 (F020) with the business intact. "When investments go from hated and reasonable to despised and cheap something is normally up in the markets." (S014)
+
+THE RISK I SEE: Standing aside has a cost, since "the biggest error an investor can make is the sale of a Wal-Mart or a Microsoft in the early stages of the company's growth." (S012) But these are not the early stages, and the destination now leans on an $88 billion build (F007) and one AI lab that is both customer and partner (F021).
+
+I'M WRONG IF: the next annual report shows cloud prices per unit falling for customers while operating margin holds near 45% (F005); that is scale shared at elephant size, and I'd move B above C.
+
+QUESTION FOR THE INVESTOR: If the price fell 37% again (F020) and the business did not, would you buy more, or would you sell?
