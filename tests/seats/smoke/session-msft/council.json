@@ -1,0 +1,121 @@
+{
+  "schema": "mosaic.council/1",
+  "id": "2026-11-17-msft-smoke-13",
+  "title": "Buy Microsoft at 518 (13-seat smoke)",
+  "job": "decision",
+  "ticker": "MSFT",
+  "decision": "Whether to open a position in Microsoft now, and how.",
+  "mode": "full",
+  "horizon": "5 years",
+  "trigger": "Single-seat smoke test of all 13 seats on one shared question.",
+  "position": {
+    "owned": false,
+    "portfolioShare": null
+  },
+  "options": [
+    {
+      "id": "A",
+      "label": "Full position now",
+      "kind": "act"
+    },
+    {
+      "id": "B",
+      "label": "Starter now, add on proof",
+      "kind": "act"
+    },
+    {
+      "id": "C",
+      "label": "Wait for a lower price",
+      "kind": "wait",
+      "trigger": "Price / DCF base below 1.2"
+    },
+    {
+      "id": "D",
+      "label": "Pass",
+      "kind": "none"
+    }
+  ],
+  "seats": [
+    "buffett",
+    "munger",
+    "damodaran",
+    "marks",
+    "taleb",
+    "druckenmiller",
+    "burry",
+    "lynch",
+    "ackman",
+    "kantesaria",
+    "sleep",
+    "mauboussin",
+    "tomlee"
+  ],
+  "weights": {
+    "buffett": {
+      "weight": 3,
+      "reason": "Owner economics is the heart of a buy-and-hold call"
+    },
+    "munger": {
+      "weight": 2,
+      "reason": "Folly check on a crowded favourite"
+    },
+    "damodaran": {
+      "weight": 3,
+      "reason": "The price versus a value range is the crux"
+    },
+    "marks": {
+      "weight": 2,
+      "reason": "Cycle and what is priced in"
+    },
+    "taleb": {
+      "weight": 2,
+      "reason": "Ruin guard"
+    },
+    "druckenmiller": {
+      "weight": 2,
+      "reason": "Rates and liquidity over the next 18 to 24 months"
+    },
+    "burry": {
+      "weight": 2,
+      "reason": "Bear guard; the capex surge is his kind of question"
+    },
+    "lynch": {
+      "weight": 1,
+      "reason": "On call: growth story and PEG"
+    },
+    "ackman": {
+      "weight": 1,
+      "reason": "On call: catalyst and governance"
+    },
+    "kantesaria": {
+      "weight": 1,
+      "reason": "On call: pricing-power gate"
+    },
+    "sleep": {
+      "weight": 1,
+      "reason": "On call: long runway and reinvestment"
+    },
+    "mauboussin": {
+      "weight": 2,
+      "reason": "What the price implies against base rates"
+    },
+    "tomlee": {
+      "weight": 1,
+      "reason": "On call: the AI theme"
+    }
+  },
+  "pack": {
+    "path": "data-pack.json",
+    "hash": "sha256:8a5155eec95fa85abf9f4de7314aae0dc5ffc678069d33743dd141b41ea57530",
+    "coverage": 0.725
+  },
+  "brief": "Investor considering a first position in Microsoft for a 5-year hold. Smoke test: all 13 seats answer Round 1 alone; a real council seats at most nine.",
+  "assumptions": [
+    "Horizon five years (stated)",
+    "Portfolio diversified and unlevered (assumed for the smoke test)"
+  ],
+  "lean": {
+    "sealed": true
+  },
+  "started": "2026-11-17T12:00:00Z"
+}

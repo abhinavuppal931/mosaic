@@ -1,0 +1,41 @@
+{
+  "$comment": "us-gaap XBRL tags for each normalized field, in order of preference. The first tag with a value for a period wins. {\"sum\": [...]} adds tags that are all present for that period. kind: flow (a duration, summed for TTM) or instant (a balance on a date).",
+  "income": {
+    "revenue": { "kind": "flow", "tags": ["RevenueFromContractWithCustomerExcludingAssessedTax", "Revenues", "SalesRevenueNet", "RevenueFromContractWithCustomerIncludingAssessedTax", "SalesRevenueGoodsNet"] },
+    "costOfRevenue": { "kind": "flow", "tags": ["CostOfGoodsAndServicesSold", "CostOfRevenue", "CostOfGoodsSold"] },
+    "grossProfit": { "kind": "flow", "tags": ["GrossProfit"] },
+    "researchAndDevelopment": { "kind": "flow", "tags": ["ResearchAndDevelopmentExpense", "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost"] },
+    "operatingIncome": { "kind": "flow", "tags": ["OperatingIncomeLoss"] },
+    "interestExpense": { "kind": "flow", "tags": ["InterestExpense", "InterestExpenseNonoperating", "InterestExpenseDebt", "InterestPaidNet"] },
+    "incomeTax": { "kind": "flow", "tags": ["IncomeTaxExpenseBenefit"] },
+    "netIncome": { "kind": "flow", "tags": ["NetIncomeLoss", "ProfitLoss", "NetIncomeLossAvailableToCommonStockholdersBasic"] },
+    "epsDiluted": { "kind": "flow", "unit": "USD/shares", "tags": ["EarningsPerShareDiluted", "EarningsPerShareBasicAndDiluted"] },
+    "dilutedShares": { "kind": "flow", "unit": "shares", "tags": ["WeightedAverageNumberOfDilutedSharesOutstanding", "WeightedAverageNumberOfShareOutstandingBasicAndDiluted"] }
+  },
+  "balance": {
+    "cash": { "kind": "instant", "tags": ["CashAndCashEquivalentsAtCarryingValue", "CashCashEquivalentsRestrictedCashAndRestrictedCashEquivalents", "Cash"] },
+    "shortTermInvestments": { "kind": "instant", "tags": ["ShortTermInvestments", "AvailableForSaleSecuritiesDebtSecuritiesCurrent", "MarketableSecuritiesCurrent"] },
+    "receivables": { "kind": "instant", "tags": ["AccountsReceivableNetCurrent", "ReceivablesNetCurrent"] },
+    "inventory": { "kind": "instant", "tags": ["InventoryNet", "InventoryFinishedGoods"] },
+    "currentAssets": { "kind": "instant", "tags": ["AssetsCurrent"] },
+    "totalAssets": { "kind": "instant", "tags": ["Assets"] },
+    "goodwill": { "kind": "instant", "tags": ["Goodwill"] },
+    "currentLiabilities": { "kind": "instant", "tags": ["LiabilitiesCurrent"] },
+    "totalLiabilities": { "kind": "instant", "tags": ["Liabilities"] },
+    "longTermDebt": { "kind": "instant", "tags": ["LongTermDebt", { "sum": ["LongTermDebtNoncurrent", "LongTermDebtCurrent"] }, "LongTermDebtNoncurrent", "LongTermDebtAndCapitalLeaseObligations"] },
+    "shortTermDebt": { "kind": "instant", "tags": ["ShortTermBorrowings", "CommercialPaper", "DebtCurrent"] },
+    "equity": { "kind": "instant", "tags": ["StockholdersEquity", "StockholdersEquityIncludingPortionAttributableToNoncontrollingInterest"] },
+    "sharesOutstanding": { "kind": "instant", "unit": "shares", "tags": ["CommonStockSharesOutstanding"] }
+  },
+  "cashflow": {
+    "operatingCF": { "kind": "flow", "tags": ["NetCashProvidedByUsedInOperatingActivities", "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"] },
+    "capex": { "kind": "flow", "tags": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets", "PaymentsForCapitalImprovements"] },
+    "da": { "kind": "flow", "tags": ["DepreciationDepletionAndAmortization", "DepreciationAndAmortization", "DepreciationAmortizationAndAccretionNet", { "sum": ["Depreciation", "AmortizationOfIntangibleAssets"] }, "Depreciation"] },
+    "sbc": { "kind": "flow", "tags": ["ShareBasedCompensation", "AllocatedShareBasedCompensationExpense"] },
+    "dividends": { "kind": "flow", "tags": ["PaymentsOfDividendsCommonStock", "PaymentsOfDividends"] },
+    "buybacks": { "kind": "flow", "tags": ["PaymentsForRepurchaseOfCommonStock"] }
+  },
+  "dei": {
+    "sharesOutstanding": "EntityCommonStockSharesOutstanding"
+  }
+}

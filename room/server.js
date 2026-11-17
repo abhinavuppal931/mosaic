@@ -2,7 +2,7 @@
 // The Mosaic Room: a local web server that plays a council's session files as they land and
 // then shows the verdict. Zero dependencies; plain HTML, CSS and JS in public/.
 //
-//   node room/server.js [--session <dir>] [--sessions <dir>] [--home <dir>] [--journal <dir>]
+//   node room/server.js [--session <dir>] [--sessions <dir>] [--home <dir>] [--plugin-data <dir>] [--journal <dir>]
 //                       [--roster <file>] [--scoring-config <file>] [--port 4731] [--host 127.0.0.1]
 //
 // With --session it shows that one folder. Otherwise it follows the newest council under the
@@ -11,7 +11,7 @@
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readSession, folderSignature, latestSession } from './lib/session.js';
 import { seatResolver } from './lib/seats.js';
 import { buildModel, DEFAULT_CONFIG } from './lib/model.js';
@@ -21,6 +21,11 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.join(HERE, 'public');
 const PLUGIN_ROOT = path.resolve(HERE, '..');
 export const DEFAULT_PORT = 4731;
+
+// Core's own home resolution (data/lib/paths.mjs), so the Room finds the same sessions and journal
+// as every other Mosaic command: --home, MOSAIC_HOME, the git clone, then --plugin-data.
+const CORE_PATHS = path.join(PLUGIN_ROOT, 'data', 'lib', 'paths.mjs');
+const core = fs.existsSync(CORE_PATHS) ? await import(pathToFileURL(CORE_PATHS).href) : null;
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8',
@@ -37,9 +42,13 @@ export function parseOptions(argv = [], env = process.env) {
     const key = m[1].replace(/-([a-z])/g, (_, c) => c.toUpperCase());
     o[key] = m[2] ?? (argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[++i] : true);
   }
-  const home = path.resolve(String(o.home || env.MOSAIC_HOME || PLUGIN_ROOT));
+  const pluginData = typeof o.pluginData === 'string' ? o.pluginData : undefined;
+  const home = core
+    ? core.resolveHome({ home: typeof o.home === 'string' ? o.home : undefined, pluginData, env, pluginRoot: PLUGIN_ROOT })
+    : path.resolve(String(o.home || env.MOSAIC_HOME || PLUGIN_ROOT));
   const rosterDefault = path.join(PLUGIN_ROOT, 'skills', 'mosaic', 'roster.json');
   return {
+    home,
     session: o.session ? path.resolve(String(o.session)) : null,
     sessions: path.resolve(String(o.sessions || path.join(home, 'sessions'))),
     journal: path.resolve(String(o.journal || env.MOSAIC_JOURNAL || path.join(home, 'journal'))),

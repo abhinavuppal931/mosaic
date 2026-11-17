@@ -1,0 +1,1 @@
+{"ticker":"TEST","queryCount":2,"resultsCount":2,"adjusted":true,"results":[{"v":900,"vw":99,"o":98,"c":99.26,"h":100,"l":97,"t":1794603600000,"n":40},{"v":1000,"vw":100.1,"o":99,"c":100.5,"h":101,"l":98,"t":1794862800000,"n":50}],"status":"OK","request_id":"synthetic"}

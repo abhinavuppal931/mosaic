@@ -7,3 +7,8 @@ sessions/*
 !sessions/.gitkeep
 !sessions/example-*/
 
+journal/*
+!journal/.gitkeep
+# The user's own config in the Mosaic home (a clone's home is the repo root). The shipped
+# defaults live in data/mosaic.config.json and stay tracked.
+/mosaic.config.json

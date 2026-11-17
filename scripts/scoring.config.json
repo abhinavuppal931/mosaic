@@ -1,0 +1,25 @@
+{
+  "$comment": "Scoring thresholds for the Chair's verdict. skills/mosaic/references/scoring.md explains each one. Change numbers here, not in code.",
+  "bands": [
+    { "min": 7.5, "label": "CONVICTION EARNED" },
+    { "min": 6.0, "label": "PROCEED WITH CONDITIONS" },
+    { "min": 4.5, "label": "RESHAPE THE THESIS" },
+    { "min": 0, "label": "PASS" }
+  ],
+  "labels": {
+    "wait": "WAIT FOR THE PITCH",
+    "insufficient": "INSUFFICIENT EVIDENCE",
+    "pass": "PASS",
+    "ruinCap": "RESHAPE THE THESIS",
+    "oneWayCap": "PROCEED WITH CONDITIONS"
+  },
+  "waitMinScore": 4.5,
+  "agreement": { "disagreeAtOrBelow": 4 },
+  "insufficient": { "coverageBelow": 0.5, "thinShareAbove": 0.5 },
+  "oneWayDoor": { "majorityAbove": 0.5, "minSpread": 4 },
+  "quick": { "round3IfSpreadAbove": 3 },
+  "unanimity": { "maxSpread": 1 },
+  "confidence": { "spreadPenaltyAt": 5 },
+  "leanPull": { "flagAt": 1.0 },
+  "evidence": { "coverageWeight": 0.5, "citedWeight": 0.5, "high": 0.75, "medium": 0.5 }
+}

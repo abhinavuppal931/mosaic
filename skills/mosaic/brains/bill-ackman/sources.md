@@ -1,0 +1,86 @@
+# Sources: Bill Ackman
+
+78 sources (43 letter, 12 speech, 12 transcript, 1 lecture, 1 testimony, 9 interview), 1,077,828 words. Every quote in this brain carries one of these ids.
+
+Depth: deep. Built from 78 free sources, 1,077,828 words, dated 2012 to 2026: 43 letters (748,096 words: the Pershing Square Holdings annual reports for 2014 to 2025, the interim reports for 2015 to 2026, quarterly investor letters from 2014 to 2019, the March 2020 hedge letters, the 2022 Netflix letter, the 2025 Howard Hughes proposal, the 2021 Tontine letter on SPARC, the Q3 2026 letter and the three 2012 Canadian Pacific proxy letters), 12 speeches (130,315 words: annual investor presentation decks from 2016 to 2026, the 2017 Ira Sohn deck and a 2017 conference call), 12 podcast and conference transcripts (2020 to 2026, 144,818 words), 9 interviews (2014 to 2026, 40,247 words), one 2014 lecture and the 2016 Senate testimony on Valeant. Thin-source limits: the Pershing Square L.P. letters from 2004 to 2013, the campaign decks (including the 2012 Herbalife presentation) and his X posts are not in the corpus, so the early activism (Wendy's, J.C. Penney, MBIA, General Growth) is known only as he retold it later. He has written no book; books about him and his campaigns are copyrighted and are neither quoted nor used. Pershing Square company text (investment policy, risk tables, chairman's statements) and the slide decks are written in the firm's voice, so policy lines are paraphrased and labeled; in S077 only his opening remarks are used. Most podcasts and interviews come from third-party transcripts, so spoken wording may differ slightly from what was said, and S031, S058, S072 and S094 are under 1,500 words. Ids skip where fetched sources were left out. The letters and transcripts are copyrighted by Pershing Square or their publishers and the right to reuse them is not confirmed, so quotes stay short and each carries its source id.
+
+Format: id | title | url | date | kind | words
+
+- S001 | Pershing Square Holdings 2014 Annual Report | https://assets.pershingsquareholdings.com/2014/09/08113002/PSH-Annual-Report.pdf | 2015-03-25 | letter | 40864
+- S002 | Pershing Square 2015 Annual Letter to Shareholders | https://assets.pershingsquareholdings.com/2014/09/Pershing-Square-2015-Annual-Letter-PSH-January-26-2016.pdf | 2016-01-26 | letter | 6920
+- S003 | PSH 2015 Annual Report Letter | https://assets.pershingsquareholdings.com/media/2014/09/09115507/2015-Annual-Report-Letter-Only.pdf | 2016-03-24 | letter | 7619
+- S004 | PSH 2016 Annual Report | https://assets.pershingsquareholdings.com/2014/09/08112935/PSH-Annual-Report_12.31.16.pdf | 2017-03-29 | letter | 38950
+- S005 | PSH 2017 Annual Report | https://assets.pershingsquareholdings.com/2018/03/08112816/2017-Annual-Report.pdf | 2018-03-28 | letter | 42965
+- S006 | PSH 2019 Annual Report | https://assets.pershingsquareholdings.com/2020/04/15125723/Pershing-Square-Holdings-Ltd.-2019-Annual-Report-1.pdf | 2020-04-15 | letter | 9202
+- S007 | PSH 2020 Annual Report Letter | https://assets.pershingsquareholdings.com/2022/10/07161558/Pershing-Square-Holdings-Ltd.-2020-Annual-Report-Letter-Only.pdf | 2021-03-30 | letter | 10478
+- S008 | PSH 2021 Annual Report | https://assets.pershingsquareholdings.com/2022/03/30135611/Pershing-Square-Holdings-Ltd.-2021-Annual-Report-1.pdf | 2022-03-30 | letter | 12791
+- S009 | PSH 2023 Annual Report | https://assets.pershingsquareholdings.com/2024/03/22201541/Pershing-Square-Holdings-Ltd.-2023-Annual-Report.pdf | 2024-03-22 | letter | 60004
+- S010 | PSH 2025 Annual Report | https://assets.pershingsquareholdings.com/wp-content/uploads/2026/02/18175039/Pershing-Square-Holdings-Ltd.-2025-Annual-Report.pdf | 2026-02-18 | letter | 58583
+- S011 | PSH June 2015 Interim Report | https://assets.pershingsquareholdings.com/2020/04/09193943/PSH-Interim-Financials-06.30.15-1.pdf | 2015-08-26 | letter | 17537
+- S012 | PSH June 2016 Interim Letter | https://assets.pershingsquareholdings.com/2022/10/07155000/2016-Interim-Financial-Statement-Letter-Only.pdf | 2016-08-25 | letter | 7674
+- S013 | PSH June 2017 Interim Report | https://assets.pershingsquareholdings.com/2017/08/08112918/PSH-Interim-Financial-Statements-06.30.17.pdf | 2017-08-24 | letter | 18229
+- S014 | PSH June 2018 Interim Letter | https://assets.pershingsquareholdings.com/media/2014/09/09163712/2018-Interim-Financial-Statement-Letter-Only.pdf | 2018-08-23 | letter | 5715
+- S015 | PSH June 2019 Interim Letter | https://assets.pershingsquareholdings.com/2019/08/20165148/2019-Semiannual-Financials-Letter-to-Shareholders-1.pdf | 2019-08-22 | letter | 7492
+- S016 | PSH June 2020 Interim Letter | https://assets.pershingsquareholdings.com/2022/10/07150917/Letter-to-Shareholders-Excerpted-from-the-2020-Semiannual-Financial-Statement.pdf | 2020-08-28 | letter | 12048
+- S017 | PSH June 2021 Interim Report | https://assets.pershingsquareholdings.com/2021/08/24160605/Pershing-Square-Holdings-Ltd.-June-2021.pdf | 2021-08-24 | letter | 25174
+- S018 | PSH June 2022 Interim Letter | https://assets.pershingsquareholdings.com/2022/08/19191407/Pershing-Square-Holdings-Ltd.-June-2022-Interim-Letter.pdf | 2022-08-19 | letter | 10968
+- S019 | PSH June 2023 Interim Report | https://assets.pershingsquareholdings.com/2023/08/18112040/Pershing-Square-Holdings-Ltd.-June-2023-Interim.pdf | 2023-08-18 | letter | 24453
+- S020 | PSH June 2024 Interim Report | https://assets.pershingsquareholdings.com/2024/08/15133212/Pershing-Square-Holdings-Ltd.-June-2024-Interim-1.pdf | 2024-08-15 | letter | 21383
+- S021 | PSH June 2025 Interim Report | https://assets.pershingsquareholdings.com/wp-content/uploads/2025/08/20192925/Pershing-Square-Holdings-Ltd.-June-2025-Interim.pdf | 2025-08-20 | letter | 25934
+- S022 | PSH June 2026 Interim Report | https://assets.pershingsquareholdings.com/wp-content/uploads/2026/08/13002306/Pershing-Square-Holdings-Ltd.-June-2026-Interim.pdf | 2026-08-13 | letter | 27367
+- S023 | Pershing Square Q3 2014 Investor Letter | https://assets.pershingsquareholdings.com/2014/09/08113006/Pershing-Square-Holdings-Ltd.-Q3Investor-Letter.pdf | 2014-11-25 | letter | 7187
+- S024 | Pershing Square Q3 2015 Investor Letter | https://assets.pershingsquareholdings.com/2014/09/Pershing-Square-Holdings-Ltd.-Q3-Investor-Letter1.pdf | 2015-12-15 | letter | 8281
+- S025 | Pershing Square Q1 2016 Investor Letter | https://assets.pershingsquareholdings.com/2016/05/Pershing-Square-1Q2016-Investor-Letter_May-11-2016_PSH-21.pdf | 2016-05-11 | letter | 6045
+- S026 | Pershing Square Q3 2016 Investor Letter | https://assets.pershingsquareholdings.com/2016/12/08112938/Pershing-Square-3Q2016-Investor-Letter-PSH.pdf | 2016-12-07 | letter | 7716
+- S027 | Pershing Square Q3 2017 Investor Letter | https://assets.pershingsquareholdings.com/2014/09/08112825/Pershing-Square-3Q17-Investor-Letter-November-2017-PSH-2.pdf | 2017-11-15 | letter | 10732
+- S028 | Pershing Square Q1 2018 Investor Letter | https://assets.pershingsquareholdings.com/2014/09/08112812/Pershing-Square-1Q18-Investor-Letter-PSH.pdf | 2018-05-17 | letter | 6400
+- S029 | Pershing Square Q1 2019 Letter to Shareholders | https://assets.pershingsquareholdings.com/2019/05/17082807/Pershing-Square-Holdings-Ltd.-Q1-Letter-to-Shareholders.pdf | 2019-05-17 | letter | 3888
+- S030 | Pershing Square Letter to Investors on COVID hedges | https://assets.pershingsquareholdings.com/2020/03/26222617/Pershing-Square-Capital-Management-L.P.-Releases-Letter-to-Investors-March-26-2020.pdf | 2020-03-26 | letter | 2343
+- S031 | Pershing Square Letter to Investors on Netflix | https://assets.pershingsquareholdings.com/2022/01/26170421/Pershing-Square-Capital-Management-L.P.-Releases-Letter-to-Investors-01-26-2022.pdf | 2022-01-26 | letter | 1038
+- S032 | Pershing Square Letter to Howard Hughes Holdings board proposing merger | https://assets.pershingsquareholdings.com/2025/01/13060332/HHH-Proposal-Letter.pdf | 2025-01-13 | letter | 5520
+- S033 | Pershing Square London Investor Meeting Presentation | https://assets.pershingsquareholdings.com/2014/09/13094310/PSCM-Annual-Investor-Update-Presentation.pdf | 2019-02-13 | speech | 8740
+- S034 | Annual Investor Presentation 2020 | https://assets.pershingsquareholdings.com/2020/02/06161429/PSCM-Annual-Investor-Update-Presentation.pdf | 2020-02-05 | speech | 10220
+- S035 | Annual Investor Presentation 2021 | https://assets.pershingsquareholdings.com/2021/02/18125641/PSH-2021-Annual-Investor-Presentation-1.pdf | 2021-02-18 | speech | 10150
+- S036 | Annual Investor Presentation 2024 | https://assets.pershingsquareholdings.com/2024/02/07111405/2024-Annual-Investor-Presentation.pdf | 2024-02-08 | speech | 13529
+- S037 | Annual Investor Presentation 2025 | https://assets.pershingsquareholdings.com/2025/03/03171547/2025-Annual-Investor-Presentation_PSH_vDF.pdf | 2025-02-11 | speech | 16296
+- S038 | Annual Investor Presentation 2026 | https://assets.pershingsquareholdings.com/wp-content/uploads/2026/02/11144917/2026-Annual-Investor-Presentation.pdf | 2026-02-11 | speech | 17312
+- S039 | Lex Fridman Podcast with Bill Ackman | https://lexfridman.com/bill-ackman-transcript/ | 2024-02-20 | transcript | 37426
+- S040 | PSH 2022 Annual Report | https://assets.pershingsquareholdings.com/2023/03/29160536/Pershing-Square-Holdings-Ltd.-2022-Annual-Report.pdf | 2023-03-29 | letter | 60347
+- S041 | Holy Grail of Investing podcast interview with Bill Ackman | https://singjupost.com/transcript-of-bill-ackman-interview-holy-grail-of-investing-podcast/ | 2026-09-08 | transcript | 11705
+- S042 | All-In Liquidity 2026 interview with Bill Ackman | https://singjupost.com/transcript-of-bill-ackman-interview-all-in-liquidity-2026/ | 2026-06-02 | transcript | 6170
+- S043 | TED conversation with Bill Ackman on challenging the status quo | https://singjupost.com/transcript-of-an-activist-investor-on-challenging-the-status-quo-bill-ackman/ | 2024-05-14 | transcript | 4289
+- S044 | Everything you need to know about finance and investing by William Ackman | https://singjupost.com/everything-need-know-finance-investing-william-ackman-transcript/ | 2014-01-01 | lecture | 11925
+- S046 | Ackman testimony to Senate Special Committee on Aging on Valeant | https://www.aging.senate.gov/imo/media/doc/SCA_Ackman_4_27_16.pdf | 2016-04-27 | testimony | 2427
+- S047 | Hargreaves Lansdown podcast with Bill Ackman on markets, AI and concentrated investing | https://www.hl.co.uk/news/special-guest-bill-ackman-on-markets-ai-and-concentrated-investing | 2026-06 | transcript | 6895
+- S048 | CNBC Squawk on the Street interview with Bill Ackman | https://pressroom.versantmedia.com/cnbc/press-releases/first-cnbc-transcript-pershing-square-ceo-bill-ackman-speaks-squawk-street | 2026-04-29 | interview | 3349
+- S050 | Bill Ackman Bloomberg interview on Allergan Valeant Herbalife | https://hedgefundalpha.com/news/bill-ackman-allergan-valeant-herbalife-full-transcript/ | 2014-04-22 | interview | 7040
+- S051 | Ackman on Herbalife interview transcript | https://hedgefundalpha.com/news/ackman-hints-herbalifes-enron-like-fraud-transcript/ | 2014-07 | interview | 3971
+- S052 | Ackman Valeant Allergan conference call | https://hedgefundalpha.com/conferences/ackman-valeant-allergan/ | 2017-12 | speech | 4386
+- S054 | Graham and Doddsville interview with Bill Ackman | https://www.marketfolly.com/2015/02/graham-doddsville-interview-with-bill.html | 2015-02-04 | interview | 4255
+- S055 | Annual Investor Presentation 2023 | https://assets.pershingsquareholdings.com/2023/02/09104816/2023-Annual-Investor-Presentation.pdf | 2023-02-09 | speech | 14638
+- S056 | Annual Investor Presentation 2022 | https://assets.pershingsquareholdings.com/2022/02/11120213/Pershing-Square-Holdings-2022-Annual-Investor-Presentation.pdf | 2022-02-11 | speech | 12123
+- S057 | Pershing Square Tontine letter to shareholders on SPARC | https://www.nasdaq.com/press-release/pershing-square-holdings-ltd.-provides-update-to-investors-2021-08-19 | 2021-08-19 | letter | 2770
+- S058 | Bill Ackman 2017 Shareholder Letter | https://www.gurufocus.com/news/656433/bill-ackmans-2017-shareholder-letter | 2018-03-26 | letter | 1264
+- S063 | Pershing Square Holdings 2024 annual letter | https://hedgefundalpha.com/investor-letters/pershing-square-holdings-returns-stocks/ | 2025-03-14 | letter | 3989
+- S064 | PSH 2024 Annual Report | https://assets.pershingsquareholdings.com/2025/03/14150847/Pershing-Square-Holdings-Ltd.-2024-Annual-Report.pdf | 2025-03-14 | letter | 60920
+- S065 | PSH 2018 Annual Report | https://assets.pershingsquareholdings.com/2019/03/25170837/PSH-2018-Annual-Report.pdf | 2019-03-25 | letter | 50143
+- S066 | Pershing Square London Investor Meeting Presentation 2018 | https://assets.pershingsquareholdings.com/2014/09/08112820/2018-Annual-London-Investor-Presentation_FINAL.pdf | 2018-01-29 | speech | 8437
+- S067 | Pershing Square European Investor Meeting Presentation 2016 | https://assets.pershingsquareholdings.com/2014/09/2016-European-Investor-Meeting-Presentation1.pdf | 2016-04-26 | speech | 10326
+- S068 | Ackman Ira Sohn 2017 presentation on Howard Hughes SimCities | https://assets.pershingsquareholdings.com/media/2017/05/08140311/FINAL-Ira-Sohn-Presentation-2017.05.08_Final-Sohn.pdf | 2017-05-08 | speech | 4158
+- S069 | Bill Ackman Bloomberg interview at Sohn on short selling and Herbalife | https://hedgefundalpha.com/conferences/bill-ackman-sohn-interview/ | 2015-05-04 | interview | 2854
+- S070 | Ackman CNBC Squawk Box interview on inflation and the election | https://hedgefundalpha.com/news/bill-ackman-inflation-catastrophic-for-the-poor/ | 2024-10-25 | interview | 6104
+- S071 | Ackman CNBC interview on SPARC and X | https://hedgefundalpha.com/news/bill-ackman-new-sparc-structure-potential-deal-with-elon-musks-x/ | 2023-10-02 | interview | 3695
+- S072 | Ackman CNBC interview on Berkshire, building an insurer and Harvard | https://hedgefundalpha.com/news/bill-ackman-on-berkshire-building-an-insurer/ | 2025-05-05 | interview | 1354
+- S077 | Pershing Square investor call on Amazon stake | https://hedgefundalpha.com/news/pershing-square-buys-amazon-lowest-multiple/ | 2025-05-22 | transcript | 3553
+- S078 | Knowledge Project: Bill Ackman, The Biggest Fight of His Life | https://podscripts.co/podcasts/the-knowledge-project-with-shane-parrish/bill-ackman-the-biggest-fight-of-his-life | 2026-09-29 | transcript | 15082
+- S079 | Knowledge Project #82: Bill Ackman, Getting Back Up | https://podscripts.co/podcasts/the-knowledge-project-with-shane-parrish/82-bill-ackman-getting-back-up | 2020-04-13 | transcript | 17806
+- S080 | In Good Company with Nicolai Tangen: Bill Ackman on concentrated investing and permanent capital | https://podscripts.co/podcasts/in-good-company-with-nicolai-tangen/bill-ackman-concentrated-investing-permanent-capital-and-the-value-of-being-challenged | 2026-10-28 | transcript | 9580
+- S081 | Boyar Value Group interview: Bill Ackman on investing, politics and Howard Hughes | https://www.blog.boyarvaluegroup.com/boyar-value-group-blog/podcasts/billackman | 2025-02-27 | transcript | 14484
+- S082 | Pershing Square Q3 2026 Letter to Shareholders | https://assets.pershingsquareholdings.com/wp-content/uploads/2026/11/03024314/PSH-Portfolio-Summary.pdf | 2026-11-02 | letter | 9802
+- S084 | Milken Institute Global Investors Symposium conversation with Bill Ackman | https://milkeninstitute.org/sites/default/files/2026-10/PershingSquareCapitalManagementBillAckman_Transcript_GISMX26.pdf | 2026-10-28 | transcript | 2848
+- S087 | Equity Mates interview with Bill Ackman | https://trackpodcasts.com/episodes/bill-ackman-on-building-the-next-berkshire-ai-his-next-10-bagger | 2026-10-28 | transcript | 14980
+- S090 | Ackman on his activist approach and backlash | https://hedgefundalpha.com/news/bill-ackman-activist-approach-backlash/ | 2024-01-12 | interview | 7625
+- S091 | Pershing Square Letter to Investors on market hedges | https://assets.pershingsquareholdings.com/2020/03/26122842/Pershing-Square-Capital-Management-L.P.-Releases-Letter-to-Investors-March-25-2020.pdf | 2020-03-25 | letter | 1906
+- S092 | Ackman letter to Canadian Pacific shareholders with proxy circular | https://www.prnewswire.com/news-releases/pershing-square-files-proxy-circular-for-shareholders-of-canadian-pacific-146257585.html | 2012-04-04 | letter | 1789
+- S093 | Ackman letter to Canadian Pacific shareholders on proxy contest | https://www.prnewswire.com/news-releases/pershing-square-issues-letter-to-shareholders-of-canadian-pacific-147562595.html | 2012-04-16 | letter | 2228
+- S094 | Ackman letter to Canadian Pacific shareholders before vote | https://www.prnewswire.com/news-releases/pershing-square-issues-letter-to-shareholders-of-canadian-pacific-148489055.html | 2012-04-23 | letter | 1438
