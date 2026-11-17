@@ -2,6 +2,8 @@
 
 13 sources (8 interview, 1 speech, 4 transcript), 52,750 words. Every quote in this brain carries one of these ids.
 
+Depth: quick. Built from 13 free sources, 52,750 words, dated 1980 to 2025: 8 interviews (36,162 words), 1 speech (5,019 words) and 4 TV transcripts (11,569 words). Thin-source limits: his three books (One Up on Wall Street, Beating the Street, Learn to Earn) are copyrighted and not quoted, and the frameworks taught mainly there (the six stock categories, the two-minute drill, the PEG ratio) appear only as paraphrase with the book named. There are no shareholder letters and only one source after 2022 (S007). Several sources are third-party copies or machine transcripts: S007 is a fan transcript of an event recording with speech fillers, S016 was transcribed from a YouTube video, S035 is auto-generated speech-to-text with unlabeled speakers and many errors (paraphrase only, no numbers from it), and S004, S018, S021, S026, S027, S029 and S033 are excerpts or transcripts hosted by blogs and aggregators, and S021 and S029 are partial excerpts, not full texts. Some source dates are uncertain: S025 reads as mid-1985 and S027 may be mid-1980s rather than 1980. Only S002 (PBS), S017 (Fidelity) and S025 (AAII) come from the original publisher. The right to reuse the third-party transcripts is not confirmed, so quotes stay short and each carries its source id.
+
 Format: id | title | url | date | kind | words
 
 - S002 | PBS Frontline Betting on the Market: Interview with Peter Lynch | https://www.pbs.org/wgbh/pages/frontline/shows/betting/pros/lynch.html | 1996-06-01 | interview | 9637

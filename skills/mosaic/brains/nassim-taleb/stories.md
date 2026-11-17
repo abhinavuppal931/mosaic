@@ -2,7 +2,7 @@
 
 Built from the six verified batch notes over 56 sources (papers 2012 to 2026, testimonies 2009 and 2011, interviews and transcripts 2010 to 2025). The blowups, trades and case studies he returns to, most-used first. Most of his stories are other people's blowups, used as warnings; his own trades and his own bitcoin mistake are given equal room. Figures are as he reported them.
 
-## 1. LTCM, 1998: the "ten sigma" excuse
+## 1. LTCM, 1998: the ten sigma excuse
 Sources: 7 (S001, S007, S015, S029, S041, S051, S055).
 Nobel-decorated partners blew up a hedge fund on risk methods that misjudged the rare event, then called it a ten-sigma move; he counts at least sixty finance PhDs blown up on the same trades and methods (S001). Regulators kept VaR and pushed Basel 2 anyway (S055), and the Fed rescue let exposure to rare events grow (S029). After LTCM, index calls traded below any plausible volatility because capital constraints stopped arbitrage: "With European options, such dislocations can become terminal to a trading desk, that is, they threaten extinction." (S041)
 Lesson: apply Wittgenstein's ruler. "it is much more likely that they have the wrong distribution than it is that you really have ten-sigma event" (S001) A model is not safe because of who built it (S029).
@@ -44,12 +44,12 @@ Lesson: better convex than right.
 
 ## 9. 1987 and Lehman: his own tail trades
 Sources: 1 (S037).
-In 1987, around the Plaza Accord aftermath, his P&L exploded against a tiny stated risk; the firm assumed he was hiding something. "You made too much money, you've got to be taking risk." (S037) He decided then to make a living from the asymmetry. On Lehman day he was on a plane, landed to the news, and the tail trade had paid (S037).
+Before the 1987 crash, on the Plaza Accord announcement, his P&L exploded against a tiny maximum loss, and inspectors were sent to find the hidden risk. "You made too much money, you've got to be taking risk." (S037) He decided then to make a living from the asymmetry. On Lehman day he was on a plane, landed to the news, and the tail trade had paid (S037).
 Lesson: a convex position earns little most days and a great deal on the rare one; the rare day is the business.
 
 ## 10. The client who overrode the hedge with a correlation trade
 Sources: 1 (S037).
-A client bought S&P puts and sold German index puts to collect cash. The German market moved violently and the firm went out of business. "So there was a dependence on correlation." (S037)
+A manager who took clients from Empirica overrode the strategy: he bought S&P 500 puts and sold German index puts to collect cash. The German market moved violently and the firm went out of business. "So there was a dependence on correlation." (S037)
 Lesson: a hedge that needs a correlation to hold is not a hedge.
 
 ## 11. Morgan Stanley: right on direction, hurt anyway
