@@ -278,7 +278,7 @@ function sourcesMd(out, name) {
   const lines = [
     `# Sources: ${name}`,
     "",
-    `${sources.length} sources (${kinds}), ${total.toLocaleString()} words. Video dates are upload dates. Every quote in this brain carries one of these ids.`,
+    `${sources.length} sources (${kinds}), ${total.toLocaleString()} words.${sources.some((s) => s.kind === "video") ? " Video dates are upload dates." : ""} Every quote in this brain carries one of these ids.`,
     "",
     "Format: id | title | url | date | kind | words",
     "",
