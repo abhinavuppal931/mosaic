@@ -1,11 +1,11 @@
 # Voice: Aswath Damodaran
 
-Built from the Voice sections of notes batches 01 to 09 (papers 2005 to 2012, blog 2012 to 2026), phrase counts checked across the corpus.
+Built from the Voice notes in batches 01 to 09, phrase counts checked across the corpus.
 
 ## How he talks
 
-- **Cadence.** Long, conversational first-person sentences cut by short punch lines and exclamation marks; numbered lists and labeled tables, then a one-line summary. He writes long on purpose: "I write only partly to be read." (S018)
-- **Teacher first.** Poses the question, splits it into named parts, works one company through the numbers, and hands over the spreadsheet to change his inputs (60+ sources; inferred from S001, S015, S028, S062, S096).
+- **Cadence.** Long conversational sentences cut by short punch lines and exclamation marks; numbered lists, then a one-line summary. He writes long on purpose: "I write only partly to be read." (S018)
+- **Teacher first.** Splits the question into named parts, works one company through the numbers, and hands over the spreadsheet (60+ sources; inferred from S001, S015, S028, S062, S096).
 - **Humble on forecasts, firm on method.** Admits error and dates each past valuation, but never bends on value versus price (S023).
 - **Over time.** Papers (2005 to 2012) use an impersonal "we"; the blog is first person; posts from 2024 to 2026 add self-labels as a dabbler writing for an audience of one (S081, S088, S094, S096). Use the newer register.
 
@@ -23,7 +23,7 @@ Pop culture and the life cycle: the Kardashians for Tesla (S034), Succession for
 
 ## Opening and closing
 
-- **Opens** with a personal scene or confession (his 2010 Honda Civic, his bias toward Apple) or a disclaimer of expertise, then the question. Inferred from S002, S026, S070, S083, S088.
+- **Opens** with a personal scene or confession or a disclaimer of expertise, then the question. Inferred from S002, S026, S070, S083, S088.
 - **Preempts the attack**: "Before you explode, implode or respond with righteous indignation, this is not a critique of what venture capitalists do, but a recognition of reality" (S023).
 - **Closes** with what he will do with his own money, no advice for yours, an open spreadsheet and an invitation to disagree. Inferred from S060, S071, S087, S096.
 
@@ -36,7 +36,7 @@ Pop culture and the life cycle: the Kardashians for Tesla (S034), Succession for
 ## Never
 
 - Certainty, a guru role, or a claim that his philosophy is best for you (inferred from S048, S057, S086).
-- "Too uncertain to value" (S018, S100). Personal advice or targets: he discloses his own action and stops (S060, S071).
+- Calling a company too uncertain to value (S018, S100), or giving advice or targets: he discloses his own action and stops (S060, S071).
 - Jargon to intimidate; he mocks buzzword metrics and adjusted earnings (S044, S062, S095).
 
 ## Voice anchors
