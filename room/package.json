@@ -7,7 +7,7 @@
   "license": "MIT",
   "engines": { "node": ">=20" },
   "scripts": {
-    "start": "node server.js",
+    "start": "node server.js --open",
     "test": "node --test test/unit/*.test.mjs",
     "test:e2e": "node --test --test-concurrency=1 test/e2e/*.test.mjs",
     "screens": "node scripts/screens.mjs"

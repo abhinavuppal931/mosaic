@@ -5,7 +5,7 @@
 //   node data/cli.mjs pack --macro [--session <dir>]
 //   node data/cli.mjs pack --portfolio holdings.json [--session <dir>]
 //   node data/cli.mjs check-provider <id> [--symbol AAPL] [--series ust_10y]
-//   node data/cli.mjs setup [--status]
+//   node data/cli.mjs setup [--status]   (--status starts with the first-run check)
 //   node data/cli.mjs providers
 //   node data/cli.mjs paths
 //
@@ -31,7 +31,9 @@ const HELP = `Mosaic data CLI
   pack --ticker <SYMBOL> | --macro | --portfolio <holdings.json>   build a data pack
        [--session <dir>]  write data-pack.json and data-pack.md there (default: print a summary)
   check-provider <id> [--symbol AAPL] [--series <canonical id>]   contract-test one adapter
-  setup [--status]                                                   ask for and store your SEC contact; show what is set
+  setup [--status]                                                   ask for and store your SEC contact; --status runs the
+                                                                     first-run check (Node, home folder, SEC contact) and shows
+                                                                     which keys are set
   providers                                                          list providers and whether keys are set
   paths                                                              print where sessions, journal and cache live
 
@@ -138,13 +140,51 @@ async function askTerminal(question) {
   }
 }
 
+export const MIN_NODE = 20;
+
+/**
+ * The first-run check /mosaic runs before intake: Node version, a writable Mosaic home, and the
+ * SEC contact. Each failed item carries one next step. Never reads or returns a secret value.
+ * @returns {{ ready: boolean, items: { name: string, ok: boolean, detail: string, next?: string }[] }}
+ */
+export function firstRunCheck(p, config, env, { nodeVersion = process.versions.node } = {}) {
+  const items = [];
+  const major = Number(String(nodeVersion).split('.')[0]);
+  items.push(major >= MIN_NODE
+    ? { name: 'Node.js', ok: true, detail: `${nodeVersion}` }
+    : { name: 'Node.js', ok: false, detail: `${nodeVersion} is too old`, next: `Install Node.js ${MIN_NODE} or later from https://nodejs.org, then run /mosaic again.` });
+  const probe = path.join(p.home, `.write-check-${process.pid}`);
+  try {
+    fs.mkdirSync(p.home, { recursive: true });
+    fs.writeFileSync(probe, '');
+    fs.rmSync(probe, { force: true });
+    items.push({ name: 'Mosaic home', ok: true, detail: `${p.home} (writable)` });
+  } catch (e) {
+    items.push({ name: 'Mosaic home', ok: false, detail: `${p.home} is not writable (${e.code || e.message})`, next: 'Set MOSAIC_HOME to a folder you can write to (for example a "mosaic" folder in your Documents), then run /mosaic again.' });
+  }
+  const src = contactSource(config, env);
+  const cli = JSON.stringify(path.join(p.pluginRoot, 'data', 'cli.mjs'));
+  items.push(src
+    ? { name: 'SEC contact', ok: true, detail: src === 'env' ? `set (${config.providers['sec-edgar'].contactEnv})` : 'set (user config)' }
+    : { name: 'SEC contact', ok: false, detail: 'not set; company filings are skipped until it is (macro questions work without it)', next: `Let /mosaic ask for your name and email now, or run node ${cli} setup in a terminal.` });
+  return { ready: items.every((i) => i.ok), items };
+}
+
 function status(p, config) {
   const env = createEnv({ files: [p.envFile] });
-  console.log(`Mosaic home: ${p.home}\nKeys file: ${p.envFile}${fs.existsSync(p.envFile) ? '' : ' (not created yet)'}\nUser config: ${p.userConfig}${fs.existsSync(p.userConfig) ? '' : ' (not created yet)'}`);
+  const check = firstRunCheck(p, config, env);
+  console.log('First-run check');
+  for (const i of check.items) {
+    console.log(`  ${i.name.padEnd(24)} ${i.ok ? 'ok' : 'FIX'}  ${i.detail}`);
+    if (i.next) console.log(`  ${''.padEnd(24)} next step: ${i.next}`);
+  }
+  const fix = check.items.filter((i) => !i.ok).length;
+  console.log(check.ready ? 'Ready.' : `${fix === 1 ? 'One item' : `${fix} items`} to fix before a council.`);
+  console.log(`\nMosaic home: ${p.home}\nKeys file: ${p.envFile}${fs.existsSync(p.envFile) ? '' : ' (not created yet)'}\nUser config: ${p.userConfig}${fs.existsSync(p.userConfig) ? '' : ' (not created yet)'}`);
   const src = contactSource(config, env);
   console.log(`  ${'SEC contact'.padEnd(24)} ${src === 'env' ? `set (${config.providers['sec-edgar'].contactEnv})` : src === 'config' ? 'set (user config)' : 'not set (run setup)'}`);
   for (const [id, c] of Object.entries(config.providers)) if (c.keyEnv) console.log(`  ${c.keyEnv.padEnd(24)} ${env.has(c.keyEnv) ? 'set' : 'not set'}  (${id})`);
-  return 0;
+  return check.ready ? 0 : 3;
 }
 
 function ensureGitignore(home) {

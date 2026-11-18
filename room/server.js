@@ -7,7 +7,11 @@
 //
 // With --session it shows that one folder. Otherwise it follows the newest council under the
 // sessions folder (<home>/sessions), so a council started after the Room opens shows up by itself.
+// Until the user has a council of their own, it shows the finished example councils in
+// room/examples/ (the newest by default; the journal page lists all of them).
 // It never writes session files; the only write is "Save to journal" (journal/<KEY>.json).
+// --open opens the Room in the default browser. If the port is taken by another Room, it reports
+// that Room's address; if something else has the port, it moves to the next free one.
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -15,12 +19,15 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { readSession, folderSignature, latestSession } from './lib/session.js';
 import { seatResolver } from './lib/seats.js';
 import { buildModel, DEFAULT_CONFIG } from './lib/model.js';
-import { journalStatus, saveSession, listJournal, journalFile, journalKey } from './lib/journal.js';
+import { journalStatus, saveSession, listJournal, journalFile, journalKey, buildEntry } from './lib/journal.js';
+import { spawn } from 'node:child_process';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.join(HERE, 'public');
 const PLUGIN_ROOT = path.resolve(HERE, '..');
+export const EXAMPLES = path.join(HERE, 'examples');
 export const DEFAULT_PORT = 4731;
+const PORT_TRIES = 10;
 
 // Core's own home resolution (data/lib/paths.mjs), so the Room finds the same sessions and journal
 // as every other Mosaic command: --home, MOSAIC_HOME, the git clone, then --plugin-data.
@@ -58,6 +65,8 @@ export function parseOptions(argv = [], env = process.env) {
     host: String(o.host || env.MOSAIC_ROOM_HOST || '127.0.0.1'),
     pollMs: Number(o.poll || 400),
     quiet: Boolean(o.quiet),
+    examples: o.examples === 'false' || o.noExamples ? null : path.resolve(String(typeof o.examples === 'string' ? o.examples : EXAMPLES)),
+    open: Boolean(o.open),
   };
 }
 
@@ -91,6 +100,22 @@ function loadRoster(file, log) {
 
 const today = () => new Date().toISOString().slice(0, 10);
 
+/** Finished example councils (folders with council.json and verdict.json), newest first. */
+export function listExamples(dir) {
+  if (!dir) return [];
+  let names = [];
+  try {
+    names = fs.readdirSync(dir);
+  } catch {
+    return [];
+  }
+  return names
+    .filter((n) => /^[\w.-]+$/.test(n) && ['council.json', 'verdict.json'].every((f) => fs.existsSync(path.join(dir, n, f))))
+    .sort()
+    .reverse()
+    .map((n) => path.join(dir, n));
+}
+
 /**
  * Start the Room. Resolves to { server, url, port, close, state }.
  * Every change in the session folder (or the journal file for it) rebuilds the model and is
@@ -110,7 +135,56 @@ export async function startServer(opts = {}) {
   let state = null;
   let body = '';
 
-  const currentDir = () => o.session || latestSession(o.sessions);
+  const examples = listExamples(o.examples);
+  const exampleCache = new Map();
+  const own = () => o.session || latestSession(o.sessions);
+  // The user's own council, else the newest example. `example` is true while showing an example.
+  const current = () => {
+    const d = own();
+    if (d || o.session) return { d, example: false };
+    return { d: examples[0] || null, example: Boolean(examples[0]) };
+  };
+  const currentDir = () => current().d;
+  const exampleList = () => examples.map((d) => path.basename(d));
+
+  /** State for one example council, built once (examples never change while the Room runs). */
+  function exampleState(name) {
+    const d = examples.find((x) => path.basename(x) === name);
+    if (!d) return null;
+    if (!exampleCache.has(name)) exampleCache.set(name, sessionState(d, new Map(), true));
+    return exampleCache.get(name);
+  }
+
+  /** Rows for the journal page: one per example, shaped like journal rows. */
+  function exampleRows() {
+    const rows = [];
+    for (const d of examples) {
+      try {
+        const s = readSession(d, { resolve, cache: new Map() });
+        if (!s.council || !s.verdict) continue;
+        let rawPack = null;
+        try {
+          rawPack = JSON.parse(fs.readFileSync(path.join(d, 'data-pack.json'), 'utf8'));
+        } catch {
+          rawPack = null;
+        }
+        const e = buildEntry(s, rawPack, { roster, cfg });
+        const date = path.basename(d).match(/^\d{4}-\d{2}-\d{2}/)?.[0] || null;
+        rows.push({
+          example: path.basename(d),
+          key: journalKey(s.council) || path.basename(d),
+          company: rawPack?.facts?.find((f) => f.key === 'company_name')?.value || null,
+          label: e.label,
+          recommended: e.recommended,
+          lastVerdict: date,
+          latest: { decision: e.decision, call: e.call, options: e.options, optionScores: e.optionScores },
+        });
+      } catch (err) {
+        log(`example ${path.basename(d)} could not be read: ${err.message}`);
+      }
+    }
+    return rows;
+  }
 
   function journalSig(council) {
     const key = journalKey(council);
@@ -123,26 +197,29 @@ export async function startServer(opts = {}) {
   }
 
   function rebuild() {
-    const d = currentDir();
+    const { d, example } = current();
     if (d !== dir) cache.clear();
     dir = d;
     if (!dir) {
       state = { ok: false, waiting: true, message: 'No council yet. Start one with /mosaic, and it will appear here.', watching: o.session || o.sessions };
       return;
     }
+    state = sessionState(dir, cache, example);
+  }
+
+  function sessionState(dir, cache, example) {
     const s = readSession(dir, { resolve, cache });
     if (!s.council) {
-      state = { ok: false, waiting: true, message: 'The council is being set up. The table assembles as soon as the brief is saved.', watching: dir, problems: s.problems };
-      return;
+      return { ok: false, waiting: true, message: 'The council is being set up. The table assembles as soon as the brief is saved.', watching: dir, problems: s.problems };
     }
-    s.journal = { ...journalStatus(o.journal, s.council) };
+    // An example is never saved to the user's journal.
+    s.journal = example ? { available: false, saved: false, key: null } : { ...journalStatus(o.journal, s.council) };
     let model;
     try {
       model = buildModel(s, { roster, cfg });
     } catch (e) {
-      state = { ok: false, waiting: true, message: 'The session files could not be read yet.', watching: dir, problems: [{ file: dir, message: e.message }] };
       log(`model error: ${e.stack || e.message}`);
-      return;
+      return { ok: false, waiting: true, message: 'The session files could not be read yet.', watching: dir, problems: [{ file: dir, message: e.message }] };
     }
     for (const p of model.problems) {
       const k = `${dir}|${p.file}|${p.message}`;
@@ -151,7 +228,13 @@ export async function startServer(opts = {}) {
         log(`problem in ${p.file}: ${p.message}`);
       }
     }
-    state = { ok: true, session: path.basename(dir), model, journal: s.journal, done: Boolean(model.verdict), stale: isStale(dir, model) };
+    const out = { ok: true, session: path.basename(dir), model, journal: s.journal, done: Boolean(model.verdict), stale: example ? false : isStale(dir, model) };
+    if (example) {
+      out.example = true;
+      out.examples = exampleList();
+      out.sessions = o.sessions;
+    }
+    return out;
   }
 
   function isStale(d, model) {
@@ -208,6 +291,11 @@ export async function startServer(opts = {}) {
     const url = new URL(req.url, 'http://localhost');
     const p = url.pathname;
     if (p === '/api/state') return send(res, 200, state);
+    const ex = p.match(/^\/api\/examples\/([\w.-]+)$/);
+    if (ex && req.method === 'GET') {
+      const st = exampleState(ex[1]);
+      return st ? send(res, 200, st) : send(res, 404, { ok: false, error: 'No example by that name.' });
+    }
     if (p === '/api/events') {
       res.writeHead(200, { 'content-type': 'text/event-stream', 'cache-control': 'no-store', connection: 'keep-alive' });
       res.write(`retry: 1500\nevent: state\ndata: ${body}\n\n`);
@@ -215,10 +303,16 @@ export async function startServer(opts = {}) {
       req.on('close', () => clients.delete(res));
       return;
     }
-    if (p === '/api/journal' && req.method === 'GET') return send(res, 200, { dir: o.journal, today: today(), rows: listJournal(o.journal, today()) });
+    if (p === '/api/journal' && req.method === 'GET') {
+      const rows = listJournal(o.journal, today());
+      // Offer the examples only to someone with nothing of their own yet.
+      const offer = !rows.length && !own();
+      return send(res, 200, { dir: o.journal, today: today(), rows, examples: offer ? exampleRows() : [] });
+    }
     if (p === '/api/journal' && req.method === 'POST') {
       if (!sameOrigin(req)) return send(res, 403, { ok: false, error: 'Saving is only allowed from the Room itself.' });
       if (!dir || !state?.ok) return send(res, 409, { ok: false, error: 'There is no council to save yet.' });
+      if (state.example) return send(res, 409, { ok: false, error: 'This is an example council, so it is not saved to your journal.' });
       const s = readSession(dir, { resolve, cache });
       if (!s.verdict) return send(res, 409, { ok: false, error: 'The council has not reached a verdict yet.' });
       try {
@@ -243,10 +337,22 @@ export async function startServer(opts = {}) {
     fs.createReadStream(file).pipe(res);
   });
 
-  await new Promise((ok, fail) => {
-    server.once('error', fail);
-    server.listen(o.port, o.host, ok);
-  });
+  // A busy port moves to the next one, unless the caller asked for strict (tests, --port given).
+  const tries = o.strictPort ? 1 : PORT_TRIES;
+  for (let i = 0; ; i++) {
+    try {
+      await new Promise((ok, fail) => {
+        server.once('error', fail);
+        server.listen(o.port === 0 ? 0 : o.port + i, o.host, () => {
+          server.off('error', fail);
+          ok();
+        });
+      });
+      break;
+    } catch (e) {
+      if (e.code !== 'EADDRINUSE' || i + 1 >= tries || o.port === 0) throw e;
+    }
+  }
   const timer = setInterval(() => {
     try {
       tick();
@@ -277,17 +383,54 @@ export async function startServer(opts = {}) {
   };
 }
 
+/** Is a Mosaic Room already answering at this port? Resolves to its URL or null. */
+export async function findRoom(port, host = '127.0.0.1') {
+  try {
+    const r = await fetch(`http://${host}:${port}/api/state`, { signal: AbortSignal.timeout(1500) });
+    const j = await r.json();
+    return j && typeof j === 'object' && ('ok' in j || 'waiting' in j) ? `http://localhost:${port}` : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Open a URL in the default browser, best effort; never throws. */
+export function openBrowser(url) {
+  const [cmd, args] =
+    process.platform === 'win32' ? ['cmd', ['/c', 'start', '""', url]] : process.platform === 'darwin' ? ['open', [url]] : ['xdg-open', [url]];
+  try {
+    const child = spawn(cmd, args, { stdio: 'ignore', detached: true, windowsHide: true });
+    child.on('error', () => {});
+    child.unref();
+  } catch {
+    /* no browser here: the URL is printed anyway */
+  }
+}
+
 const invoked = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
 if (invoked) {
-  const o = parseOptions(process.argv.slice(2));
+  const argv = process.argv.slice(2);
+  const o = parseOptions(argv);
+  // With --port given, only that port; otherwise the default and the next few.
+  o.strictPort = argv.some((a) => /^--port(=|$)/.test(a)) || Boolean(process.env.MOSAIC_ROOM_PORT);
+  let existing = null;
+  for (let i = 0; i < (o.strictPort ? 1 : PORT_TRIES) && !existing; i++) existing = await findRoom(o.port + i);
+  if (existing) {
+    process.stdout.write(`Mosaic Room is already open at ${existing}\n`);
+    if (o.open) openBrowser(existing);
+    process.exit(0);
+  }
   startServer(o).then(
     (r) => {
       process.stdout.write(`Mosaic Room is open at ${r.url}\n`);
-      process.stdout.write(o.session ? `Showing ${o.session}\n` : `Following the newest council in ${o.sessions}\n`);
-      process.stdout.write(`Journal folder: ${o.journal}\n`);
+      if (o.session) process.stdout.write(`Showing ${o.session}\n`);
+      else if (r.state()?.example) process.stdout.write(`No council of your own yet, so it shows the example councils. Yours will appear here as soon as you run /mosaic.\nWatching ${o.sessions}\n`);
+      else process.stdout.write(`Following the newest council in ${o.sessions}\n`);
+      process.stdout.write(`Journal folder: ${o.journal}\nStop it with Ctrl+C.\n`);
+      if (o.open) openBrowser(r.url);
     },
     (e) => {
-      if (e.code === 'EADDRINUSE') process.stderr.write(`Port ${o.port} is busy. Is the Room already open? Try --port ${o.port + 1}.\n`);
+      if (e.code === 'EADDRINUSE') process.stderr.write(`Port ${o.port} is busy. Start the Room on another port with --port ${o.port + 1}.\n`);
       else process.stderr.write(`The Room could not start: ${e.message}\n`);
       process.exit(1);
     },
