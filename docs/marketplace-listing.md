@@ -24,11 +24,21 @@ Mosaic can be listed in the claude.ai plugin directory through the developer por
 
 In the portal, choose Submit new, then Plugin bundle.
 
-1. Source. Repo `abhinavuppal931/mosaic`. Plugin path blank (the plugin is at the root). Branch `main`. Run Validate.
+1. Source. Repo `abhinavuppal931/mosaic`. Plugin path blank (the plugin is at the root). Branch `directory`, not `main` (see below). Run Validate.
 2. Listing details. These are read from `plugin.json` and the README.
 3. Data handling questions.
 4. Compliance. Four acknowledgements.
 5. Review and submit. Choose Submit for review.
+
+### Why the listing tracks the `directory` branch
+
+Validating `main` on 2026-11-18 gave three blocking issues. Each applies only to publishers that are not Verified organizations:
+
+- `allowed-tools` may hold only Read, Grep, Glob and LS. Main pre-approves the plugin's own scripts so a council runs without prompts.
+- Only Markdown, text, JSON, YAML and images may ship. `.gitleaks.toml` is TOML.
+- `package.json` may not have `scripts`.
+
+Main keeps all three, so the self-hosted install (`claude plugin install mosaic --marketplace abhinavuppal931/mosaic`) stays prompt-free. On every push to main, `.github/workflows/directory-branch.yml` runs `scripts/directory-variant.mjs` and force-pushes the result as `directory`: one orphan commit with no `.github` folder. Directory installs work the same way but ask before each script runs. Everything else the validator raised was a policy hold for the human reviewer or a warning about documentation.
 
 Other rules:
 

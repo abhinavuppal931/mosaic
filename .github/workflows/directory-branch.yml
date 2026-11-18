@@ -1,0 +1,40 @@
+name: Directory branch
+
+# Publishes the `directory` branch that the claude.ai plugin directory tracks.
+# It is main with the three things the directory refuses from unverified publishers
+# taken out (see scripts/directory-variant.mjs). It is one orphan commit with no
+# .github folder, so it never runs workflows and needs no workflow permission.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: directory-branch
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    if: github.event.repository.private == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build the directory variant
+        run: node scripts/directory-variant.mjs
+      - name: Publish the directory branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan directory-build
+          git rm -r -q --cached .github
+          rm -rf .github
+          git add -A
+          git commit -q -m "Directory variant of main at ${GITHUB_SHA::7}"
+          git push -f origin HEAD:refs/heads/directory
