@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import http from 'node:http';
+import net from 'node:net';
 import { fileURLToPath } from 'node:url';
 import { startServer, parseOptions, DEFAULT_PORT } from '../../server.js';
 import { stageTo } from '../helpers/stepper.mjs';
@@ -96,7 +97,7 @@ test('serves the page, the state, and pushes updates as files land', async () =>
 
 test('waits politely when there is no council yet, then follows the newest one', async () => {
   const sessions = tmp();
-  const r = await startServer({ sessions, port: 0, quiet: true, journal: tmp(), pollMs: 100 });
+  const r = await startServer({ sessions, examples: null, port: 0, quiet: true, journal: tmp(), pollMs: 100 });
   try {
     const st = JSON.parse((await request(`${r.url}/api/state`)).body);
     assert.equal(st.ok, false);
@@ -153,8 +154,126 @@ test('static files stay inside public/', async () => {
 test('a busy port fails with EADDRINUSE', async () => {
   const r = await startServer({ session: NVDA, port: 0, quiet: true, journal: tmp() });
   try {
-    await assert.rejects(startServer({ session: NVDA, port: r.port, quiet: true, journal: tmp() }), { code: 'EADDRINUSE' });
+    await assert.rejects(startServer({ session: NVDA, port: r.port, strictPort: true, quiet: true, journal: tmp() }), { code: 'EADDRINUSE' });
   } finally {
     await r.close();
+  }
+});
+
+const json = async (url, opts) => JSON.parse((await request(url, opts)).body);
+const startEmpty = (extra = {}) => {
+  const sessions = tmp();
+  const journal = tmp();
+  return startServer({ sessions, journal, port: 0, quiet: true, pollMs: 100, ...extra }).then((r) => ({ r, sessions, journal }));
+};
+
+test('examples: with nothing of your own, the newest example is shown and cannot be saved', async () => {
+  const { r } = await startEmpty();
+  try {
+    const st = await json(`${r.url}/api/state`);
+    assert.equal(st.ok, true);
+    assert.equal(st.example, true);
+    assert.equal(st.session, '2026-11-17-nvda-buy');
+    assert.deepEqual(st.examples, ['2026-11-17-nvda-buy', '2026-11-15-msft-size', '2026-11-12-cost-sell']);
+    assert.equal(st.journal.available, false);
+    const save = await request(`${r.url}/api/journal`, { method: 'POST', headers: { origin: r.url.replace('localhost', '127.0.0.1') } });
+    assert.equal(save.status, 409);
+  } finally {
+    await r.close();
+  }
+});
+
+test('examples: /api/examples/<name> serves one example and refuses unknown names and path tricks', async () => {
+  const { r } = await startEmpty();
+  try {
+    const ok = await request(`${r.url}/api/examples/2026-11-15-msft-size`);
+    assert.equal(ok.status, 200);
+    const st = JSON.parse(ok.body);
+    assert.equal(st.ok, true);
+    assert.equal(st.example, true);
+    assert.equal(st.session, '2026-11-15-msft-size');
+    for (const bad of ['nope', '..%2Fexamples', '..%2F..%2Fpackage.json', '%2e%2e', '..']) {
+      assert.equal((await request(`${r.url}/api/examples/${bad}`)).status, 404, bad);
+    }
+  } finally {
+    await r.close();
+  }
+});
+
+test('examples: the journal offers three example rows until you have a council or a journal file', async () => {
+  const { r, sessions } = await startEmpty();
+  try {
+    const j = await json(`${r.url}/api/journal`);
+    assert.deepEqual(j.rows, []);
+    assert.equal(j.examples.length, 3);
+    for (const row of j.examples) {
+      assert.ok(row.example && row.key && row.label && row.recommended && row.lastVerdict && row.latest.decision, JSON.stringify(row));
+    }
+    // A council of your own removes the offer.
+    fs.cpSync(NVDA, path.join(sessions, '2026-11-17-nvda-buy'), { recursive: true });
+    assert.deepEqual((await json(`${r.url}/api/journal`)).examples, []);
+  } finally {
+    await r.close();
+  }
+  // So does a journal file, even with no council: save one through a server that follows NVDA.
+  const saved = tmp();
+  const saver = await startServer({ session: NVDA, journal: saved, port: 0, quiet: true });
+  try {
+    assert.equal((await request(`${saver.url}/api/journal`, { method: 'POST', headers: { origin: saver.url.replace('localhost', '127.0.0.1') } })).status, 200);
+  } finally {
+    await saver.close();
+  }
+  const r2 = await startServer({ sessions: tmp(), journal: saved, port: 0, quiet: true });
+  try {
+    const j = await json(`${r2.url}/api/journal`);
+    assert.equal(j.rows.length, 1);
+    assert.deepEqual(j.examples, []);
+  } finally {
+    await r2.close();
+  }
+});
+
+test('examples: a new council of your own takes over from the example', async () => {
+  const { r, sessions } = await startEmpty();
+  try {
+    assert.equal((await json(`${r.url}/api/state`)).example, true);
+    fs.cpSync(path.join(EX, '2026-11-15-msft-size'), path.join(sessions, '2026-11-16-mine'), { recursive: true });
+    r.refresh();
+    const st = await json(`${r.url}/api/state`);
+    assert.equal(st.ok, true);
+    assert.equal(st.example, undefined);
+    assert.equal(st.session, '2026-11-16-mine');
+  } finally {
+    await r.close();
+  }
+});
+
+test('examples: null turns the fallback off and keeps the waiting message', async () => {
+  const { r } = await startEmpty({ examples: null });
+  try {
+    const st = await json(`${r.url}/api/state`);
+    assert.equal(st.ok, false);
+    assert.equal(st.waiting, true);
+    assert.match(st.message, /No council yet/);
+    assert.equal((await request(`${r.url}/api/examples/2026-11-17-nvda-buy`)).status, 404);
+    assert.deepEqual((await json(`${r.url}/api/journal`)).examples, []);
+  } finally {
+    await r.close();
+  }
+});
+
+test('a busy port moves to another one unless strictPort is set', async () => {
+  const blocker = net.createServer();
+  await new Promise((ok) => blocker.listen(0, '127.0.0.1', ok));
+  const busy = blocker.address().port;
+  let r;
+  try {
+    r = await startServer({ session: NVDA, port: busy, host: '127.0.0.1', quiet: true, journal: tmp() });
+    assert.notEqual(r.port, busy);
+    assert.equal((await request(`${r.url}/api/state`)).status, 200);
+    await assert.rejects(startServer({ session: NVDA, port: busy, host: '127.0.0.1', strictPort: true, quiet: true, journal: tmp() }), { code: 'EADDRINUSE' });
+  } finally {
+    if (r) await r.close();
+    await new Promise((ok) => blocker.close(ok));
   }
 });

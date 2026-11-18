@@ -4,48 +4,111 @@ A council of investing legends for Claude Code. Bring an investment decision; th
 
 > **Mosaic grades how a decision was made. It is not investment advice.** Every seat is a simulation built from that investor's public work. It is not the person, is not affiliated with or endorsed by them, and does not speak for them. Verbatim quotes appear only with a source id. Mosaic grades your reasoning and decision process, never a security: no price targets (valuation is a range and "what the price implies"), and position sizing appears only as education about survivable loss. Numbers carry their as-of dates; verify them against the filings before acting.
 
-## Why it is different
+## What you need
 
-1. **One sourced fact sheet.** Every seat argues from the same `data-pack.json`. Every number has a fact id (`F014`), a source, an as-of date and a status. Missing data stays visibly missing, never filled in. A check script fails any cited fact id or quote that is not real.
-2. **Real debate, dissent kept.** Seats answer each other's strongest argument. The verdict leads with where they disagree and keeps the minority report. No averaging into "hold".
-3. **It remembers.** Each decision becomes a thesis journal entry with kill criteria and a re-check date. `/mosaic recheck NVDA` reruns a quick council on what changed since the last pack.
-4. **Anti-sycophancy.** Round 1 seats do not know which way you lean. The lean is revealed in Round 2, and the verdict reports the **lean pull**: how far scores moved toward your lean after the reveal.
+- Claude Code 2.1.292 or later. Check with `claude --version`. Update with `claude update`.
+- Node.js 20 or later. Check with `node --version`. Get it from nodejs.org.
 
-## Install
+Nothing else. No npm install, no API keys, no accounts. For company filings the SEC asks for your name and email once. `/mosaic` asks for it the first time.
 
-### As a Claude Code plugin (recommended)
+## Quick start
 
-In Claude Code:
+1. In a terminal, from any folder:
+
+   ```bash
+   claude plugin install mosaic --marketplace abhinavuppal931/mosaic
+   ```
+
+2. Start Claude Code (any folder):
+
+   ```bash
+   claude
+   ```
+
+3. In Claude Code:
+
+   ```
+   /mosaic
+   ```
+
+   It checks Node, your Mosaic home and the SEC contact. It opens the Room in your browser on a finished example council, and asks for your decision. Then ask for a council, for example:
+
+   ```
+   /mosaic should I buy MSFT here? I'm leaning toward a full position because the selloff looks overdone
+   ```
+
+**Already in Claude Code?** Paste this one line into Claude Code. It installs Mosaic and opens the Room:
 
 ```
-/plugin marketplace add abhinavuppal931/mosaic
+Install the Mosaic plugin with claude plugin install mosaic --marketplace abhinavuppal931/mosaic, then start its Room (room/server.js in the installed plugin folder) in the background with node and --open, and give me the link.
 ```
 
-```
-/plugin install mosaic@mosaic
-```
+When it is done, type `/reload-plugins`, then `/mosaic`.
 
-On Claude Code 2.1.275 or later this also works in one step:
+If `/mosaic` is taken by another plugin, use `/mosaic:mosaic`.
 
-```
-/plugin install mosaic --marketplace abhinavuppal931/mosaic
-```
-
-Then run `/mosaic` (or `/mosaic:mosaic` if another command already uses the name). Your sessions, journal and settings live in Claude Code's plugin data folder, which survives plugin updates.
-
-### From a git clone
+**Older Claude Code (before 2.1.292).** Use two commands, from any folder:
 
 ```bash
-git clone https://github.com/abhinavuppal931/mosaic.git
+claude plugin marketplace add abhinavuppal931/mosaic
 ```
 
 ```bash
-cd mosaic && claude --plugin-dir .
+claude plugin install mosaic@mosaic
 ```
 
-`--plugin-dir .` loads the clone as the `mosaic` plugin for that session, so `/mosaic` and the seat agents work exactly as in the marketplace install. Sessions, the journal and `.env.local` stay inside the clone (all git-ignored). To keep it loaded without the flag, add the clone as a local marketplace once from inside Claude Code with `/plugin marketplace add ./` and then `/plugin install mosaic@mosaic`; a local marketplace loads the plugin in place, so `git pull` updates it.
+## Quick start from a git clone
 
-Requirements: Claude Code and Node.js 20 or later. No npm install: Mosaic has zero dependencies.
+For people who want the code.
+
+1. Clone it, in the folder you want the code in:
+
+   ```bash
+   git clone https://github.com/abhinavuppal931/mosaic.git
+   ```
+
+2. Start Claude Code with the clone as the plugin, in the same folder you ran `git clone` in:
+
+   ```bash
+   claude --plugin-dir mosaic
+   ```
+
+   This loads the clone as the `mosaic` plugin for that session, so `/mosaic` and the seat agents work as in the marketplace install.
+
+3. In Claude Code:
+
+   ```
+   /mosaic
+   ```
+
+To open the Room without Claude Code, run this inside the `mosaic` folder:
+
+```bash
+npm start
+```
+
+Or run this from the folder you cloned into:
+
+```bash
+node mosaic/room/server.js --open
+```
+
+The Room shows the three example councils until you run one of your own.
+
+`--plugin-dir` loads the clone as it is on disk, so your edits and a `git pull` apply the next time you start Claude Code with it. To use Mosaic without the flag, install it from the marketplace as in the Quick start above. (Adding the clone as a local marketplace copies it into Claude Code's plugin cache, so later edits would not show up.)
+
+## Where your data lives
+
+Sessions, the journal, the cache, `.env.local` and `mosaic.config.json` live in `~/.mosaic`. On Windows that is `C:\Users\<you>\.mosaic`. This is the same for marketplace and clone installs. These files survive plugin updates and uninstalls.
+
+- Set `MOSAIC_HOME` to use another folder.
+- An older clone or plugin data folder that already holds sessions keeps being used.
+- `/mosaic` pre-approves `node` commands and file writes inside `~/.mosaic`, so a council runs without approval prompts. Anything else still asks.
+- To print the folders, run this inside the clone:
+
+```bash
+node data/cli.mjs paths
+```
 
 ## Use
 
@@ -55,6 +118,7 @@ Requirements: Claude Code and Node.js 20 or later. No npm install: Mosaic has ze
 
 | Command | What it does |
 |---|---|
+| `/mosaic` | First-run check, opens the Room, asks for your decision |
 | `/mosaic <decision, thesis, holdings or question>` | Full council: intake, data pack, three rounds, verdict, journal entry |
 | `--quick` | Four seats including a guard; Round 3 only if the scores did not converge |
 | `--seats buffett,taleb,marks` | Exactly those seats |
@@ -68,6 +132,68 @@ Requirements: Claude Code and Node.js 20 or later. No npm install: Mosaic has ze
 Mosaic handles four jobs: a **decision** on one ticker (buy, add, hold, trim, sell), a **thesis stress test** (pre-mortem and "I'm wrong if" conditions), a **portfolio review** (concentration, correlated bets and ruin exposure, as education) and a **macro question** (curve, policy rate, inflation, labor, credit).
 
 Verdict labels grade the decision: **CONVICTION EARNED**, **PROCEED WITH CONDITIONS**, **RESHAPE THE THESIS**, **PASS**, plus **WAIT FOR THE PITCH** and **INSUFFICIENT EVIDENCE**. The math is in `skills/mosaic/references/scoring.md`.
+
+## Why it is different
+
+1. **One sourced fact sheet.** Every seat argues from the same `data-pack.json`. Every number has a fact id (`F014`), a source, an as-of date and a status. Missing data stays visibly missing, never filled in. A check script fails any cited fact id or quote that is not real.
+2. **Real debate, dissent kept.** Seats answer each other's strongest argument. The verdict leads with where they disagree and keeps the minority report. No averaging into "hold".
+3. **It remembers.** Each decision becomes a thesis journal entry with kill criteria and a re-check date. `/mosaic recheck NVDA` reruns a quick council on what changed since the last pack.
+4. **Anti-sycophancy.** Round 1 seats do not know which way you lean. The lean is revealed in Round 2, and the verdict reports the **lean pull**: how far scores moved toward your lean after the reveal.
+
+## The Room
+
+The Room is a local web page that plays a council live, then shows the verdict. It reads the session files the council writes and makes no AI calls. It needs Node 20 or later and nothing else.
+
+In Claude Code, `/mosaic room` starts it. Without Claude Code, run this inside the `mosaic` folder:
+
+```bash
+node room/server.js --open
+```
+
+`--open` opens your browser. The address is http://localhost:4731.
+
+- Until you have a council of your own, the Room shows the newest example council. The Journal page lists all three examples to open.
+- If port 4731 is taken by something else, the Room moves to the next free port and prints the address. If a Room is already open, it says so.
+- To pick a port, use `--port 4800` or set `MOSAIC_ROOM_PORT`.
+- To open one finished example, run this inside the `mosaic` folder:
+
+```bash
+node room/server.js --session room/examples/2026-11-17-nvda-buy
+```
+
+- To watch your own councils, run this inside the `mosaic` folder. Use the `home` that `node data/cli.mjs paths` prints:
+
+```bash
+node room/server.js --home <home>
+```
+
+Without `--session`, the Room follows the newest council in that home's `sessions/` folder, so a council started after the Room opens shows up by itself. Other options are `--plugin-data`, `--sessions`, `--journal` and `--roster`.
+
+Three finished councils in `room/examples/` run with no live council: a buy (NVIDIA), a sell (Costco) and a sizing decision (Microsoft). The Room's tests run with the rest under `npm test`. Its browser tests need Playwright and skip themselves without it.
+
+## Troubleshooting
+
+- `npm ERR! enoent ... package.json`: npm ran outside the clone. Run `npm start` inside the `mosaic` folder, or use `/mosaic room` in Claude Code.
+- `error: unknown option '--marketplace'`, or the install fails: Claude Code is older than 2.1.292. Run `claude update`, or use the two-command install.
+- Repository not found while installing: the repository must be public, or your git must be signed in to GitHub with access to it.
+- Port 4731 busy: the Room picks the next free port and prints the address. To choose one, add `--port 4800`.
+- Node too old: install Node.js 20 or later.
+- Paths with spaces (common on Windows): Mosaic quotes every path. If you type commands yourself, put paths in double quotes.
+- Check everything at once: run `node data/cli.mjs setup --status` inside the clone, or `npm run check` inside the clone. In a plugin install, `/mosaic` runs the same check.
+
+## What Mosaic runs and sends
+
+- It runs only Node scripts that ship in the plugin. There are no npm packages, no postinstall step, no hooks and no MCP servers.
+- The Room is a local web server bound to 127.0.0.1. It makes no AI calls.
+- Network requests go only to the data sources below, and only when building a data pack:
+  - `data.sec.gov` and `www.sec.gov`, with your SEC contact in the User-Agent, as the SEC requires
+  - `query1.finance.yahoo.com`
+  - `home.treasury.gov`
+  - `markets.newyorkfed.org`
+  - `api.bls.gov`
+  - With a key you add: `api.stlouisfed.org` (FRED), `financialmodelingprep.com`, `finnhub.io` and `api.massive.com`
+- Keys and the SEC contact are never written to packs, sessions or logs.
+- Nothing is sent anywhere else. There is no telemetry.
 
 ## Data setup
 
@@ -88,7 +214,7 @@ Out of the box Mosaic uses free sources only:
 
 Ratios (P/E, ROIC, FCF yield, margins, leverage, reverse DCF and the rest) are computed locally from the filings, with the formula stored on every fact.
 
-The SEC asks every client to identify itself with a name and email. Once, in a terminal:
+The SEC asks every client to identify itself with a name and email. Once, in a terminal, inside the clone:
 
 ```bash
 node data/cli.mjs setup
@@ -96,7 +222,7 @@ node data/cli.mjs setup
 
 It asks for your name and email and saves them to `mosaic.config.json` in your Mosaic home (git-ignored, readable only by you). They are never taken from the command line, so they stay out of shell history. You can instead set `MOSAIC_SEC_CONTACT="Your Name you@example.com"` in your environment or in `.env.local`. In a plugin install, `/mosaic` asks on first run and saves it for you.
 
-Try it:
+Try it, inside the clone:
 
 ```bash
 node data/cli.mjs pack --ticker MSFT
@@ -118,7 +244,7 @@ Keys come only from environment variables or from `.env.local` in your Mosaic ho
 | Massive (Polygon) | `MASSIVE_API_KEY` or `POLYGON_API_KEY` | 5 calls a minute, end of day | Prices and news |
 | BLS v2 | `BLS_API_KEY` | 500 queries a day | Longer, less rate-limited labor and inflation data |
 
-Add a line such as `FRED_API_KEY=your-key` to `.env.local` (or export it in your shell), then check it:
+Add a line such as `FRED_API_KEY=your-key` to `.env.local` in your Mosaic home (or export it in your shell), then check it, inside the clone:
 
 ```bash
 node data/cli.mjs setup --status
@@ -128,11 +254,11 @@ node data/cli.mjs setup --status
 node data/cli.mjs check-provider fred
 ```
 
-`setup --status` prints which variables are set, never their values. `node data/cli.mjs providers` shows every provider and the order each capability is tried in.
+`setup --status` prints which variables are set, never their values. `node data/cli.mjs providers` (inside the clone) shows every provider and the order each capability is tried in.
 
 ### Changing the order of providers
 
-`data/mosaic.config.json` holds the defaults: a chain per capability (first answer wins), per-provider rate limits, timeouts, retries and cache times. To override any part, put a `mosaic.config.json` in your Mosaic home; it is deep-merged over the defaults (arrays replace). Run `node data/cli.mjs paths` to see where your home is. For example, to prefer FMP for prices:
+`data/mosaic.config.json` holds the defaults: a chain per capability (first answer wins), per-provider rate limits, timeouts, retries and cache times. To override any part, put a `mosaic.config.json` in your Mosaic home; it is deep-merged over the defaults (arrays replace). Run `node data/cli.mjs paths` (inside the clone) to see where your home is. For example, to prefer FMP for prices:
 
 ```json
 { "chains": { "quote": ["fmp", "yahoo"], "priceHistory": ["fmp", "yahoo"] } }
@@ -153,7 +279,7 @@ When a provider fails, the router moves to the next one and labels the result `f
    }
    ```
 
-4. Run the contract test, which calls each capability once and checks the shapes:
+4. Run the contract test, inside the clone. It calls each capability once and checks the shapes:
 
    ```bash
    node data/cli.mjs check-provider myvendor --symbol AAPL
@@ -173,18 +299,6 @@ For macro series, map your series ids to Mosaic's canonical ids in `data/series.
 
 Session file formats (the contract the Room reads) are in `skills/mosaic/references/live-room.md`.
 
-## The Room
-
-The Room is a local web page that plays a council live, then shows the verdict. It reads the session files the council writes and makes no AI calls. It needs Node 20 or later and nothing else.
-
-```bash
-node room/server.js --session room/examples/2026-11-17-nvda-buy
-```
-
-Open http://localhost:4731. To watch your own councils, start it with `node room/server.js --home <home>` (the `home` that `node data/cli.mjs paths` prints). Without `--session`, the Room follows the newest council in that home's `sessions/` folder, so a council started after the Room opens shows up by itself. Other options are `--port` (or `MOSAIC_ROOM_PORT`), `--plugin-data`, `--sessions`, `--journal` and `--roster`.
-
-Three finished councils in `room/examples/` run with no live council: a buy (NVIDIA), a sell (Costco) and a sizing decision (Microsoft). The Room's tests run with the rest under `npm test`; its browser tests need Playwright and skip themselves without it.
-
 ## Repository layout
 
 ```
@@ -198,6 +312,8 @@ room/                    the Room: server.js, public/, lib/, examples/, test/
 ```
 
 ## Tests
+
+Run this inside the clone:
 
 ```bash
 npm test

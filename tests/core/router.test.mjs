@@ -327,18 +327,37 @@ describe('config, registry and paths', () => {
     assert.deepEqual(validateAdapter(tpl), []);
   });
 
-  test('home: --home, then MOSAIC_HOME, then a clone, then plugin data, then ~/.mosaic', () => {
-    // Platform-neutral: every expectation goes through path.resolve / path.join.
+  test('home: --home, MOSAIC_HOME, then a clone or plugin data that holds state, else ~/.mosaic', () => {
+    // Real temp folders, platform neutral: every expectation goes through path.join / path.resolve.
     const r = (p) => path.resolve(p);
+    const mk = () => fs.mkdtempSync(path.join(os.tmpdir(), 'mosaic-home-'));
+    const fallback = path.join(os.homedir(), '.mosaic');
     assert.equal(resolveHome({ home: r('/h'), env: {} }), r('/h'));
     assert.equal(resolveHome({ env: { MOSAIC_HOME: r('/m') } }), r('/m'));
-    const clone = r('/code/mosaic');
-    assert.equal(resolveHome({ env: {}, pluginRoot: clone }), clone);
-    const cached = path.join(r('/u'), '.claude', 'plugins', 'cache', 'mosaic', 'mosaic', '0.1.0');
-    const data = path.join(r('/u'), '.claude', 'plugins', 'data', 'mosaic-mosaic');
-    assert.ok(isPluginCache(cached));
+
+    // A clone is used only once it holds state.
+    const clone = mk();
     assert.ok(!isPluginCache(clone));
-    assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: data }), data);
-    assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: '${CLAUDE_PLUGIN_DATA}' }), path.join(os.homedir(), '.mosaic'));
+    assert.equal(resolveHome({ env: {}, pluginRoot: clone }), fallback, 'stateless clone');
+    fs.mkdirSync(path.join(clone, 'sessions'));
+    fs.writeFileSync(path.join(clone, 'sessions', '.gitkeep'), '');
+    assert.equal(resolveHome({ env: {}, pluginRoot: clone }), fallback, 'only sessions/.gitkeep');
+    fs.mkdirSync(path.join(clone, 'sessions', 'x'));
+    assert.equal(resolveHome({ env: {}, pluginRoot: clone }), clone, 'clone with a session');
+
+    // Plugin data is used only once it holds state; the plugin cache itself never is.
+    const cached = path.join(mk(), '.claude', 'plugins', 'cache', 'mosaic', 'mosaic', '0.1.0');
+    fs.mkdirSync(cached, { recursive: true });
+    assert.ok(isPluginCache(cached));
+    const data = mk();
+    assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: data }), fallback, 'plugin data without state');
+    fs.mkdirSync(path.join(data, 'journal'));
+    fs.writeFileSync(path.join(data, 'journal', 'NVDA.json'), '{}');
+    assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: data }), data, 'plugin data with a journal');
+    assert.equal(resolveHome({ env: {}, pluginRoot: cached, pluginData: '${CLAUDE_PLUGIN_DATA}' }), fallback, 'unexpanded placeholder');
+
+    // Explicit choices still win over state.
+    assert.equal(resolveHome({ home: r('/h'), env: { MOSAIC_HOME: r('/m') }, pluginRoot: clone }), r('/h'));
+    assert.equal(resolveHome({ env: { MOSAIC_HOME: r('/m') }, pluginRoot: clone, pluginData: data }), r('/m'));
   });
 });
