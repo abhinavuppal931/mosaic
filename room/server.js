@@ -13,6 +13,7 @@
 // --open opens the Room in the default browser. If the port is taken by another Room, it reports
 // that Room's address; if something else has the port, it moves to the next free one.
 import http from 'node:http';
+import net from 'node:net';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -338,6 +339,8 @@ export async function startServer(opts = {}) {
   });
 
   // A busy port moves to the next one, unless the caller asked for strict (tests, --port given).
+  // "Busy" also covers another app answering on [::1] at that port: on macOS a 127.0.0.1 bind can
+  // succeed next to that app's wildcard listener, and the localhost link would then reach it.
   const tries = o.strictPort ? 1 : PORT_TRIES;
   for (let i = 0; ; i++) {
     try {
@@ -348,9 +351,17 @@ export async function startServer(opts = {}) {
           ok();
         });
       });
+      const bound = server.address().port;
+      if (o.host === '127.0.0.1' && (await loopbackV6Taken(bound))) {
+        await new Promise((ok) => server.close(() => ok()));
+        const e = new Error(`port ${bound} is in use by another app on [::1]`);
+        e.code = 'EADDRINUSE';
+        throw e;
+      }
       break;
     } catch (e) {
-      if (e.code !== 'EADDRINUSE' || i + 1 >= tries || o.port === 0) throw e;
+      if (e.code !== 'EADDRINUSE' || i + 1 >= tries) throw e;
+      // With port 0 the system picks again; otherwise try the next port.
     }
   }
   const timer = setInterval(() => {
@@ -381,6 +392,29 @@ export async function startServer(opts = {}) {
       }),
     options: o,
   };
+}
+
+/**
+ * Does something other than this process answer on the IPv6 loopback at this port? True only when a
+ * connection to [::1]:port is accepted by another socket; refused, unreachable (no IPv6), slow, or a
+ * connection the probe made to itself all count as free.
+ */
+export function loopbackV6Taken(port, timeoutMs = 400) {
+  return new Promise((resolve) => {
+    let done = false;
+    const sock = net.connect({ host: '::1', port });
+    const finish = (v) => {
+      if (done) return;
+      done = true;
+      sock.destroy();
+      resolve(v);
+    };
+    sock.setTimeout(timeoutMs, () => finish(false));
+    // On macOS, ephemeral ports are handed out in sequence, so the probe socket can be given this very
+    // port as its own local port and connect to itself (TCP self-connect). That is not another app.
+    sock.once('connect', () => finish(!(sock.localPort === port && sock.localAddress === sock.remoteAddress)));
+    sock.once('error', () => finish(false));
+  });
 }
 
 /** Is a Mosaic Room already answering at this port? Resolves to its URL or null; never hangs on a silent listener. */

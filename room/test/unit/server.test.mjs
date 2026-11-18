@@ -8,7 +8,7 @@ import http from 'node:http';
 import net from 'node:net';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
-import { startServer, parseOptions, DEFAULT_PORT, findRoom, browserCommand } from '../../server.js';
+import { startServer, parseOptions, DEFAULT_PORT, findRoom, browserCommand, loopbackV6Taken } from '../../server.js';
 import { stageTo } from '../helpers/stepper.mjs';
 
 const EX = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'examples');
@@ -271,11 +271,82 @@ test('a busy port moves to another one unless strictPort is set', async () => {
   try {
     r = await startServer({ session: NVDA, port: busy, host: '127.0.0.1', quiet: true, journal: tmp() });
     assert.notEqual(r.port, busy);
-    assert.equal((await request(`${r.url}/api/state`)).status, 200);
+    // 127.0.0.1, not the localhost link, so the check does not depend on what else the host runs.
+    assert.equal((await request(`http://127.0.0.1:${r.port}/api/state`)).status, 200);
     await assert.rejects(startServer({ session: NVDA, port: busy, host: '127.0.0.1', strictPort: true, quiet: true, journal: tmp() }), { code: 'EADDRINUSE' });
   } finally {
     if (r) await r.close();
     await new Promise((ok) => blocker.close(ok));
+  }
+});
+
+/** A listener that answers every connection with non-HTTP bytes, like an RTSP service (AirPlay on macOS). */
+async function garbageListener(host = '127.0.0.1') {
+  const sockets = new Set();
+  const srv = net.createServer((s) => {
+    sockets.add(s);
+    s.on('error', () => {});
+    s.write('RTSP/1.0 200 OK\r\nCSeq: 1\r\nServer: AirTunes/770.8.1\r\n\r\n');
+    s.on('data', () => s.write('RTSP/1.0 400 Bad Request\r\n\r\n'));
+  });
+  await new Promise((ok, fail) => {
+    srv.once('error', fail);
+    srv.listen(0, host, ok);
+  });
+  return {
+    port: srv.address().port,
+    close: () => new Promise((ok) => {
+      for (const s of sockets) s.destroy();
+      srv.close(ok);
+    }),
+  };
+}
+
+test('findRoom treats a non-HTTP reply (RTSP-like) as no Room, quickly', async () => {
+  const g = await garbageListener();
+  try {
+    const t0 = Date.now();
+    assert.equal(await findRoom(g.port), null);
+    assert.ok(Date.now() - t0 < 1500, `took ${Date.now() - t0} ms`);
+  } finally {
+    await g.close();
+  }
+});
+
+test('a port held by a non-HTTP service moves the Room to the next port', async () => {
+  const g = await garbageListener();
+  let r;
+  try {
+    r = await startServer({ session: NVDA, port: g.port, host: '127.0.0.1', quiet: true, journal: tmp() });
+    assert.notEqual(r.port, g.port);
+    assert.equal((await request(`http://127.0.0.1:${r.port}/api/state`)).status, 200);
+  } finally {
+    if (r) await r.close();
+    await g.close();
+  }
+});
+
+test('another app on [::1] at the port moves the Room on, so the localhost link reaches the Room', async (t) => {
+  // macOS lets a 127.0.0.1 bind succeed next to another app's listener, and localhost resolves to ::1
+  // first there. This reproduces that on every system that has IPv6 loopback.
+  let g;
+  try {
+    g = await garbageListener('::1');
+  } catch {
+    t.skip('no IPv6 loopback here');
+    return;
+  }
+  let r;
+  try {
+    assert.equal(await loopbackV6Taken(g.port), true);
+    r = await startServer({ session: NVDA, port: g.port, host: '127.0.0.1', quiet: true, journal: tmp() });
+    assert.notEqual(r.port, g.port);
+    assert.equal(await loopbackV6Taken(r.port), false);
+    assert.equal((await request(`${r.url}/api/state`)).status, 200);
+    await assert.rejects(startServer({ session: NVDA, port: g.port, host: '127.0.0.1', strictPort: true, quiet: true, journal: tmp() }), { code: 'EADDRINUSE' });
+  } finally {
+    if (r) await r.close();
+    await g.close();
   }
 });
 
