@@ -1,0 +1,351 @@
+{
+  "schema": "mosaic.scores/1",
+  "round": 3,
+  "roundsRun": [
+    1,
+    2,
+    3
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Double the position",
+      "kind": "act",
+      "score": 2.4,
+      "spread": 5,
+      "math": "A (2x3 + 2x2 + 2x2 + 2x2 + 2x1 + 2x6 + 3x2 + 2x1) / 17 = 2.4"
+    },
+    {
+      "id": "B",
+      "label": "Add a quarter more",
+      "kind": "act",
+      "score": 5.5,
+      "spread": 4,
+      "math": "B (2x7 + 2x6 + 2x6 + 2x4 + 2x3 + 2x7 + 3x7 + 2x3) / 17 = 5.5"
+    },
+    {
+      "id": "C",
+      "label": "Keep it as it is",
+      "kind": "act",
+      "score": 5.2,
+      "spread": 2,
+      "math": "C (2x6 + 2x6 + 2x5 + 2x6 + 2x5 + 2x4 + 3x5 + 2x5) / 17 = 5.2"
+    },
+    {
+      "id": "D",
+      "label": "Trim it back",
+      "kind": "act",
+      "score": 4.2,
+      "spread": 5,
+      "math": "D (2x2 + 2x3 + 2x4 + 2x5 + 2x7 + 2x2 + 3x4 + 2x7) / 17 = 4.2"
+    }
+  ],
+  "recommended": "B",
+  "band": "RESHAPE THE THESIS",
+  "label": "RESHAPE THE THESIS",
+  "underlyingLabel": null,
+  "overrides": [],
+  "spread": 4,
+  "confidence": 7,
+  "abstentions": [
+    "lynch"
+  ],
+  "agreement": {
+    "agrees": 5,
+    "partly agrees": 0,
+    "disagrees": 3,
+    "abstains": 1
+  },
+  "support": 5.5,
+  "unanimousRound1": {
+    "unanimous": false
+  },
+  "needsRound3": false,
+  "leanPull": {
+    "option": "A",
+    "value": 0.4,
+    "rawShift": 0.4,
+    "perSeat": [
+      {
+        "seat": "buffett",
+        "pull": 1,
+        "toward": 1
+      },
+      {
+        "seat": "munger",
+        "pull": 1,
+        "toward": 1
+      },
+      {
+        "seat": "damodaran",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "marks",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "taleb",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "druckenmiller",
+        "pull": 1,
+        "toward": 1
+      },
+      {
+        "seat": "mauboussin",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "burry",
+        "pull": 0,
+        "toward": 0
+      }
+    ],
+    "flagged": false
+  },
+  "evidence": {
+    "coverage": 0.78,
+    "citedShare": 0.542,
+    "whyPoints": 24,
+    "score": 0.661,
+    "grade": "medium"
+  },
+  "scorecard": [
+    {
+      "seat": "buffett",
+      "short": "Buffett",
+      "dimension": "Moat and owner economics",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "Own businesses, not tickers.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 3,
+        "B": 7,
+        "C": 6,
+        "D": 2
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "strong",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "munger",
+      "short": "Munger",
+      "dimension": "Folly check",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "Do not fall in love with a winner.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 2,
+        "B": 6,
+        "C": 6,
+        "D": 3
+      },
+      "pillar": 6,
+      "conviction": 3,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "damodaran",
+      "short": "Damodaran",
+      "dimension": "Value vs price",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "A fair price is not a reason to double.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 2,
+        "B": 6,
+        "C": 5,
+        "D": 4
+      },
+      "pillar": 6,
+      "conviction": 3,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "marks",
+      "short": "Marks",
+      "dimension": "Risk and cycle",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "disagrees",
+      "ownVote": "Endorse with amendment",
+      "ownLine": "Wait for fear.",
+      "amendment": "Add only on a real fall, not a 7% dip.",
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 2,
+        "B": 4,
+        "C": 6,
+        "D": 5
+      },
+      "pillar": 6,
+      "conviction": 3,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "lynch",
+      "short": "Lynch",
+      "dimension": "Growth story and PEG",
+      "weight": 2,
+      "present": true,
+      "abstain": true,
+      "stance": null,
+      "agreement": "abstains",
+      "ownVote": "Endorse",
+      "ownLine": "Still a question about the investor, not the company.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {},
+      "pillar": null,
+      "conviction": null,
+      "evidence": null,
+      "ruin": null,
+      "door": null,
+      "movedOnTop": null
+    },
+    {
+      "seat": "taleb",
+      "short": "Taleb",
+      "dimension": "Ruin and convexity",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "disagrees",
+      "ownVote": "Dissent",
+      "ownLine": "No single stock should decide your life.",
+      "amendment": "Trim to under a fifth of the portfolio first.",
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 1,
+        "B": 3,
+        "C": 5,
+        "D": 7
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "possible",
+      "door": "two-way",
+      "movedOnTop": 1
+    },
+    {
+      "seat": "druckenmiller",
+      "short": "Druckenmiller",
+      "dimension": "Macro and timing",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "Ride the trend, but know when it breaks.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 6,
+        "B": 7,
+        "C": 4,
+        "D": 2
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "mauboussin",
+      "short": "Mauboussin",
+      "dimension": "Base rates and sizing",
+      "weight": 3,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "Size the bet to the edge.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 2,
+        "B": 7,
+        "C": 5,
+        "D": 4
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "burry",
+      "short": "Burry",
+      "dimension": "Bear case",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "disagrees",
+      "ownVote": "Dissent",
+      "ownLine": "Watch the cash, not the story.",
+      "amendment": "Trim instead. The spending is a toll [F010].",
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 1,
+        "B": 3,
+        "C": 5,
+        "D": 7
+      },
+      "pillar": 3,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    }
+  ],
+  "problems": []
+}

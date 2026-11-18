@@ -1,0 +1,43 @@
+{
+  "option": "B",
+  "label": "PROCEED WITH CONDITIONS",
+  "recommendation": "Start with a small position now, and add only if data center sales keep growing above 40% a year for two more quarters.",
+  "conditions": [
+    "Data center sales growth stays above 40% a year [F006]",
+    "Gross margin holds above 70% [F009]"
+  ],
+  "next_steps": [
+    "Decide the starter size by the loss you could live with, before the results",
+    "Write down the reasons you would sell",
+    "Read the results on 19 November"
+  ],
+  "premortem": [
+    "Big tech companies pause AI spending and orders dry up for two quarters.",
+    "Rivals' own chips win business and NVIDIA's margins fall below 70%.",
+    "New export rules hit, or one of the four biggest customers cuts orders."
+  ],
+  "kill_criteria": [
+    {
+      "text": "Profit on each sale (gross margin) stays under 70% for two quarters",
+      "fact": "gross_margin",
+      "op": "<",
+      "value": 0.7
+    }
+  ],
+  "recheck": {
+    "date": "2026-11-21",
+    "triggers": [
+      "After NVIDIA's results, expected around 2026-11-19 [F039]"
+    ]
+  },
+  "cheapest_test": "Wait two days for the results before adding anything beyond the starter.",
+  "sizing_note": "The record holds a 66% fall [F029]. Size the starter so that a fall like that would not change how you live.",
+  "ruin_mitigations": [
+    {
+      "seat": "taleb",
+      "mitigation": "A starter sized for a 66% fall.",
+      "endorsed": true
+    }
+  ],
+  "wait_for_pitch": null
+}

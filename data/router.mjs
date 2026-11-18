@@ -10,7 +10,7 @@ import { CAPABILITIES, METHOD, ProviderError, isEmpty } from './lib/contract.mjs
 import { createHttp } from './lib/http.mjs';
 import { createLimiter } from './lib/ratelimit.mjs';
 import { createCache } from './lib/cache.mjs';
-import { redactText } from './lib/redact.mjs';
+import { redactText, registerSecret } from './lib/redact.mjs';
 
 /**
  * @param {{
@@ -73,7 +73,11 @@ export function createRouter(o) {
     // A contact string (the SEC asks for a name and email) comes from an env var or the
     // user's config file, never from the command line.
     const contact = (c.contactEnv && env.get(c.contactEnv)) || c.contact || '';
-    if (contact) config.contact = String(contact).replace(/[\r\n]/g, ' ').trim();
+    if (contact) {
+      config.contact = String(contact).replace(/[\r\n]/g, ' ').trim();
+      // Mask it in every log line and error, whether it came from the env or the config file.
+      registerSecret(config.contact);
+    }
     return {
       http: httpFor(adapter.id),
       key,

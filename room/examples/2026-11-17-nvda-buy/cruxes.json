@@ -1,0 +1,59 @@
+{
+  "cruxes": [
+    {
+      "question": "Is AI chip demand here to stay, or a boom that will cool?",
+      "sides": [
+        {
+          "position": "Here to stay",
+          "seats": [
+            "druckenmiller",
+            "damodaran"
+          ]
+        },
+        {
+          "position": "Will cool",
+          "seats": [
+            "burry",
+            "marks",
+            "munger"
+          ]
+        }
+      ],
+      "facts": [
+        "F006",
+        "F008"
+      ]
+    },
+    {
+      "question": "Does $182 leave any room for error?",
+      "sides": [
+        {
+          "position": "Enough for a starter",
+          "seats": [
+            "damodaran",
+            "taleb"
+          ]
+        },
+        {
+          "position": "Not yet",
+          "seats": [
+            "buffett",
+            "marks"
+          ]
+        }
+      ],
+      "facts": [
+        "F018"
+      ]
+    }
+  ],
+  "unanimous": false,
+  "unargued": null,
+  "biasFlags": [
+    {
+      "type": "fomo",
+      "quote": "everyone is buying it and I do not want to miss out"
+    }
+  ],
+  "note": "The room splits on whether the spending boom lasts, and on whether the price leaves room for error."
+}

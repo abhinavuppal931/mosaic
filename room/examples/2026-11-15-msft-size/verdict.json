@@ -1,0 +1,92 @@
+{
+  "schema": "mosaic.verdict/1",
+  "label": "RESHAPE THE THESIS",
+  "call": "The council narrowly favours adding a quarter more to Microsoft, but only once the investor writes down a limit for how much of the portfolio one stock may be. Today it is 18% [F017].",
+  "recommended": "B",
+  "why": [
+    {
+      "point": "Returns on capital near 30% [F009] in a business customers cannot easily leave.",
+      "seat": "buffett"
+    },
+    {
+      "point": "The price asks for 14% growth a year for a decade [F013]; the edge is real but small, so the add should be too.",
+      "seat": "mauboussin"
+    },
+    {
+      "point": "Cloud sales grew 38% [F006], and that is where the spending is going.",
+      "seat": "druckenmiller"
+    }
+  ],
+  "minority": {
+    "seat": "taleb",
+    "quote": "No single stock should decide your life.",
+    "would_have_to_be_true": "Taleb would be proven right if Microsoft falls 37% again while it is a fifth of the portfolio."
+  },
+  "premortem": [
+    "The data center spending earns less than it costs and margins fall.",
+    "A fall like the 37% on record arrives while the position is at its largest.",
+    "The investor keeps adding on every dip until one stock decides the outcome."
+  ],
+  "kill_criteria": [
+    {
+      "id": "K1",
+      "text": "Capital spending stays high without better margins",
+      "fact": "gross_margin",
+      "op": "<",
+      "value": 0.65
+    },
+    {
+      "id": "K2",
+      "text": "Cloud sales growth slows",
+      "fact": "cloud_growth",
+      "op": "<",
+      "value": 0.25
+    },
+    {
+      "id": "K3",
+      "text": "The position grows past a fifth of the portfolio",
+      "fact": "portfolio_share",
+      "op": ">",
+      "value": 0.2
+    }
+  ],
+  "conditions": [
+    "A written limit for the size of any one stock"
+  ],
+  "next_steps": [
+    {
+      "when": "This week",
+      "action": "Write down the size limit before adding."
+    }
+  ],
+  "recheck": {
+    "date": "2027-01-29",
+    "triggers": [
+      "Microsoft's next results, expected around 2027-01-27 [F021]"
+    ]
+  },
+  "cheapest_test": "Write the size limit first; add only if it still allows it.",
+  "sizing_note": "At 18% already, ask what a 37% fall in this one stock would do to you.",
+  "behavioral_flags": [
+    {
+      "type": "recency",
+      "quote": "it is my best performer"
+    }
+  ],
+  "lean_pull_note": "Doubling gained a little after the lean was shared; it still ranks last.",
+  "data_health": "Prices, filings and rates ok; no analyst estimates, news or short interest.",
+  "amendments": [
+    {
+      "seat": "marks",
+      "amendment": "Add only on a real fall.",
+      "adopted": false,
+      "reason": "The council kept the add, with a size limit instead."
+    }
+  ],
+  "removed_by_citation_check": [],
+  "override_note": "",
+  "share_line": {
+    "seat_lines": {},
+    "sharpest_dissent": "taleb"
+  }
+}

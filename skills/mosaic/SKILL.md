@@ -1,6 +1,7 @@
 ---
 name: mosaic
 description: Use when an investor wants a buy, add, hold, trim or sell decision, an investment thesis, a portfolio's risk, or a macro question debated by a council of simulated investing legends, or says "mosaic", "convene the council", "what would Buffett, Munger or Taleb say", "stress test my thesis", "should I buy/sell X", "recheck NVDA", or "show my journal". Seats built from each investor's public work (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry by default; Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee on call) argue over three rounds from one sourced data pack; the Chair returns a graded verdict with the dissent kept, a pre-mortem, kill criteria and a re-check date, then journals it. Also one-seat consults ("ask taleb ..."), board settings, rechecks and the thesis journal. Education, not investment advice.
+allowed-tools: Bash(node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/score.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/check-citations.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/room/server.js":*) Read(~/.mosaic/**) Write(~/.mosaic/**) Edit(~/.mosaic/**)
 argument-hint: "<decision, thesis, holdings or question> [--quick] [--all] [--seats buffett,taleb,...] | ask <seat> <question> | board | recheck <TICKER> | journal | room"
 ---
 
@@ -19,7 +20,8 @@ You are the **Chair**. You never argue a side and never add your own view. You r
   node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs" paths --plugin-data "${CLAUDE_PLUGIN_DATA}"
   ```
 
-  Use the printed `home`, `sessions` and `journal` folders for the rest of the run and pass `--home <home>` to every Mosaic command. A git clone keeps everything in the clone; a marketplace install keeps it in Claude Code's plugin data folder, which survives updates.
+  Use the printed `home`, `sessions` and `journal` folders for the rest of the run and pass `--home "<home>"` to every Mosaic command. The home is `~/.mosaic` for a new install, clone or marketplace alike (an older clone or plugin data folder that already holds sessions keeps being used, and `MOSAIC_HOME` overrides it). It survives plugin updates.
+- **Run every command on its own**: one `node ...` command per Bash call, with no `cd`, `&&`, pipes, `;` or shell variables, and always quote paths (they may contain spaces). This skill pre-approves exactly `node "${CLAUDE_PLUGIN_ROOT}/<script>" ...` for its five scripts (`data/cli.mjs`, `scripts/score.mjs`, `scripts/check-citations.mjs`, `scripts/journal.mjs`, `room/server.js`) and file writes under `~/.mosaic`, so commands written exactly this way, with the quoted plugin root first, run without asking the user; anything else asks.
 - References (read once before the first council): `references/intake.md`, `references/seats.md`, `references/round-prompts.md`, `references/scoring.md`, `references/report-template.md`, `references/live-room.md`. They sit next to this file.
 - The roster: `skills/mosaic/roster.json` under the plugin root. Seat agents: `agents/seat-<key>.md`. Brains: `skills/mosaic/brains/<slug>/`.
 
@@ -29,7 +31,8 @@ Parse the arguments in `$ARGUMENTS`.
 
 | Input | What runs |
 |---|---|
-| `/mosaic <anything>` | Full council: intake, data pack, board, three rounds, verdict, journal |
+| `/mosaic` (nothing else) | First run: the check below, start the Room (it shows finished example councils until there is one of the user's own), then ask for the decision in one line |
+| `/mosaic <anything>` | Full council: first-run check, intake, data pack, board, three rounds, verdict, journal |
 | `--quick` | Four seats including at least one guard; Rounds 1 and 2; Round 3 only if `score.mjs` says the scores did not converge |
 | `--seats a,b,c` | Exactly those seats (keys from the roster), three rounds. If Taleb or Burry is left out, warn once that a guard is missing, then proceed |
 | `--all` | Every seat with an agent file, capped at nine (keep the guards, then the highest weights) |
@@ -38,6 +41,21 @@ Parse the arguments in `$ARGUMENTS`.
 | `recheck <TICKER>` | Quick council against the journal entry, leading with what changed since the last pack |
 | `journal` | `node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs" list --home <home>`: tracked theses, verdicts, next re-check, DUE flags |
 | `room` | Start the Room (see "The Room") |
+
+## Step 0: First-run check (once per conversation, before intake)
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs" setup --status --home "<home>"
+```
+
+It prints a "First-run check" block and ends with "Ready." (exit 0) or the items to fix (exit 3), each with one next step. Never print the values of anything it reports as set.
+
+- **Node.js FIX**: stop. Tell the user the next step it printed, word for word. Nothing else in Mosaic runs without Node 20 or later.
+- **Mosaic home FIX**: stop and give the next step it printed.
+- **SEC contact FIX**: a macro question does not need it, so go on. For a ticker or portfolio council, ask the user once in chat for their name and email ("The SEC asks every client to identify itself; this is sent only to sec.gov"), then write `{ "providers": { "sec-edgar": { "contact": "<name> <email>" } } }` into `<home>/mosaic.config.json` with your file tools (merge with what is there) and run the check again. If they would rather not, go on: the pack will show filings as missing.
+- **Ready**: say nothing about the check and go straight to intake.
+
+Run the check again only when the user says they fixed something.
 
 ## Step 1: Intake and brief
 
@@ -128,7 +146,13 @@ Show the roster as a short table (seat, role, default board or on call), then th
 
 ## The Room (`room`)
 
-The Room is a local web app that plays the session files as they land. Start it with `npm start` in the plugin root if `room/` exists, and tell the user the URL it prints (http://localhost:4731). If `room/` is not there yet, say the Room ships in a later release and that the council runs the same without it.
+The Room is a local web app that plays the session files as they land. Start it with the Bash tool's background option (it keeps running until stopped):
+
+```bash
+node "${CLAUDE_PLUGIN_ROOT}/room/server.js" --home "<home>" --open
+```
+
+`--open` opens it in the browser. Give the user the URL it prints (usually http://localhost:4731; it moves to the next port when 4731 is taken by something else). If it prints "already open at", the Room is running: give that URL and do not start another. Until the user has a council of their own, the Room shows the finished example councils, and the journal page lists all three; their first council replaces the example as soon as `council.json` is written. From a git clone, `npm start` run inside the clone folder does the same.
 
 ## Chair rules
 

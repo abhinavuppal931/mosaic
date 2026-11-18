@@ -1,0 +1,297 @@
+{
+  "schema": "mosaic.scores/1",
+  "round": 3,
+  "roundsRun": [
+    1,
+    2,
+    3
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Buy all now",
+      "kind": "act",
+      "score": 3.6,
+      "spread": 5,
+      "math": "A (2x4 + 2x3 + 3x4 + 2x3 + 2x2 + 2x7 + 2x2) / 15 = 3.6"
+    },
+    {
+      "id": "B",
+      "label": "Start small",
+      "kind": "act",
+      "score": 6.3,
+      "spread": 4,
+      "math": "B (2x6 + 2x6 + 3x7 + 2x6 + 2x7 + 2x8 + 2x4) / 15 = 6.3"
+    },
+    {
+      "id": "C",
+      "label": "Wait for $150",
+      "kind": "wait",
+      "score": 6.1,
+      "spread": 3,
+      "math": "C (2x7 + 2x7 + 3x5 + 2x7 + 2x6 + 2x4 + 2x7) / 15 = 6.1"
+    },
+    {
+      "id": "D",
+      "label": "Pass",
+      "kind": "none",
+      "score": 3.8,
+      "spread": 4,
+      "math": "D (2x3 + 2x4 + 3x3 + 2x4 + 2x5 + 2x2 + 2x6) / 15 = 3.8"
+    }
+  ],
+  "recommended": "B",
+  "band": "PROCEED WITH CONDITIONS",
+  "label": "PROCEED WITH CONDITIONS",
+  "underlyingLabel": null,
+  "overrides": [],
+  "spread": 4,
+  "confidence": 7,
+  "abstentions": [],
+  "agreement": {
+    "agrees": 3,
+    "partly agrees": 3,
+    "disagrees": 1,
+    "abstains": 0
+  },
+  "support": 6.2,
+  "unanimousRound1": {
+    "unanimous": false
+  },
+  "needsRound3": false,
+  "leanPull": {
+    "option": "A",
+    "value": 0.2,
+    "rawShift": 0.3,
+    "perSeat": [
+      {
+        "seat": "buffett",
+        "pull": 0.7,
+        "toward": 1
+      },
+      {
+        "seat": "munger",
+        "pull": 1,
+        "toward": 1
+      },
+      {
+        "seat": "damodaran",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "marks",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "taleb",
+        "pull": 1,
+        "toward": 1
+      },
+      {
+        "seat": "druckenmiller",
+        "pull": -1,
+        "toward": -1
+      },
+      {
+        "seat": "burry",
+        "pull": -0.3,
+        "toward": 0
+      }
+    ],
+    "flagged": false
+  },
+  "evidence": {
+    "coverage": 0.82,
+    "citedShare": 0.81,
+    "whyPoints": 21,
+    "score": 0.815,
+    "grade": "high"
+  },
+  "scorecard": [
+    {
+      "seat": "buffett",
+      "short": "Buffett",
+      "dimension": "Moat and owner economics",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "partly agrees",
+      "ownVote": "Endorse with amendment",
+      "ownLine": "Buy the business, not the excitement.",
+      "amendment": "Add more only after two quarters of proof, not one.",
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 4,
+        "B": 6,
+        "C": 7,
+        "D": 3
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "strong",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 1
+    },
+    {
+      "seat": "munger",
+      "short": "Munger",
+      "dimension": "Folly check",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "partly agrees",
+      "ownVote": "Endorse with amendment",
+      "ownLine": "Know your exit before you enter.",
+      "amendment": "Write down now what would make you sell [F008].",
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 3,
+        "B": 6,
+        "C": 7,
+        "D": 4
+      },
+      "pillar": 6,
+      "conviction": 3,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "damodaran",
+      "short": "Damodaran",
+      "dimension": "Value vs price",
+      "weight": 3,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "Value is a range. Pay inside it.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 4,
+        "B": 7,
+        "C": 5,
+        "D": 3
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "strong",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "marks",
+      "short": "Marks",
+      "dimension": "Risk and cycle",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "partly agrees",
+      "ownVote": "Endorse with amendment",
+      "ownLine": "The best time to be careful is when everyone else is not.",
+      "amendment": "Keep the starter small enough that a fall to $150 [F019] would not shake you.",
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 3,
+        "B": 6,
+        "C": 7,
+        "D": 4
+      },
+      "pillar": 6,
+      "conviction": 3,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "taleb",
+      "short": "Taleb",
+      "dimension": "Ruin and convexity",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "Survive first. Size so the worst case is a lesson.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 2,
+        "B": 7,
+        "C": 6,
+        "D": 5
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "possible",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "druckenmiller",
+      "short": "Druckenmiller",
+      "dimension": "Macro and timing",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "agrees",
+      "ownVote": "Endorse",
+      "ownLine": "Own it while money is easy, and watch the central bank.",
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 7,
+        "B": 8,
+        "C": 4,
+        "D": 2
+      },
+      "pillar": 8,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "burry",
+      "short": "Burry",
+      "dimension": "Bear case",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": null,
+      "agreement": "disagrees",
+      "ownVote": "Dissent",
+      "ownLine": "Know who the four customers are and what they plan to spend.",
+      "amendment": "People are paying for a spending boom as if it will last forever [F018].",
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 2,
+        "B": 4,
+        "C": 7,
+        "D": 6
+      },
+      "pillar": 3,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 1
+    }
+  ],
+  "problems": []
+}
