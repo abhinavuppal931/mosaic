@@ -128,7 +128,7 @@ Show the roster as a short table (seat, role, default board or on call), then th
 
 ## The Room (`room`)
 
-The Room is a local web app that plays the session files as they land. Start it with `npm start` in the plugin root if `room/` exists, and tell the user the URL it prints (http://localhost:4731). If `room/` is not there yet, say the Room ships in a later release and that the council runs the same without it.
+The Room is a local web app that plays the session files as they land. Start it in the background with `node "${CLAUDE_PLUGIN_ROOT}/room/server.js" --home "<home>"` (it keeps running until stopped) and tell the user the URL it prints (http://localhost:4731). If it says the port is busy, the Room is already open: give the user the same URL. From a git clone, `npm start` in the clone does the same.
 
 ## Chair rules
 
