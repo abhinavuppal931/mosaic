@@ -2,6 +2,10 @@
 
 Nothing has been submitted. This file records what the research found and what is left to do. The research is from official docs read on 2026-11-18.
 
+## Status on 2026-11-18: blocked on verification
+
+The portal draft (Source step, branch `directory`) validates with one blocking issue: "Files outside the allowed list accepted only from Verified organizations". For an organization that isn't Verified, the directory accepts only Markdown, text, JSON, YAML and images. Mosaic's engine is JavaScript (the data CLI, scoring, citation checks, journal and the Room server), so no variant without scripts would work. The public docs give no way to apply for Verified status, and the only contact they name is directory@anthropic.com. Until that changes, install from this repo's own marketplace: `claude plugin install mosaic --marketplace abhinavuppal931/mosaic`.
+
 ## Summary
 
 Mosaic can be listed in the claude.ai plugin directory through the developer portal. It passes `claude plugin validate . --strict` with nothing to report (Claude Code 2.1.327). A few items will be held for a human reviewer. The list is below, with the steps for Abs.
