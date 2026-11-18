@@ -396,7 +396,8 @@ export async function startServer(opts = {}) {
 
 /**
  * Does something other than this process answer on the IPv6 loopback at this port? True only when a
- * connection to [::1]:port is accepted; refused, unreachable (no IPv6) or slow all count as free.
+ * connection to [::1]:port is accepted by another socket; refused, unreachable (no IPv6), slow, or a
+ * connection the probe made to itself all count as free.
  */
 export function loopbackV6Taken(port, timeoutMs = 400) {
   return new Promise((resolve) => {
@@ -409,7 +410,9 @@ export function loopbackV6Taken(port, timeoutMs = 400) {
       resolve(v);
     };
     sock.setTimeout(timeoutMs, () => finish(false));
-    sock.once('connect', () => finish(true));
+    // On macOS, ephemeral ports are handed out in sequence, so the probe socket can be given this very
+    // port as its own local port and connect to itself (TCP self-connect). That is not another app.
+    sock.once('connect', () => finish(!(sock.localPort === port && sock.localAddress === sock.remoteAddress)));
     sock.once('error', () => finish(false));
   });
 }
