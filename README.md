@@ -113,8 +113,9 @@ The Room shows the three example councils until you run one of your own.
 
 ## See it in action
 
-<!-- The tour lands in phase 2 (ABH-339). -->
-Take the tour: [docs/TOUR.md](docs/TOUR.md).
+A council from install to verdict, in real screenshots: first run, Round 1 blind, the debate, the verdict and scorecard, the journal and rechecks, the share card, the PDF and the phone view.
+
+**[Take the tour](docs/TOUR.md)**
 
 ## Use
 
