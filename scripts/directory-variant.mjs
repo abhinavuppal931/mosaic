@@ -7,6 +7,8 @@
 //   scripts so a council runs without prompts; directory installs ask instead.
 // - files that are not Markdown, text, JSON, YAML or images (here, .gitleaks.toml).
 // - package.json fields outside its list, such as scripts.
+// - any file whose first line is a #! shebang. Every script runs as `node "<script>"`,
+//   so the variant drops that line and nothing else.
 //
 // Usage: node scripts/directory-variant.mjs [root]
 import fs from 'node:fs';
@@ -23,6 +25,10 @@ export function stripAllowedTools(text) {
   if (!m) return text;
   const kept = m[1].split(/\r?\n/).filter((line) => !/^allowed-tools\s*:/.test(line));
   return text.replace(m[1], kept.join('\n'));
+}
+
+export function stripShebang(text) {
+  return text.startsWith('#!') ? text.replace(/^#![^\n]*\n?/, '') : text;
 }
 
 export function stripPackage(json) {
@@ -56,6 +62,10 @@ export function run() {
         fs.writeFileSync(file, JSON.stringify(after, null, 2) + '\n');
         changed.push(path.relative(root, file));
       }
+    } else if (/\.(mjs|cjs|js|sh)$/.test(name)) {
+      const before = fs.readFileSync(file, 'utf8');
+      const after = stripShebang(before);
+      if (after !== before) { fs.writeFileSync(file, after); changed.push(path.relative(root, file)); }
     }
   }
   for (const p of REMOVE) if (fs.existsSync(rel(p))) { fs.rmSync(rel(p)); changed.push(`${p} (removed)`); }

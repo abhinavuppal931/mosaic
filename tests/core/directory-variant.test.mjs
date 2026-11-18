@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
-import { stripAllowedTools, stripPackage } from '../../scripts/directory-variant.mjs';
+import { stripAllowedTools, stripPackage, stripShebang } from '../../scripts/directory-variant.mjs';
 
 const script = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'scripts', 'directory-variant.mjs');
 
@@ -23,6 +23,12 @@ test('stripPackage keeps only fields the directory accepts', () => {
   assert.deepEqual(Object.keys(out), ['name', 'version', 'private', 'type', 'engines']);
 });
 
+test('stripShebang drops only a leading #! line', () => {
+  assert.equal(stripShebang('#!/usr/bin/env node\r\n// x\n'), '// x\n');
+  assert.equal(stripShebang('#!/usr/bin/env node\n// x\n'), '// x\n');
+  assert.equal(stripShebang('// x\n#! not first\n'), '// x\n#! not first\n');
+});
+
 test('the script rewrites a checkout in place', () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mosaic-dir-'));
   fs.mkdirSync(path.join(dir, 'skills', 'mosaic'), { recursive: true });
@@ -31,10 +37,13 @@ test('the script rewrites a checkout in place', () => {
   fs.writeFileSync(path.join(dir, 'package.json'), JSON.stringify({ name: 'mosaic', scripts: { start: 'x' } }));
   fs.writeFileSync(path.join(dir, 'room', 'package.json'), JSON.stringify({ name: 'mosaic-room', scripts: { start: 'x' } }));
   fs.writeFileSync(path.join(dir, '.gitleaks.toml'), 'title = "x"\n');
+  fs.mkdirSync(path.join(dir, 'data'));
+  fs.writeFileSync(path.join(dir, 'data', 'cli.mjs'), '#!/usr/bin/env node\nconsole.log(1);\n');
   const log = execFileSync(process.execPath, [script, dir], { encoding: 'utf8' });
   assert.match(log, /\.gitleaks\.toml \(removed\)/);
   assert.equal(fs.existsSync(path.join(dir, '.gitleaks.toml')), false);
   assert.ok(!fs.readFileSync(path.join(dir, 'skills', 'mosaic', 'SKILL.md'), 'utf8').includes('allowed-tools'));
+  assert.equal(fs.readFileSync(path.join(dir, 'data', 'cli.mjs'), 'utf8'), 'console.log(1);\n');
   for (const p of ['package.json', path.join('room', 'package.json')]) {
     assert.equal(JSON.parse(fs.readFileSync(path.join(dir, p), 'utf8')).scripts, undefined);
   }

@@ -38,7 +38,9 @@ Validating `main` on 2026-11-18 gave three blocking issues. Each applies only to
 - Only Markdown, text, JSON, YAML and images may ship. `.gitleaks.toml` is TOML.
 - `package.json` may not have `scripts`.
 
-Main keeps all three, so the self-hosted install (`claude plugin install mosaic --marketplace abhinavuppal931/mosaic`) stays prompt-free. On every push to main, `.github/workflows/directory-branch.yml` runs `scripts/directory-variant.mjs` and force-pushes the result as `directory`: one orphan commit with no `.github` folder. Directory installs work the same way but ask before each script runs. Everything else the validator raised was a policy hold for the human reviewer or a warning about documentation.
+Validating `directory` then found a fourth: no file may start with a `#!` shebang. The variant drops that first line from each script, since every script runs as `node "<script>"`.
+
+Main keeps all four, so the self-hosted install (`claude plugin install mosaic --marketplace abhinavuppal931/mosaic`) stays prompt-free. On every push to main, `.github/workflows/directory-branch.yml` runs `scripts/directory-variant.mjs` and force-pushes the result as `directory`: one orphan commit with no `.github` folder. Directory installs work the same way but ask before each script runs. Everything else the validator raised was a policy hold for the human reviewer or a warning about documentation.
 
 Other rules:
 
