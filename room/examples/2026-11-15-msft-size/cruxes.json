@@ -1,0 +1,52 @@
+{
+  "cruxes": [
+    {
+      "question": "Is the data center spending an investment or a toll?",
+      "sides": [
+        {
+          "position": "An investment",
+          "seats": [
+            "buffett",
+            "druckenmiller",
+            "damodaran"
+          ]
+        },
+        {
+          "position": "A toll",
+          "seats": [
+            "burry"
+          ]
+        }
+      ]
+    },
+    {
+      "question": "How much of one stock is too much?",
+      "sides": [
+        {
+          "position": "Already enough",
+          "seats": [
+            "taleb",
+            "munger",
+            "marks"
+          ]
+        },
+        {
+          "position": "Room for a little more",
+          "seats": [
+            "mauboussin",
+            "buffett"
+          ]
+        }
+      ]
+    }
+  ],
+  "unanimous": false,
+  "unargued": null,
+  "biasFlags": [
+    {
+      "type": "recency",
+      "quote": "it is my best performer"
+    }
+  ],
+  "note": "The room splits on the spending and on size."
+}

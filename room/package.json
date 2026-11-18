@@ -1,0 +1,11 @@
+{
+  "name": "mosaic-room",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Mosaic Room: a local web app that plays a council's session files live, then shows the verdict. Zero dependencies.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  }
+}

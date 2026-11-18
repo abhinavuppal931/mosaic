@@ -1,0 +1,1966 @@
+{
+  "schema": "mosaic.datapack/1",
+  "kind": "macro",
+  "symbol": null,
+  "asOf": "2026-11-17",
+  "generatedAt": "2026-11-17T12:05:33.769Z",
+  "hash": "sha256:dacdf08677ac8764f6d945d7bd689086b8fdd0626ec4ff84bbde8e30444efba9",
+  "coverage": {
+    "byCapability": {
+      "macro": "partial"
+    },
+    "core": [
+      "macro"
+    ],
+    "score": 0.818,
+    "facts": 20,
+    "missingFacts": 2
+  },
+  "providers": [
+    {
+      "capability": "macro:ust_3m",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "treasury",
+          "status": "ok",
+          "ms": 436
+        }
+      ]
+    },
+    {
+      "capability": "macro:ust_2y",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "treasury",
+          "status": "ok",
+          "ms": 192
+        }
+      ]
+    },
+    {
+      "capability": "macro:ust_10y",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "treasury",
+          "status": "ok",
+          "ms": 216
+        }
+      ]
+    },
+    {
+      "capability": "macro:ust_30y",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "treasury",
+          "status": "ok",
+          "ms": 403
+        }
+      ]
+    },
+    {
+      "capability": "macro:policy_rate",
+      "source": "nyfed",
+      "status": "ok",
+      "asOf": "2026-11-13",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "nyfed",
+          "status": "ok",
+          "ms": 125
+        }
+      ]
+    },
+    {
+      "capability": "macro:cpi",
+      "source": "bls",
+      "status": "ok",
+      "asOf": "2026-10-01",
+      "note": "BLS API v1 (no key)",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "bls",
+          "status": "ok",
+          "ms": 368
+        }
+      ]
+    },
+    {
+      "capability": "macro:core_cpi",
+      "source": "bls",
+      "status": "ok",
+      "asOf": "2026-10-01",
+      "note": "BLS API v1 (no key)",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "bls",
+          "status": "ok",
+          "ms": 709
+        }
+      ]
+    },
+    {
+      "capability": "macro:unemployment",
+      "source": "bls",
+      "status": "ok",
+      "asOf": "2026-10-01",
+      "note": "BLS API v1 (no key)",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "bls",
+          "status": "ok",
+          "ms": 1010
+        }
+      ]
+    },
+    {
+      "capability": "macro:payrolls",
+      "source": "bls",
+      "status": "ok",
+      "asOf": "2026-10-01",
+      "note": "BLS API v1 (no key)",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "bls",
+          "status": "ok",
+          "ms": 987
+        }
+      ]
+    },
+    {
+      "capability": "macro:hy_oas",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "note": "fred: skipped (no key (FRED_API_KEY))",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        }
+      ]
+    },
+    {
+      "capability": "macro:vix",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "note": "fred: skipped (no key (FRED_API_KEY))",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    "Macro series hy_oas missing (fred: skipped (no key (FRED_API_KEY))).",
+    "Macro series vix missing (fred: skipped (no key (FRED_API_KEY)))."
+  ],
+  "facts": [
+    {
+      "id": "F001",
+      "key": "macro_ust_3m",
+      "label": "3-month Treasury yield",
+      "value": 4.34,
+      "unit": "percent",
+      "period": "2026-11-16",
+      "source": "treasury",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
+    },
+    {
+      "id": "F002",
+      "key": "macro_ust_3m_change_1y",
+      "label": "3-month Treasury yield, change over 12 months",
+      "value": 0.39,
+      "unit": "percentage points",
+      "period": "2025-11-14 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_3m(latest) - ust_3m(one year earlier)",
+      "inputs": [
+        "F001"
+      ]
+    },
+    {
+      "id": "F003",
+      "key": "macro_ust_2y",
+      "label": "2-year Treasury yield",
+      "value": 4.83,
+      "unit": "percent",
+      "period": "2026-11-16",
+      "source": "treasury",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
+    },
+    {
+      "id": "F004",
+      "key": "macro_ust_2y_change_1y",
+      "label": "2-year Treasury yield, change over 12 months",
+      "value": 1.21,
+      "unit": "percentage points",
+      "period": "2025-11-14 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_2y(latest) - ust_2y(one year earlier)",
+      "inputs": [
+        "F003"
+      ]
+    },
+    {
+      "id": "F005",
+      "key": "macro_ust_10y",
+      "label": "10-year Treasury yield",
+      "value": 5.12,
+      "unit": "percent",
+      "period": "2026-11-16",
+      "source": "treasury",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
+    },
+    {
+      "id": "F006",
+      "key": "macro_ust_10y_change_1y",
+      "label": "10-year Treasury yield, change over 12 months",
+      "value": 0.98,
+      "unit": "percentage points",
+      "period": "2025-11-14 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_10y(latest) - ust_10y(one year earlier)",
+      "inputs": [
+        "F005"
+      ]
+    },
+    {
+      "id": "F007",
+      "key": "macro_ust_30y",
+      "label": "30-year Treasury yield",
+      "value": 5.46,
+      "unit": "percent",
+      "period": "2026-11-16",
+      "source": "treasury",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
+    },
+    {
+      "id": "F008",
+      "key": "macro_ust_30y_change_1y",
+      "label": "30-year Treasury yield, change over 12 months",
+      "value": 0.72,
+      "unit": "percentage points",
+      "period": "2025-11-14 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_30y(latest) - ust_30y(one year earlier)",
+      "inputs": [
+        "F007"
+      ]
+    },
+    {
+      "id": "F009",
+      "key": "macro_policy_rate",
+      "label": "Effective federal funds rate",
+      "value": 3.88,
+      "unit": "percent",
+      "period": "2026-11-13",
+      "source": "nyfed",
+      "asOf": "2026-11-13",
+      "status": "ok",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/effr"
+    },
+    {
+      "id": "F010",
+      "key": "macro_policy_rate_change_1y",
+      "label": "Effective federal funds rate, change over 12 months",
+      "value": 0,
+      "unit": "percentage points",
+      "period": "2025-11-13 to 2026-11-13",
+      "source": "mosaic",
+      "asOf": "2026-11-13",
+      "status": "ok",
+      "derived": true,
+      "formula": "policy_rate(latest) - policy_rate(one year earlier)",
+      "inputs": [
+        "F009"
+      ]
+    },
+    {
+      "id": "F011",
+      "key": "macro_policy_target_range",
+      "label": "Fed funds target range",
+      "value": "3.75 to 4",
+      "unit": "percent",
+      "period": "2026-11-13",
+      "source": "nyfed",
+      "asOf": "2026-11-13",
+      "status": "ok",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/effr"
+    },
+    {
+      "id": "F012",
+      "key": "macro_cpi_yoy",
+      "label": "CPI, all items, year-over-year change",
+      "value": 3.74,
+      "unit": "percent",
+      "period": "2026-09 vs 2025-09",
+      "source": "bls",
+      "asOf": "2026-09-01",
+      "status": "ok",
+      "url": "https://data.bls.gov/timeseries/CUUR0000SA0",
+      "note": "the latest 1 month(s) have no print a year earlier in the source, so the comparison uses 2026-09"
+    },
+    {
+      "id": "F013",
+      "key": "macro_core_cpi_yoy",
+      "label": "Core CPI, less food and energy, year-over-year change",
+      "value": 2.56,
+      "unit": "percent",
+      "period": "2026-09 vs 2025-09",
+      "source": "bls",
+      "asOf": "2026-09-01",
+      "status": "ok",
+      "url": "https://data.bls.gov/timeseries/CUUR0000SA0L1E",
+      "note": "the latest 1 month(s) have no print a year earlier in the source, so the comparison uses 2026-09"
+    },
+    {
+      "id": "F014",
+      "key": "macro_unemployment",
+      "label": "Unemployment rate",
+      "value": 4.1,
+      "unit": "percent",
+      "period": "2026-10-01",
+      "source": "bls",
+      "asOf": "2026-10-01",
+      "status": "ok",
+      "url": "https://data.bls.gov/timeseries/LNS14000000"
+    },
+    {
+      "id": "F015",
+      "key": "macro_payrolls",
+      "label": "Nonfarm payrolls (thousands)",
+      "value": 159293,
+      "unit": "thousands",
+      "period": "2026-10-01",
+      "source": "bls",
+      "asOf": "2026-10-01",
+      "status": "ok",
+      "url": "https://data.bls.gov/timeseries/CES0000000001"
+    },
+    {
+      "id": "F016",
+      "key": "macro_hy_oas",
+      "label": "High-yield credit spread (ICE BofA US HY OAS)",
+      "value": null,
+      "unit": "percent",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "fred: skipped (no key (FRED_API_KEY))"
+    },
+    {
+      "id": "F017",
+      "key": "macro_vix",
+      "label": "CBOE volatility index (VIX)",
+      "value": null,
+      "unit": "index",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "fred: skipped (no key (FRED_API_KEY))"
+    },
+    {
+      "id": "F018",
+      "key": "macro_curve_10y_2y",
+      "label": "Yield curve: 10-year minus 2-year Treasury",
+      "value": 0.29,
+      "unit": "percentage points",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_10y - ust_2y",
+      "inputs": [
+        "F005",
+        "F003"
+      ]
+    },
+    {
+      "id": "F019",
+      "key": "macro_curve_10y_3m",
+      "label": "Yield curve: 10-year minus 3-month Treasury",
+      "value": 0.78,
+      "unit": "percentage points",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_10y - ust_3m",
+      "inputs": [
+        "F005",
+        "F001"
+      ]
+    },
+    {
+      "id": "F020",
+      "key": "macro_real_policy_rate",
+      "label": "Real policy rate (policy rate minus CPI inflation)",
+      "value": 0.14,
+      "unit": "percentage points",
+      "source": "mosaic",
+      "asOf": "2026-11-13",
+      "status": "ok",
+      "derived": true,
+      "formula": "policy_rate - cpi_yoy",
+      "inputs": [
+        "F009",
+        "F012"
+      ]
+    }
+  ],
+  "packs": {
+    "buffett": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "munger": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "damodaran": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "marks": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "taleb": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "druckenmiller": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "burry": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "lynch": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "ackman": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "kantesaria": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "sleep": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "mauboussin": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    },
+    "tomlee": {
+      "facts": [
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "F006",
+        "F007",
+        "F008",
+        "F009",
+        "F010",
+        "F011",
+        "F012",
+        "F013",
+        "F014",
+        "F015",
+        "F016",
+        "F017",
+        "F018",
+        "F019",
+        "F020"
+      ],
+      "missing": [
+        "F016",
+        "F017"
+      ],
+      "coverage": 0.9,
+      "evidenceCap": "strong",
+      "checks": []
+    }
+  },
+  "series": {
+    "macro": {
+      "ust_3m": {
+        "source": "treasury",
+        "asOf": "2026-11-16",
+        "status": "ok",
+        "points": [
+          [
+            "2025-01-31",
+            4.31
+          ],
+          [
+            "2025-02-28",
+            4.32
+          ],
+          [
+            "2025-03-31",
+            4.32
+          ],
+          [
+            "2025-04-30",
+            4.31
+          ],
+          [
+            "2025-05-30",
+            4.36
+          ],
+          [
+            "2025-06-30",
+            4.41
+          ],
+          [
+            "2025-07-31",
+            4.41
+          ],
+          [
+            "2025-08-29",
+            4.23
+          ],
+          [
+            "2025-09-30",
+            4.02
+          ],
+          [
+            "2025-10-31",
+            3.89
+          ],
+          [
+            "2025-11-28",
+            3.88
+          ],
+          [
+            "2025-12-31",
+            3.67
+          ],
+          [
+            "2026-01-30",
+            3.67
+          ],
+          [
+            "2026-02-27",
+            3.67
+          ],
+          [
+            "2026-03-31",
+            3.7
+          ],
+          [
+            "2026-04-30",
+            3.68
+          ],
+          [
+            "2026-05-29",
+            3.69
+          ],
+          [
+            "2026-06-30",
+            3.87
+          ],
+          [
+            "2026-07-31",
+            3.83
+          ],
+          [
+            "2026-08-31",
+            3.91
+          ],
+          [
+            "2026-09-30",
+            4.2
+          ],
+          [
+            "2026-10-30",
+            4.16
+          ],
+          [
+            "2026-11-16",
+            4.34
+          ]
+        ]
+      },
+      "ust_2y": {
+        "source": "treasury",
+        "asOf": "2026-11-16",
+        "status": "ok",
+        "points": [
+          [
+            "2025-01-31",
+            4.22
+          ],
+          [
+            "2025-02-28",
+            3.99
+          ],
+          [
+            "2025-03-31",
+            3.89
+          ],
+          [
+            "2025-04-30",
+            3.6
+          ],
+          [
+            "2025-05-30",
+            3.89
+          ],
+          [
+            "2025-06-30",
+            3.72
+          ],
+          [
+            "2025-07-31",
+            3.94
+          ],
+          [
+            "2025-08-29",
+            3.59
+          ],
+          [
+            "2025-09-30",
+            3.6
+          ],
+          [
+            "2025-10-31",
+            3.6
+          ],
+          [
+            "2025-11-28",
+            3.47
+          ],
+          [
+            "2025-12-31",
+            3.47
+          ],
+          [
+            "2026-01-30",
+            3.52
+          ],
+          [
+            "2026-02-27",
+            3.38
+          ],
+          [
+            "2026-03-31",
+            3.79
+          ],
+          [
+            "2026-04-30",
+            3.88
+          ],
+          [
+            "2026-05-29",
+            3.98
+          ],
+          [
+            "2026-06-30",
+            4.14
+          ],
+          [
+            "2026-07-31",
+            4.28
+          ],
+          [
+            "2026-08-31",
+            4.34
+          ],
+          [
+            "2026-09-30",
+            4.88
+          ],
+          [
+            "2026-10-30",
+            4.56
+          ],
+          [
+            "2026-11-16",
+            4.83
+          ]
+        ]
+      },
+      "ust_10y": {
+        "source": "treasury",
+        "asOf": "2026-11-16",
+        "status": "ok",
+        "points": [
+          [
+            "2025-01-31",
+            4.58
+          ],
+          [
+            "2025-02-28",
+            4.24
+          ],
+          [
+            "2025-03-31",
+            4.23
+          ],
+          [
+            "2025-04-30",
+            4.17
+          ],
+          [
+            "2025-05-30",
+            4.41
+          ],
+          [
+            "2025-06-30",
+            4.24
+          ],
+          [
+            "2025-07-31",
+            4.37
+          ],
+          [
+            "2025-08-29",
+            4.23
+          ],
+          [
+            "2025-09-30",
+            4.16
+          ],
+          [
+            "2025-10-31",
+            4.11
+          ],
+          [
+            "2025-11-28",
+            4.02
+          ],
+          [
+            "2025-12-31",
+            4.18
+          ],
+          [
+            "2026-01-30",
+            4.26
+          ],
+          [
+            "2026-02-27",
+            3.97
+          ],
+          [
+            "2026-03-31",
+            4.3
+          ],
+          [
+            "2026-04-30",
+            4.4
+          ],
+          [
+            "2026-05-29",
+            4.45
+          ],
+          [
+            "2026-06-30",
+            4.44
+          ],
+          [
+            "2026-07-31",
+            4.75
+          ],
+          [
+            "2026-08-31",
+            4.75
+          ],
+          [
+            "2026-09-30",
+            5.29
+          ],
+          [
+            "2026-10-30",
+            4.94
+          ],
+          [
+            "2026-11-16",
+            5.12
+          ]
+        ]
+      },
+      "ust_30y": {
+        "source": "treasury",
+        "asOf": "2026-11-16",
+        "status": "ok",
+        "points": [
+          [
+            "2025-01-31",
+            4.83
+          ],
+          [
+            "2025-02-28",
+            4.51
+          ],
+          [
+            "2025-03-31",
+            4.59
+          ],
+          [
+            "2025-04-30",
+            4.66
+          ],
+          [
+            "2025-05-30",
+            4.92
+          ],
+          [
+            "2025-06-30",
+            4.78
+          ],
+          [
+            "2025-07-31",
+            4.89
+          ],
+          [
+            "2025-08-29",
+            4.92
+          ],
+          [
+            "2025-09-30",
+            4.73
+          ],
+          [
+            "2025-10-31",
+            4.67
+          ],
+          [
+            "2025-11-28",
+            4.67
+          ],
+          [
+            "2025-12-31",
+            4.84
+          ],
+          [
+            "2026-01-30",
+            4.87
+          ],
+          [
+            "2026-02-27",
+            4.64
+          ],
+          [
+            "2026-03-31",
+            4.88
+          ],
+          [
+            "2026-04-30",
+            4.98
+          ],
+          [
+            "2026-05-29",
+            4.99
+          ],
+          [
+            "2026-06-30",
+            4.91
+          ],
+          [
+            "2026-07-31",
+            5.27
+          ],
+          [
+            "2026-08-31",
+            5.25
+          ],
+          [
+            "2026-09-30",
+            5.64
+          ],
+          [
+            "2026-10-30",
+            5.31
+          ],
+          [
+            "2026-11-16",
+            5.46
+          ]
+        ]
+      },
+      "policy_rate": {
+        "source": "nyfed",
+        "asOf": "2026-11-13",
+        "status": "ok",
+        "points": [
+          [
+            "2024-11-29",
+            4.58
+          ],
+          [
+            "2024-12-31",
+            4.33
+          ],
+          [
+            "2025-01-31",
+            4.33
+          ],
+          [
+            "2025-02-28",
+            4.33
+          ],
+          [
+            "2025-03-31",
+            4.33
+          ],
+          [
+            "2025-04-30",
+            4.33
+          ],
+          [
+            "2025-05-30",
+            4.33
+          ],
+          [
+            "2025-06-30",
+            4.33
+          ],
+          [
+            "2025-07-31",
+            4.33
+          ],
+          [
+            "2025-08-29",
+            4.33
+          ],
+          [
+            "2025-09-30",
+            4.09
+          ],
+          [
+            "2025-10-31",
+            3.86
+          ],
+          [
+            "2025-11-28",
+            3.89
+          ],
+          [
+            "2025-12-31",
+            3.64
+          ],
+          [
+            "2026-01-30",
+            3.64
+          ],
+          [
+            "2026-02-27",
+            3.64
+          ],
+          [
+            "2026-03-31",
+            3.64
+          ],
+          [
+            "2026-04-30",
+            3.64
+          ],
+          [
+            "2026-05-29",
+            3.62
+          ],
+          [
+            "2026-06-30",
+            3.63
+          ],
+          [
+            "2026-07-31",
+            3.63
+          ],
+          [
+            "2026-08-31",
+            3.63
+          ],
+          [
+            "2026-09-30",
+            3.88
+          ],
+          [
+            "2026-10-30",
+            3.88
+          ],
+          [
+            "2026-11-13",
+            3.88
+          ]
+        ]
+      },
+      "cpi": {
+        "source": "bls",
+        "asOf": "2026-10-01",
+        "status": "ok",
+        "points": [
+          [
+            "2024-01-01",
+            308.417
+          ],
+          [
+            "2024-02-01",
+            310.326
+          ],
+          [
+            "2024-03-01",
+            312.332
+          ],
+          [
+            "2024-04-01",
+            313.548
+          ],
+          [
+            "2024-05-01",
+            314.069
+          ],
+          [
+            "2024-06-01",
+            314.175
+          ],
+          [
+            "2024-07-01",
+            314.54
+          ],
+          [
+            "2024-08-01",
+            314.796
+          ],
+          [
+            "2024-09-01",
+            315.301
+          ],
+          [
+            "2024-10-01",
+            315.664
+          ],
+          [
+            "2024-11-01",
+            315.493
+          ],
+          [
+            "2024-12-01",
+            315.605
+          ],
+          [
+            "2025-01-01",
+            317.671
+          ],
+          [
+            "2025-02-01",
+            319.082
+          ],
+          [
+            "2025-03-01",
+            319.799
+          ],
+          [
+            "2025-04-01",
+            320.795
+          ],
+          [
+            "2025-05-01",
+            321.465
+          ],
+          [
+            "2025-06-01",
+            322.561
+          ],
+          [
+            "2025-07-01",
+            323.048
+          ],
+          [
+            "2025-08-01",
+            323.976
+          ],
+          [
+            "2025-09-01",
+            324.8
+          ],
+          [
+            "2025-11-01",
+            324.122
+          ],
+          [
+            "2025-12-01",
+            324.054
+          ],
+          [
+            "2026-01-01",
+            325.252
+          ],
+          [
+            "2026-02-01",
+            326.785
+          ],
+          [
+            "2026-03-01",
+            330.213
+          ],
+          [
+            "2026-04-01",
+            333.02
+          ],
+          [
+            "2026-05-01",
+            335.123
+          ],
+          [
+            "2026-06-01",
+            333.952
+          ],
+          [
+            "2026-07-01",
+            333.918
+          ],
+          [
+            "2026-08-01",
+            334.98
+          ],
+          [
+            "2026-09-01",
+            336.94
+          ],
+          [
+            "2026-10-01",
+            337.511
+          ]
+        ]
+      },
+      "core_cpi": {
+        "source": "bls",
+        "asOf": "2026-10-01",
+        "status": "ok",
+        "points": [
+          [
+            "2024-01-01",
+            313.623
+          ],
+          [
+            "2024-02-01",
+            315.419
+          ],
+          [
+            "2024-03-01",
+            317.088
+          ],
+          [
+            "2024-04-01",
+            317.978
+          ],
+          [
+            "2024-05-01",
+            318.629
+          ],
+          [
+            "2024-06-01",
+            319.003
+          ],
+          [
+            "2024-07-01",
+            319.214
+          ],
+          [
+            "2024-08-01",
+            320.017
+          ],
+          [
+            "2024-09-01",
+            321.109
+          ],
+          [
+            "2024-10-01",
+            321.758
+          ],
+          [
+            "2024-11-01",
+            321.947
+          ],
+          [
+            "2024-12-01",
+            322.007
+          ],
+          [
+            "2025-01-01",
+            323.842
+          ],
+          [
+            "2025-02-01",
+            325.252
+          ],
+          [
+            "2025-03-01",
+            325.933
+          ],
+          [
+            "2025-04-01",
+            326.815
+          ],
+          [
+            "2025-05-01",
+            327.509
+          ],
+          [
+            "2025-06-01",
+            328.364
+          ],
+          [
+            "2025-07-01",
+            328.98
+          ],
+          [
+            "2025-08-01",
+            329.97
+          ],
+          [
+            "2025-09-01",
+            330.804
+          ],
+          [
+            "2025-11-01",
+            330.425
+          ],
+          [
+            "2025-12-01",
+            330.506
+          ],
+          [
+            "2026-01-01",
+            331.95
+          ],
+          [
+            "2026-02-01",
+            333.242
+          ],
+          [
+            "2026-03-01",
+            334.391
+          ],
+          [
+            "2026-04-01",
+            335.803
+          ],
+          [
+            "2026-05-01",
+            336.846
+          ],
+          [
+            "2026-06-01",
+            336.882
+          ],
+          [
+            "2026-07-01",
+            337.133
+          ],
+          [
+            "2026-08-01",
+            338.041
+          ],
+          [
+            "2026-09-01",
+            339.287
+          ],
+          [
+            "2026-10-01",
+            339.921
+          ]
+        ]
+      },
+      "unemployment": {
+        "source": "bls",
+        "asOf": "2026-10-01",
+        "status": "ok",
+        "points": [
+          [
+            "2024-01-01",
+            3.7
+          ],
+          [
+            "2024-02-01",
+            3.9
+          ],
+          [
+            "2024-03-01",
+            3.9
+          ],
+          [
+            "2024-04-01",
+            3.9
+          ],
+          [
+            "2024-05-01",
+            3.9
+          ],
+          [
+            "2024-06-01",
+            4.1
+          ],
+          [
+            "2024-07-01",
+            4.2
+          ],
+          [
+            "2024-08-01",
+            4.2
+          ],
+          [
+            "2024-09-01",
+            4.1
+          ],
+          [
+            "2024-10-01",
+            4.1
+          ],
+          [
+            "2024-11-01",
+            4.2
+          ],
+          [
+            "2024-12-01",
+            4.1
+          ],
+          [
+            "2025-01-01",
+            4
+          ],
+          [
+            "2025-02-01",
+            4.2
+          ],
+          [
+            "2025-03-01",
+            4.2
+          ],
+          [
+            "2025-04-01",
+            4.2
+          ],
+          [
+            "2025-05-01",
+            4.3
+          ],
+          [
+            "2025-06-01",
+            4.1
+          ],
+          [
+            "2025-07-01",
+            4.3
+          ],
+          [
+            "2025-08-01",
+            4.3
+          ],
+          [
+            "2025-09-01",
+            4.4
+          ],
+          [
+            "2025-11-01",
+            4.5
+          ],
+          [
+            "2025-12-01",
+            4.4
+          ],
+          [
+            "2026-01-01",
+            4.3
+          ],
+          [
+            "2026-02-01",
+            4.4
+          ],
+          [
+            "2026-03-01",
+            4.3
+          ],
+          [
+            "2026-04-01",
+            4.3
+          ],
+          [
+            "2026-05-01",
+            4.3
+          ],
+          [
+            "2026-06-01",
+            4.2
+          ],
+          [
+            "2026-07-01",
+            4.1
+          ],
+          [
+            "2026-08-01",
+            4.1
+          ],
+          [
+            "2026-09-01",
+            4.2
+          ],
+          [
+            "2026-10-01",
+            4.1
+          ]
+        ]
+      },
+      "payrolls": {
+        "source": "bls",
+        "asOf": "2026-10-01",
+        "status": "ok",
+        "points": [
+          [
+            "2024-01-01",
+            157032
+          ],
+          [
+            "2024-02-01",
+            157238
+          ],
+          [
+            "2024-03-01",
+            157466
+          ],
+          [
+            "2024-04-01",
+            157530
+          ],
+          [
+            "2024-05-01",
+            157608
+          ],
+          [
+            "2024-06-01",
+            157695
+          ],
+          [
+            "2024-07-01",
+            157748
+          ],
+          [
+            "2024-08-01",
+            157757
+          ],
+          [
+            "2024-09-01",
+            157912
+          ],
+          [
+            "2024-10-01",
+            157945
+          ],
+          [
+            "2024-11-01",
+            158079
+          ],
+          [
+            "2024-12-01",
+            158316
+          ],
+          [
+            "2025-01-01",
+            158268
+          ],
+          [
+            "2025-02-01",
+            158310
+          ],
+          [
+            "2025-03-01",
+            158377
+          ],
+          [
+            "2025-04-01",
+            158485
+          ],
+          [
+            "2025-05-01",
+            158498
+          ],
+          [
+            "2025-06-01",
+            158478
+          ],
+          [
+            "2025-07-01",
+            158542
+          ],
+          [
+            "2025-08-01",
+            158472
+          ],
+          [
+            "2025-09-01",
+            158548
+          ],
+          [
+            "2025-10-01",
+            158408
+          ],
+          [
+            "2025-11-01",
+            158449
+          ],
+          [
+            "2025-12-01",
+            158432
+          ],
+          [
+            "2026-01-01",
+            158592
+          ],
+          [
+            "2026-02-01",
+            158436
+          ],
+          [
+            "2026-03-01",
+            158650
+          ],
+          [
+            "2026-04-01",
+            158798
+          ],
+          [
+            "2026-05-01",
+            158861
+          ],
+          [
+            "2026-06-01",
+            158892
+          ],
+          [
+            "2026-07-01",
+            158882
+          ],
+          [
+            "2026-08-01",
+            159068
+          ],
+          [
+            "2026-09-01",
+            159128
+          ],
+          [
+            "2026-10-01",
+            159293
+          ]
+        ]
+      }
+    }
+  },
+  "disclaimer": "Simulated council for education. Not financial advice. Numbers as of the dates shown; verify against the filings."
+}

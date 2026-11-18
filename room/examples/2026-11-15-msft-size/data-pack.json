@@ -1,0 +1,356 @@
+{
+  "schema": "mosaic.datapack/1",
+  "kind": "ticker",
+  "symbol": "MSFT",
+  "asOf": "2026-11-14",
+  "generatedAt": "2026-11-15T10:01:00.000Z",
+  "hash": "sha256:example-msft",
+  "coverage": {
+    "byCapability": {
+      "quote": "ok",
+      "priceHistory": "ok",
+      "financials": "ok",
+      "macro": "ok",
+      "estimates": "missing",
+      "news": "missing"
+    },
+    "core": [
+      "quote",
+      "priceHistory",
+      "financials",
+      "macro",
+      "estimates",
+      "news"
+    ],
+    "score": 0.78,
+    "facts": 23,
+    "missingFacts": 2
+  },
+  "providers": [
+    {
+      "capability": "quote",
+      "source": "yahoo",
+      "status": "ok",
+      "asOf": "2026-11-14",
+      "attempts": []
+    },
+    {
+      "capability": "financials",
+      "source": "sec-edgar",
+      "status": "ok",
+      "asOf": "2026-10-28",
+      "attempts": []
+    },
+    {
+      "capability": "macro:rates",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-13",
+      "attempts": []
+    },
+    {
+      "capability": "macro:policy",
+      "source": "nyfed",
+      "status": "ok",
+      "asOf": "2026-11-13",
+      "attempts": []
+    },
+    {
+      "capability": "estimates",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "attempts": []
+    },
+    {
+      "capability": "news",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "attempts": []
+    }
+  ],
+  "warnings": [
+    "No analyst estimates or news in the pack."
+  ],
+  "facts": [
+    {
+      "id": "F001",
+      "key": "company_name",
+      "label": "Company name",
+      "value": "MICROSOFT CORP",
+      "unit": "text",
+      "source": "sec-edgar",
+      "asOf": "2026-10-28",
+      "status": "ok"
+    },
+    {
+      "id": "F002",
+      "key": "price",
+      "label": "Share price",
+      "value": 518,
+      "unit": "USD/share",
+      "source": "yahoo",
+      "asOf": "2026-11-14",
+      "status": "ok"
+    },
+    {
+      "id": "F003",
+      "key": "market_cap",
+      "label": "Market value",
+      "value": 3850000000000,
+      "unit": "USD",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F004",
+      "key": "revenue_ttm",
+      "label": "Sales over the last four quarters",
+      "value": 302000000000,
+      "unit": "USD",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok"
+    },
+    {
+      "id": "F005",
+      "key": "revenue_growth_yoy",
+      "label": "Sales growth over the last year",
+      "value": 0.16,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F006",
+      "key": "cloud_growth",
+      "label": "Cloud sales growth, latest quarter against a year earlier",
+      "value": 0.38,
+      "unit": "ratio",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok"
+    },
+    {
+      "id": "F007",
+      "key": "gross_margin",
+      "label": "Gross margin",
+      "value": 0.677,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F008",
+      "key": "operating_margin",
+      "label": "Operating margin",
+      "value": 0.46,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F009",
+      "key": "roic",
+      "label": "Return on invested capital",
+      "value": 0.297,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F010",
+      "key": "capex_to_revenue",
+      "label": "Capital spending as a share of sales",
+      "value": 0.392,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F011",
+      "key": "fcf_yield",
+      "label": "Free cash flow yield",
+      "value": 0.0156,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F012",
+      "key": "pe",
+      "label": "Price to earnings",
+      "value": 36.8,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F013",
+      "key": "implied_fcf_growth",
+      "label": "Growth a year the price assumes for ten years",
+      "value": 0.14,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F014",
+      "key": "dcf_value_bear",
+      "label": "Cash flow value per share, cautious case",
+      "value": 410,
+      "unit": "USD/share",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F015",
+      "key": "dcf_value_bull",
+      "label": "Cash flow value per share, hopeful case",
+      "value": 590,
+      "unit": "USD/share",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F016",
+      "key": "max_drawdown",
+      "label": "Largest fall from a high over the price history",
+      "value": -0.371,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F017",
+      "key": "portfolio_share",
+      "label": "Share of the portfolio in this stock",
+      "value": 0.18,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-14",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F018",
+      "key": "treasury_10y",
+      "label": "10-year Treasury yield",
+      "value": 4.1,
+      "unit": "percent",
+      "source": "treasury",
+      "asOf": "2026-11-13",
+      "status": "ok"
+    },
+    {
+      "id": "F019",
+      "key": "fed_funds",
+      "label": "Policy interest rate",
+      "value": 3.63,
+      "unit": "percent",
+      "source": "nyfed",
+      "asOf": "2026-11-13",
+      "status": "ok"
+    },
+    {
+      "id": "F020",
+      "key": "last_report_filed",
+      "label": "Last quarterly report filed",
+      "value": "2026-10-28",
+      "unit": "date",
+      "source": "sec-edgar",
+      "asOf": "2026-10-28",
+      "status": "ok"
+    },
+    {
+      "id": "F021",
+      "key": "next_report_expected",
+      "label": "Next quarterly report, expected",
+      "value": "2027-01-27",
+      "unit": "date",
+      "source": "mosaic",
+      "asOf": "2026-10-28",
+      "status": "ok",
+      "derived": true,
+      "formula": "see data-pack.md",
+      "inputs": []
+    },
+    {
+      "id": "F022",
+      "key": "short_interest",
+      "label": "Share of stock sold short",
+      "value": null,
+      "unit": "ratio",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "no configured provider supplies short interest"
+    },
+    {
+      "id": "F023",
+      "key": "estimates_revenue_next_year",
+      "label": "Analyst estimates for next year's sales",
+      "value": null,
+      "unit": "USD",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "analyst estimates need a keyed provider"
+    }
+  ],
+  "packs": {},
+  "series": {},
+  "news": [],
+  "disclaimer": "Simulated council for education. Not financial advice."
+}

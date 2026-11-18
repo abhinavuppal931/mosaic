@@ -1,0 +1,26 @@
+{
+  "name": "mosaic",
+  "displayName": "Mosaic",
+  "version": "0.1.0",
+  "description": "Investing legends, simulated from their public work, debate your investment decision over three rounds from one sourced fact sheet. You get a scored verdict that shows where they disagree, with a pre-mortem, kill criteria and a re-check date. Free data by default, no keys needed. Not investment advice.",
+  "author": {
+    "name": "Abs",
+    "url": "https://github.com/abhinavuppal931"
+  },
+  "homepage": "https://github.com/abhinavuppal931/mosaic",
+  "repository": "https://github.com/abhinavuppal931/mosaic",
+  "license": "MIT",
+  "keywords": [
+    "investing",
+    "council",
+    "stocks",
+    "valuation",
+    "thesis",
+    "journal",
+    "sec-edgar",
+    "education"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "supportUrl": "https://github.com/abhinavuppal931/mosaic/issues",
+  "documentationUrl": "https://github.com/abhinavuppal931/mosaic#readme"
+}

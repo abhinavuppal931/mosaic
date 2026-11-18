@@ -1,0 +1,29 @@
+{
+  "schema": "mosaic.council/1",
+  "id": "2026-11-17-msft-buy",
+  "title": "Buy Microsoft at 518",
+  "job": "decision",
+  "ticker": "MSFT",
+  "decision": "Whether to open a position in Microsoft now, and how.",
+  "mode": "full",
+  "horizon": "5 years",
+  "trigger": "The stock is 7% off its high after a capex-heavy quarter.",
+  "position": { "owned": false, "portfolioShare": null },
+  "options": [
+    { "id": "A", "label": "Full position now", "kind": "act" },
+    { "id": "B", "label": "Starter now, add on proof", "kind": "act" },
+    { "id": "C", "label": "Wait for a lower price", "kind": "wait", "trigger": "Price / DCF base below 1.2" },
+    { "id": "D", "label": "Pass", "kind": "none" }
+  ],
+  "seats": ["buffett", "taleb", "burry"],
+  "weights": {
+    "buffett": { "weight": 3, "reason": "Owner economics is the heart of this call" },
+    "taleb": { "weight": 2, "reason": "Ruin guard" },
+    "burry": { "weight": 2, "reason": "Bear guard; the capex surge is his kind of question" }
+  },
+  "pack": { "path": "data-pack.json", "hash": "sha256:fixture", "coverage": 0.75 },
+  "brief": "Investor considering a first position in Microsoft after a capex-heavy quarter.",
+  "assumptions": ["Horizon five years (stated)"],
+  "lean": { "sealed": true },
+  "started": "2026-11-17T12:00:00Z"
+}

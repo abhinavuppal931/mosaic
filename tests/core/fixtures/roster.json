@@ -1,0 +1,20 @@
+{
+  "$comment": "Test fixture. The real skills/mosaic/roster.json is owned by the brains build (ABH-329); core code reads only the fields used here.",
+  "board": "ask",
+  "default": ["buffett", "munger", "damodaran", "marks", "taleb", "druckenmiller", "burry"],
+  "seats": [
+    { "key": "buffett", "name": "Warren Buffett", "short": "Buffett", "slug": "warren-buffett", "role": "Business quality and owner economics", "dimension": "Moat and owner economics" },
+    { "key": "munger", "name": "Charlie Munger", "short": "Munger", "slug": "charlie-munger", "role": "Inversion, incentives, misjudgment", "dimension": "Folly check" },
+    { "key": "damodaran", "name": "Aswath Damodaran", "short": "Damodaran", "slug": "aswath-damodaran", "role": "Valuation", "dimension": "Value vs price" },
+    { "key": "marks", "name": "Howard Marks", "short": "Marks", "slug": "howard-marks", "role": "Cycle and pricing of risk", "dimension": "Risk and cycle" },
+    { "key": "taleb", "name": "Nassim Nicholas Taleb", "short": "Taleb", "slug": "nassim-taleb", "role": "Fragility and ruin", "dimension": "Ruin and convexity", "guard": "ruin" },
+    { "key": "druckenmiller", "name": "Stanley Druckenmiller", "short": "Druckenmiller", "slug": "stanley-druckenmiller", "role": "Macro, liquidity, timing, flows", "dimension": "Macro and timing" },
+    { "key": "burry", "name": "Michael Burry", "short": "Burry", "slug": "michael-burry", "role": "Contrarian bear case", "dimension": "Bear case", "guard": "bear" },
+    { "key": "lynch", "name": "Peter Lynch", "short": "Lynch", "slug": "peter-lynch", "role": "Growth and ground truth", "dimension": "Growth story and PEG" },
+    { "key": "ackman", "name": "Bill Ackman", "short": "Ackman", "slug": "bill-ackman", "role": "Catalysts, governance, asymmetric hedges", "dimension": "Catalyst and governance" },
+    { "key": "kantesaria", "name": "Dev Kantesaria", "short": "Kantesaria", "slug": "dev-kantesaria", "role": "Toll-booth quality gate", "dimension": "Predictability and pricing power" },
+    { "key": "sleep", "name": "Nick Sleep", "short": "Sleep", "slug": "nick-sleep", "role": "Long runway, scale shared", "dimension": "Runway and reinvestment" },
+    { "key": "mauboussin", "name": "Michael Mauboussin", "short": "Mauboussin", "slug": "michael-mauboussin", "role": "Expectations, base rates, sizing", "dimension": "Base rates and sizing" },
+    { "key": "tomlee", "name": "Tom Lee", "short": "Tom Lee", "slug": "tom-lee", "role": "Thematic and secular trends", "dimension": "Thematic tailwind" }
+  ]
+}

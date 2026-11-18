@@ -1,0 +1,6509 @@
+{
+  "schema": "mosaic.datapack/1",
+  "kind": "ticker",
+  "symbol": "MSFT",
+  "asOf": "2026-11-17",
+  "generatedAt": "2026-11-17T12:05:29.225Z",
+  "hash": "sha256:8a5155eec95fa85abf9f4de7314aae0dc5ffc678069d33743dd141b41ea57530",
+  "coverage": {
+    "byCapability": {
+      "profile": "ok",
+      "quote": "ok",
+      "priceHistory": "ok",
+      "financials": "ok",
+      "insiderTrades": "ok",
+      "holdings": "missing",
+      "news": "missing",
+      "estimates": "missing",
+      "benchmark": "ok",
+      "macro": "partial",
+      "ratios": "computed"
+    },
+    "core": [
+      "profile",
+      "quote",
+      "priceHistory",
+      "financials",
+      "insiderTrades",
+      "macro",
+      "news",
+      "estimates"
+    ],
+    "score": 0.725,
+    "facts": 135,
+    "missingFacts": 6
+  },
+  "providers": [
+    {
+      "capability": "profile",
+      "source": "sec-edgar",
+      "status": "ok",
+      "asOf": "2026-10-28",
+      "attempts": [
+        {
+          "provider": "sec-edgar",
+          "status": "ok",
+          "ms": 521
+        }
+      ]
+    },
+    {
+      "capability": "quote",
+      "source": "yahoo",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "note": "unofficial endpoint, best effort",
+      "attempts": [
+        {
+          "provider": "yahoo",
+          "status": "ok",
+          "ms": 139
+        }
+      ]
+    },
+    {
+      "capability": "priceHistory",
+      "source": "yahoo",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "note": "unofficial endpoint, best effort; adjC is split and dividend adjusted",
+      "attempts": [
+        {
+          "provider": "yahoo",
+          "status": "ok",
+          "ms": 215
+        }
+      ]
+    },
+    {
+      "capability": "financials",
+      "source": "sec-edgar",
+      "status": "ok",
+      "asOf": "2026-09-30",
+      "attempts": [
+        {
+          "provider": "sec-edgar",
+          "status": "ok",
+          "ms": 140
+        }
+      ]
+    },
+    {
+      "capability": "insiderTrades",
+      "source": "sec-edgar",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "note": "40 Form 4 filings since 2025-11-17 (capped at 40; older filings in the window were not read)",
+      "attempts": [
+        {
+          "provider": "sec-edgar",
+          "status": "ok",
+          "ms": 4297
+        }
+      ]
+    },
+    {
+      "capability": "holdings",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "note": "sec-edgar: empty (EDGAR lists 13F holdings per manager; holders of one ticker need a keyed provider)",
+      "attempts": [
+        {
+          "provider": "sec-edgar",
+          "status": "empty",
+          "ms": 0,
+          "note": "EDGAR lists 13F holdings per manager; holders of one ticker need a keyed provider"
+        }
+      ]
+    },
+    {
+      "capability": "news",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "note": "finnhub: skipped (no key (FINNHUB_API_KEY)); massive: skipped (no key (MASSIVE_API_KEY)); fmp: skipped (no key (FMP_API_KEY))",
+      "attempts": [
+        {
+          "provider": "finnhub",
+          "status": "skipped",
+          "note": "no key (FINNHUB_API_KEY)"
+        },
+        {
+          "provider": "massive",
+          "status": "skipped",
+          "note": "no key (MASSIVE_API_KEY)"
+        },
+        {
+          "provider": "fmp",
+          "status": "skipped",
+          "note": "no key (FMP_API_KEY)"
+        }
+      ]
+    },
+    {
+      "capability": "estimates",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "note": "fmp: skipped (no key (FMP_API_KEY)); finnhub: skipped (no key (FINNHUB_API_KEY))",
+      "attempts": [
+        {
+          "provider": "fmp",
+          "status": "skipped",
+          "note": "no key (FMP_API_KEY)"
+        },
+        {
+          "provider": "finnhub",
+          "status": "skipped",
+          "note": "no key (FINNHUB_API_KEY)"
+        }
+      ]
+    },
+    {
+      "capability": "benchmark",
+      "source": "yahoo",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "note": "unofficial endpoint, best effort; adjC is split and dividend adjusted",
+      "attempts": [
+        {
+          "provider": "yahoo",
+          "status": "ok",
+          "ms": 284
+        }
+      ]
+    },
+    {
+      "capability": "macro:ust_3m",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "treasury",
+          "status": "ok",
+          "ms": 724
+        }
+      ]
+    },
+    {
+      "capability": "macro:ust_2y",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "treasury",
+          "status": "ok",
+          "ms": 187
+        }
+      ]
+    },
+    {
+      "capability": "macro:ust_10y",
+      "source": "treasury",
+      "status": "ok",
+      "asOf": "2026-11-16",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "treasury",
+          "status": "ok",
+          "ms": 292
+        }
+      ]
+    },
+    {
+      "capability": "macro:policy_rate",
+      "source": "nyfed",
+      "status": "ok",
+      "asOf": "2026-11-13",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        },
+        {
+          "provider": "nyfed",
+          "status": "ok",
+          "ms": 370
+        }
+      ]
+    },
+    {
+      "capability": "macro:hy_oas",
+      "source": null,
+      "status": "missing",
+      "asOf": null,
+      "note": "fred: skipped (no key (FRED_API_KEY))",
+      "attempts": [
+        {
+          "provider": "fred",
+          "status": "skipped",
+          "note": "no key (FRED_API_KEY)"
+        }
+      ]
+    }
+  ],
+  "warnings": [
+    "No news in the pack (needs a keyed provider such as Finnhub or FMP).",
+    "No analyst estimates: valuation rests on reported history only.",
+    "Macro series hy_oas missing (fred: skipped (no key (FRED_API_KEY)))."
+  ],
+  "facts": [
+    {
+      "id": "F001",
+      "key": "company_name",
+      "label": "Company name",
+      "value": "MICROSOFT CORP",
+      "unit": "text",
+      "source": "sec-edgar",
+      "asOf": "2026-10-28",
+      "status": "ok",
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000789019"
+    },
+    {
+      "id": "F002",
+      "key": "cik",
+      "label": "SEC CIK",
+      "value": "0000789019",
+      "unit": "text",
+      "source": "sec-edgar",
+      "asOf": "2026-10-28",
+      "status": "ok"
+    },
+    {
+      "id": "F003",
+      "key": "industry",
+      "label": "Industry (SIC description)",
+      "value": "Services-Prepackaged Software",
+      "unit": "text",
+      "source": "sec-edgar",
+      "asOf": "2026-10-28",
+      "status": "ok"
+    },
+    {
+      "id": "F004",
+      "key": "fiscal_year_end",
+      "label": "Fiscal year end (MMDD)",
+      "value": "0630",
+      "unit": "text",
+      "source": "sec-edgar",
+      "asOf": "2026-10-28",
+      "status": "ok"
+    },
+    {
+      "id": "F005",
+      "key": "price",
+      "label": "Share price",
+      "value": 517.99,
+      "unit": "USD/share",
+      "period": "2026-11-16T21:00:01.000Z",
+      "source": "yahoo",
+      "asOf": "2026-11-16",
+      "status": "ok"
+    },
+    {
+      "id": "F006",
+      "key": "revenue",
+      "label": "Revenue",
+      "value": 346445000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F007",
+      "key": "gross_profit",
+      "label": "Gross profit",
+      "value": 234394000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F008",
+      "key": "operating_income",
+      "label": "Operating income",
+      "value": 163191000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F009",
+      "key": "net_income",
+      "label": "Net income",
+      "value": 142631000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F010",
+      "key": "eps_diluted",
+      "label": "Diluted EPS",
+      "value": 19.15,
+      "unit": "USD/share",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F011",
+      "key": "interest_expense",
+      "label": "Interest expense",
+      "value": 3223000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F012",
+      "key": "rd_expense",
+      "label": "Research and development expense",
+      "value": 36463000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F013",
+      "key": "operating_cash_flow",
+      "label": "Operating cash flow",
+      "value": 195878000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F014",
+      "key": "capex",
+      "label": "Capital expenditure",
+      "value": 135921000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F015",
+      "key": "depreciation_amortization",
+      "label": "Depreciation and amortization",
+      "value": 38300000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F016",
+      "key": "sbc",
+      "label": "Stock-based compensation",
+      "value": 12556000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F017",
+      "key": "dividends_paid",
+      "label": "Dividends paid",
+      "value": 27033000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F018",
+      "key": "buybacks",
+      "label": "Share repurchases",
+      "value": 21000000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F019",
+      "key": "cash",
+      "label": "Cash and equivalents",
+      "value": 20281000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F020",
+      "key": "short_term_investments",
+      "label": "Short-term investments",
+      "value": 44228000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F021",
+      "key": "total_debt",
+      "label": "Total debt (long-term incl. current, plus short-term borrowings)",
+      "value": 35481000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F022",
+      "key": "equity",
+      "label": "Shareholders equity",
+      "value": 470509000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F023",
+      "key": "total_assets",
+      "label": "Total assets",
+      "value": 779403000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F024",
+      "key": "goodwill",
+      "label": "Goodwill",
+      "value": 119646000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F025",
+      "key": "current_assets",
+      "label": "Current assets",
+      "value": 186137000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F026",
+      "key": "current_liabilities",
+      "label": "Current liabilities",
+      "value": 151968000000,
+      "unit": "USD",
+      "period": "as of 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F027",
+      "key": "shares_outstanding",
+      "label": "Shares outstanding (cover page)",
+      "value": 7426194552,
+      "unit": "shares",
+      "period": "as of 2026-10-22",
+      "source": "sec-edgar",
+      "asOf": "2026-10-22",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json"
+    },
+    {
+      "id": "F028",
+      "key": "market_cap",
+      "label": "Market capitalization",
+      "value": 3846694516000,
+      "unit": "USD",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "price x shares_outstanding",
+      "inputs": [
+        "F005",
+        "F027"
+      ]
+    },
+    {
+      "id": "F029",
+      "key": "enterprise_value",
+      "label": "Enterprise value",
+      "value": 3817666516000,
+      "unit": "USD",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "market_cap + total_debt - cash - short_term_investments",
+      "inputs": [
+        "F028",
+        "F021",
+        "F019",
+        "F020"
+      ]
+    },
+    {
+      "id": "F030",
+      "key": "free_cash_flow",
+      "label": "Free cash flow",
+      "value": 59957000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "operating_cash_flow - capex",
+      "inputs": [
+        "F013",
+        "F014"
+      ]
+    },
+    {
+      "id": "F031",
+      "key": "owner_earnings",
+      "label": "Owner earnings (all capex treated as maintenance, conservative)",
+      "value": 45010000000,
+      "unit": "USD",
+      "period": "TTM to 2026-09-30",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "net_income + depreciation_amortization - capex",
+      "inputs": [
+        "F009",
+        "F015",
+        "F014"
+      ],
+      "note": "Total capex is used because maintenance capex is not disclosed; growth capex makes this understate owner earnings."
+    },
+    {
+      "id": "F032",
+      "key": "pe",
+      "label": "Price / earnings",
+      "value": 27.04908616,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "price / eps_diluted",
+      "inputs": [
+        "F005",
+        "F010"
+      ]
+    },
+    {
+      "id": "F033",
+      "key": "pb",
+      "label": "Price / book",
+      "value": 8.175602414,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "market_cap / equity",
+      "inputs": [
+        "F028",
+        "F022"
+      ]
+    },
+    {
+      "id": "F034",
+      "key": "ps",
+      "label": "Price / sales",
+      "value": 11.10333391,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "market_cap / revenue",
+      "inputs": [
+        "F028",
+        "F006"
+      ]
+    },
+    {
+      "id": "F035",
+      "key": "ev_ebit",
+      "label": "EV / EBIT",
+      "value": 23.39385454,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "enterprise_value / operating_income",
+      "inputs": [
+        "F029",
+        "F008"
+      ]
+    },
+    {
+      "id": "F036",
+      "key": "ev_ebitda",
+      "label": "EV / EBITDA",
+      "value": 18.94708208,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "enterprise_value / (operating_income + depreciation_amortization)",
+      "inputs": [
+        "F029",
+        "F008",
+        "F015"
+      ]
+    },
+    {
+      "id": "F037",
+      "key": "fcf_yield",
+      "label": "Free cash flow yield",
+      "value": 0.01558662892,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "free_cash_flow / market_cap",
+      "inputs": [
+        "F030",
+        "F028"
+      ]
+    },
+    {
+      "id": "F038",
+      "key": "fcf_yield_after_sbc",
+      "label": "FCF yield after stock comp",
+      "value": 0.01232252777,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "(free_cash_flow - sbc) / market_cap",
+      "inputs": [
+        "F030",
+        "F016",
+        "F028"
+      ]
+    },
+    {
+      "id": "F039",
+      "key": "ev_fcf",
+      "label": "EV / free cash flow",
+      "value": 63.67340788,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "enterprise_value / free_cash_flow",
+      "inputs": [
+        "F029",
+        "F030"
+      ]
+    },
+    {
+      "id": "F040",
+      "key": "owner_earnings_yield",
+      "label": "Owner earnings yield",
+      "value": 0.01170095515,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "owner_earnings / market_cap",
+      "inputs": [
+        "F031",
+        "F028"
+      ]
+    },
+    {
+      "id": "F041",
+      "key": "dividend_yield",
+      "label": "Dividend yield (cash paid / market cap)",
+      "value": 0.007027592102,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "dividends_paid / market_cap",
+      "inputs": [
+        "F017",
+        "F028"
+      ]
+    },
+    {
+      "id": "F042",
+      "key": "buyback_yield",
+      "label": "Buyback yield (repurchases / market cap)",
+      "value": 0.005459232573,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "buybacks / market_cap",
+      "inputs": [
+        "F018",
+        "F028"
+      ]
+    },
+    {
+      "id": "F043",
+      "key": "roe",
+      "label": "Return on equity",
+      "value": 0.3031419165,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "net_income / equity",
+      "inputs": [
+        "F009",
+        "F022"
+      ]
+    },
+    {
+      "id": "F044",
+      "key": "roic",
+      "label": "Return on invested capital (after-tax operating income / (equity + debt - cash))",
+      "value": 0.2968857741,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "operating_income x (1 - tax_rate) / (equity + total_debt - cash - short_term_investments); tax_rate = income_tax / (net_income + income_tax), clamped 0 to 0.35",
+      "inputs": [
+        "F008",
+        "F009",
+        "F022",
+        "F021",
+        "F019"
+      ]
+    },
+    {
+      "id": "F045",
+      "key": "gross_margin",
+      "label": "Gross margin",
+      "value": 0.6765691524,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "gross_profit / revenue",
+      "inputs": [
+        "F007",
+        "F006"
+      ]
+    },
+    {
+      "id": "F046",
+      "key": "operating_margin",
+      "label": "Operating margin",
+      "value": 0.4710444659,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "operating_income / revenue",
+      "inputs": [
+        "F008",
+        "F006"
+      ]
+    },
+    {
+      "id": "F047",
+      "key": "net_margin",
+      "label": "Net margin",
+      "value": 0.4116988267,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "net_income / revenue",
+      "inputs": [
+        "F009",
+        "F006"
+      ]
+    },
+    {
+      "id": "F048",
+      "key": "fcf_margin",
+      "label": "Free cash flow margin",
+      "value": 0.1730635454,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "free_cash_flow / revenue",
+      "inputs": [
+        "F030",
+        "F006"
+      ]
+    },
+    {
+      "id": "F049",
+      "key": "debt_to_equity",
+      "label": "Debt / equity",
+      "value": 0.07540982213,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "total_debt / equity",
+      "inputs": [
+        "F021",
+        "F022"
+      ]
+    },
+    {
+      "id": "F050",
+      "key": "net_debt",
+      "label": "Net debt (negative means net cash)",
+      "value": -29028000000,
+      "unit": "USD",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "total_debt - cash - short_term_investments",
+      "inputs": [
+        "F021",
+        "F019",
+        "F020"
+      ]
+    },
+    {
+      "id": "F051",
+      "key": "net_debt_to_ebitda",
+      "label": "Net debt / EBITDA",
+      "value": -0.1440659881,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "net_debt / (operating_income + depreciation_amortization)",
+      "inputs": [
+        "F050",
+        "F008",
+        "F015"
+      ]
+    },
+    {
+      "id": "F052",
+      "key": "interest_coverage",
+      "label": "Interest coverage (EBIT / interest)",
+      "value": 50.63326094,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "operating_income / interest_expense",
+      "inputs": [
+        "F008",
+        "F011"
+      ]
+    },
+    {
+      "id": "F053",
+      "key": "current_ratio",
+      "label": "Current ratio",
+      "value": 1.224843388,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "current_assets / current_liabilities",
+      "inputs": [
+        "F025",
+        "F026"
+      ]
+    },
+    {
+      "id": "F054",
+      "key": "fcf_conversion",
+      "label": "FCF / net income",
+      "value": 0.4203644369,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "free_cash_flow / net_income",
+      "inputs": [
+        "F030",
+        "F009"
+      ]
+    },
+    {
+      "id": "F055",
+      "key": "sbc_to_revenue",
+      "label": "Stock comp / revenue",
+      "value": 0.036242405,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "sbc / revenue",
+      "inputs": [
+        "F016",
+        "F006"
+      ]
+    },
+    {
+      "id": "F056",
+      "key": "goodwill_to_assets",
+      "label": "Goodwill / total assets",
+      "value": 0.1535098017,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "goodwill / total_assets",
+      "inputs": [
+        "F024",
+        "F023"
+      ]
+    },
+    {
+      "id": "F057",
+      "key": "accruals_ratio",
+      "label": "Accruals ratio ((net income - operating cash flow) / assets)",
+      "value": -0.06831767391,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "(net_income - operating_cash_flow) / total_assets",
+      "inputs": [
+        "F009",
+        "F013",
+        "F023"
+      ]
+    },
+    {
+      "id": "F058",
+      "key": "capex_to_revenue",
+      "label": "Capex / revenue",
+      "value": 0.392330673,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "capex / revenue",
+      "inputs": [
+        "F014",
+        "F006"
+      ]
+    },
+    {
+      "id": "F059",
+      "key": "rd_to_revenue",
+      "label": "R&D / revenue",
+      "value": 0.1052490294,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-09-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "rd_expense / revenue",
+      "inputs": [
+        "F012",
+        "F006"
+      ]
+    },
+    {
+      "id": "F060",
+      "key": "fiscal_years_available",
+      "label": "Fiscal years of financials in the pack",
+      "value": 10,
+      "unit": "count",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "count(annual periods)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F061",
+      "key": "roe_avg",
+      "label": "Return on equity, average over 10 fiscal years",
+      "value": 0.3394949722,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "mean(net_income / equity) per fiscal year",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F062",
+      "key": "roe_min",
+      "label": "Return on equity, lowest fiscal year of 10",
+      "value": 0.2003312459,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "min(net_income / equity) per fiscal year",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F063",
+      "key": "roic_avg",
+      "label": "ROIC, average over 10 fiscal years",
+      "value": 0.6037163457,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "mean(roic) per fiscal year",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F064",
+      "key": "gross_margin_stdev",
+      "label": "Gross margin, standard deviation across fiscal years",
+      "value": 0.01775153546,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "stdev(gross_profit / revenue) per fiscal year",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F065",
+      "key": "gross_margin_trend",
+      "label": "Gross margin change, latest minus oldest fiscal year",
+      "value": 0.03421617679,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "gross_margin(latest FY) - gross_margin(oldest FY)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F066",
+      "key": "operating_margin_stdev",
+      "label": "Operating margin, standard deviation across fiscal years",
+      "value": 0.05933642115,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "stdev(operating_income / revenue) per fiscal year",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F067",
+      "key": "operating_margin_trend",
+      "label": "Operating margin change, latest minus oldest fiscal year",
+      "value": 0.1672521165,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "operating_margin(latest FY) - operating_margin(oldest FY)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F068",
+      "key": "operating_margin_max",
+      "label": "Operating margin, best fiscal year",
+      "value": 0.4678081841,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "max(operating_income / revenue) per fiscal year",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F069",
+      "key": "revenue_cagr_5y",
+      "label": "Revenue CAGR, last 5 fiscal years",
+      "value": 0.1457190738,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "(revenue_latest / revenue_5y_ago)^(1/5) - 1",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F070",
+      "key": "revenue_cagr_10y",
+      "label": "Revenue CAGR, last 9 fiscal years",
+      "value": 0.1470029158,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "(revenue_latest / revenue_9y_ago)^(1/9) - 1",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F071",
+      "key": "eps_cagr_5y",
+      "label": "Diluted EPS CAGR, last 5 fiscal years",
+      "value": 0.1739611216,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "(eps_latest / eps_5y_ago)^(1/5) - 1; null if either is not positive",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F072",
+      "key": "fcf_cagr_5y",
+      "label": "Free cash flow CAGR, last 5 fiscal years",
+      "value": 0.03604273274,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "(fcf_latest / fcf_5y_ago)^(1/5) - 1; null if either is not positive",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F073",
+      "key": "bvps_cagr",
+      "label": "Book value per share CAGR, last 9 fiscal years",
+      "value": 0.2035846773,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "CAGR of equity / diluted shares",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F074",
+      "key": "diluted_shares_change_5y",
+      "label": "Diluted share count change, last 5 fiscal years",
+      "value": -0.02037329127,
+      "unit": "ratio",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "diluted_shares_latest / diluted_shares_5y_ago - 1 (negative means buybacks shrank the count)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F075",
+      "key": "revenue_growth_yoy",
+      "label": "Revenue growth, latest fiscal year",
+      "value": 0.177886868,
+      "unit": "ratio",
+      "period": "FY2026 vs FY2025",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "revenue(latest FY) / revenue(prior FY) - 1",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F076",
+      "key": "revenue_growth_acceleration",
+      "label": "Revenue growth acceleration (latest FY growth minus prior FY growth)",
+      "value": 0.02856530567,
+      "unit": "ratio",
+      "period": "FY2026 vs FY2025",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "revenue_growth(latest FY) - revenue_growth(prior FY)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F077",
+      "key": "eps_growth_yoy",
+      "label": "Diluted EPS growth, latest fiscal year",
+      "value": 0.3159824047,
+      "unit": "ratio",
+      "period": "FY2026 vs FY2025",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "eps(latest FY) / eps(prior FY) - 1; null if prior EPS not positive",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F078",
+      "key": "receivables_vs_revenue_growth",
+      "label": "Receivables growth minus revenue growth, latest fiscal year",
+      "value": -0.02094530445,
+      "unit": "ratio",
+      "period": "FY2026 vs FY2025",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "receivables_growth(latest FY) - revenue_growth(latest FY)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F079",
+      "key": "inventory_vs_revenue_growth",
+      "label": "Inventory growth minus revenue growth, latest fiscal year",
+      "value": 0.3114521512,
+      "unit": "ratio",
+      "period": "FY2026 vs FY2025",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "inventory_growth(latest FY) - revenue_growth(latest FY)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F080",
+      "key": "fcf_conversion_avg_5y",
+      "label": "FCF / net income, average of last 5 fiscal years",
+      "value": 0.7524144762,
+      "unit": "x",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "mean(free_cash_flow / net_income), last 5 FY",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F081",
+      "key": "sales_to_capital_5y",
+      "label": "Sales to capital, last 5 fiscal years (revenue added / invested capital added)",
+      "value": 0.4872990555,
+      "unit": "x",
+      "period": "2017 to 2026",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "delta revenue / delta (equity + debt - cash)",
+      "inputs": [
+        "series:annual"
+      ]
+    },
+    {
+      "id": "F082",
+      "key": "price_history_days",
+      "label": "Daily price points in the pack",
+      "value": 2512,
+      "unit": "count",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "count(daily closes)",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F083",
+      "key": "return_1y",
+      "label": "Total return, last 12 months",
+      "value": 0.02366192365,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "adjusted close now / adjusted close 365 days ago - 1",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F084",
+      "key": "return_6m",
+      "label": "Total return, last 6 months",
+      "value": 0.2279574585,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "adjusted close now / adjusted close 182 days ago - 1",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F085",
+      "key": "return_3y_annualized",
+      "label": "Total return, last 3 years, annualized",
+      "value": 0.1267388235,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "(1 + 3y return)^(1/3) - 1",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F086",
+      "key": "return_5y_annualized",
+      "label": "Total return, last 5 years, annualized",
+      "value": 0.09699655872,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "(1 + 5y return)^(1/5) - 1",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F087",
+      "key": "high_52w",
+      "label": "52-week high close",
+      "value": 555.7999878,
+      "unit": "USD/share",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "max(close), last 365 days",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F088",
+      "key": "low_52w",
+      "label": "52-week low close",
+      "value": 352.8299866,
+      "unit": "USD/share",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "min(close), last 365 days",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F089",
+      "key": "pct_below_52w_high",
+      "label": "Distance below the 52-week high",
+      "value": -0.06802806475,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "last close / 52-week high - 1",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F090",
+      "key": "max_drawdown",
+      "label": "Maximum drawdown over the price history",
+      "value": -0.3714849968,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "min(adjusted close / running peak - 1)",
+      "inputs": [
+        "series:price"
+      ],
+      "note": "peak 2021-11-19, trough 2022-11-03"
+    },
+    {
+      "id": "F091",
+      "key": "current_drawdown",
+      "label": "Current drawdown from the all-history peak",
+      "value": -0.06802806475,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "last adjusted close / max(adjusted close) - 1",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F092",
+      "key": "volatility_1y",
+      "label": "Volatility, last 12 months (annualized)",
+      "value": 0.3364942475,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "stdev(daily log returns) x sqrt(252), last 365 days",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F093",
+      "key": "volatility_5y",
+      "label": "Volatility, last 5 years (annualized)",
+      "value": 0.2833421691,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "stdev(daily log returns) x sqrt(252), last 5 years",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F094",
+      "key": "return_skew_5y",
+      "label": "Skew of daily returns, last 5 years",
+      "value": 0.3807266732,
+      "unit": "number",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "sample skewness of daily log returns",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F095",
+      "key": "return_excess_kurtosis_5y",
+      "label": "Excess kurtosis of daily returns, last 5 years (0 = normal tails)",
+      "value": 6.003853369,
+      "unit": "number",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "sample excess kurtosis of daily log returns",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F096",
+      "key": "worst_day_5y",
+      "label": "Worst one-day return, last 5 years",
+      "value": -0.09993152266,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "min(daily return), last 5 years",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F097",
+      "key": "price_vs_200d_average",
+      "label": "Price versus its 200-day average",
+      "value": 0.1747301778,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "adjusted close / mean(last 200 adjusted closes) - 1",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F098",
+      "key": "price_percentile_history",
+      "label": "Where today's price sits in its own history (0 = lowest, 1 = highest)",
+      "value": 0.9824840764,
+      "unit": "ratio",
+      "period": "2016-11-17 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "share of daily adjusted closes at or below today",
+      "inputs": [
+        "series:price"
+      ]
+    },
+    {
+      "id": "F099",
+      "key": "relative_strength_1y",
+      "label": "12-month return minus SPY 12-month return",
+      "value": -0.08944973686,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "return_1y - SPY return_1y",
+      "inputs": [
+        "series:price",
+        "series:SPY"
+      ]
+    },
+    {
+      "id": "F100",
+      "key": "pe_percentile_own_history",
+      "label": "Today's P/E against P/E at each past fiscal year end (0 = cheapest, 1 = richest)",
+      "value": 0.4,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "share of fiscal-year-end P/Es (close on FY end / FY diluted EPS) at or below today's P/E",
+      "inputs": [
+        "F032",
+        "series:annual",
+        "series:price"
+      ]
+    },
+    {
+      "id": "F101",
+      "key": "pe_median_own_history",
+      "label": "Median P/E at past fiscal year ends",
+      "value": 34.41596305,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "median(close on FY end / FY diluted EPS)",
+      "inputs": [
+        "series:annual",
+        "series:price"
+      ]
+    },
+    {
+      "id": "F102",
+      "key": "peg",
+      "label": "PEG (P/E divided by 5-year EPS growth in percent)",
+      "value": 1.554892605,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "pe / (eps_cagr_5y x 100)",
+      "inputs": [
+        "F032",
+        "F071"
+      ]
+    },
+    {
+      "id": "F103",
+      "key": "lynch_category",
+      "label": "Growth category by 5-year EPS growth (heuristic)",
+      "value": "stalwart",
+      "unit": "text",
+      "source": "mosaic",
+      "asOf": "2026-06-30",
+      "status": "ok",
+      "derived": true,
+      "formula": "eps_cagr_5y >= 0.2 fast; >= 0.1 stalwart; >= 0 slow; below that shrinking",
+      "inputs": [
+        "F071"
+      ]
+    },
+    {
+      "id": "F104",
+      "key": "dcf_value_bear",
+      "label": "DCF value per share, bear case (FCF growth 7.3%)",
+      "value": 182.7281306,
+      "unit": "USD/share",
+      "source": "mosaic",
+      "asOf": "2026-10-22",
+      "status": "ok",
+      "derived": true,
+      "formula": "FCF DCF: growth = clamp(revenue_cagr_5y x 0.5, 0, 0.25); 10 years of FCF growth then 2.5% forever, discounted at 9%",
+      "inputs": [
+        "F030",
+        "F027",
+        "F069"
+      ],
+      "note": "A range for debate, not a price target."
+    },
+    {
+      "id": "F105",
+      "key": "dcf_value_base",
+      "label": "DCF value per share, base case (FCF growth 14.6%)",
+      "value": 316.904788,
+      "unit": "USD/share",
+      "source": "mosaic",
+      "asOf": "2026-10-22",
+      "status": "ok",
+      "derived": true,
+      "formula": "FCF DCF: growth = clamp(revenue_cagr_5y x 1, 0, 0.25); 10 years of FCF growth then 2.5% forever, discounted at 9%",
+      "inputs": [
+        "F030",
+        "F027",
+        "F069"
+      ],
+      "note": "A range for debate, not a price target."
+    },
+    {
+      "id": "F106",
+      "key": "dcf_value_bull",
+      "label": "DCF value per share, bull case (FCF growth 21.9%)",
+      "value": 545.1328384,
+      "unit": "USD/share",
+      "source": "mosaic",
+      "asOf": "2026-10-22",
+      "status": "ok",
+      "derived": true,
+      "formula": "FCF DCF: growth = clamp(revenue_cagr_5y x 1.5, 0, 0.25); 10 years of FCF growth then 2.5% forever, discounted at 9%",
+      "inputs": [
+        "F030",
+        "F027",
+        "F069"
+      ],
+      "note": "A range for debate, not a price target."
+    },
+    {
+      "id": "F107",
+      "key": "price_to_dcf_base",
+      "label": "Price / DCF base-case value",
+      "value": 1.634528791,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "price / dcf_value_base",
+      "inputs": [
+        "F005",
+        "F105"
+      ]
+    },
+    {
+      "id": "F108",
+      "key": "implied_fcf_growth",
+      "label": "What the price implies: annual FCF growth for 10 years at a 9% discount rate",
+      "value": 0.2106180733,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "solve g: DCF(free_cash_flow, g, 10y, terminal 0.025, r 0.09) = enterprise_value",
+      "inputs": [
+        "F029",
+        "F030"
+      ]
+    },
+    {
+      "id": "F109",
+      "key": "implied_fcf_growth_low_discount",
+      "label": "Implied FCF growth at a 8% discount rate",
+      "value": 0.1835329854,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "same as implied_fcf_growth with r = 0.08",
+      "inputs": [
+        "F029",
+        "F030"
+      ]
+    },
+    {
+      "id": "F110",
+      "key": "implied_fcf_growth_high_discount",
+      "label": "Implied FCF growth at a 10% discount rate",
+      "value": 0.235476463,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "same as implied_fcf_growth with r = 0.1",
+      "inputs": [
+        "F029",
+        "F030"
+      ]
+    },
+    {
+      "id": "F111",
+      "key": "implied_vs_history_gap",
+      "label": "Implied FCF growth minus the company's own revenue CAGR",
+      "value": 0.0636151575,
+      "unit": "ratio",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "implied_fcf_growth - revenue_cagr_10y (or 5y when 10y is missing)",
+      "inputs": [
+        "F108",
+        "F070",
+        "F069"
+      ]
+    },
+    {
+      "id": "F112",
+      "key": "insider_open_market_buys",
+      "label": "Insider open-market purchases (count)",
+      "value": 0,
+      "unit": "count",
+      "period": "last 365 days",
+      "source": "sec-edgar",
+      "asOf": "2026-11-16",
+      "status": "ok"
+    },
+    {
+      "id": "F113",
+      "key": "insider_open_market_buy_value",
+      "label": "Insider open-market purchases (value)",
+      "value": 0,
+      "unit": "USD",
+      "period": "last 365 days",
+      "source": "sec-edgar",
+      "asOf": "2026-11-16",
+      "status": "ok"
+    },
+    {
+      "id": "F114",
+      "key": "insider_open_market_sells",
+      "label": "Insider open-market sales (count)",
+      "value": 20,
+      "unit": "count",
+      "period": "last 365 days",
+      "source": "sec-edgar",
+      "asOf": "2026-11-16",
+      "status": "ok"
+    },
+    {
+      "id": "F115",
+      "key": "insider_open_market_sell_value",
+      "label": "Insider open-market sales (value)",
+      "value": 2655000,
+      "unit": "USD",
+      "period": "last 365 days",
+      "source": "sec-edgar",
+      "asOf": "2026-11-16",
+      "status": "ok"
+    },
+    {
+      "id": "F116",
+      "key": "insider_net_value",
+      "label": "Insider net open-market buying (buys minus sells)",
+      "value": -2655000,
+      "unit": "USD",
+      "period": "last 365 days",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "sum(purchase value) - sum(sale value); grants, exercises and tax withholding excluded",
+      "inputs": [
+        "F113",
+        "F115"
+      ]
+    },
+    {
+      "id": "F117",
+      "key": "short_interest",
+      "label": "Short interest (% of float)",
+      "value": null,
+      "unit": "ratio",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "no configured provider supplies short interest"
+    },
+    {
+      "id": "F118",
+      "key": "institutional_holders",
+      "label": "Top institutional holders",
+      "value": null,
+      "unit": "text",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "sec-edgar: empty (EDGAR lists 13F holdings per manager; holders of one ticker need a keyed provider)"
+    },
+    {
+      "id": "F119",
+      "key": "eps_estimate_next_fy",
+      "label": "Consensus EPS, next fiscal year",
+      "value": null,
+      "unit": "USD/share",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "fmp: skipped (no key (FMP_API_KEY)); finnhub: skipped (no key (FINNHUB_API_KEY))"
+    },
+    {
+      "id": "F120",
+      "key": "revenue_estimate_next_fy",
+      "label": "Consensus revenue, next fiscal year",
+      "value": null,
+      "unit": "USD",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "fmp: skipped (no key (FMP_API_KEY)); finnhub: skipped (no key (FINNHUB_API_KEY))"
+    },
+    {
+      "id": "F121",
+      "key": "forward_pe",
+      "label": "Price / next fiscal year consensus EPS",
+      "value": null,
+      "unit": "x",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "missing",
+      "derived": true,
+      "formula": "price / eps_estimate_next_fy",
+      "inputs": [
+        "F005",
+        "F119"
+      ],
+      "note": "input missing: F119"
+    },
+    {
+      "id": "F122",
+      "key": "last_report_filed",
+      "label": "Last 10-K or 10-Q filed",
+      "value": "2026-10-28",
+      "unit": "date",
+      "period": "10-Q for period 2026-09-30",
+      "source": "sec-edgar",
+      "asOf": "2026-10-28",
+      "status": "ok"
+    },
+    {
+      "id": "F123",
+      "key": "next_report_expected",
+      "label": "Next quarterly report, expected (from filing cadence)",
+      "value": "2027-01-27",
+      "unit": "date",
+      "source": "mosaic",
+      "asOf": "2026-10-28",
+      "status": "ok",
+      "derived": true,
+      "formula": "last periodic filing date + median days between the last periodic filings",
+      "inputs": [
+        "F122"
+      ],
+      "note": "An estimate from past filing dates, not an announced date."
+    },
+    {
+      "id": "F124",
+      "key": "macro_ust_3m",
+      "label": "3-month Treasury yield",
+      "value": 4.34,
+      "unit": "percent",
+      "period": "2026-11-16",
+      "source": "treasury",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
+    },
+    {
+      "id": "F125",
+      "key": "macro_ust_3m_change_1y",
+      "label": "3-month Treasury yield, change over 12 months",
+      "value": 0.39,
+      "unit": "percentage points",
+      "period": "2025-11-14 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_3m(latest) - ust_3m(one year earlier)",
+      "inputs": [
+        "F124"
+      ]
+    },
+    {
+      "id": "F126",
+      "key": "macro_ust_2y",
+      "label": "2-year Treasury yield",
+      "value": 4.83,
+      "unit": "percent",
+      "period": "2026-11-16",
+      "source": "treasury",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
+    },
+    {
+      "id": "F127",
+      "key": "macro_ust_2y_change_1y",
+      "label": "2-year Treasury yield, change over 12 months",
+      "value": 1.21,
+      "unit": "percentage points",
+      "period": "2025-11-14 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_2y(latest) - ust_2y(one year earlier)",
+      "inputs": [
+        "F126"
+      ]
+    },
+    {
+      "id": "F128",
+      "key": "macro_ust_10y",
+      "label": "10-year Treasury yield",
+      "value": 5.12,
+      "unit": "percent",
+      "period": "2026-11-16",
+      "source": "treasury",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
+    },
+    {
+      "id": "F129",
+      "key": "macro_ust_10y_change_1y",
+      "label": "10-year Treasury yield, change over 12 months",
+      "value": 0.98,
+      "unit": "percentage points",
+      "period": "2025-11-14 to 2026-11-16",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_10y(latest) - ust_10y(one year earlier)",
+      "inputs": [
+        "F128"
+      ]
+    },
+    {
+      "id": "F130",
+      "key": "macro_policy_rate",
+      "label": "Effective federal funds rate",
+      "value": 3.88,
+      "unit": "percent",
+      "period": "2026-11-13",
+      "source": "nyfed",
+      "asOf": "2026-11-13",
+      "status": "ok",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/effr"
+    },
+    {
+      "id": "F131",
+      "key": "macro_policy_rate_change_1y",
+      "label": "Effective federal funds rate, change over 12 months",
+      "value": 0,
+      "unit": "percentage points",
+      "period": "2025-11-13 to 2026-11-13",
+      "source": "mosaic",
+      "asOf": "2026-11-13",
+      "status": "ok",
+      "derived": true,
+      "formula": "policy_rate(latest) - policy_rate(one year earlier)",
+      "inputs": [
+        "F130"
+      ]
+    },
+    {
+      "id": "F132",
+      "key": "macro_policy_target_range",
+      "label": "Fed funds target range",
+      "value": "3.75 to 4",
+      "unit": "percent",
+      "period": "2026-11-13",
+      "source": "nyfed",
+      "asOf": "2026-11-13",
+      "status": "ok",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/effr"
+    },
+    {
+      "id": "F133",
+      "key": "macro_hy_oas",
+      "label": "High-yield credit spread (ICE BofA US HY OAS)",
+      "value": null,
+      "unit": "percent",
+      "source": null,
+      "asOf": null,
+      "status": "missing",
+      "note": "fred: skipped (no key (FRED_API_KEY))"
+    },
+    {
+      "id": "F134",
+      "key": "macro_curve_10y_2y",
+      "label": "Yield curve: 10-year minus 2-year Treasury",
+      "value": 0.29,
+      "unit": "percentage points",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_10y - ust_2y",
+      "inputs": [
+        "F128",
+        "F126"
+      ]
+    },
+    {
+      "id": "F135",
+      "key": "macro_curve_10y_3m",
+      "label": "Yield curve: 10-year minus 3-month Treasury",
+      "value": 0.78,
+      "unit": "percentage points",
+      "source": "mosaic",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "derived": true,
+      "formula": "ust_10y - ust_3m",
+      "inputs": [
+        "F128",
+        "F124"
+      ]
+    }
+  ],
+  "packs": {
+    "buffett": {
+      "facts": [
+        "F043",
+        "F061",
+        "F062",
+        "F044",
+        "F063",
+        "F046",
+        "F066",
+        "F064",
+        "F049",
+        "F052",
+        "F054",
+        "F080",
+        "F031",
+        "F040",
+        "F073",
+        "F074",
+        "F104",
+        "F105",
+        "F106",
+        "F107",
+        "F032"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Average ROE of 15% or more across the record",
+          "metric": "roe_avg",
+          "op": ">=",
+          "threshold": 0.15,
+          "heuristic": true,
+          "fact": "F061",
+          "value": 0.3394949722,
+          "result": "pass"
+        },
+        {
+          "label": "No fiscal year with ROE below 10%",
+          "metric": "roe_min",
+          "op": ">=",
+          "threshold": 0.1,
+          "heuristic": true,
+          "fact": "F062",
+          "value": 0.2003312459,
+          "result": "pass"
+        },
+        {
+          "label": "Debt below half of equity",
+          "metric": "debt_to_equity",
+          "op": "<",
+          "threshold": 0.5,
+          "heuristic": true,
+          "fact": "F049",
+          "value": 0.07540982213,
+          "result": "pass"
+        },
+        {
+          "label": "Operating margin of 15% or more",
+          "metric": "operating_margin",
+          "op": ">=",
+          "threshold": 0.15,
+          "heuristic": true,
+          "fact": "F046",
+          "value": 0.4710444659,
+          "result": "pass"
+        },
+        {
+          "label": "Steady operating margins (stdev under 5 points)",
+          "metric": "operating_margin_stdev",
+          "op": "<",
+          "threshold": 0.05,
+          "heuristic": true,
+          "fact": "F066",
+          "value": 0.05933642115,
+          "result": "fail"
+        },
+        {
+          "label": "Earnings turn into cash (FCF at least 80% of net income)",
+          "metric": "fcf_conversion_avg_5y",
+          "op": ">=",
+          "threshold": 0.8,
+          "heuristic": true,
+          "fact": "F080",
+          "value": 0.7524144762,
+          "result": "fail"
+        },
+        {
+          "label": "Price below the base-case DCF value",
+          "metric": "price_to_dcf_base",
+          "op": "<",
+          "threshold": 1,
+          "heuristic": true,
+          "fact": "F107",
+          "value": 1.634528791,
+          "result": "fail"
+        }
+      ]
+    },
+    "munger": {
+      "facts": [
+        "F044",
+        "F063",
+        "F061",
+        "F065",
+        "F067",
+        "F049",
+        "F056",
+        "F055",
+        "F074",
+        "F057",
+        "F116",
+        "F078",
+        "F032",
+        "F108"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Gross margin not eroding over the record",
+          "metric": "gross_margin_trend",
+          "op": ">=",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F065",
+          "value": 0.03421617679,
+          "result": "pass"
+        },
+        {
+          "label": "Operating margin not eroding over the record",
+          "metric": "operating_margin_trend",
+          "op": ">=",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F067",
+          "value": 0.1672521165,
+          "result": "pass"
+        },
+        {
+          "label": "Goodwill under 30% of assets (growth not bought)",
+          "metric": "goodwill_to_assets",
+          "op": "<",
+          "threshold": 0.3,
+          "heuristic": true,
+          "fact": "F056",
+          "value": 0.1535098017,
+          "result": "pass"
+        },
+        {
+          "label": "Stock comp under 5% of revenue",
+          "metric": "sbc_to_revenue",
+          "op": "<",
+          "threshold": 0.05,
+          "heuristic": true,
+          "fact": "F055",
+          "value": 0.036242405,
+          "result": "pass"
+        },
+        {
+          "label": "No meaningful dilution over five years",
+          "metric": "diluted_shares_change_5y",
+          "op": "<=",
+          "threshold": 0.02,
+          "heuristic": true,
+          "fact": "F074",
+          "value": -0.02037329127,
+          "result": "pass"
+        },
+        {
+          "label": "Earnings backed by cash (low accruals)",
+          "metric": "accruals_ratio",
+          "op": "<",
+          "threshold": 0.05,
+          "heuristic": true,
+          "fact": "F057",
+          "value": -0.06831767391,
+          "result": "pass"
+        }
+      ]
+    },
+    "damodaran": {
+      "facts": [
+        "F108",
+        "F109",
+        "F110",
+        "F069",
+        "F070",
+        "F046",
+        "F067",
+        "F081",
+        "F044",
+        "F104",
+        "F105",
+        "F106",
+        "F107",
+        "F035",
+        "F034",
+        "F032",
+        "F121",
+        "F128"
+      ],
+      "missing": [
+        "F121"
+      ],
+      "coverage": 0.944,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Price implies no more growth than the company has delivered",
+          "metric": "implied_vs_history_gap",
+          "op": "<=",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F111",
+          "value": 0.0636151575,
+          "result": "fail"
+        },
+        {
+          "label": "Price at or below the base-case value",
+          "metric": "price_to_dcf_base",
+          "op": "<=",
+          "threshold": 1,
+          "heuristic": true,
+          "fact": "F107",
+          "value": 1.634528791,
+          "result": "fail"
+        }
+      ]
+    },
+    "marks": {
+      "facts": [
+        "F098",
+        "F100",
+        "F101",
+        "F032",
+        "F091",
+        "F083",
+        "F108",
+        "F133",
+        "F134",
+        "F135",
+        "F130",
+        "F090"
+      ],
+      "missing": [
+        "F133"
+      ],
+      "coverage": 0.917,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "P/E in the cheaper half of its own history",
+          "metric": "pe_percentile_own_history",
+          "op": "<=",
+          "threshold": 0.5,
+          "heuristic": true,
+          "fact": "F100",
+          "value": 0.4,
+          "result": "pass"
+        },
+        {
+          "label": "Price not at the top tenth of its own history",
+          "metric": "price_percentile_history",
+          "op": "<",
+          "threshold": 0.9,
+          "heuristic": true,
+          "fact": "F098",
+          "value": 0.9824840764,
+          "result": "fail"
+        }
+      ]
+    },
+    "taleb": {
+      "facts": [
+        "F090",
+        "F091",
+        "F092",
+        "F093",
+        "F094",
+        "F095",
+        "F096",
+        "F051",
+        "F052",
+        "F049",
+        "F053",
+        "F050"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Net debt under two years of EBITDA",
+          "metric": "net_debt_to_ebitda",
+          "op": "<",
+          "threshold": 2,
+          "heuristic": true,
+          "fact": "F051",
+          "value": -0.1440659881,
+          "result": "pass"
+        },
+        {
+          "label": "EBIT covers interest at least eight times",
+          "metric": "interest_coverage",
+          "op": ">=",
+          "threshold": 8,
+          "heuristic": true,
+          "fact": "F052",
+          "value": 50.63326094,
+          "result": "pass"
+        },
+        {
+          "label": "History shows no fall worse than 60%",
+          "metric": "max_drawdown",
+          "op": ">",
+          "threshold": -0.6,
+          "heuristic": true,
+          "fact": "F090",
+          "value": -0.3714849968,
+          "result": "pass"
+        },
+        {
+          "label": "Daily return tails not extreme (excess kurtosis under 10)",
+          "metric": "return_excess_kurtosis_5y",
+          "op": "<",
+          "threshold": 10,
+          "heuristic": true,
+          "fact": "F095",
+          "value": 6.003853369,
+          "result": "pass"
+        }
+      ]
+    },
+    "druckenmiller": {
+      "facts": [
+        "F134",
+        "F135",
+        "F130",
+        "F131",
+        "F128",
+        "F129",
+        "F133",
+        "F097",
+        "F084",
+        "F083",
+        "F099",
+        "F075",
+        "F076",
+        "F077",
+        "F123"
+      ],
+      "missing": [
+        "F133"
+      ],
+      "coverage": 0.933,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Price above its 200-day average (trend intact)",
+          "metric": "price_vs_200d_average",
+          "op": ">",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F097",
+          "value": 0.1747301778,
+          "result": "pass"
+        },
+        {
+          "label": "Revenue growth accelerating",
+          "metric": "revenue_growth_acceleration",
+          "op": ">",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F076",
+          "value": 0.02856530567,
+          "result": "pass"
+        },
+        {
+          "label": "Beating the market over 12 months",
+          "metric": "relative_strength_1y",
+          "op": ">",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F099",
+          "value": -0.08944973686,
+          "result": "fail"
+        }
+      ]
+    },
+    "burry": {
+      "facts": [
+        "F037",
+        "F038",
+        "F035",
+        "F050",
+        "F057",
+        "F074",
+        "F055",
+        "F116",
+        "F112",
+        "F117",
+        "F078",
+        "F079",
+        "F098",
+        "F091"
+      ],
+      "missing": [
+        "F117"
+      ],
+      "coverage": 0.929,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "FCF yield of 8% or more",
+          "metric": "fcf_yield",
+          "op": ">=",
+          "threshold": 0.08,
+          "heuristic": true,
+          "fact": "F037",
+          "value": 0.01558662892,
+          "result": "fail"
+        },
+        {
+          "label": "EV/EBIT under 7",
+          "metric": "ev_ebit",
+          "op": "<",
+          "threshold": 7,
+          "heuristic": true,
+          "fact": "F035",
+          "value": 23.39385454,
+          "result": "fail"
+        },
+        {
+          "label": "Low accruals (no earnings quality red flag)",
+          "metric": "accruals_ratio",
+          "op": "<",
+          "threshold": 0.05,
+          "heuristic": true,
+          "fact": "F057",
+          "value": -0.06831767391,
+          "result": "pass"
+        },
+        {
+          "label": "Receivables not outrunning revenue by 10 points",
+          "metric": "receivables_vs_revenue_growth",
+          "op": "<",
+          "threshold": 0.1,
+          "heuristic": true,
+          "fact": "F078",
+          "value": -0.02094530445,
+          "result": "pass"
+        }
+      ]
+    },
+    "lynch": {
+      "facts": [
+        "F103",
+        "F071",
+        "F077",
+        "F075",
+        "F032",
+        "F102",
+        "F049",
+        "F079",
+        "F112",
+        "F116"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "PEG under 1",
+          "metric": "peg",
+          "op": "<",
+          "threshold": 1,
+          "heuristic": true,
+          "fact": "F102",
+          "value": 1.554892605,
+          "result": "fail"
+        },
+        {
+          "label": "PEG under 2",
+          "metric": "peg",
+          "op": "<",
+          "threshold": 2,
+          "heuristic": true,
+          "fact": "F102",
+          "value": 1.554892605,
+          "result": "pass"
+        },
+        {
+          "label": "Inventory not piling up faster than sales",
+          "metric": "inventory_vs_revenue_growth",
+          "op": "<",
+          "threshold": 0.05,
+          "heuristic": true,
+          "fact": "F079",
+          "value": 0.3114521512,
+          "result": "fail"
+        }
+      ]
+    },
+    "ackman": {
+      "facts": [
+        "F037",
+        "F039",
+        "F044",
+        "F046",
+        "F068",
+        "F051",
+        "F042",
+        "F041",
+        "F116",
+        "F098",
+        "F091"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "FCF yield of 4% or more",
+          "metric": "fcf_yield",
+          "op": ">=",
+          "threshold": 0.04,
+          "heuristic": true,
+          "fact": "F037",
+          "value": 0.01558662892,
+          "result": "fail"
+        },
+        {
+          "label": "Net debt under three years of EBITDA",
+          "metric": "net_debt_to_ebitda",
+          "op": "<",
+          "threshold": 3,
+          "heuristic": true,
+          "fact": "F051",
+          "value": -0.1440659881,
+          "result": "pass"
+        }
+      ]
+    },
+    "kantesaria": {
+      "facts": [
+        "F044",
+        "F063",
+        "F045",
+        "F065",
+        "F064",
+        "F058",
+        "F059",
+        "F048",
+        "F038",
+        "F055",
+        "F091",
+        "F098"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Average ROIC of 20% or more",
+          "metric": "roic_avg",
+          "op": ">=",
+          "threshold": 0.2,
+          "heuristic": true,
+          "fact": "F063",
+          "value": 0.6037163457,
+          "result": "pass"
+        },
+        {
+          "label": "Gross margin holding or rising (pricing power)",
+          "metric": "gross_margin_trend",
+          "op": ">=",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F065",
+          "value": 0.03421617679,
+          "result": "pass"
+        },
+        {
+          "label": "Capital light (capex under 10% of revenue)",
+          "metric": "capex_to_revenue",
+          "op": "<",
+          "threshold": 0.1,
+          "heuristic": true,
+          "fact": "F058",
+          "value": 0.392330673,
+          "result": "fail"
+        },
+        {
+          "label": "No heavy R&D dependence (under 15% of revenue)",
+          "metric": "rd_to_revenue",
+          "op": "<",
+          "threshold": 0.15,
+          "heuristic": true,
+          "fact": "F059",
+          "value": 0.1052490294,
+          "result": "pass"
+        }
+      ]
+    },
+    "sleep": {
+      "facts": [
+        "F070",
+        "F069",
+        "F065",
+        "F067",
+        "F058",
+        "F059",
+        "F063",
+        "F074",
+        "F060"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Revenue compounding at 10% or more over the record",
+          "metric": "revenue_cagr_10y",
+          "op": ">=",
+          "threshold": 0.1,
+          "heuristic": true,
+          "fact": "F070",
+          "value": 0.1470029158,
+          "result": "pass"
+        },
+        {
+          "label": "Owners not diluted",
+          "metric": "diluted_shares_change_5y",
+          "op": "<=",
+          "threshold": 0.02,
+          "heuristic": true,
+          "fact": "F074",
+          "value": -0.02037329127,
+          "result": "pass"
+        }
+      ]
+    },
+    "mauboussin": {
+      "facts": [
+        "F108",
+        "F109",
+        "F110",
+        "F111",
+        "F069",
+        "F070",
+        "F072",
+        "F044",
+        "F063",
+        "F092",
+        "F090"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Expectations in the price at or below the company's own record",
+          "metric": "implied_vs_history_gap",
+          "op": "<=",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F111",
+          "value": 0.0636151575,
+          "result": "fail"
+        }
+      ]
+    },
+    "tomlee": {
+      "facts": [
+        "F083",
+        "F084",
+        "F099",
+        "F097",
+        "F075",
+        "F076",
+        "F130",
+        "F134"
+      ],
+      "missing": [],
+      "coverage": 1,
+      "evidenceCap": "strong",
+      "checks": [
+        {
+          "label": "Leading the market over 12 months",
+          "metric": "relative_strength_1y",
+          "op": ">",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F099",
+          "value": -0.08944973686,
+          "result": "fail"
+        },
+        {
+          "label": "Growth accelerating",
+          "metric": "revenue_growth_acceleration",
+          "op": ">",
+          "threshold": 0,
+          "heuristic": true,
+          "fact": "F076",
+          "value": 0.02856530567,
+          "result": "pass"
+        }
+      ]
+    }
+  },
+  "series": {
+    "price": {
+      "source": "yahoo",
+      "asOf": "2026-11-16",
+      "status": "ok",
+      "columns": [
+        "date",
+        "close",
+        "adjClose"
+      ],
+      "points": [
+        [
+          "2016-11-18",
+          60.349998474121094,
+          53.95084762573242
+        ],
+        [
+          "2016-11-25",
+          60.529998779296875,
+          54.11175537109375
+        ],
+        [
+          "2016-12-02",
+          59.25,
+          52.967491149902344
+        ],
+        [
+          "2016-12-09",
+          61.970001220703125,
+          55.399078369140625
+        ],
+        [
+          "2016-12-16",
+          62.29999923706055,
+          55.69407653808594
+        ],
+        [
+          "2016-12-23",
+          63.2400016784668,
+          56.53441619873047
+        ],
+        [
+          "2016-12-30",
+          62.13999938964844,
+          55.551048278808594
+        ],
+        [
+          "2017-01-06",
+          62.84000015258789,
+          56.17681884765625
+        ],
+        [
+          "2017-01-13",
+          62.70000076293945,
+          56.05167007446289
+        ],
+        [
+          "2017-01-20",
+          62.7400016784668,
+          56.08742904663086
+        ],
+        [
+          "2017-01-27",
+          65.77999877929688,
+          58.80509567260742
+        ],
+        [
+          "2017-02-03",
+          63.68000030517578,
+          56.927757263183594
+        ],
+        [
+          "2017-02-10",
+          64,
+          57.213829040527344
+        ],
+        [
+          "2017-02-17",
+          64.62000274658203,
+          58.11830520629883
+        ],
+        [
+          "2017-02-24",
+          64.62000274658203,
+          58.11830520629883
+        ],
+        [
+          "2017-03-03",
+          64.25,
+          57.78553009033203
+        ],
+        [
+          "2017-03-10",
+          64.93000030517578,
+          58.397117614746094
+        ],
+        [
+          "2017-03-17",
+          64.87000274658203,
+          58.3431510925293
+        ],
+        [
+          "2017-03-24",
+          64.9800033569336,
+          58.44207000732422
+        ],
+        [
+          "2017-03-31",
+          65.86000061035156,
+          59.23353576660156
+        ],
+        [
+          "2017-04-07",
+          65.68000030517578,
+          59.07163619995117
+        ],
+        [
+          "2017-04-13",
+          64.94999694824219,
+          58.41509246826172
+        ],
+        [
+          "2017-04-21",
+          66.4000015258789,
+          59.71921157836914
+        ],
+        [
+          "2017-04-28",
+          68.45999908447266,
+          61.57194137573242
+        ],
+        [
+          "2017-05-05",
+          69,
+          62.05762481689453
+        ],
+        [
+          "2017-05-12",
+          68.37999725341797,
+          61.5
+        ],
+        [
+          "2017-05-19",
+          67.69000244140625,
+          61.2283821105957
+        ],
+        [
+          "2017-05-26",
+          69.95999908447266,
+          63.281654357910156
+        ],
+        [
+          "2017-06-02",
+          71.76000213623047,
+          64.90988159179688
+        ],
+        [
+          "2017-06-09",
+          70.31999969482422,
+          63.60733413696289
+        ],
+        [
+          "2017-06-16",
+          70,
+          63.31787109375
+        ],
+        [
+          "2017-06-23",
+          71.20999908447266,
+          64.41236114501953
+        ],
+        [
+          "2017-06-30",
+          68.93000030517578,
+          62.35000228881836
+        ],
+        [
+          "2017-07-07",
+          69.45999908447266,
+          62.82939910888672
+        ],
+        [
+          "2017-07-14",
+          72.77999877929688,
+          65.83248138427734
+        ],
+        [
+          "2017-07-21",
+          73.79000091552734,
+          66.74609375
+        ],
+        [
+          "2017-07-28",
+          73.04000091552734,
+          66.06768035888672
+        ],
+        [
+          "2017-08-04",
+          72.68000030517578,
+          65.74203491210938
+        ],
+        [
+          "2017-08-11",
+          72.5,
+          65.57921600341797
+        ],
+        [
+          "2017-08-18",
+          72.48999786376953,
+          65.91950225830078
+        ],
+        [
+          "2017-08-25",
+          72.81999969482422,
+          66.21961975097656
+        ],
+        [
+          "2017-09-01",
+          73.94000244140625,
+          67.23808288574219
+        ],
+        [
+          "2017-09-08",
+          73.9800033569336,
+          67.27446746826172
+        ],
+        [
+          "2017-09-15",
+          75.30999755859375,
+          68.4839096069336
+        ],
+        [
+          "2017-09-22",
+          74.41000366210938,
+          67.6655044555664
+        ],
+        [
+          "2017-09-29",
+          74.48999786376953,
+          67.73822784423828
+        ],
+        [
+          "2017-10-06",
+          76,
+          69.11137390136719
+        ],
+        [
+          "2017-10-13",
+          77.48999786376953,
+          70.46631622314453
+        ],
+        [
+          "2017-10-20",
+          78.80999755859375,
+          71.66666412353516
+        ],
+        [
+          "2017-10-27",
+          83.80999755859375,
+          76.21346282958984
+        ],
+        [
+          "2017-11-03",
+          84.13999938964844,
+          76.51353454589844
+        ],
+        [
+          "2017-11-10",
+          83.87000274658203,
+          76.26802825927734
+        ],
+        [
+          "2017-11-17",
+          82.4000015258789,
+          75.30760192871094
+        ],
+        [
+          "2017-11-24",
+          83.26000213623047,
+          76.09357452392578
+        ],
+        [
+          "2017-12-01",
+          84.26000213623047,
+          77.00747680664062
+        ],
+        [
+          "2017-12-08",
+          84.16000366210938,
+          76.91609191894531
+        ],
+        [
+          "2017-12-15",
+          86.8499984741211,
+          79.37458038330078
+        ],
+        [
+          "2017-12-22",
+          85.51000213623047,
+          78.14990997314453
+        ],
+        [
+          "2017-12-29",
+          85.54000091552734,
+          78.17731475830078
+        ],
+        [
+          "2018-01-05",
+          88.19000244140625,
+          80.5992431640625
+        ],
+        [
+          "2018-01-12",
+          89.5999984741211,
+          81.88786315917969
+        ],
+        [
+          "2018-01-19",
+          90,
+          82.25343322753906
+        ],
+        [
+          "2018-01-26",
+          94.05999755859375,
+          85.96399688720703
+        ],
+        [
+          "2018-02-02",
+          91.77999877929688,
+          83.88023376464844
+        ],
+        [
+          "2018-02-09",
+          88.18000030517578,
+          80.59007263183594
+        ],
+        [
+          "2018-02-16",
+          92,
+          84.47624206542969
+        ],
+        [
+          "2018-02-23",
+          94.05999755859375,
+          86.3677978515625
+        ],
+        [
+          "2018-03-02",
+          93.05000305175781,
+          85.44038391113281
+        ],
+        [
+          "2018-03-09",
+          96.54000091552734,
+          88.64501953125
+        ],
+        [
+          "2018-03-16",
+          94.5999984741211,
+          86.8636245727539
+        ],
+        [
+          "2018-03-23",
+          87.18000030517578,
+          80.05040740966797
+        ],
+        [
+          "2018-03-29",
+          91.2699966430664,
+          83.80597686767578
+        ],
+        [
+          "2018-04-06",
+          90.2300033569336,
+          82.85101318359375
+        ],
+        [
+          "2018-04-13",
+          93.08000183105469,
+          85.4679183959961
+        ],
+        [
+          "2018-04-20",
+          95,
+          87.23091888427734
+        ],
+        [
+          "2018-04-27",
+          95.81999969482422,
+          87.9838638305664
+        ],
+        [
+          "2018-05-04",
+          95.16000366210938,
+          87.37786865234375
+        ],
+        [
+          "2018-05-11",
+          97.69999694824219,
+          89.71011352539062
+        ],
+        [
+          "2018-05-18",
+          96.36000061035156,
+          88.86322784423828
+        ],
+        [
+          "2018-05-25",
+          98.36000061035156,
+          90.7076187133789
+        ],
+        [
+          "2018-06-01",
+          100.79000091552734,
+          92.94855499267578
+        ],
+        [
+          "2018-06-08",
+          101.62999725341797,
+          93.72318267822266
+        ],
+        [
+          "2018-06-15",
+          100.12999725341797,
+          92.33988952636719
+        ],
+        [
+          "2018-06-22",
+          100.41000366210938,
+          92.59814453125
+        ],
+        [
+          "2018-06-29",
+          98.61000061035156,
+          90.93817138671875
+        ],
+        [
+          "2018-07-06",
+          101.16000366210938,
+          93.2897720336914
+        ],
+        [
+          "2018-07-13",
+          105.43000030517578,
+          97.22755432128906
+        ],
+        [
+          "2018-07-20",
+          106.2699966430664,
+          98.00218200683594
+        ],
+        [
+          "2018-07-27",
+          107.68000030517578,
+          99.30249786376953
+        ],
+        [
+          "2018-08-03",
+          108.04000091552734,
+          99.6344985961914
+        ],
+        [
+          "2018-08-10",
+          109,
+          100.5197982788086
+        ],
+        [
+          "2018-08-17",
+          107.58000183105469,
+          99.59208679199219
+        ],
+        [
+          "2018-08-24",
+          108.4000015258789,
+          100.3511962890625
+        ],
+        [
+          "2018-08-31",
+          112.33000183105469,
+          103.9893798828125
+        ],
+        [
+          "2018-09-07",
+          108.20999908447266,
+          100.17532348632812
+        ],
+        [
+          "2018-09-14",
+          113.37000274658203,
+          104.95217895507812
+        ],
+        [
+          "2018-09-21",
+          114.26000213623047,
+          105.77608489990234
+        ],
+        [
+          "2018-09-28",
+          114.37000274658203,
+          105.87791442871094
+        ],
+        [
+          "2018-10-05",
+          112.12999725341797,
+          103.80424499511719
+        ],
+        [
+          "2018-10-12",
+          109.56999969482422,
+          101.43431091308594
+        ],
+        [
+          "2018-10-19",
+          108.66000366210938,
+          100.59188079833984
+        ],
+        [
+          "2018-10-26",
+          106.95999908447266,
+          99.01811981201172
+        ],
+        [
+          "2018-11-02",
+          106.16000366210938,
+          98.27751159667969
+        ],
+        [
+          "2018-11-09",
+          109.56999969482422,
+          101.43431091308594
+        ],
+        [
+          "2018-11-16",
+          108.29000091552734,
+          100.68242645263672
+        ],
+        [
+          "2018-11-23",
+          103.06999969482422,
+          95.82915496826172
+        ],
+        [
+          "2018-11-30",
+          110.88999938964844,
+          103.09980010986328
+        ],
+        [
+          "2018-12-07",
+          104.81999969482422,
+          97.45623016357422
+        ],
+        [
+          "2018-12-14",
+          106.02999877929688,
+          98.5811996459961
+        ],
+        [
+          "2018-12-21",
+          98.2300033569336,
+          91.32918548583984
+        ],
+        [
+          "2018-12-28",
+          100.38999938964844,
+          93.33743286132812
+        ],
+        [
+          "2019-01-04",
+          101.93000030517578,
+          94.76922607421875
+        ],
+        [
+          "2019-01-11",
+          102.80000305175781,
+          95.5781478881836
+        ],
+        [
+          "2019-01-18",
+          107.70999908447266,
+          100.14318084716797
+        ],
+        [
+          "2019-01-25",
+          107.16999816894531,
+          99.64112854003906
+        ],
+        [
+          "2019-02-01",
+          102.77999877929688,
+          95.55951690673828
+        ],
+        [
+          "2019-02-08",
+          105.66999816894531,
+          98.24650573730469
+        ],
+        [
+          "2019-02-15",
+          108.22000122070312,
+          100.61735534667969
+        ],
+        [
+          "2019-02-22",
+          110.97000122070312,
+          103.61477661132812
+        ],
+        [
+          "2019-03-01",
+          112.52999877929688,
+          105.07139587402344
+        ],
+        [
+          "2019-03-08",
+          110.51000213623047,
+          103.1852798461914
+        ],
+        [
+          "2019-03-15",
+          115.91000366210938,
+          108.2273941040039
+        ],
+        [
+          "2019-03-22",
+          117.05000305175781,
+          109.29181671142578
+        ],
+        [
+          "2019-03-29",
+          117.94000244140625,
+          110.12284851074219
+        ],
+        [
+          "2019-04-05",
+          119.88999938964844,
+          111.9435806274414
+        ],
+        [
+          "2019-04-12",
+          120.94999694824219,
+          112.93331146240234
+        ],
+        [
+          "2019-04-18",
+          123.37000274658203,
+          115.19291687011719
+        ],
+        [
+          "2019-04-26",
+          129.88999938964844,
+          121.28075408935547
+        ],
+        [
+          "2019-05-03",
+          128.89999389648438,
+          120.35639190673828
+        ],
+        [
+          "2019-05-10",
+          127.12999725341797,
+          118.70368957519531
+        ],
+        [
+          "2019-05-17",
+          128.07000732421875,
+          120.02405548095703
+        ],
+        [
+          "2019-05-24",
+          126.23999786376953,
+          118.30899047851562
+        ],
+        [
+          "2019-05-31",
+          123.68000030517578,
+          115.90983581542969
+        ],
+        [
+          "2019-06-07",
+          131.39999389648438,
+          123.14484405517578
+        ],
+        [
+          "2019-06-14",
+          132.4499969482422,
+          124.12885284423828
+        ],
+        [
+          "2019-06-21",
+          136.97000122070312,
+          128.36488342285156
+        ],
+        [
+          "2019-06-28",
+          133.9600067138672,
+          125.54399871826172
+        ],
+        [
+          "2019-07-05",
+          137.05999755859375,
+          128.4492645263672
+        ],
+        [
+          "2019-07-12",
+          138.89999389648438,
+          130.17367553710938
+        ],
+        [
+          "2019-07-19",
+          136.6199951171875,
+          128.03688049316406
+        ],
+        [
+          "2019-07-26",
+          141.33999633789062,
+          132.4603729248047
+        ],
+        [
+          "2019-08-02",
+          136.89999389648438,
+          128.29931640625
+        ],
+        [
+          "2019-08-09",
+          137.7100067138672,
+          129.05836486816406
+        ],
+        [
+          "2019-08-16",
+          136.1300048828125,
+          128.0024871826172
+        ],
+        [
+          "2019-08-23",
+          133.38999938964844,
+          125.42607116699219
+        ],
+        [
+          "2019-08-30",
+          137.86000061035156,
+          129.6292266845703
+        ],
+        [
+          "2019-09-06",
+          139.10000610351562,
+          130.7952117919922
+        ],
+        [
+          "2019-09-13",
+          137.32000732421875,
+          129.12142944335938
+        ],
+        [
+          "2019-09-20",
+          139.44000244140625,
+          131.1148681640625
+        ],
+        [
+          "2019-09-27",
+          137.72999572753906,
+          129.50698852539062
+        ],
+        [
+          "2019-10-04",
+          138.1199951171875,
+          129.87368774414062
+        ],
+        [
+          "2019-10-11",
+          139.67999267578125,
+          131.34054565429688
+        ],
+        [
+          "2019-10-18",
+          137.41000366210938,
+          129.20608520507812
+        ],
+        [
+          "2019-10-25",
+          140.72999572753906,
+          132.32789611816406
+        ],
+        [
+          "2019-11-01",
+          143.72000122070312,
+          135.1393585205078
+        ],
+        [
+          "2019-11-08",
+          145.9600067138672,
+          137.2456512451172
+        ],
+        [
+          "2019-11-15",
+          149.97000122070312,
+          141.01617431640625
+        ],
+        [
+          "2019-11-22",
+          149.58999633789062,
+          141.13748168945312
+        ],
+        [
+          "2019-11-29",
+          151.3800048828125,
+          142.82640075683594
+        ],
+        [
+          "2019-12-06",
+          151.75,
+          143.17547607421875
+        ],
+        [
+          "2019-12-13",
+          154.52999877929688,
+          145.7983856201172
+        ],
+        [
+          "2019-12-20",
+          157.41000366210938,
+          148.5156707763672
+        ],
+        [
+          "2019-12-27",
+          158.9600067138672,
+          149.9780731201172
+        ],
+        [
+          "2020-01-03",
+          158.6199951171875,
+          149.65728759765625
+        ],
+        [
+          "2020-01-10",
+          161.33999633789062,
+          152.2235565185547
+        ],
+        [
+          "2020-01-17",
+          167.10000610351562,
+          157.65809631347656
+        ],
+        [
+          "2020-01-24",
+          165.0399932861328,
+          155.71453857421875
+        ],
+        [
+          "2020-01-31",
+          170.22999572753906,
+          160.61123657226562
+        ],
+        [
+          "2020-02-07",
+          183.88999938964844,
+          173.49937438964844
+        ],
+        [
+          "2020-02-14",
+          185.35000610351562,
+          174.87692260742188
+        ],
+        [
+          "2020-02-21",
+          178.58999633789062,
+          168.95907592773438
+        ],
+        [
+          "2020-02-28",
+          162.00999450683594,
+          153.2732696533203
+        ],
+        [
+          "2020-03-06",
+          161.57000732421875,
+          152.8569793701172
+        ],
+        [
+          "2020-03-13",
+          158.8300018310547,
+          150.26470947265625
+        ],
+        [
+          "2020-03-20",
+          137.35000610351562,
+          129.9430694580078
+        ],
+        [
+          "2020-03-27",
+          149.6999969482422,
+          141.62709045410156
+        ],
+        [
+          "2020-04-03",
+          153.8300018310547,
+          145.53436279296875
+        ],
+        [
+          "2020-04-09",
+          165.13999938964844,
+          156.2344207763672
+        ],
+        [
+          "2020-04-17",
+          178.60000610351562,
+          168.96853637695312
+        ],
+        [
+          "2020-04-24",
+          174.5500030517578,
+          165.13699340820312
+        ],
+        [
+          "2020-05-01",
+          174.57000732421875,
+          165.15589904785156
+        ],
+        [
+          "2020-05-08",
+          184.67999267578125,
+          174.72067260742188
+        ],
+        [
+          "2020-05-15",
+          183.16000366210938,
+          173.28268432617188
+        ],
+        [
+          "2020-05-22",
+          183.50999450683594,
+          174.09727478027344
+        ],
+        [
+          "2020-05-29",
+          183.25,
+          173.8506622314453
+        ],
+        [
+          "2020-06-05",
+          187.1999969482422,
+          177.59803771972656
+        ],
+        [
+          "2020-06-12",
+          187.74000549316406,
+          178.11036682128906
+        ],
+        [
+          "2020-06-19",
+          195.14999389648438,
+          185.14027404785156
+        ],
+        [
+          "2020-06-26",
+          196.3300018310547,
+          186.25973510742188
+        ],
+        [
+          "2020-07-02",
+          206.25999450683594,
+          195.68038940429688
+        ],
+        [
+          "2020-07-10",
+          213.6699981689453,
+          202.71034240722656
+        ],
+        [
+          "2020-07-17",
+          202.8800048828125,
+          192.47381591796875
+        ],
+        [
+          "2020-07-24",
+          201.3000030517578,
+          190.97482299804688
+        ],
+        [
+          "2020-07-31",
+          205.00999450683594,
+          194.49452209472656
+        ],
+        [
+          "2020-08-07",
+          212.47999572753906,
+          201.58139038085938
+        ],
+        [
+          "2020-08-14",
+          208.89999389648438,
+          198.18496704101562
+        ],
+        [
+          "2020-08-21",
+          213.02000427246094,
+          202.58218383789062
+        ],
+        [
+          "2020-08-28",
+          228.91000366210938,
+          217.69361877441406
+        ],
+        [
+          "2020-09-04",
+          214.25,
+          203.75193786621094
+        ],
+        [
+          "2020-09-11",
+          204.02999877929688,
+          194.03268432617188
+        ],
+        [
+          "2020-09-18",
+          200.38999938964844,
+          190.5710906982422
+        ],
+        [
+          "2020-09-25",
+          207.82000732421875,
+          197.63702392578125
+        ],
+        [
+          "2020-10-02",
+          206.19000244140625,
+          196.08688354492188
+        ],
+        [
+          "2020-10-09",
+          215.80999755859375,
+          205.23553466796875
+        ],
+        [
+          "2020-10-16",
+          219.66000366210938,
+          208.8968505859375
+        ],
+        [
+          "2020-10-23",
+          216.22999572753906,
+          205.6348876953125
+        ],
+        [
+          "2020-10-30",
+          202.47000122070312,
+          192.54916381835938
+        ],
+        [
+          "2020-11-06",
+          223.72000122070312,
+          212.75791931152344
+        ],
+        [
+          "2020-11-13",
+          216.50999450683594,
+          205.9011993408203
+        ],
+        [
+          "2020-11-20",
+          210.38999938964844,
+          200.60488891601562
+        ],
+        [
+          "2020-11-27",
+          215.22999572753906,
+          205.2197723388672
+        ],
+        [
+          "2020-12-04",
+          214.36000061035156,
+          204.39024353027344
+        ],
+        [
+          "2020-12-11",
+          213.25999450683594,
+          203.3414306640625
+        ],
+        [
+          "2020-12-18",
+          218.58999633789062,
+          208.42352294921875
+        ],
+        [
+          "2020-12-24",
+          222.75,
+          212.39004516601562
+        ],
+        [
+          "2020-12-31",
+          222.4199981689453,
+          212.07537841796875
+        ],
+        [
+          "2021-01-08",
+          219.6199951171875,
+          209.40560913085938
+        ],
+        [
+          "2021-01-15",
+          212.64999389648438,
+          202.75978088378906
+        ],
+        [
+          "2021-01-22",
+          225.9499969482422,
+          215.4412078857422
+        ],
+        [
+          "2021-01-29",
+          231.9600067138672,
+          221.17173767089844
+        ],
+        [
+          "2021-02-05",
+          242.1999969482422,
+          230.93544006347656
+        ],
+        [
+          "2021-02-12",
+          244.99000549316406,
+          233.59568786621094
+        ],
+        [
+          "2021-02-19",
+          240.97000122070312,
+          230.2918243408203
+        ],
+        [
+          "2021-02-26",
+          232.3800048828125,
+          222.08248901367188
+        ],
+        [
+          "2021-03-05",
+          231.60000610351562,
+          221.3370361328125
+        ],
+        [
+          "2021-03-12",
+          235.75,
+          225.3031768798828
+        ],
+        [
+          "2021-03-19",
+          230.35000610351562,
+          220.1424102783203
+        ],
+        [
+          "2021-03-26",
+          236.47999572753906,
+          226.0008087158203
+        ],
+        [
+          "2021-04-01",
+          242.35000610351562,
+          231.61068725585938
+        ],
+        [
+          "2021-04-09",
+          255.85000610351562,
+          244.51242065429688
+        ],
+        [
+          "2021-04-16",
+          260.739990234375,
+          249.185791015625
+        ],
+        [
+          "2021-04-23",
+          261.1499938964844,
+          249.5775604248047
+        ],
+        [
+          "2021-04-30",
+          252.17999267578125,
+          241.0050506591797
+        ],
+        [
+          "2021-05-07",
+          252.4600067138672,
+          241.2726593017578
+        ],
+        [
+          "2021-05-14",
+          248.14999389648438,
+          237.15365600585938
+        ],
+        [
+          "2021-05-21",
+          245.1699981689453,
+          234.84677124023438
+        ],
+        [
+          "2021-05-28",
+          249.67999267578125,
+          239.1668701171875
+        ],
+        [
+          "2021-06-04",
+          250.7899932861328,
+          240.23007202148438
+        ],
+        [
+          "2021-06-11",
+          257.8900146484375,
+          247.03118896484375
+        ],
+        [
+          "2021-06-18",
+          259.42999267578125,
+          248.50633239746094
+        ],
+        [
+          "2021-06-25",
+          265.0199890136719,
+          253.86090087890625
+        ],
+        [
+          "2021-07-02",
+          277.6499938964844,
+          265.9591369628906
+        ],
+        [
+          "2021-07-09",
+          277.94000244140625,
+          266.2369384765625
+        ],
+        [
+          "2021-07-16",
+          280.75,
+          268.92864990234375
+        ],
+        [
+          "2021-07-23",
+          289.6700134277344,
+          277.4730529785156
+        ],
+        [
+          "2021-07-30",
+          284.9100036621094,
+          272.9135437011719
+        ],
+        [
+          "2021-08-06",
+          289.4599914550781,
+          277.2718505859375
+        ],
+        [
+          "2021-08-13",
+          292.8500061035156,
+          280.5190734863281
+        ],
+        [
+          "2021-08-20",
+          304.3599853515625,
+          292.1025695800781
+        ],
+        [
+          "2021-08-27",
+          299.7200012207031,
+          287.6494445800781
+        ],
+        [
+          "2021-09-03",
+          301.1400146484375,
+          289.0122375488281
+        ],
+        [
+          "2021-09-10",
+          295.7099914550781,
+          283.8009338378906
+        ],
+        [
+          "2021-09-17",
+          299.8699951171875,
+          287.79345703125
+        ],
+        [
+          "2021-09-24",
+          299.3500061035156,
+          287.2944030761719
+        ],
+        [
+          "2021-10-01",
+          289.1000061035156,
+          277.4571533203125
+        ],
+        [
+          "2021-10-08",
+          294.8500061035156,
+          282.9755554199219
+        ],
+        [
+          "2021-10-15",
+          304.2099914550781,
+          291.9586181640625
+        ],
+        [
+          "2021-10-22",
+          309.1600036621094,
+          296.7091979980469
+        ],
+        [
+          "2021-10-29",
+          331.6199951171875,
+          318.2647705078125
+        ],
+        [
+          "2021-11-05",
+          336.05999755859375,
+          322.5260009765625
+        ],
+        [
+          "2021-11-12",
+          336.7200012207031,
+          323.15936279296875
+        ],
+        [
+          "2021-11-19",
+          343.1099853515625,
+          329.8945007324219
+        ],
+        [
+          "2021-11-26",
+          329.67999267578125,
+          316.9817199707031
+        ],
+        [
+          "2021-12-03",
+          323.010009765625,
+          310.5686950683594
+        ],
+        [
+          "2021-12-10",
+          342.5400085449219,
+          329.3464050292969
+        ],
+        [
+          "2021-12-17",
+          323.79998779296875,
+          311.32818603515625
+        ],
+        [
+          "2021-12-23",
+          334.69000244140625,
+          321.798828125
+        ],
+        [
+          "2021-12-31",
+          336.32000732421875,
+          323.36602783203125
+        ],
+        [
+          "2022-01-07",
+          314.0400085449219,
+          301.9441833496094
+        ],
+        [
+          "2022-01-14",
+          310.20001220703125,
+          298.2521057128906
+        ],
+        [
+          "2022-01-21",
+          296.0299987792969,
+          284.6278381347656
+        ],
+        [
+          "2022-01-28",
+          308.260009765625,
+          296.38677978515625
+        ],
+        [
+          "2022-02-04",
+          305.94000244140625,
+          294.15618896484375
+        ],
+        [
+          "2022-02-11",
+          295.0400085449219,
+          283.6759948730469
+        ],
+        [
+          "2022-02-18",
+          287.92999267578125,
+          277.4122314453125
+        ],
+        [
+          "2022-02-25",
+          297.30999755859375,
+          286.4496154785156
+        ],
+        [
+          "2022-03-04",
+          289.8599853515625,
+          279.2717590332031
+        ],
+        [
+          "2022-03-11",
+          280.07000732421875,
+          269.83941650390625
+        ],
+        [
+          "2022-03-18",
+          300.42999267578125,
+          289.45562744140625
+        ],
+        [
+          "2022-03-25",
+          303.67999267578125,
+          292.5869445800781
+        ],
+        [
+          "2022-04-01",
+          309.4200134277344,
+          298.11724853515625
+        ],
+        [
+          "2022-04-08",
+          296.9700012207031,
+          286.1220703125
+        ],
+        [
+          "2022-04-14",
+          279.8299865722656,
+          269.608154296875
+        ],
+        [
+          "2022-04-22",
+          274.0299987792969,
+          264.0199890136719
+        ],
+        [
+          "2022-04-29",
+          277.5199890136719,
+          267.3825378417969
+        ],
+        [
+          "2022-05-06",
+          274.7300109863281,
+          264.6944274902344
+        ],
+        [
+          "2022-05-13",
+          261.1199951171875,
+          251.5815887451172
+        ],
+        [
+          "2022-05-20",
+          252.55999755859375,
+          243.90103149414062
+        ],
+        [
+          "2022-05-27",
+          273.239990234375,
+          263.8720397949219
+        ],
+        [
+          "2022-06-03",
+          270.0199890136719,
+          260.76239013671875
+        ],
+        [
+          "2022-06-10",
+          252.99000549316406,
+          244.3162841796875
+        ],
+        [
+          "2022-06-17",
+          247.64999389648438,
+          239.15936279296875
+        ],
+        [
+          "2022-06-24",
+          267.70001220703125,
+          258.52197265625
+        ],
+        [
+          "2022-07-01",
+          259.5799865722656,
+          250.6803436279297
+        ],
+        [
+          "2022-07-08",
+          267.6600036621094,
+          258.4833679199219
+        ],
+        [
+          "2022-07-15",
+          256.7200012207031,
+          247.9184112548828
+        ],
+        [
+          "2022-07-22",
+          260.3599853515625,
+          251.43360900878906
+        ],
+        [
+          "2022-07-29",
+          280.739990234375,
+          271.1148681640625
+        ],
+        [
+          "2022-08-05",
+          282.9100036621094,
+          273.2104797363281
+        ],
+        [
+          "2022-08-12",
+          291.9100036621094,
+          281.90191650390625
+        ],
+        [
+          "2022-08-19",
+          286.1499938964844,
+          276.9259033203125
+        ],
+        [
+          "2022-08-26",
+          268.0899963378906,
+          259.4480895996094
+        ],
+        [
+          "2022-09-02",
+          256.05999755859375,
+          247.80593872070312
+        ],
+        [
+          "2022-09-09",
+          264.4599914550781,
+          255.93511962890625
+        ],
+        [
+          "2022-09-16",
+          244.74000549316406,
+          236.85084533691406
+        ],
+        [
+          "2022-09-23",
+          237.9199981689453,
+          230.2506561279297
+        ],
+        [
+          "2022-09-30",
+          232.89999389648438,
+          225.3924560546875
+        ],
+        [
+          "2022-10-07",
+          234.24000549316406,
+          226.68927001953125
+        ],
+        [
+          "2022-10-14",
+          228.55999755859375,
+          221.19236755371094
+        ],
+        [
+          "2022-10-21",
+          242.1199951171875,
+          234.31524658203125
+        ],
+        [
+          "2022-10-28",
+          235.8699951171875,
+          228.26673889160156
+        ],
+        [
+          "2022-11-04",
+          221.38999938964844,
+          214.25350952148438
+        ],
+        [
+          "2022-11-11",
+          247.11000061035156,
+          239.14442443847656
+        ],
+        [
+          "2022-11-18",
+          241.22000122070312,
+          234.10214233398438
+        ],
+        [
+          "2022-11-25",
+          247.49000549316406,
+          240.1871337890625
+        ],
+        [
+          "2022-12-02",
+          255.02000427246094,
+          247.4949493408203
+        ],
+        [
+          "2022-12-09",
+          245.4199981689453,
+          238.17825317382812
+        ],
+        [
+          "2022-12-16",
+          244.69000244140625,
+          237.4697723388672
+        ],
+        [
+          "2022-12-23",
+          238.72999572753906,
+          231.68565368652344
+        ],
+        [
+          "2022-12-30",
+          239.82000732421875,
+          232.74349975585938
+        ],
+        [
+          "2023-01-06",
+          224.92999267578125,
+          218.2928466796875
+        ],
+        [
+          "2023-01-13",
+          239.22999572753906,
+          232.1708984375
+        ],
+        [
+          "2023-01-20",
+          240.22000122070312,
+          233.13168334960938
+        ],
+        [
+          "2023-01-27",
+          248.16000366210938,
+          240.8373565673828
+        ],
+        [
+          "2023-02-03",
+          258.3500061035156,
+          250.7267303466797
+        ],
+        [
+          "2023-02-10",
+          263.1000061035156,
+          255.33653259277344
+        ],
+        [
+          "2023-02-17",
+          258.05999755859375,
+          251.0725555419922
+        ],
+        [
+          "2023-02-24",
+          249.22000122070312,
+          242.471923828125
+        ],
+        [
+          "2023-03-03",
+          255.2899932861328,
+          248.3775634765625
+        ],
+        [
+          "2023-03-10",
+          248.58999633789062,
+          241.8589630126953
+        ],
+        [
+          "2023-03-17",
+          279.42999267578125,
+          271.8638610839844
+        ],
+        [
+          "2023-03-24",
+          280.57000732421875,
+          272.9730529785156
+        ],
+        [
+          "2023-03-31",
+          288.29998779296875,
+          280.4937438964844
+        ],
+        [
+          "2023-04-06",
+          291.6000061035156,
+          283.704345703125
+        ],
+        [
+          "2023-04-14",
+          286.1400146484375,
+          278.39227294921875
+        ],
+        [
+          "2023-04-21",
+          285.760009765625,
+          278.0225524902344
+        ],
+        [
+          "2023-04-28",
+          307.260009765625,
+          298.9403991699219
+        ],
+        [
+          "2023-05-05",
+          310.6499938964844,
+          302.2386169433594
+        ],
+        [
+          "2023-05-12",
+          308.9700012207031,
+          300.6040954589844
+        ],
+        [
+          "2023-05-19",
+          318.3399963378906,
+          310.3974304199219
+        ],
+        [
+          "2023-05-26",
+          332.8900146484375,
+          324.58441162109375
+        ],
+        [
+          "2023-06-02",
+          335.3999938964844,
+          327.0317687988281
+        ],
+        [
+          "2023-06-09",
+          326.7900085449219,
+          318.6365661621094
+        ],
+        [
+          "2023-06-16",
+          342.3299865722656,
+          333.78887939453125
+        ],
+        [
+          "2023-06-23",
+          335.0199890136719,
+          326.6612548828125
+        ],
+        [
+          "2023-06-30",
+          340.5400085449219,
+          332.0435791015625
+        ],
+        [
+          "2023-07-07",
+          337.2200012207031,
+          328.8063659667969
+        ],
+        [
+          "2023-07-14",
+          345.239990234375,
+          336.6262512207031
+        ],
+        [
+          "2023-07-21",
+          343.7699890136719,
+          335.19287109375
+        ],
+        [
+          "2023-07-28",
+          338.3699951171875,
+          329.9277038574219
+        ],
+        [
+          "2023-08-04",
+          327.7799987792969,
+          319.6018981933594
+        ],
+        [
+          "2023-08-11",
+          321.010009765625,
+          313.0008239746094
+        ],
+        [
+          "2023-08-18",
+          316.4800109863281,
+          309.23712158203125
+        ],
+        [
+          "2023-08-25",
+          322.9800109863281,
+          315.58843994140625
+        ],
+        [
+          "2023-09-01",
+          328.6600036621094,
+          321.13848876953125
+        ],
+        [
+          "2023-09-08",
+          334.2699890136719,
+          326.6200256347656
+        ],
+        [
+          "2023-09-15",
+          330.2200012207031,
+          322.6627197265625
+        ],
+        [
+          "2023-09-22",
+          317.010009765625,
+          309.7550354003906
+        ],
+        [
+          "2023-09-29",
+          315.75,
+          308.5238952636719
+        ],
+        [
+          "2023-10-06",
+          327.260009765625,
+          319.7704772949219
+        ],
+        [
+          "2023-10-13",
+          327.7300109863281,
+          320.2297058105469
+        ],
+        [
+          "2023-10-20",
+          326.6700134277344,
+          319.1939697265625
+        ],
+        [
+          "2023-10-27",
+          329.80999755859375,
+          322.2621154785156
+        ],
+        [
+          "2023-11-03",
+          352.79998779296875,
+          344.7259521484375
+        ],
+        [
+          "2023-11-10",
+          369.6700134277344,
+          361.2099304199219
+        ],
+        [
+          "2023-11-17",
+          369.8500061035156,
+          362.1192321777344
+        ],
+        [
+          "2023-11-24",
+          377.42999267578125,
+          369.5408020019531
+        ],
+        [
+          "2023-12-01",
+          374.510009765625,
+          366.6818542480469
+        ],
+        [
+          "2023-12-08",
+          374.2300109863281,
+          366.40771484375
+        ],
+        [
+          "2023-12-15",
+          370.7300109863281,
+          362.9808654785156
+        ],
+        [
+          "2023-12-22",
+          374.5799865722656,
+          366.7503662109375
+        ],
+        [
+          "2023-12-29",
+          376.0400085449219,
+          368.1799011230469
+        ],
+        [
+          "2024-01-05",
+          367.75,
+          360.0631408691406
+        ],
+        [
+          "2024-01-12",
+          388.4700012207031,
+          380.3500061035156
+        ],
+        [
+          "2024-01-19",
+          398.6700134277344,
+          390.3368835449219
+        ],
+        [
+          "2024-01-26",
+          403.92999267578125,
+          395.4869079589844
+        ],
+        [
+          "2024-02-02",
+          411.2200012207031,
+          402.62451171875
+        ],
+        [
+          "2024-02-09",
+          420.54998779296875,
+          411.7594909667969
+        ],
+        [
+          "2024-02-16",
+          404.05999755859375,
+          396.34576416015625
+        ],
+        [
+          "2024-02-23",
+          410.3399963378906,
+          402.505859375
+        ],
+        [
+          "2024-03-01",
+          415.5,
+          407.56732177734375
+        ],
+        [
+          "2024-03-08",
+          406.2200012207031,
+          398.46453857421875
+        ],
+        [
+          "2024-03-15",
+          416.4200134277344,
+          408.4698181152344
+        ],
+        [
+          "2024-03-22",
+          428.739990234375,
+          420.5545349121094
+        ],
+        [
+          "2024-03-28",
+          420.7200012207031,
+          412.687744140625
+        ],
+        [
+          "2024-04-05",
+          425.5199890136719,
+          417.39605712890625
+        ],
+        [
+          "2024-04-12",
+          421.8999938964844,
+          413.8451843261719
+        ],
+        [
+          "2024-04-19",
+          399.1199951171875,
+          391.5001525878906
+        ],
+        [
+          "2024-04-26",
+          406.32000732421875,
+          398.5626220703125
+        ],
+        [
+          "2024-05-03",
+          406.6600036621094,
+          398.8961181640625
+        ],
+        [
+          "2024-05-10",
+          414.739990234375,
+          406.8218994140625
+        ],
+        [
+          "2024-05-17",
+          420.2099914550781,
+          412.930908203125
+        ],
+        [
+          "2024-05-24",
+          430.1600036621094,
+          422.70855712890625
+        ],
+        [
+          "2024-05-31",
+          415.1300048828125,
+          407.93890380859375
+        ],
+        [
+          "2024-06-07",
+          423.8500061035156,
+          416.50787353515625
+        ],
+        [
+          "2024-06-14",
+          442.57000732421875,
+          434.9035949707031
+        ],
+        [
+          "2024-06-21",
+          449.7799987792969,
+          441.9886779785156
+        ],
+        [
+          "2024-06-28",
+          446.95001220703125,
+          439.20770263671875
+        ],
+        [
+          "2024-07-05",
+          467.55999755859375,
+          459.460693359375
+        ],
+        [
+          "2024-07-12",
+          453.54998779296875,
+          445.6933898925781
+        ],
+        [
+          "2024-07-19",
+          437.1099853515625,
+          429.53814697265625
+        ],
+        [
+          "2024-07-26",
+          425.2699890136719,
+          417.90325927734375
+        ],
+        [
+          "2024-08-02",
+          408.489990234375,
+          401.41387939453125
+        ],
+        [
+          "2024-08-09",
+          406.0199890136719,
+          398.9866943359375
+        ],
+        [
+          "2024-08-16",
+          418.4700012207031,
+          411.96221923828125
+        ],
+        [
+          "2024-08-23",
+          416.7900085449219,
+          410.30841064453125
+        ],
+        [
+          "2024-08-30",
+          417.1400146484375,
+          410.6529541015625
+        ],
+        [
+          "2024-09-06",
+          401.70001220703125,
+          395.4530334472656
+        ],
+        [
+          "2024-09-13",
+          430.5899963378906,
+          423.8937683105469
+        ],
+        [
+          "2024-09-20",
+          435.2699890136719,
+          428.5009765625
+        ],
+        [
+          "2024-09-27",
+          428.0199890136719,
+          421.36370849609375
+        ],
+        [
+          "2024-10-04",
+          416.05999755859375,
+          409.5897216796875
+        ],
+        [
+          "2024-10-11",
+          416.32000732421875,
+          409.845703125
+        ],
+        [
+          "2024-10-18",
+          418.1600036621094,
+          411.6570739746094
+        ],
+        [
+          "2024-10-25",
+          428.1499938964844,
+          421.4916687011719
+        ],
+        [
+          "2024-11-01",
+          410.3699951171875,
+          403.9881896972656
+        ],
+        [
+          "2024-11-08",
+          422.5400085449219,
+          415.9689636230469
+        ],
+        [
+          "2024-11-15",
+          415,
+          408.5461730957031
+        ],
+        [
+          "2024-11-22",
+          417,
+          411.3367919921875
+        ],
+        [
+          "2024-11-29",
+          423.4599914550781,
+          417.70904541015625
+        ],
+        [
+          "2024-12-06",
+          443.57000732421875,
+          437.5459899902344
+        ],
+        [
+          "2024-12-13",
+          447.2699890136719,
+          441.1956787109375
+        ],
+        [
+          "2024-12-20",
+          436.6000061035156,
+          430.6706848144531
+        ],
+        [
+          "2024-12-27",
+          430.5299987792969,
+          424.6830139160156
+        ],
+        [
+          "2025-01-03",
+          423.3500061035156,
+          417.6005554199219
+        ],
+        [
+          "2025-01-10",
+          418.95001220703125,
+          413.2603454589844
+        ],
+        [
+          "2025-01-17",
+          429.0299987792969,
+          423.20343017578125
+        ],
+        [
+          "2025-01-24",
+          444.05999755859375,
+          438.029296875
+        ],
+        [
+          "2025-01-31",
+          415.05999755859375,
+          409.4231872558594
+        ],
+        [
+          "2025-02-07",
+          409.75,
+          404.1852722167969
+        ],
+        [
+          "2025-02-14",
+          408.42999267578125,
+          402.8832092285156
+        ],
+        [
+          "2025-02-21",
+          408.2099914550781,
+          403.4735412597656
+        ],
+        [
+          "2025-02-28",
+          396.989990234375,
+          392.3837585449219
+        ],
+        [
+          "2025-03-07",
+          393.30999755859375,
+          388.7464599609375
+        ],
+        [
+          "2025-03-14",
+          388.55999755859375,
+          384.05157470703125
+        ],
+        [
+          "2025-03-21",
+          391.260009765625,
+          386.72027587890625
+        ],
+        [
+          "2025-03-28",
+          378.79998779296875,
+          374.4048156738281
+        ],
+        [
+          "2025-04-04",
+          359.8399963378906,
+          355.664794921875
+        ],
+        [
+          "2025-04-11",
+          388.45001220703125,
+          383.94287109375
+        ],
+        [
+          "2025-04-17",
+          367.7799987792969,
+          363.5126647949219
+        ],
+        [
+          "2025-04-25",
+          391.8500061035156,
+          387.30340576171875
+        ],
+        [
+          "2025-05-02",
+          435.2799987792969,
+          430.2295227050781
+        ],
+        [
+          "2025-05-09",
+          438.7300109863281,
+          433.6394348144531
+        ],
+        [
+          "2025-05-16",
+          454.2699890136719,
+          449.82342529296875
+        ],
+        [
+          "2025-05-23",
+          450.17999267578125,
+          445.7734680175781
+        ],
+        [
+          "2025-05-30",
+          460.3599853515625,
+          455.85382080078125
+        ],
+        [
+          "2025-06-06",
+          470.3800048828125,
+          465.7757263183594
+        ],
+        [
+          "2025-06-13",
+          474.9599914550781,
+          470.3109130859375
+        ],
+        [
+          "2025-06-20",
+          477.3999938964844,
+          472.7270202636719
+        ],
+        [
+          "2025-06-27",
+          495.94000244140625,
+          491.0855407714844
+        ],
+        [
+          "2025-07-03",
+          498.8399963378906,
+          493.9571838378906
+        ],
+        [
+          "2025-07-11",
+          503.32000732421875,
+          498.393310546875
+        ],
+        [
+          "2025-07-18",
+          510.04998779296875,
+          505.05743408203125
+        ],
+        [
+          "2025-07-25",
+          513.7100219726562,
+          508.6816711425781
+        ],
+        [
+          "2025-08-01",
+          524.1099853515625,
+          518.9797973632812
+        ],
+        [
+          "2025-08-08",
+          522.0399780273438,
+          516.9300537109375
+        ],
+        [
+          "2025-08-15",
+          520.1699829101562,
+          515.0783081054688
+        ],
+        [
+          "2025-08-22",
+          507.2300109863281,
+          503.0907287597656
+        ],
+        [
+          "2025-08-29",
+          506.69000244140625,
+          502.5551452636719
+        ],
+        [
+          "2025-09-05",
+          495,
+          490.96051025390625
+        ],
+        [
+          "2025-09-12",
+          509.8999938964844,
+          505.73895263671875
+        ],
+        [
+          "2025-09-19",
+          517.9299926757812,
+          513.7034912109375
+        ],
+        [
+          "2025-09-26",
+          511.4599914550781,
+          507.28619384765625
+        ],
+        [
+          "2025-10-03",
+          517.3499755859375,
+          513.1280517578125
+        ],
+        [
+          "2025-10-10",
+          510.9599914550781,
+          506.790283203125
+        ],
+        [
+          "2025-10-17",
+          513.5800170898438,
+          509.3889465332031
+        ],
+        [
+          "2025-10-24",
+          523.6099853515625,
+          519.3369750976562
+        ],
+        [
+          "2025-10-31",
+          517.8099975585938,
+          513.5843505859375
+        ],
+        [
+          "2025-11-07",
+          496.82000732421875,
+          492.76568603515625
+        ],
+        [
+          "2025-11-14",
+          510.17999267578125,
+          506.01666259765625
+        ],
+        [
+          "2025-11-21",
+          472.1199951171875,
+          469.1436462402344
+        ],
+        [
+          "2025-11-28",
+          492.010009765625,
+          488.9082946777344
+        ],
+        [
+          "2025-12-05",
+          483.1600036621094,
+          480.11407470703125
+        ],
+        [
+          "2025-12-12",
+          478.5299987792969,
+          475.51324462890625
+        ],
+        [
+          "2025-12-19",
+          485.9200134277344,
+          482.8566589355469
+        ],
+        [
+          "2025-12-26",
+          487.7099914550781,
+          484.6353454589844
+        ],
+        [
+          "2026-01-02",
+          472.94000244140625,
+          469.95849609375
+        ],
+        [
+          "2026-01-09",
+          479.2799987792969,
+          476.2585144042969
+        ],
+        [
+          "2026-01-16",
+          459.8599853515625,
+          456.9609069824219
+        ],
+        [
+          "2026-01-23",
+          465.95001220703125,
+          463.0125732421875
+        ],
+        [
+          "2026-01-30",
+          430.2900085449219,
+          427.577392578125
+        ],
+        [
+          "2026-02-06",
+          401.1400146484375,
+          398.61114501953125
+        ],
+        [
+          "2026-02-13",
+          401.32000732421875,
+          398.7900085449219
+        ],
+        [
+          "2026-02-20",
+          397.2300109863281,
+          395.6267395019531
+        ],
+        [
+          "2026-02-27",
+          392.739990234375,
+          391.15484619140625
+        ],
+        [
+          "2026-03-06",
+          408.9599914550781,
+          407.30938720703125
+        ],
+        [
+          "2026-03-13",
+          395.54998779296875,
+          393.9534912109375
+        ],
+        [
+          "2026-03-20",
+          381.8699951171875,
+          380.3287353515625
+        ],
+        [
+          "2026-03-27",
+          356.7699890136719,
+          355.33001708984375
+        ],
+        [
+          "2026-04-02",
+          373.4599914550781,
+          371.9526672363281
+        ],
+        [
+          "2026-04-10",
+          370.8699951171875,
+          369.3731384277344
+        ],
+        [
+          "2026-04-17",
+          422.7900085449219,
+          421.0835876464844
+        ],
+        [
+          "2026-04-24",
+          424.6199951171875,
+          422.90618896484375
+        ],
+        [
+          "2026-05-01",
+          414.44000244140625,
+          412.76727294921875
+        ],
+        [
+          "2026-05-08",
+          415.1199951171875,
+          413.44451904296875
+        ],
+        [
+          "2026-05-15",
+          421.9200134277344,
+          420.2170715332031
+        ],
+        [
+          "2026-05-22",
+          418.57000732421875,
+          417.7835388183594
+        ],
+        [
+          "2026-05-29",
+          450.239990234375,
+          449.3940124511719
+        ],
+        [
+          "2026-06-05",
+          416.6700134277344,
+          415.8870849609375
+        ],
+        [
+          "2026-06-12",
+          390.739990234375,
+          390.00579833984375
+        ],
+        [
+          "2026-06-18",
+          379.3999938964844,
+          378.6871032714844
+        ],
+        [
+          "2026-06-26",
+          372.9700012207031,
+          372.2691955566406
+        ],
+        [
+          "2026-07-02",
+          390.489990234375,
+          389.7562561035156
+        ],
+        [
+          "2026-07-10",
+          385.1000061035156,
+          384.37640380859375
+        ],
+        [
+          "2026-07-17",
+          393.82000732421875,
+          393.08001708984375
+        ],
+        [
+          "2026-07-24",
+          381.70001220703125,
+          380.9828186035156
+        ],
+        [
+          "2026-07-31",
+          464.7200012207031,
+          463.8468017578125
+        ],
+        [
+          "2026-08-07",
+          499.989990234375,
+          499.0505065917969
+        ],
+        [
+          "2026-08-14",
+          495.3999938964844,
+          494.4691467285156
+        ],
+        [
+          "2026-08-21",
+          483.239990234375,
+          483.239990234375
+        ],
+        [
+          "2026-08-28",
+          513.530029296875,
+          513.530029296875
+        ],
+        [
+          "2026-09-04",
+          499.70001220703125,
+          499.70001220703125
+        ],
+        [
+          "2026-09-11",
+          495.6300048828125,
+          495.6300048828125
+        ],
+        [
+          "2026-09-18",
+          493.7799987792969,
+          493.7799987792969
+        ],
+        [
+          "2026-09-25",
+          516.1699829101562,
+          516.1699829101562
+        ],
+        [
+          "2026-10-02",
+          517.530029296875,
+          517.530029296875
+        ],
+        [
+          "2026-10-09",
+          535.0700073242188,
+          535.0700073242188
+        ],
+        [
+          "2026-10-16",
+          529.0499877929688,
+          529.0499877929688
+        ],
+        [
+          "2026-10-23",
+          524.510009765625,
+          524.510009765625
+        ],
+        [
+          "2026-10-30",
+          521.9099731445312,
+          521.9099731445312
+        ],
+        [
+          "2026-11-06",
+          530.6099853515625,
+          530.6099853515625
+        ],
+        [
+          "2026-11-13",
+          523.8800048828125,
+          523.8800048828125
+        ],
+        [
+          "2026-11-16",
+          517.989990234375,
+          517.989990234375
+        ]
+      ]
+    },
+    "annual": {
+      "source": "sec-edgar",
+      "status": "ok",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000789019.json",
+      "periods": [
+        {
+          "periodEnd": "2026-06-30",
+          "fiscalYear": 2026,
+          "form": "10-Q",
+          "filed": "2026-10-28",
+          "accession": "0001193125-26-436133",
+          "income": {
+            "revenue": 331839000000,
+            "costOfRevenue": 106374000000,
+            "grossProfit": 225465000000,
+            "researchAndDevelopment": 35562000000,
+            "operatingIncome": 155237000000,
+            "interestExpense": 3051000000,
+            "incomeTax": 32185000000,
+            "netIncome": 133749000000,
+            "epsDiluted": 17.95,
+            "dilutedShares": 7453000000
+          },
+          "balance": {
+            "cash": 20935000000,
+            "shortTermInvestments": 55908000000,
+            "receivables": 80876000000,
+            "inventory": 1397000000,
+            "currentAssets": 207710000000,
+            "totalAssets": 758376000000,
+            "goodwill": 119651000000,
+            "currentLiabilities": 168825000000,
+            "totalLiabilities": 315989000000,
+            "longTermDebt": 40294000000,
+            "shortTermDebt": null,
+            "equity": 442387000000,
+            "sharesOutstanding": 7427000000,
+            "totalDebt": 40294000000
+          },
+          "cashflow": {
+            "operatingCF": 182935000000,
+            "capex": 115948000000,
+            "da": 39000000000,
+            "sbc": 12405000000,
+            "dividends": 26445000000,
+            "buybacks": 22271000000,
+            "freeCashFlow": 66987000000
+          }
+        },
+        {
+          "periodEnd": "2025-06-30",
+          "fiscalYear": 2025,
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accession": "0001193125-26-323660",
+          "income": {
+            "revenue": 281724000000,
+            "costOfRevenue": 87831000000,
+            "grossProfit": 193893000000,
+            "researchAndDevelopment": 32488000000,
+            "operatingIncome": 128528000000,
+            "interestExpense": 2385000000,
+            "incomeTax": 21795000000,
+            "netIncome": 101832000000,
+            "epsDiluted": 13.64,
+            "dilutedShares": 7465000000
+          },
+          "balance": {
+            "cash": 30242000000,
+            "shortTermInvestments": 64323000000,
+            "receivables": 69905000000,
+            "inventory": 938000000,
+            "currentAssets": 191131000000,
+            "totalAssets": 619003000000,
+            "goodwill": 119509000000,
+            "currentLiabilities": 141218000000,
+            "totalLiabilities": 275524000000,
+            "longTermDebt": 43151000000,
+            "shortTermDebt": 0,
+            "equity": 343479000000,
+            "sharesOutstanding": 7434000000,
+            "totalDebt": 43151000000
+          },
+          "cashflow": {
+            "operatingCF": 136162000000,
+            "capex": 64551000000,
+            "da": 28000000000,
+            "sbc": 11974000000,
+            "dividends": 24082000000,
+            "buybacks": 18420000000,
+            "freeCashFlow": 71611000000
+          }
+        },
+        {
+          "periodEnd": "2024-06-30",
+          "fiscalYear": 2024,
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accession": "0001193125-26-323660",
+          "income": {
+            "revenue": 245122000000,
+            "costOfRevenue": 74114000000,
+            "grossProfit": 171008000000,
+            "researchAndDevelopment": 29510000000,
+            "operatingIncome": 109433000000,
+            "interestExpense": 2935000000,
+            "incomeTax": 19651000000,
+            "netIncome": 88136000000,
+            "epsDiluted": 11.8,
+            "dilutedShares": 7469000000
+          },
+          "balance": {
+            "cash": 18315000000,
+            "shortTermInvestments": 57228000000,
+            "receivables": 56924000000,
+            "inventory": 1246000000,
+            "currentAssets": 159734000000,
+            "totalAssets": 512163000000,
+            "goodwill": 119220000000,
+            "currentLiabilities": 125286000000,
+            "totalLiabilities": 243686000000,
+            "longTermDebt": 44937000000,
+            "shortTermDebt": 6693000000,
+            "equity": 268477000000,
+            "sharesOutstanding": 7434000000,
+            "totalDebt": 51630000000
+          },
+          "cashflow": {
+            "operatingCF": 118548000000,
+            "capex": 44477000000,
+            "da": 20000000000,
+            "sbc": 10734000000,
+            "dividends": 21771000000,
+            "buybacks": 17254000000,
+            "freeCashFlow": 74071000000
+          }
+        },
+        {
+          "periodEnd": "2023-06-30",
+          "fiscalYear": 2023,
+          "form": "10-K",
+          "filed": "2026-07-29",
+          "accession": "0001193125-26-323660",
+          "income": {
+            "revenue": 211915000000,
+            "costOfRevenue": 65863000000,
+            "grossProfit": 146052000000,
+            "researchAndDevelopment": 27195000000,
+            "operatingIncome": 88523000000,
+            "interestExpense": 1968000000,
+            "incomeTax": 16950000000,
+            "netIncome": 72361000000,
+            "epsDiluted": 9.68,
+            "dilutedShares": 7472000000
+          },
+          "balance": {
+            "cash": 34704000000,
+            "shortTermInvestments": 76558000000,
+            "receivables": 48688000000,
+            "inventory": 2500000000,
+            "currentAssets": 184257000000,
+            "totalAssets": 411976000000,
+            "goodwill": 67886000000,
+            "currentLiabilities": 104149000000,
+            "totalLiabilities": 205753000000,
+            "longTermDebt": 47237000000,
+            "shortTermDebt": 0,
+            "equity": 206223000000,
+            "sharesOutstanding": 7432000000,
+            "totalDebt": 47237000000
+          },
+          "cashflow": {
+            "operatingCF": 87582000000,
+            "capex": 28107000000,
+            "da": 13500000000,
+            "sbc": 9611000000,
+            "dividends": 19800000000,
+            "buybacks": 22245000000,
+            "freeCashFlow": 59475000000
+          }
+        },
+        {
+          "periodEnd": "2022-06-30",
+          "fiscalYear": 2022,
+          "form": "10-K",
+          "filed": "2025-07-30",
+          "accession": "0000950170-25-100235",
+          "income": {
+            "revenue": 198270000000,
+            "costOfRevenue": 62650000000,
+            "grossProfit": 135620000000,
+            "researchAndDevelopment": 24512000000,
+            "operatingIncome": 83383000000,
+            "interestExpense": 2063000000,
+            "incomeTax": 10978000000,
+            "netIncome": 72738000000,
+            "epsDiluted": 9.65,
+            "dilutedShares": 7540000000
+          },
+          "balance": {
+            "cash": 13931000000,
+            "shortTermInvestments": 90826000000,
+            "receivables": 44261000000,
+            "inventory": 3742000000,
+            "currentAssets": 169684000000,
+            "totalAssets": 364840000000,
+            "goodwill": 67524000000,
+            "currentLiabilities": 95082000000,
+            "totalLiabilities": 198298000000,
+            "longTermDebt": 49781000000,
+            "shortTermDebt": null,
+            "equity": 166542000000,
+            "sharesOutstanding": 7464000000,
+            "totalDebt": 49781000000
+          },
+          "cashflow": {
+            "operatingCF": 89035000000,
+            "capex": 23886000000,
+            "da": 14600000000,
+            "sbc": 7502000000,
+            "dividends": 18135000000,
+            "buybacks": 32696000000,
+            "freeCashFlow": 65149000000
+          }
+        },
+        {
+          "periodEnd": "2021-06-30",
+          "fiscalYear": 2021,
+          "form": "8-K",
+          "filed": "2024-12-03",
+          "accession": "0000950170-24-132722",
+          "income": {
+            "revenue": 168088000000,
+            "costOfRevenue": 52232000000,
+            "grossProfit": 115856000000,
+            "researchAndDevelopment": 20716000000,
+            "operatingIncome": 69916000000,
+            "interestExpense": 2346000000,
+            "incomeTax": 9831000000,
+            "netIncome": 61271000000,
+            "epsDiluted": 8.05,
+            "dilutedShares": 7608000000
+          },
+          "balance": {
+            "cash": 14224000000,
+            "shortTermInvestments": 116110000000,
+            "receivables": 38043000000,
+            "inventory": 2636000000,
+            "currentAssets": 184406000000,
+            "totalAssets": 333779000000,
+            "goodwill": 49711000000,
+            "currentLiabilities": 88657000000,
+            "totalLiabilities": 191791000000,
+            "longTermDebt": 58146000000,
+            "shortTermDebt": null,
+            "equity": 141988000000,
+            "sharesOutstanding": 7519000000,
+            "totalDebt": 58146000000
+          },
+          "cashflow": {
+            "operatingCF": 76740000000,
+            "capex": 20622000000,
+            "da": 10900000000,
+            "sbc": 6118000000,
+            "dividends": 16521000000,
+            "buybacks": 27385000000,
+            "freeCashFlow": 56118000000
+          }
+        },
+        {
+          "periodEnd": "2020-06-30",
+          "fiscalYear": 2020,
+          "form": "10-K",
+          "filed": "2023-07-27",
+          "accession": "0000950170-23-035122",
+          "income": {
+            "revenue": 143015000000,
+            "costOfRevenue": 46078000000,
+            "grossProfit": 96937000000,
+            "researchAndDevelopment": 19269000000,
+            "operatingIncome": 52959000000,
+            "interestExpense": 2591000000,
+            "incomeTax": 8755000000,
+            "netIncome": 44281000000,
+            "epsDiluted": 5.76,
+            "dilutedShares": 7683000000
+          },
+          "balance": {
+            "cash": 13576000000,
+            "shortTermInvestments": 122951000000,
+            "receivables": 32011000000,
+            "inventory": 1895000000,
+            "currentAssets": 181915000000,
+            "totalAssets": 301311000000,
+            "goodwill": 43351000000,
+            "currentLiabilities": 72310000000,
+            "totalLiabilities": 183007000000,
+            "longTermDebt": 63327000000,
+            "shortTermDebt": null,
+            "equity": 118304000000,
+            "sharesOutstanding": 7571000000,
+            "totalDebt": 63327000000
+          },
+          "cashflow": {
+            "operatingCF": 60675000000,
+            "capex": 15441000000,
+            "da": 12300000000,
+            "sbc": 5289000000,
+            "dividends": 15137000000,
+            "buybacks": 22968000000,
+            "freeCashFlow": 45234000000
+          }
+        },
+        {
+          "periodEnd": "2019-06-30",
+          "fiscalYear": 2019,
+          "form": "10-K",
+          "filed": "2022-07-28",
+          "accession": "0001564590-22-026876",
+          "income": {
+            "revenue": 125843000000,
+            "costOfRevenue": 42910000000,
+            "grossProfit": 82933000000,
+            "researchAndDevelopment": 16876000000,
+            "operatingIncome": 42959000000,
+            "interestExpense": 2686000000,
+            "incomeTax": 4448000000,
+            "netIncome": 39240000000,
+            "epsDiluted": 5.06,
+            "dilutedShares": 7753000000
+          },
+          "balance": {
+            "cash": 11356000000,
+            "shortTermInvestments": 122463000000,
+            "receivables": 29524000000,
+            "inventory": 2063000000,
+            "currentAssets": 175552000000,
+            "totalAssets": 286556000000,
+            "goodwill": 42026000000,
+            "currentLiabilities": 69420000000,
+            "totalLiabilities": 184226000000,
+            "longTermDebt": 72178000000,
+            "shortTermDebt": 0,
+            "equity": 102330000000,
+            "sharesOutstanding": 7643000000,
+            "totalDebt": 72178000000
+          },
+          "cashflow": {
+            "operatingCF": 52185000000,
+            "capex": 13925000000,
+            "da": 11600000000,
+            "sbc": 4652000000,
+            "dividends": 13811000000,
+            "buybacks": 19543000000,
+            "freeCashFlow": 38260000000
+          }
+        },
+        {
+          "periodEnd": "2018-06-30",
+          "fiscalYear": 2018,
+          "form": "10-K",
+          "filed": "2021-07-29",
+          "accession": "0001564590-21-039151",
+          "income": {
+            "revenue": 110360000000,
+            "costOfRevenue": 38353000000,
+            "grossProfit": 72007000000,
+            "researchAndDevelopment": 14726000000,
+            "operatingIncome": 35058000000,
+            "interestExpense": 2733000000,
+            "incomeTax": 19903000000,
+            "netIncome": 16571000000,
+            "epsDiluted": 2.13,
+            "dilutedShares": 7794000000
+          },
+          "balance": {
+            "cash": 11946000000,
+            "shortTermInvestments": 121822000000,
+            "receivables": 26481000000,
+            "inventory": 2662000000,
+            "currentAssets": 169662000000,
+            "totalAssets": 258848000000,
+            "goodwill": 35683000000,
+            "currentLiabilities": 58488000000,
+            "totalLiabilities": 176130000000,
+            "longTermDebt": 76200000000,
+            "shortTermDebt": 0,
+            "equity": 82718000000,
+            "sharesOutstanding": 7677000000,
+            "totalDebt": 76200000000
+          },
+          "cashflow": {
+            "operatingCF": 43884000000,
+            "capex": 11632000000,
+            "da": 9900000000,
+            "sbc": 3940000000,
+            "dividends": 12699000000,
+            "buybacks": 10721000000,
+            "freeCashFlow": 32252000000
+          }
+        },
+        {
+          "periodEnd": "2017-06-30",
+          "fiscalYear": 2017,
+          "form": "10-K",
+          "filed": "2020-07-30",
+          "accession": "0001564590-20-034944",
+          "income": {
+            "revenue": 96571000000,
+            "costOfRevenue": 34261000000,
+            "grossProfit": 62310000000,
+            "researchAndDevelopment": 13037000000,
+            "operatingIncome": 29025000000,
+            "interestExpense": 2222000000,
+            "incomeTax": 4412000000,
+            "netIncome": 25489000000,
+            "epsDiluted": 3.25,
+            "dilutedShares": 7832000000
+          },
+          "balance": {
+            "cash": 7663000000,
+            "shortTermInvestments": null,
+            "receivables": 22431000000,
+            "inventory": 2181000000,
+            "currentAssets": 162696000000,
+            "totalAssets": 250312000000,
+            "goodwill": 35122000000,
+            "currentLiabilities": 55745000000,
+            "totalLiabilities": 162601000000,
+            "longTermDebt": 77100000000,
+            "shortTermDebt": 9072000000,
+            "equity": 87711000000,
+            "sharesOutstanding": 7708000000,
+            "totalDebt": 86172000000
+          },
+          "cashflow": {
+            "operatingCF": 39507000000,
+            "capex": 8129000000,
+            "da": 7800000000,
+            "sbc": 3266000000,
+            "dividends": 11845000000,
+            "buybacks": 11788000000,
+            "freeCashFlow": 31378000000
+          }
+        }
+      ],
+      "ttm": {
+        "periodEnd": "2026-09-30",
+        "basis": "FY ending 2026-06-30 + YTD to 2026-09-30 - prior YTD to 2025-09-30",
+        "income": {
+          "revenue": 346445000000,
+          "costOfRevenue": 112051000000,
+          "grossProfit": 234394000000,
+          "researchAndDevelopment": 36463000000,
+          "operatingIncome": 163191000000,
+          "interestExpense": 3223000000,
+          "incomeTax": 34955000000,
+          "netIncome": 142631000000,
+          "epsDiluted": 19.15,
+          "dilutedShares": null
+        },
+        "cashflow": {
+          "operatingCF": 195878000000,
+          "capex": 135921000000,
+          "da": 38300000000,
+          "sbc": 12556000000,
+          "dividends": 27033000000,
+          "buybacks": 21000000000,
+          "freeCashFlow": 59957000000
+        },
+        "balance": {
+          "cash": 20281000000,
+          "shortTermInvestments": 44228000000,
+          "receivables": 62084000000,
+          "inventory": 1835000000,
+          "currentAssets": 186137000000,
+          "totalAssets": 779403000000,
+          "goodwill": 119646000000,
+          "currentLiabilities": 151968000000,
+          "totalLiabilities": 308894000000,
+          "longTermDebt": 35481000000,
+          "shortTermDebt": null,
+          "equity": 470509000000,
+          "sharesOutstanding": 7427000000,
+          "totalDebt": 35481000000
+        },
+        "filed": "2026-10-28"
+      }
+    },
+    "macro": {
+      "ust_3m": {
+        "source": "treasury",
+        "asOf": "2026-11-16",
+        "status": "ok",
+        "points": [
+          [
+            "2025-01-31",
+            4.31
+          ],
+          [
+            "2025-02-28",
+            4.32
+          ],
+          [
+            "2025-03-31",
+            4.32
+          ],
+          [
+            "2025-04-30",
+            4.31
+          ],
+          [
+            "2025-05-30",
+            4.36
+          ],
+          [
+            "2025-06-30",
+            4.41
+          ],
+          [
+            "2025-07-31",
+            4.41
+          ],
+          [
+            "2025-08-29",
+            4.23
+          ],
+          [
+            "2025-09-30",
+            4.02
+          ],
+          [
+            "2025-10-31",
+            3.89
+          ],
+          [
+            "2025-11-28",
+            3.88
+          ],
+          [
+            "2025-12-31",
+            3.67
+          ],
+          [
+            "2026-01-30",
+            3.67
+          ],
+          [
+            "2026-02-27",
+            3.67
+          ],
+          [
+            "2026-03-31",
+            3.7
+          ],
+          [
+            "2026-04-30",
+            3.68
+          ],
+          [
+            "2026-05-29",
+            3.69
+          ],
+          [
+            "2026-06-30",
+            3.87
+          ],
+          [
+            "2026-07-31",
+            3.83
+          ],
+          [
+            "2026-08-31",
+            3.91
+          ],
+          [
+            "2026-09-30",
+            4.2
+          ],
+          [
+            "2026-10-30",
+            4.16
+          ],
+          [
+            "2026-11-16",
+            4.34
+          ]
+        ]
+      },
+      "ust_2y": {
+        "source": "treasury",
+        "asOf": "2026-11-16",
+        "status": "ok",
+        "points": [
+          [
+            "2025-01-31",
+            4.22
+          ],
+          [
+            "2025-02-28",
+            3.99
+          ],
+          [
+            "2025-03-31",
+            3.89
+          ],
+          [
+            "2025-04-30",
+            3.6
+          ],
+          [
+            "2025-05-30",
+            3.89
+          ],
+          [
+            "2025-06-30",
+            3.72
+          ],
+          [
+            "2025-07-31",
+            3.94
+          ],
+          [
+            "2025-08-29",
+            3.59
+          ],
+          [
+            "2025-09-30",
+            3.6
+          ],
+          [
+            "2025-10-31",
+            3.6
+          ],
+          [
+            "2025-11-28",
+            3.47
+          ],
+          [
+            "2025-12-31",
+            3.47
+          ],
+          [
+            "2026-01-30",
+            3.52
+          ],
+          [
+            "2026-02-27",
+            3.38
+          ],
+          [
+            "2026-03-31",
+            3.79
+          ],
+          [
+            "2026-04-30",
+            3.88
+          ],
+          [
+            "2026-05-29",
+            3.98
+          ],
+          [
+            "2026-06-30",
+            4.14
+          ],
+          [
+            "2026-07-31",
+            4.28
+          ],
+          [
+            "2026-08-31",
+            4.34
+          ],
+          [
+            "2026-09-30",
+            4.88
+          ],
+          [
+            "2026-10-30",
+            4.56
+          ],
+          [
+            "2026-11-16",
+            4.83
+          ]
+        ]
+      },
+      "ust_10y": {
+        "source": "treasury",
+        "asOf": "2026-11-16",
+        "status": "ok",
+        "points": [
+          [
+            "2025-01-31",
+            4.58
+          ],
+          [
+            "2025-02-28",
+            4.24
+          ],
+          [
+            "2025-03-31",
+            4.23
+          ],
+          [
+            "2025-04-30",
+            4.17
+          ],
+          [
+            "2025-05-30",
+            4.41
+          ],
+          [
+            "2025-06-30",
+            4.24
+          ],
+          [
+            "2025-07-31",
+            4.37
+          ],
+          [
+            "2025-08-29",
+            4.23
+          ],
+          [
+            "2025-09-30",
+            4.16
+          ],
+          [
+            "2025-10-31",
+            4.11
+          ],
+          [
+            "2025-11-28",
+            4.02
+          ],
+          [
+            "2025-12-31",
+            4.18
+          ],
+          [
+            "2026-01-30",
+            4.26
+          ],
+          [
+            "2026-02-27",
+            3.97
+          ],
+          [
+            "2026-03-31",
+            4.3
+          ],
+          [
+            "2026-04-30",
+            4.4
+          ],
+          [
+            "2026-05-29",
+            4.45
+          ],
+          [
+            "2026-06-30",
+            4.44
+          ],
+          [
+            "2026-07-31",
+            4.75
+          ],
+          [
+            "2026-08-31",
+            4.75
+          ],
+          [
+            "2026-09-30",
+            5.29
+          ],
+          [
+            "2026-10-30",
+            4.94
+          ],
+          [
+            "2026-11-16",
+            5.12
+          ]
+        ]
+      },
+      "policy_rate": {
+        "source": "nyfed",
+        "asOf": "2026-11-13",
+        "status": "ok",
+        "points": [
+          [
+            "2024-11-29",
+            4.58
+          ],
+          [
+            "2024-12-31",
+            4.33
+          ],
+          [
+            "2025-01-31",
+            4.33
+          ],
+          [
+            "2025-02-28",
+            4.33
+          ],
+          [
+            "2025-03-31",
+            4.33
+          ],
+          [
+            "2025-04-30",
+            4.33
+          ],
+          [
+            "2025-05-30",
+            4.33
+          ],
+          [
+            "2025-06-30",
+            4.33
+          ],
+          [
+            "2025-07-31",
+            4.33
+          ],
+          [
+            "2025-08-29",
+            4.33
+          ],
+          [
+            "2025-09-30",
+            4.09
+          ],
+          [
+            "2025-10-31",
+            3.86
+          ],
+          [
+            "2025-11-28",
+            3.89
+          ],
+          [
+            "2025-12-31",
+            3.64
+          ],
+          [
+            "2026-01-30",
+            3.64
+          ],
+          [
+            "2026-02-27",
+            3.64
+          ],
+          [
+            "2026-03-31",
+            3.64
+          ],
+          [
+            "2026-04-30",
+            3.64
+          ],
+          [
+            "2026-05-29",
+            3.62
+          ],
+          [
+            "2026-06-30",
+            3.63
+          ],
+          [
+            "2026-07-31",
+            3.63
+          ],
+          [
+            "2026-08-31",
+            3.63
+          ],
+          [
+            "2026-09-30",
+            3.88
+          ],
+          [
+            "2026-10-30",
+            3.88
+          ],
+          [
+            "2026-11-13",
+            3.88
+          ]
+        ]
+      }
+    }
+  },
+  "news": [],
+  "disclaimer": "Simulated council for education. Not financial advice. Numbers as of the dates shown; verify against the filings."
+}

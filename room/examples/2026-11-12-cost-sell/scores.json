@@ -1,0 +1,221 @@
+{
+  "schema": "mosaic.scores/1",
+  "round": 2,
+  "roundsRun": [
+    1,
+    2
+  ],
+  "options": [
+    {
+      "id": "A",
+      "label": "Sell it all",
+      "kind": "act",
+      "score": 4,
+      "spread": 5,
+      "math": "A (3x4 + 2x2 + 2x7 + 2x4 + 2x3) / 11 = 4.0"
+    },
+    {
+      "id": "B",
+      "label": "Sell a third",
+      "kind": "act",
+      "score": 7.8,
+      "spread": 2,
+      "math": "B (3x8 + 2x7 + 2x7 + 2x9 + 2x8) / 11 = 7.8"
+    },
+    {
+      "id": "C",
+      "label": "Keep it all",
+      "kind": "none",
+      "score": 4.8,
+      "spread": 6,
+      "math": "C (3x5 + 2x8 + 2x2 + 2x3 + 2x6) / 11 = 4.8"
+    }
+  ],
+  "recommended": "B",
+  "band": "CONVICTION EARNED",
+  "label": "CONVICTION EARNED",
+  "underlyingLabel": null,
+  "overrides": [],
+  "spread": 2,
+  "confidence": 8,
+  "abstentions": [],
+  "agreement": {
+    "agrees": 4,
+    "partly agrees": 1,
+    "disagrees": 0,
+    "abstains": 0
+  },
+  "support": null,
+  "unanimousRound1": {
+    "unanimous": false
+  },
+  "needsRound3": false,
+  "leanPull": {
+    "option": "A",
+    "value": 0.3,
+    "rawShift": 0.4,
+    "perSeat": [
+      {
+        "seat": "marks",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "buffett",
+        "pull": 0,
+        "toward": 0
+      },
+      {
+        "seat": "burry",
+        "pull": 0.5,
+        "toward": 1
+      },
+      {
+        "seat": "taleb",
+        "pull": 1,
+        "toward": 1
+      },
+      {
+        "seat": "munger",
+        "pull": 0,
+        "toward": 0
+      }
+    ],
+    "flagged": false
+  },
+  "evidence": {
+    "coverage": 0.86,
+    "citedShare": 0.533,
+    "whyPoints": 15,
+    "score": 0.697,
+    "grade": "medium"
+  },
+  "scorecard": [
+    {
+      "seat": "buffett",
+      "short": "Buffett",
+      "dimension": "Moat and owner economics",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": "No",
+      "agreement": "partly agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 2,
+        "B": 7,
+        "C": 8
+      },
+      "pillar": 8,
+      "conviction": 4,
+      "evidence": "strong",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "munger",
+      "short": "Munger",
+      "dimension": "Folly check",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": "Conditional yes",
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 3,
+        "B": 8,
+        "C": 6
+      },
+      "pillar": 7,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "marks",
+      "short": "Marks",
+      "dimension": "Risk and cycle",
+      "weight": 3,
+      "present": true,
+      "abstain": false,
+      "stance": "Conditional yes",
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 4,
+        "B": 8,
+        "C": 5
+      },
+      "pillar": 8,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 0
+    },
+    {
+      "seat": "taleb",
+      "short": "Taleb",
+      "dimension": "Ruin and convexity",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": "Conditional yes",
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 4,
+        "B": 9,
+        "C": 3
+      },
+      "pillar": 8,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "possible",
+      "door": "two-way",
+      "movedOnTop": 1
+    },
+    {
+      "seat": "burry",
+      "short": "Burry",
+      "dimension": "Bear case",
+      "weight": 2,
+      "present": true,
+      "abstain": false,
+      "stance": "Yes",
+      "agreement": "agrees",
+      "ownVote": null,
+      "ownLine": null,
+      "amendment": null,
+      "scoresCarriedFrom": null,
+      "scores": {
+        "A": 7,
+        "B": 7,
+        "C": 2
+      },
+      "pillar": 6,
+      "conviction": 4,
+      "evidence": "adequate",
+      "ruin": "none",
+      "door": "two-way",
+      "movedOnTop": 1
+    }
+  ],
+  "problems": []
+}

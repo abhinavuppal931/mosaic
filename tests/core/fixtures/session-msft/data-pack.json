@@ -1,0 +1,25 @@
+{
+  "schema": "mosaic.datapack/1",
+  "kind": "ticker",
+  "symbol": "MSFT",
+  "asOf": "2026-11-17",
+  "generatedAt": "2026-11-17T12:00:00.000Z",
+  "hash": "sha256:fixture",
+  "coverage": { "byCapability": { "quote": "ok", "financials": "ok", "news": "missing" }, "core": ["quote", "financials", "news", "macro"], "score": 0.75, "facts": 6, "missingFacts": 1 },
+  "providers": [],
+  "warnings": ["No news in the pack (needs a keyed provider such as Finnhub or FMP)."],
+  "facts": [
+    { "id": "F001", "key": "price", "label": "Share price", "value": 517.99, "unit": "USD/share", "source": "yahoo", "asOf": "2026-11-16", "status": "ok" },
+    { "id": "F002", "key": "roic", "label": "Return on invested capital", "value": 0.297, "unit": "ratio", "source": "mosaic", "asOf": "2026-09-30", "status": "ok", "derived": true, "formula": "fixture", "inputs": [] },
+    { "id": "F003", "key": "capex_to_revenue", "label": "Capex / revenue", "value": 0.392, "unit": "ratio", "source": "mosaic", "asOf": "2026-09-30", "status": "ok", "derived": true, "formula": "capex / revenue", "inputs": [] },
+    { "id": "F004", "key": "fcf_yield", "label": "Free cash flow yield", "value": 0.0156, "unit": "ratio", "source": "mosaic", "asOf": "2026-11-16", "status": "ok", "derived": true, "formula": "free_cash_flow / market_cap", "inputs": [] },
+    { "id": "F005", "key": "max_drawdown", "label": "Maximum drawdown over the price history", "value": -0.371, "unit": "ratio", "source": "mosaic", "asOf": "2026-11-16", "status": "ok", "derived": true, "formula": "fixture", "inputs": [] },
+    { "id": "F006", "key": "short_interest", "label": "Short interest (% of float)", "value": null, "unit": "ratio", "source": null, "asOf": null, "status": "missing", "note": "no configured provider supplies short interest" },
+    { "id": "F007", "key": "gross_margin", "label": "Gross margin", "value": 0.677, "unit": "ratio", "source": "mosaic", "asOf": "2026-09-30", "status": "ok", "derived": true, "formula": "gross_profit / revenue", "inputs": [] },
+    { "id": "F008", "key": "next_report_expected", "label": "Next quarterly report, expected", "value": "2027-01-27", "unit": "date", "source": "mosaic", "asOf": "2026-10-28", "status": "ok", "derived": true, "formula": "fixture", "inputs": [] },
+    { "id": "F009", "key": "last_report_filed", "label": "Last 10-K or 10-Q filed", "value": "2026-10-28", "unit": "date", "source": "sec-edgar", "asOf": "2026-10-28", "status": "ok" }
+  ],
+  "packs": {},
+  "series": {},
+  "disclaimer": "Simulated council for education. Not financial advice. Numbers as of the dates shown; verify against the filings."
+}

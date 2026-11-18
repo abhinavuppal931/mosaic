@@ -1,0 +1,102 @@
+{
+  "schema": "mosaic.council/1",
+  "id": "2026-11-15-msft-size",
+  "title": "How much more Microsoft should I own?",
+  "job": "decision",
+  "ticker": "MSFT",
+  "decision": "Whether to add to a Microsoft position that is already 18% of the portfolio, keep it, or trim it.",
+  "mode": "all",
+  "horizon": "5 years",
+  "trigger": "Microsoft dipped 7% after a quarter of heavy spending on data centers.",
+  "position": {
+    "owned": true,
+    "portfolioShare": 0.18,
+    "costBasisVsPrice": 0.71
+  },
+  "options": [
+    {
+      "id": "A",
+      "label": "Double the position",
+      "kind": "act"
+    },
+    {
+      "id": "B",
+      "label": "Add a quarter more",
+      "kind": "act"
+    },
+    {
+      "id": "C",
+      "label": "Keep it as it is",
+      "kind": "act"
+    },
+    {
+      "id": "D",
+      "label": "Trim it back",
+      "kind": "act"
+    }
+  ],
+  "seats": [
+    "buffett",
+    "munger",
+    "damodaran",
+    "marks",
+    "lynch",
+    "taleb",
+    "druckenmiller",
+    "mauboussin",
+    "burry"
+  ],
+  "weights": {
+    "buffett": {
+      "weight": 2,
+      "reason": "Standard seat"
+    },
+    "munger": {
+      "weight": 2,
+      "reason": "Standard seat"
+    },
+    "damodaran": {
+      "weight": 2,
+      "reason": "Standard seat"
+    },
+    "marks": {
+      "weight": 2,
+      "reason": "Standard seat"
+    },
+    "lynch": {
+      "weight": 2,
+      "reason": "Standard seat"
+    },
+    "taleb": {
+      "weight": 2,
+      "reason": "Standard seat"
+    },
+    "druckenmiller": {
+      "weight": 2,
+      "reason": "Standard seat"
+    },
+    "mauboussin": {
+      "weight": 3,
+      "reason": "The sizing specialist, on a question about how much to own"
+    },
+    "burry": {
+      "weight": 2,
+      "reason": "Standard seat"
+    }
+  },
+  "pack": {
+    "path": "data-pack.json",
+    "hash": "sha256:example-msft",
+    "coverage": 0.78
+  },
+  "brief": "A long-time Microsoft owner wonders whether the dip is a chance to add.",
+  "assumptions": [
+    "No other large technology holdings (assumed)"
+  ],
+  "thesis": "Microsoft compounds through cloud and AI for a decade.",
+  "lean": {
+    "sealed": true
+  },
+  "recheckOf": null,
+  "started": "2026-11-15T10:00:00Z"
+}

@@ -1,0 +1,125 @@
+{
+  "schema": "mosaic.verdict/1",
+  "label": "PROCEED WITH CONDITIONS",
+  "call": "The council would start with a small position in NVIDIA, and add more only if its data center sales keep growing faster than 40% a year for the next two quarters [F006].",
+  "recommended": "B",
+  "why": [
+    {
+      "point": "The price already assumes about 24% growth a year for five years [F018]. Possible, but it leaves no room for error on a full position.",
+      "seat": "damodaran",
+      "framework": "Narrative and numbers"
+    },
+    {
+      "point": "It is an exceptional business, earning more than 70% on the money it reinvests [F012].",
+      "seat": "buffett",
+      "framework": "Owner earnings"
+    },
+    {
+      "point": "A small position limits the damage if the AI spending boom cools.",
+      "seat": "taleb",
+      "framework": "Convexity"
+    }
+  ],
+  "minority": {
+    "seat": "burry",
+    "quote": "People are paying for a spending boom as if it will last forever.",
+    "would_have_to_be_true": "For starting small to go wrong, big tech would have to cut its AI spending in 2027."
+  },
+  "fights": [
+    {
+      "crux": "Is AI chip demand here to stay, or a boom that will cool?",
+      "story": "Druckenmiller and Damodaran said it lasts; Burry, Marks and Munger said it cools. Nobody moved on demand, so the council settled on size instead."
+    }
+  ],
+  "premortem": [
+    "Big tech companies pause AI spending and orders dry up for two quarters.",
+    "Rivals' own chips win business and NVIDIA's margins fall below 70%.",
+    "New export rules hit, or one of the four biggest customers cuts orders."
+  ],
+  "kill_criteria": [
+    {
+      "id": "K1",
+      "text": "Profit on each sale (gross margin) stays under 70% for two quarters",
+      "fact": "gross_margin",
+      "op": "<",
+      "value": 0.7
+    },
+    {
+      "id": "K2",
+      "text": "Data center sales growth slows",
+      "fact": "data_center_growth",
+      "op": "<",
+      "value": 0.4
+    },
+    {
+      "id": "K3",
+      "text": "The four biggest customers become a bigger share of sales",
+      "fact": "top4_customer_share",
+      "op": ">",
+      "value": 0.55
+    }
+  ],
+  "conditions": [
+    "Data center sales growth stays above 40% a year [F006]",
+    "Gross margin holds above 70% [F009]"
+  ],
+  "next_steps": [
+    {
+      "when": "Before 19 November",
+      "action": "Decide the starter size by the loss you could live with."
+    },
+    {
+      "when": "This week",
+      "action": "Write down the reasons you would sell."
+    },
+    {
+      "when": "19 November",
+      "action": "Read the results against the conditions."
+    }
+  ],
+  "recheck": {
+    "date": "2026-11-21",
+    "triggers": [
+      "After NVIDIA's results, expected around 2026-11-19 [F039]"
+    ]
+  },
+  "cheapest_test": "Wait two days for the results before adding anything beyond the starter.",
+  "price_implies": "The price implies about 24% growth a year for five years [F018], inside a value range of $150 to $205 [F019] [F021].",
+  "sizing_note": "The record holds a 66% fall [F029]. Size the starter so that a fall like that would not change how you live.",
+  "behavioral_flags": [
+    {
+      "type": "fomo",
+      "quote": "everyone is buying it and I do not want to miss out"
+    }
+  ],
+  "lean_pull_note": "Buying all now gained 0.3 after the lean was shared; not enough to change the call.",
+  "data_health": "Prices from Yahoo, filings from the SEC, rates from the Treasury and the New York Fed; no analyst estimates or news.",
+  "amendments": [
+    {
+      "seat": "buffett",
+      "amendment": "Add more only after two quarters of proof.",
+      "adopted": true,
+      "reason": "Matches the condition the council set."
+    },
+    {
+      "seat": "marks",
+      "amendment": "Keep the starter small enough that a fall to $150 would not shake you.",
+      "adopted": true,
+      "reason": "Folded into the sizing note."
+    }
+  ],
+  "removed_by_citation_check": [],
+  "override_note": "",
+  "share_line": {
+    "seat_lines": {
+      "buffett": "Buy the business, not the excitement.",
+      "munger": "Know your exit before you enter.",
+      "damodaran": "Value is a range. Pay inside it.",
+      "marks": "The best time to be careful is when everyone else is not.",
+      "taleb": "Survive first. Size so the worst case is a lesson.",
+      "druckenmiller": "Own it while money is easy, and watch the central bank.",
+      "burry": "Know who the four customers are and what they plan to spend."
+    },
+    "sharpest_dissent": "burry"
+  }
+}

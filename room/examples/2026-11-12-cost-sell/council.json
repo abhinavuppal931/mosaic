@@ -1,0 +1,77 @@
+{
+  "schema": "mosaic.council/1",
+  "id": "2026-11-12-cost-sell",
+  "title": "Sell Costco after a 60% year?",
+  "job": "decision",
+  "ticker": "COST",
+  "decision": "Whether to sell some or all of a Costco position that has risen 60% in a year and is now a quarter of the portfolio.",
+  "mode": "quick",
+  "horizon": "5 years",
+  "trigger": "Costco is up 60% in a year and is now 24% of the portfolio.",
+  "position": {
+    "owned": true,
+    "portfolioShare": 0.24,
+    "costBasisVsPrice": 0.62
+  },
+  "options": [
+    {
+      "id": "A",
+      "label": "Sell it all",
+      "kind": "act"
+    },
+    {
+      "id": "B",
+      "label": "Sell a third",
+      "kind": "act"
+    },
+    {
+      "id": "C",
+      "label": "Keep it all",
+      "kind": "none"
+    }
+  ],
+  "seats": [
+    "buffett",
+    "munger",
+    "marks",
+    "taleb",
+    "burry"
+  ],
+  "weights": {
+    "buffett": {
+      "weight": 2,
+      "reason": "Business quality"
+    },
+    "munger": {
+      "weight": 2,
+      "reason": "Folly check"
+    },
+    "marks": {
+      "weight": 3,
+      "reason": "The question is the price of risk after a big run"
+    },
+    "taleb": {
+      "weight": 2,
+      "reason": "Ruin guard on a concentrated position"
+    },
+    "burry": {
+      "weight": 2,
+      "reason": "Bear guard"
+    }
+  },
+  "pack": {
+    "path": "data-pack.json",
+    "hash": "sha256:example-cost",
+    "coverage": 0.86
+  },
+  "brief": "An owner of Costco is deciding whether to take profits after a 60% year.",
+  "assumptions": [
+    "Taxes on the gain are not part of this council (assumed)"
+  ],
+  "thesis": null,
+  "lean": {
+    "sealed": true
+  },
+  "recheckOf": null,
+  "started": "2026-11-12T15:00:00Z"
+}

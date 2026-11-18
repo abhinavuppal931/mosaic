@@ -1,0 +1,22 @@
+{
+  "schema": "mosaic.citations/1",
+  "ok": true,
+  "stats": {
+    "factCitations": 21,
+    "factIdsUnknown": 0,
+    "factIdsMissingData": 0,
+    "quotesVerified": 4,
+    "quotesInternal": 0,
+    "quotesUnverified": 0,
+    "uncitedNumbers": 0
+  },
+  "errors": [],
+  "warnings": [],
+  "files": [
+    "round-1.md",
+    "round-2.md",
+    "verdict.md",
+    "verdict.json"
+  ],
+  "verdictChecked": true
+}
