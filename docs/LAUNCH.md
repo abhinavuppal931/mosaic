@@ -23,7 +23,9 @@ A council of simulated investing legends for Claude Code. Debates your investmen
 
 That is 117 characters.
 
-Homepage: leave it as the repo README unless Abs has a site.
+Homepage: `https://abhinav-uppal-website.vercel.app`
+
+The site URL lives in exactly two places, each a link reference at the bottom of the file: `[site]` in `README.md` and `[site]` in `docs/TOUR.md`. For a custom domain later, change those two lines and the homepage field above.
 
 Topics (lowercase, hyphens, 50 characters or fewer each, 20 at most):
 

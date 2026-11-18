@@ -373,6 +373,10 @@ The core suite runs every adapter against recorded responses (no network), the r
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). To report a security problem, read [SECURITY.md](SECURITY.md) first.
 
+## More from Abhinav
+
+Mosaic is made by Abhinav Uppal. More of his work is on [his website][site].
+
 ## Credits
 
 Adapted from [Roast Room](https://github.com/nateherkai/roast-room) (MIT, AI Automation Society); see `NOTICE`. Ideas from [ai-hedge-fund](https://github.com/virattt/ai-hedge-fund) (MIT). Mosaic is MIT licensed.
@@ -380,3 +384,5 @@ Adapted from [Roast Room](https://github.com/nateherkai/roast-room) (MIT, AI Aut
 ---
 
 Simulated council for education. Not financial advice. Seats are simulations built from public work; they are not the people and do not speak for them.
+
+[site]: https://abhinav-uppal-website.vercel.app
