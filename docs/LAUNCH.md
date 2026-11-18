@@ -22,7 +22,7 @@ Description (under 120 characters):
 Simulated investing legends debate your decision in Claude Code and return a scored verdict. Not investment advice.
 ```
 
-That is 117 characters.
+That is 115 characters.
 
 Homepage: `https://abhinav-uppal-website.vercel.app`
 
