@@ -103,7 +103,7 @@ Sessions, the journal, the cache, `.env.local` and `mosaic.config.json` live in 
 
 - Set `MOSAIC_HOME` to use another folder.
 - An older clone or plugin data folder that already holds sessions keeps being used.
-- `/mosaic` pre-approves `node` commands and file writes inside `~/.mosaic`, so a council runs without approval prompts. Anything else still asks.
+- `/mosaic` pre-approves only its own five scripts (run as `node "<plugin folder>/<script>"`) and file reads and writes inside `~/.mosaic`, so a council runs without approval prompts. Anything else still asks, including other `node` commands. Details are in `docs/marketplace-listing.md`, under Security notes.
 - To print the folders, run this inside the clone:
 
 ```bash

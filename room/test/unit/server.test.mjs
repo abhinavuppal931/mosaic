@@ -7,7 +7,8 @@ import path from 'node:path';
 import http from 'node:http';
 import net from 'node:net';
 import { fileURLToPath } from 'node:url';
-import { startServer, parseOptions, DEFAULT_PORT } from '../../server.js';
+import { spawn } from 'node:child_process';
+import { startServer, parseOptions, DEFAULT_PORT, findRoom, browserCommand } from '../../server.js';
 import { stageTo } from '../helpers/stepper.mjs';
 
 const EX = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'examples');
@@ -276,4 +277,83 @@ test('a busy port moves to another one unless strictPort is set', async () => {
     if (r) await r.close();
     await new Promise((ok) => blocker.close(ok));
   }
+});
+
+/** A listener that accepts connections and never answers. */
+async function silentListener() {
+  const sockets = new Set();
+  const srv = net.createServer((s) => {
+    sockets.add(s);
+    s.on('error', () => {});
+  });
+  await new Promise((ok) => srv.listen(0, '127.0.0.1', ok));
+  return {
+    port: srv.address().port,
+    close: () => new Promise((ok) => {
+      for (const s of sockets) s.destroy();
+      srv.close(ok);
+    }),
+  };
+}
+
+test('findRoom gives up on a listener that accepts but never answers', async () => {
+  const silent = await silentListener();
+  try {
+    const t0 = Date.now();
+    assert.equal(await findRoom(silent.port), null);
+    assert.ok(Date.now() - t0 < 1500, `took ${Date.now() - t0} ms`);
+  } finally {
+    await silent.close();
+  }
+});
+
+test('findRoom finds a running Room', async () => {
+  const r = await startServer({ session: NVDA, port: 0, host: '127.0.0.1', quiet: true, journal: tmp(), pollMs: 100 });
+  try {
+    assert.equal(await findRoom(r.port), `http://localhost:${r.port}`);
+  } finally {
+    await r.close();
+  }
+});
+
+test('findRoom resolves null quickly for a closed port', async () => {
+  const probe = net.createServer();
+  await new Promise((ok) => probe.listen(0, '127.0.0.1', ok));
+  const port = probe.address().port;
+  await new Promise((ok) => probe.close(ok));
+  const t0 = Date.now();
+  assert.equal(await findRoom(port), null);
+  assert.ok(Date.now() - t0 < 1500);
+});
+
+test('the launcher exits 1 with a busy-port message when a silent listener holds the port', async () => {
+  const silent = await silentListener();
+  const serverJs = fileURLToPath(new URL('../../server.js', import.meta.url));
+  const child = spawn(process.execPath, [serverJs, '--home', tmp(), '--quiet'], {
+    env: { ...process.env, MOSAIC_ROOM_PORT: String(silent.port) },
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  let err = '';
+  child.stderr.on('data', (c) => (err += c));
+  try {
+    const code = await new Promise((resolve, reject) => {
+      const t = setTimeout(() => reject(new Error('launcher did not exit within 4000 ms')), 4000);
+      child.on('exit', (c) => {
+        clearTimeout(t);
+        resolve(c);
+      });
+    });
+    assert.equal(code, 1);
+    assert.match(err, /busy/i);
+  } finally {
+    child.kill();
+    await silent.close();
+  }
+});
+
+test('browserCommand builds the right command per platform', () => {
+  const url = 'http://localhost:4731';
+  assert.deepEqual(browserCommand(url, 'win32'), { cmd: 'cmd', args: ['/c', 'start', '""', url], options: { windowsVerbatimArguments: true } });
+  assert.deepEqual(browserCommand(url, 'darwin'), { cmd: 'open', args: [url], options: {} });
+  assert.deepEqual(browserCommand(url, 'linux'), { cmd: 'xdg-open', args: [url], options: {} });
 });

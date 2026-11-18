@@ -92,6 +92,30 @@ ls .gitmodules
 
 Result: file not found, so no submodules. `.gitattributes` only sets line endings (no LFS).
 
+## Security notes: what the skill pre-approves
+
+`skills/mosaic/SKILL.md` declares `allowed-tools` so a council runs without approval prompts. While the skill is active it pre-approves only:
+
+- `Bash(node "${CLAUDE_PLUGIN_ROOT}/<script>":*)` for exactly five scripts: `data/cli.mjs`, `scripts/score.mjs`, `scripts/check-citations.mjs`, `scripts/journal.mjs` and `room/server.js`.
+- `Read`, `Write` and `Edit` under `~/.mosaic/**`, the Mosaic home.
+
+Everything else still asks, including `node -e`, any other script, compound commands (`&&`, `;`, pipes) and writes anywhere else.
+
+How this was chosen (tested on 2026-11-18 with Claude Code 2.1.327, headless runs in a fresh home, plugin folder path containing spaces):
+
+| Rule | `node "<root>/data/cli.mjs" status` | `node -e "..."` |
+|---|---|---|
+| `Bash(node:*)` (the first version) | allowed | allowed |
+| `Bash(node "${CLAUDE_PLUGIN_ROOT}/:*)` | denied | denied |
+| `Bash(node ${CLAUDE_PLUGIN_ROOT}/:*)` | denied | denied |
+| `Bash(node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs":*)` | allowed | denied |
+
+So `${CLAUDE_PLUGIN_ROOT}` is substituted in front matter. A prefix rule matches only when it ends at a whole word, here the closing quote, so a folder-wide rule does not work and the rule names each script. The Chair is told to write every command as `node "${CLAUDE_PLUGIN_ROOT}/<script>" ...`, one per call. If it ever falls back to another path form, the user gets an ordinary prompt; nothing is approved more widely.
+
+Writes under `~/.claude` (where Claude Code keeps plugin data) are treated as sensitive and ask even with a rule, which is why the home is `~/.mosaic`.
+
+Not yet confirmed on Windows: that the substituted root with backslashes matches the command the Chair writes.
+
 ## Validation
 
 Run from the repo root (Claude Code 2.1.327 here):

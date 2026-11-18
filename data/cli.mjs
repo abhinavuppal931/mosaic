@@ -58,7 +58,7 @@ async function cmdPack(args, inject) {
   warnProblems(ctx.problems);
   const holdings = kind === 'portfolio' ? readHoldings(path.resolve(args.portfolio)) : undefined;
   if (kind !== 'macro' && !contactSource(ctx.config, ctx.env)) {
-    process.stderr.write(`Note: no SEC contact set, so EDGAR is skipped. Set MOSAIC_SEC_CONTACT or run: node ${JSON.stringify(path.join(ctx.p.pluginRoot, 'data', 'cli.mjs'))} setup\n`);
+    process.stderr.write(`Note: no SEC contact set, so EDGAR is skipped. Set MOSAIC_SEC_CONTACT or run: node ${quotePath(path.join(ctx.p.pluginRoot, 'data', 'cli.mjs'))} setup\n`);
   }
   const pack = await buildPack({ kind, router: ctx.router, config: ctx.config, series: loadSeries(), symbol: kind === 'ticker' ? args.ticker.toUpperCase() : undefined, holdings, ...(inject.now ? { now: inject.now } : {}) });
   if (args.session && args.session !== true) {
@@ -142,6 +142,11 @@ async function askTerminal(question) {
 
 export const MIN_NODE = 20;
 
+/** A path in plain double quotes for a copy-paste hint. Unlike JSON.stringify it does not double Windows backslashes. */
+export function quotePath(p) {
+  return `"${p}"`;
+}
+
 /**
  * The first-run check /mosaic runs before intake: Node version, a writable Mosaic home, and the
  * SEC contact. Each failed item carries one next step. Never reads or returns a secret value.
@@ -163,7 +168,7 @@ export function firstRunCheck(p, config, env, { nodeVersion = process.versions.n
     items.push({ name: 'Mosaic home', ok: false, detail: `${p.home} is not writable (${e.code || e.message})`, next: 'Set MOSAIC_HOME to a folder you can write to (for example a "mosaic" folder in your Documents), then run /mosaic again.' });
   }
   const src = contactSource(config, env);
-  const cli = JSON.stringify(path.join(p.pluginRoot, 'data', 'cli.mjs'));
+  const cli = quotePath(path.join(p.pluginRoot, 'data', 'cli.mjs'));
   items.push(src
     ? { name: 'SEC contact', ok: true, detail: src === 'env' ? `set (${config.providers['sec-edgar'].contactEnv})` : 'set (user config)' }
     : { name: 'SEC contact', ok: false, detail: 'not set; company filings are skipped until it is (macro questions work without it)', next: `Let /mosaic ask for your name and email now, or run node ${cli} setup in a terminal.` });
@@ -181,8 +186,6 @@ function status(p, config) {
   const fix = check.items.filter((i) => !i.ok).length;
   console.log(check.ready ? 'Ready.' : `${fix === 1 ? 'One item' : `${fix} items`} to fix before a council.`);
   console.log(`\nMosaic home: ${p.home}\nKeys file: ${p.envFile}${fs.existsSync(p.envFile) ? '' : ' (not created yet)'}\nUser config: ${p.userConfig}${fs.existsSync(p.userConfig) ? '' : ' (not created yet)'}`);
-  const src = contactSource(config, env);
-  console.log(`  ${'SEC contact'.padEnd(24)} ${src === 'env' ? `set (${config.providers['sec-edgar'].contactEnv})` : src === 'config' ? 'set (user config)' : 'not set (run setup)'}`);
   for (const [id, c] of Object.entries(config.providers)) if (c.keyEnv) console.log(`  ${c.keyEnv.padEnd(24)} ${env.has(c.keyEnv) ? 'set' : 'not set'}  (${id})`);
   return check.ready ? 0 : 3;
 }

@@ -6,7 +6,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { FIXTURES, blockNetwork, fakeFetch } from './helpers/fake-fetch.mjs';
 import { FREE_ROUTES, NOW, SEC_CONTACT } from './helpers/setup.mjs';
-import { main as dataCli, firstRunCheck } from '../../data/cli.mjs';
+import { main as dataCli, firstRunCheck, quotePath } from '../../data/cli.mjs';
 import { loadConfig } from '../../data/lib/config.mjs';
 import { createEnv } from '../../data/lib/env.mjs';
 import { paths as resolvePaths } from '../../data/lib/paths.mjs';
@@ -125,7 +125,7 @@ describe('data/cli.mjs', () => {
     const bad = await capture(() => dataCli(['setup', '--home', home], { prompt: async () => 'no email here' }));
     assert.equal(bad.code, 64);
     const st = await capture(() => dataCli(['setup', '--status', '--home', home]));
-    assert.match(st.out, /SEC contact\s+set \(user config\)/);
+    assert.match(st.out, /SEC contact\s+ok\s+set \(user config\)/);
     assert.match(st.out, /FMP_API_KEY\s+not set/);
     assert.ok(!st.out.includes('jane@example.com'));
   });
@@ -254,5 +254,22 @@ describe('scripts', () => {
     const none = await capture(() => journalCli(['diff', 'NVDA', '--pack', newPack, '--journal', jdir]));
     assert.equal(none.code, 1);
     assert.match(none.err, /no journal entries for NVDA/);
+  });
+});
+
+describe('path hints', () => {
+  test('quotePath wraps in plain quotes and keeps single backslashes', () => {
+    assert.equal(quotePath('C:\\Users\\Jane Doe\\mosaic\\data\\cli.mjs'), '"C:\\Users\\Jane Doe\\mosaic\\data\\cli.mjs"');
+  });
+
+  test('the SEC contact next step does not double backslashes in a Windows plugin root', () => {
+    const root = 'C:\\Users\\Jane Doe\\mosaic';
+    const p = { ...resolvePaths({ home: tmp() }), pluginRoot: root };
+    const env = createEnv({ files: [p.envFile], env: {} });
+    const config = loadConfig({ userConfigPath: p.userConfig });
+    const item = firstRunCheck(p, config, env).items.find((i) => i.name === 'SEC contact');
+    assert.equal(item.ok, false);
+    assert.ok(item.next.includes(root));
+    assert.ok(!item.next.includes('\\\\'));
   });
 });

@@ -1,7 +1,7 @@
 ---
 name: mosaic
 description: Use when an investor wants a buy, add, hold, trim or sell decision, an investment thesis, a portfolio's risk, or a macro question debated by a council of simulated investing legends, or says "mosaic", "convene the council", "what would Buffett, Munger or Taleb say", "stress test my thesis", "should I buy/sell X", "recheck NVDA", or "show my journal". Seats built from each investor's public work (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry by default; Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee on call) argue over three rounds from one sourced data pack; the Chair returns a graded verdict with the dissent kept, a pre-mortem, kill criteria and a re-check date, then journals it. Also one-seat consults ("ask taleb ..."), board settings, rechecks and the thesis journal. Education, not investment advice.
-allowed-tools: Bash(node:*) Read(~/.mosaic/**) Write(~/.mosaic/**) Edit(~/.mosaic/**)
+allowed-tools: Bash(node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/score.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/check-citations.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/room/server.js":*) Read(~/.mosaic/**) Write(~/.mosaic/**) Edit(~/.mosaic/**)
 argument-hint: "<decision, thesis, holdings or question> [--quick] [--all] [--seats buffett,taleb,...] | ask <seat> <question> | board | recheck <TICKER> | journal | room"
 ---
 
@@ -21,7 +21,7 @@ You are the **Chair**. You never argue a side and never add your own view. You r
   ```
 
   Use the printed `home`, `sessions` and `journal` folders for the rest of the run and pass `--home "<home>"` to every Mosaic command. The home is `~/.mosaic` for a new install, clone or marketplace alike (an older clone or plugin data folder that already holds sessions keeps being used, and `MOSAIC_HOME` overrides it). It survives plugin updates.
-- **Run every command on its own**: one `node ...` command per Bash call, with no `cd`, `&&`, pipes, `;` or shell variables, and always quote paths (they may contain spaces). This skill pre-approves `node` commands and file writes under `~/.mosaic`, so commands written this way run without asking the user; anything else asks.
+- **Run every command on its own**: one `node ...` command per Bash call, with no `cd`, `&&`, pipes, `;` or shell variables, and always quote paths (they may contain spaces). This skill pre-approves exactly `node "${CLAUDE_PLUGIN_ROOT}/<script>" ...` for its five scripts (`data/cli.mjs`, `scripts/score.mjs`, `scripts/check-citations.mjs`, `scripts/journal.mjs`, `room/server.js`) and file writes under `~/.mosaic`, so commands written exactly this way, with the quoted plugin root first, run without asking the user; anything else asks.
 - References (read once before the first council): `references/intake.md`, `references/seats.md`, `references/round-prompts.md`, `references/scoring.md`, `references/report-template.md`, `references/live-room.md`. They sit next to this file.
 - The roster: `skills/mosaic/roster.json` under the plugin root. Seat agents: `agents/seat-<key>.md`. Brains: `skills/mosaic/brains/<slug>/`.
 

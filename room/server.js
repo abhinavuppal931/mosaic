@@ -383,23 +383,58 @@ export async function startServer(opts = {}) {
   };
 }
 
-/** Is a Mosaic Room already answering at this port? Resolves to its URL or null. */
-export async function findRoom(port, host = '127.0.0.1') {
-  try {
-    const r = await fetch(`http://${host}:${port}/api/state`, { signal: AbortSignal.timeout(1500) });
-    const j = await r.json();
-    return j && typeof j === 'object' && ('ok' in j || 'waiting' in j) ? `http://localhost:${port}` : null;
-  } catch {
-    return null;
-  }
+/** Is a Mosaic Room already answering at this port? Resolves to its URL or null; never hangs on a silent listener. */
+export function findRoom(port, host = '127.0.0.1') {
+  return new Promise((resolve) => {
+    let done = false;
+    let req = null;
+    let timer = null;
+    const finish = (v) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      if (req) req.destroy();
+      resolve(v);
+    };
+    timer = setTimeout(() => finish(null), 1000);
+    try {
+      req = http.get({ host, port, path: '/api/state', timeout: 800 }, (res) => {
+        let body = '';
+        res.setEncoding('utf8');
+        res.on('data', (c) => (body += c));
+        res.on('end', () => {
+          try {
+            const j = JSON.parse(body);
+            finish(j && typeof j === 'object' && ('ok' in j || 'waiting' in j) ? `http://localhost:${port}` : null);
+          } catch {
+            finish(null);
+          }
+        });
+        res.on('error', () => finish(null));
+      });
+      req.on('timeout', () => finish(null));
+      req.on('error', () => finish(null));
+    } catch {
+      finish(null);
+    }
+  });
+}
+
+/** The command that opens a URL in the default browser on this platform. */
+export function browserCommand(url, platform = process.platform) {
+  // On Windows, `start` treats a first quoted argument as the window title. We pass an empty title ("")
+  // so the URL is not mistaken for it. Node would escape the quotes in `""` unless the arguments go
+  // through verbatim, and then start would read the escaped text as the title or the target.
+  if (platform === 'win32') return { cmd: 'cmd', args: ['/c', 'start', '""', url], options: { windowsVerbatimArguments: true } };
+  if (platform === 'darwin') return { cmd: 'open', args: [url], options: {} };
+  return { cmd: 'xdg-open', args: [url], options: {} };
 }
 
 /** Open a URL in the default browser, best effort; never throws. */
 export function openBrowser(url) {
-  const [cmd, args] =
-    process.platform === 'win32' ? ['cmd', ['/c', 'start', '""', url]] : process.platform === 'darwin' ? ['open', [url]] : ['xdg-open', [url]];
+  const { cmd, args, options } = browserCommand(url);
   try {
-    const child = spawn(cmd, args, { stdio: 'ignore', detached: true, windowsHide: true });
+    const child = spawn(cmd, args, { stdio: 'ignore', detached: true, windowsHide: true, ...options });
     child.on('error', () => {});
     child.unref();
   } catch {
