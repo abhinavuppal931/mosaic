@@ -1,7 +1,7 @@
 // HTTP for adapters: timeout, retry with exponential backoff on 429/5xx/network errors,
 // Retry-After support, a per-provider rate limiter, and redacted URLs in every error and log.
 import { ProviderError } from './contract.mjs';
-import { redactUrl } from './redact.mjs';
+import { redactUrl, redactText } from './redact.mjs';
 
 const RETRYABLE = new Set([429, 500, 502, 503, 504]);
 
@@ -46,7 +46,7 @@ export function createHttp(o) {
       const timedOut = ac.signal.aborted;
       log({ provider, url: redactUrl(url), error: timedOut ? 'timeout' : 'network', ms: Date.now() - started });
       throw new ProviderError(
-        timedOut ? `${provider}: timed out after ${timeoutMs} ms (${redactUrl(url)})` : `${provider}: network error (${redactUrl(url)}): ${err?.message || err}`,
+        timedOut ? `${provider}: timed out after ${timeoutMs} ms (${redactUrl(url)})` : `${provider}: network error (${redactUrl(url)}): ${redactText(err?.message || String(err))}`,
         { kind: timedOut ? 'timeout' : 'network', provider },
       );
     } finally {

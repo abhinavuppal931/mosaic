@@ -1,4 +1,4 @@
-﻿node_modules/
+node_modules/
 build/
 .env
 .env.local
@@ -12,3 +12,10 @@ journal/*
 # The user's own config in the Mosaic home (a clone's home is the repo root). The shipped
 # defaults live in data/mosaic.config.json and stay tracked.
 /mosaic.config.json
+
+# Review screenshots. Regenerate with: npm run screens --prefix room (needs Playwright). No test reads them.
+room/test/screens/*.png
+
+# Local noise
+.DS_Store
+Thumbs.db

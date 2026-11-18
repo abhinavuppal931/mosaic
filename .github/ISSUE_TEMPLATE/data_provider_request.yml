@@ -1,0 +1,32 @@
+name: Data provider request
+description: Suggest a data source for the data pack.
+labels: ["data"]
+body:
+  - type: input
+    id: provider
+    attributes:
+      label: Provider
+      description: Name and link.
+    validations:
+      required: true
+  - type: textarea
+    id: adds
+    attributes:
+      label: Data it adds
+      description: What the free sources do not cover today, for example news, estimates or short interest.
+    validations:
+      required: true
+  - type: textarea
+    id: tier
+    attributes:
+      label: Free tier and key
+      description: Does it have a free tier? Does it need a key? What are the rate limits?
+    validations:
+      required: true
+  - type: textarea
+    id: terms
+    attributes:
+      label: Terms
+      description: Do the provider's terms allow caching and use in a tool like this? Link the terms.
+    validations:
+      required: true

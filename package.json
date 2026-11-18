@@ -7,7 +7,8 @@
   "license": "MIT",
   "engines": { "node": ">=20" },
   "scripts": {
-    "start": "node room/server.js",
+    "start": "node room/server.js --open",
+    "check": "node data/cli.mjs setup --status",
     "test": "node --test",
     "test:core": "node --test tests/core/*.test.mjs",
     "pack:msft": "node data/cli.mjs pack --ticker MSFT",

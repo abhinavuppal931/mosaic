@@ -1,0 +1,25 @@
+# gitleaks configuration for Mosaic.
+#
+# It keeps every default gitleaks rule and allows one known false positive. Data-pack facts carry
+# a `key` field that names the fact (for example `key: 'next_report_expected'` in
+# data/packs/ticker.mjs and data/packs/macro.mjs, or `"key": "market_cap"` in data-pack.json
+# files). The generic API key rule reads those as secrets. The pre-public audit on 2026-11-18
+# (docs/security-audit-2026-11-18.md) found 28 of these and no real secrets.
+#
+# The allowlist matches only a fact key: lowercase letters, digits and underscores after `key:`
+# or `"key":`. It does not exclude any file, so a real secret anywhere is still reported.
+#
+# Run: gitleaks git . --config .gitleaks.toml   (history)   or   gitleaks dir . --config .gitleaks.toml
+# GitHub's own secret scanning does not read this file; it matches provider token formats,
+# which these fact keys do not resemble.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Data-pack fact keys (fact names, not secrets)"
+regexTarget = "line"
+regexes = [
+  '''\bkey:\s*'[a-z0-9_]+'\s*,''',
+  '''"key":\s*"[a-z0-9_]+"''',
+]

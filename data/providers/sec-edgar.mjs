@@ -22,7 +22,7 @@ export function secUserAgent(contact) {
 function headers(ctx) {
   const contact = ctx.config?.contact || '';
   if (!/\S+@\S+\.\S+/.test(contact)) {
-    throw new ProviderError('sec-edgar: the SEC needs your name and email as a contact. Set MOSAIC_SEC_CONTACT, or run: node data/cli.mjs setup', { kind: 'config', provider: 'sec-edgar' });
+    throw new ProviderError('sec-edgar: the SEC needs your name and email as a contact. Set MOSAIC_SEC_CONTACT, or run setup (node data/cli.mjs setup, inside the Mosaic folder)', { kind: 'config', provider: 'sec-edgar' });
   }
   return { 'user-agent': secUserAgent(contact), accept: 'application/json, text/xml, */*' };
 }

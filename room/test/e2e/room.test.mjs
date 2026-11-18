@@ -296,3 +296,26 @@ for (const ex of ['2026-11-12-cost-sell', '2026-11-15-msft-size']) {
     }
   });
 }
+
+test('an empty home shows the example verdict, lists three examples, and opens one', { skip, timeout: 60_000 }, async () => {
+  const r = await startServer({ sessions: tmp(), port: 0, quiet: true, journal: tmp() });
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+    const errors = watchErrors(page);
+    await page.goto(r.url);
+    await page.locator('.v-verdict h1').waitFor({ timeout: 8000 });
+    assert.match(await page.locator('.crumb').textContent(), /^\s*Examples/);
+    assert.equal(await page.locator('[data-act=save]').count(), 0, 'an example cannot be saved');
+    await page.goto(`${r.url}/#/journal`);
+    await page.locator('a.jrow').first().waitFor({ timeout: 5000 });
+    assert.equal(await page.locator('a.jrow').count(), 3);
+    await page.locator('a.jrow').first().click();
+    await page.waitForFunction(() => /^#\/example\//.test(location.hash), null, { timeout: 5000 });
+    await page.locator('.v-verdict h1').waitFor({ timeout: 5000 });
+    assert.deepEqual(errors, []);
+  } finally {
+    await browser.close();
+    await r.close();
+  }
+});

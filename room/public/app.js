@@ -1,6 +1,8 @@
 // The Mosaic Room page. It renders what the server sends (a model built from the session files)
 // and never computes a score itself: every number on screen arrives already derived from the
 // seats' option scores. Views: live (#/live), verdict (#/verdict), journal (#/journal).
+// #/example/<name> shows one of the finished example councils; until the user has a council of
+// their own, the server sends the newest example on its own.
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const app = $('#app');
@@ -38,7 +40,9 @@ function face(seat, cls, alt = '') {
 }
 
 const S = {
-  data: null,
+  data: null, // what the page shows: the server's state, or an example picked from the journal
+  live: null, // the server's latest state
+  example: null, // name of the example picked from the journal, if any
   connected: false,
   view: null,
   userChose: false,
@@ -59,8 +63,17 @@ function connect() {
     es = new EventSource('/api/events');
     es.addEventListener('state', (e) => {
       S.connected = true;
+      S.live = JSON.parse(e.data);
+      if (S.example && S.live.example) return; // keep showing the example the user picked
+      if (S.example) {
+        // The user's own council has started: it takes over from the example.
+        S.example = null;
+        S.userChose = false;
+        history.replaceState(null, '', location.pathname);
+        toast('Your council has started.');
+      }
       const prev = S.data;
-      S.data = JSON.parse(e.data);
+      S.data = S.live;
       onState(prev);
     });
     es.onopen = () => {
@@ -95,8 +108,31 @@ async function loadJournal() {
 
 /* ---------------- Routing ---------------- */
 
+async function loadExample(name) {
+  try {
+    const r = await fetch(`/api/examples/${encodeURIComponent(name)}`);
+    if (!r.ok) throw new Error('not found');
+    const st = await r.json();
+    S.example = name;
+    S.data = st;
+    S.view = st.model?.verdict ? 'verdict' : 'live';
+    S.userChose = true;
+    stopReplay();
+    render();
+    window.scrollTo(0, 0);
+  } catch {
+    location.hash = '#/journal';
+  }
+}
+
 function route() {
   const v = location.hash.replace(/^#\/?/, '');
+  const ex = v.match(/^example\/([\w.-]+)$/);
+  if (ex) return loadExample(ex[1]);
+  if (!v && S.example) {
+    S.example = null;
+    S.data = S.live;
+  }
   if (v === 'live' || v === 'verdict' || v === 'journal') {
     S.view = v;
     S.userChose = true;
@@ -138,6 +174,7 @@ function afterRender() {
 
 function statusChip(d) {
   if (S.replay !== null) return `<span class="status warn"><i></i>Replay</span>`;
+  if (d.example) return `<span class="status off"><i></i>Example</span>`;
   if (!S.connected) return `<span class="status warn"><i></i>Reconnecting</span>`;
   if (d.done) return `<span class="status off"><i></i>Finished</span>`;
   if (d.stale) return `<span class="status warn"><i></i>Paused</span>`;
@@ -366,7 +403,7 @@ function verdictView(m, d) {
   const n = v.votes.length;
   return `<div class="v-verdict">
   <header class="hdr">
-    <div class="hdr-left">${brand()}<span class="crumb"><a href="#/journal">Councils</a>  /  ${h(m.meta.question)}</span></div>
+    <div class="hdr-left">${brand()}<span class="crumb"><a href="#/journal">${d.example ? 'Examples' : 'Councils'}</a>  /  ${h(m.meta.question)}</span></div>
     <div class="actions">${saveBtn}<button type="button" class="btn btn-ghost" data-act="share">${icon('share')}Share</button><button type="button" class="btn btn-primary" data-act="pdf">${icon('download')}Download PDF</button></div>
   </header>
   <main id="main" class="wrap">
@@ -430,9 +467,17 @@ const labelCase = (s) => (s ? s[0] + s.slice(1).toLowerCase() : '');
 
 function journalView() {
   const j = S.journal;
-  const back = S.data?.ok ? `<a class="btn btn-ghost" href="#/${S.data.model?.verdict ? 'verdict' : 'live'}">${icon('arrowLeft')}Back to the council</a>` : '';
+  const backTo = S.example ? `example/${S.example}` : S.data?.model?.verdict ? 'verdict' : 'live';
+  const back = S.data?.ok ? `<a class="btn btn-ghost" href="#/${backTo}">${icon('arrowLeft')}Back to the council</a>` : '';
   let body;
   if (!j) body = '<div class="jempty">Opening the journal.</div>';
+  else if (!j.rows?.length && j.examples?.length) body = `<div class="jempty">Nothing saved yet. Until you run a council of your own with /mosaic, here are three finished ones to open.</div>${j.examples.map((r) => {
+    const opt = r.latest?.options?.find((o) => o.id === r.recommended);
+    return `<a class="jrow" href="#/example/${h(r.example)}"><div><div class="t">${h(r.company ? `${r.key}, ${labelCase(r.company)}` : r.key)}</div><div class="s">${h(r.latest?.decision || '')}</div></div>
+    <div><div>${h(labelCase(r.label || ''))}</div><div class="s">${h(opt ? `“${opt.label}”` : '')}</div></div>
+    <div class="hide-sm"><div>${h(fmtDate(r.lastVerdict))}</div><div class="s">Example council</div></div>
+    <div><div>Open it</div><div class="s">${S.example === r.example || (!S.example && S.data?.session === r.example) ? 'Showing now' : 'Finished'}</div></div></a>`;
+  }).join('')}`;
   else if (!j.rows?.length) body = `<div class="jempty">Nothing saved yet. When a council reaches a verdict, use Save to journal and it will be listed here with its next check-in date.</div>`;
   else body = j.rows.map((r) => {
     const opt = r.latest?.options?.find((o) => o.id === r.recommended);
@@ -556,12 +601,17 @@ async function shareCanvas() {
   const LW = Math.round((W * 1.15) / 2.15);
   const P = 48;
   // Mark and byline.
-  const sq = [['#FF7A38', 0, 0], ['#3A3733', 1, 0], ['#6C6660', 0, 1], ['#A3C4AA', 1, 1]];
-  for (const [col, x, y] of sq) {
+  // The Mosaic mark (docs/mark.svg): the amber tile is turned 8 degrees and nudged out of line.
+  const sq = [['#9A9187', 0, 0, 0], ['#FF7A38', 1, 0, 8], ['#6F6860', 0, 1, 0], ['#A3C4AA', 1, 1, 0]];
+  for (const [col, x, y, turn] of sq) {
+    c.save();
     c.fillStyle = col;
+    c.translate(P + x * 14 + 6 + (turn ? 1 : 0), P + y * 14 + 6 - (turn ? 1 : 0));
+    c.rotate((turn * Math.PI) / 180);
     c.beginPath();
-    c.roundRect(P + x * 14, P + y * 14, 12, 12, 3);
+    c.roundRect(-6, -6, 12, 12, 3);
     c.fill();
+    c.restore();
   }
   c.textBaseline = 'alphabetic';
   c.fillStyle = '#9A938A';

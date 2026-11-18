@@ -6,7 +6,10 @@ import os from 'node:os';
 import path from 'node:path';
 import { FIXTURES, blockNetwork, fakeFetch } from './helpers/fake-fetch.mjs';
 import { FREE_ROUTES, NOW, SEC_CONTACT } from './helpers/setup.mjs';
-import { main as dataCli } from '../../data/cli.mjs';
+import { main as dataCli, firstRunCheck, quotePath } from '../../data/cli.mjs';
+import { loadConfig } from '../../data/lib/config.mjs';
+import { createEnv } from '../../data/lib/env.mjs';
+import { paths as resolvePaths } from '../../data/lib/paths.mjs';
 import { main as scoreCli } from '../../scripts/score.mjs';
 import { main as citeCli } from '../../scripts/check-citations.mjs';
 import { main as journalCli } from '../../scripts/journal.mjs';
@@ -122,9 +125,56 @@ describe('data/cli.mjs', () => {
     const bad = await capture(() => dataCli(['setup', '--home', home], { prompt: async () => 'no email here' }));
     assert.equal(bad.code, 64);
     const st = await capture(() => dataCli(['setup', '--status', '--home', home]));
-    assert.match(st.out, /SEC contact\s+set \(user config\)/);
+    assert.match(st.out, /SEC contact\s+ok\s+set \(user config\)/);
     assert.match(st.out, /FMP_API_KEY\s+not set/);
     assert.ok(!st.out.includes('jane@example.com'));
+  });
+
+  test('setup --status first-run check: ready with a contact, exit 0', async () => {
+    const home = tmp();
+    await capture(() => dataCli(['setup', '--home', home], { prompt: async () => 'Jane Doe jane@example.com' }));
+    const r = await capture(() => dataCli(['setup', '--status', '--home', home]));
+    assert.equal(r.code, 0, r.out);
+    assert.match(r.out, /^First-run check/m);
+    assert.match(r.out, /Node\.js\s+ok/);
+    assert.match(r.out, /Mosaic home\s+ok/);
+    assert.match(r.out, /SEC contact\s+ok/);
+    assert.match(r.out, /^Ready\.$/m);
+    assert.ok(!/next step:/.test(r.out));
+  });
+
+  test('setup --status first-run check: a missing contact exits 3 with a next step that names setup', async () => {
+    const home = tmp();
+    const r = await capture(() => dataCli(['setup', '--status', '--home', home]));
+    assert.equal(r.code, 3, r.out);
+    assert.match(r.out, /SEC contact\s+FIX/);
+    assert.match(r.out, /next step: .*setup/);
+    assert.match(r.out, /One item to fix before a council\./);
+    assert.ok(!r.out.includes('jane@example.com'));
+  });
+
+  test('first-run check: Node older than 20 fails with a Node.js 20 next step', () => {
+    const home = tmp();
+    const p = resolvePaths({ home });
+    const config = loadConfig({ userConfigPath: p.userConfig });
+    const env = createEnv({ files: [p.envFile] });
+    const check = firstRunCheck(p, config, env, { nodeVersion: '18.19.0' });
+    const node = check.items.find((i) => i.name === 'Node.js');
+    assert.equal(node.ok, false);
+    assert.match(node.next, /Node\.js 20/);
+    assert.equal(check.ready, false);
+    assert.equal(firstRunCheck(p, config, env, { nodeVersion: '20.0.0' }).items.find((i) => i.name === 'Node.js').ok, true);
+  });
+
+  test('first-run check: an unwritable home fails with a next step', async () => {
+    // A path under a regular file cannot be created (ENOTDIR), even as root.
+    const file = path.join(tmp(), 'a-file');
+    fs.writeFileSync(file, 'x');
+    const home = path.join(file, 'home');
+    const r = await capture(() => dataCli(['setup', '--status', '--home', home]));
+    assert.equal(r.code, 3, r.out);
+    assert.match(r.out, /Mosaic home\s+FIX/);
+    assert.match(r.out, /next step: .*MOSAIC_HOME/);
   });
 
   test('setup refuses a contact on the command line and explains the alternatives without a terminal', async () => {
@@ -204,5 +254,22 @@ describe('scripts', () => {
     const none = await capture(() => journalCli(['diff', 'NVDA', '--pack', newPack, '--journal', jdir]));
     assert.equal(none.code, 1);
     assert.match(none.err, /no journal entries for NVDA/);
+  });
+});
+
+describe('path hints', () => {
+  test('quotePath wraps in plain quotes and keeps single backslashes', () => {
+    assert.equal(quotePath('C:\\Users\\Jane Doe\\mosaic\\data\\cli.mjs'), '"C:\\Users\\Jane Doe\\mosaic\\data\\cli.mjs"');
+  });
+
+  test('the SEC contact next step does not double backslashes in a Windows plugin root', () => {
+    const root = 'C:\\Users\\Jane Doe\\mosaic';
+    const p = { ...resolvePaths({ home: tmp() }), pluginRoot: root };
+    const env = createEnv({ files: [p.envFile], env: {} });
+    const config = loadConfig({ userConfigPath: p.userConfig });
+    const item = firstRunCheck(p, config, env).items.find((i) => i.name === 'SEC contact');
+    assert.equal(item.ok, false);
+    assert.ok(item.next.includes(root));
+    assert.ok(!item.next.includes('\\\\'));
   });
 });
