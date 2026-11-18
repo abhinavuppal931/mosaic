@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Mosaic, icon C (Dissent)</title>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6F4EF"/>
+      <stop offset="1" stop-color="#ECE8E0"/>
+    </linearGradient>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#3A2A1C" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#paper)"/>
+  <!-- Three tiles hold the grid; the amber tile, the dissent, sits a step out of it. -->
+  <rect x="232" y="540" width="252" height="252" rx="52" fill="#1E1B18"/>
+  <rect x="540" y="540" width="252" height="252" rx="52" fill="#8FB497"/>
+  <rect x="232" y="232" width="252" height="252" rx="52" fill="#8A847D"/>
+  <g transform="rotate(12 680 344)" filter="url(#lift)">
+    <rect x="566" y="206" width="252" height="252" rx="52" fill="#FF7A38"/>
+  </g>
+</svg>

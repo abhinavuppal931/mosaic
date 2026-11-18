@@ -1,0 +1,29 @@
+name: Seat request
+description: Suggest an investor for the council.
+labels: ["seat"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Seats are simulations built from an investor's free public work. Copyrighted books are not fetched or quoted.
+  - type: input
+    id: investor
+    attributes:
+      label: Investor
+      description: Full name.
+    validations:
+      required: true
+  - type: textarea
+    id: lens
+    attributes:
+      label: Why they add a distinct lens
+      description: Which question would this seat own that the current thirteen do not?
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Public sources
+      description: Letters, memos, papers, speeches, testimony or long interviews, with links. Books are not used as sources.
+    validations:
+      required: true

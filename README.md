@@ -1,6 +1,20 @@
+<div align="center">
+
+<!-- HERO: replaced in ABH-339 phase 2 -->
+<!-- <img src="docs/hero.png" alt="The Mosaic Room playing a council live: thirteen investor seats, a debate in progress and the verdict panel" width="860"> -->
+
 # Mosaic
 
-A council of investing legends for Claude Code. Bring an investment decision; thirteen simulated investors (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry by default; Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee on call) argue it over three rounds from one shared, sourced fact sheet. A Chair returns a graded verdict that keeps the dissent, with a pre-mortem, kill criteria and a date to re-check, and remembers it for next time.
+**Bring an investment decision. Thirteen simulated investing legends debate it from one sourced fact sheet and return a graded verdict that keeps the dissent.**
+
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![dependencies: zero](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)](package.json)
+[![Claude Code: plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange.svg)](#quick-start)
+[![CI](https://github.com/abhinavuppal931/mosaic/actions/workflows/test.yml/badge.svg)](https://github.com/abhinavuppal931/mosaic/actions/workflows/test.yml)
+
+</div>
+
+A council of investing legends for Claude Code. Thirteen simulated investors (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry by default; Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee on call) argue your decision over three rounds. A Chair returns a graded verdict that keeps the dissent, with a pre-mortem, kill criteria and a date to re-check, and remembers it for next time.
 
 > **Mosaic grades how a decision was made. It is not investment advice.** Every seat is a simulation built from that investor's public work. It is not the person, is not affiliated with or endorsed by them, and does not speak for them. Verbatim quotes appear only with a source id. Mosaic grades your reasoning and decision process, never a security: no price targets (valuation is a range and "what the price implies"), and position sizing appears only as education about survivable loss. Numbers carry their as-of dates; verify them against the filings before acting.
 
@@ -97,18 +111,10 @@ The Room shows the three example councils until you run one of your own.
 
 `--plugin-dir` loads the clone as it is on disk, so your edits and a `git pull` apply the next time you start Claude Code with it. To use Mosaic without the flag, install it from the marketplace as in the Quick start above. (Adding the clone as a local marketplace copies it into Claude Code's plugin cache, so later edits would not show up.)
 
-## Where your data lives
+## See it in action
 
-Sessions, the journal, the cache, `.env.local` and `mosaic.config.json` live in `~/.mosaic`. On Windows that is `C:\Users\<you>\.mosaic`. This is the same for marketplace and clone installs. These files survive plugin updates and uninstalls.
-
-- Set `MOSAIC_HOME` to use another folder.
-- An older clone or plugin data folder that already holds sessions keeps being used.
-- `/mosaic` pre-approves only its own five scripts (run as `node "<plugin folder>/<script>"`) and file reads and writes inside `~/.mosaic`, so a council runs without approval prompts. Anything else still asks, including other `node` commands. Details are in `docs/marketplace-listing.md`, under Security notes.
-- To print the folders, run this inside the clone:
-
-```bash
-node data/cli.mjs paths
-```
+<!-- The tour lands in phase 2 (ABH-339). -->
+Take the tour: [docs/TOUR.md](docs/TOUR.md).
 
 ## Use
 
@@ -170,6 +176,45 @@ node room/server.js --home <home>
 Without `--session`, the Room follows the newest council in that home's `sessions/` folder, so a council started after the Room opens shows up by itself. Other options are `--plugin-data`, `--sessions`, `--journal` and `--roster`.
 
 Three finished councils in `room/examples/` run with no live council: a buy (NVIDIA), a sell (Costco) and a sizing decision (Microsoft). The Room's tests run with the rest under `npm test`. Its browser tests need Playwright and skip themselves without it.
+
+## Where your data lives
+
+Sessions, the journal, the cache, `.env.local` and `mosaic.config.json` live in `~/.mosaic`. On Windows that is `C:\Users\<you>\.mosaic`. This is the same for marketplace and clone installs. These files survive plugin updates and uninstalls.
+
+- Set `MOSAIC_HOME` to use another folder.
+- An older clone or plugin data folder that already holds sessions keeps being used.
+- `/mosaic` pre-approves only its own five scripts (run as `node "<plugin folder>/<script>"`) and file reads and writes inside `~/.mosaic`, so a council runs without approval prompts. Anything else still asks, including other `node` commands. Details are in `docs/marketplace-listing.md`, under Security notes.
+- To print the folders, run this inside the clone:
+
+```bash
+node data/cli.mjs paths
+```
+
+## FAQ
+
+**Is this investment advice?**
+No. In the words of the disclaimer above: "Mosaic grades how a decision was made. It is not investment advice."
+
+**Does it cost money?**
+Mosaic is free and MIT licensed. It runs on your Claude Code plan, so it uses your plan's usage. A full council is three sub-agent runs per seat. `--quick` runs four seats and skips Round 3 when the scores already converged, so it costs less.
+
+**Do I need API keys?**
+No. It uses free sources by default. Keys are optional and add more data (see Adding a key).
+
+**What data leaves my machine?**
+Only requests to the listed data sources, made when building a data pack. There is no telemetry. See [What Mosaic runs and sends](#what-mosaic-runs-and-sends).
+
+**Are the seats the real people?**
+No. Each seat is a simulation built from that investor's public work. It is not the person and does not speak for them.
+
+**Can I add my own investor?**
+Yes. Run `/newseat` in Claude Code. It builds the brain from free public sources, writes the seat agent and registers it in the roster.
+
+**Does it work on Windows?**
+Yes. It is tested on Windows 11 with Node 24.
+
+**Where are my sessions?**
+In `~/.mosaic` (on Windows, `C:\Users\<you>\.mosaic`). See Where your data lives.
 
 ## Troubleshooting
 
@@ -309,6 +354,9 @@ data/                    providers/, router.mjs, packs/, lib/, cli.mjs, mosaic.c
 scripts/                 score.mjs, check-citations.mjs, journal.mjs and their configs
 tests/core/              node:test suite with recorded fixtures (no network)
 room/                    the Room: server.js, public/, lib/, examples/, test/
+docs/                    LAUNCH.md, marketplace-listing.md, design/, research/
+.github/                 test.yml (CI), issue forms, pull request template, release notes
+CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md, CHANGELOG.md
 ```
 
 ## Tests
@@ -320,6 +368,10 @@ npm test
 ```
 
 The core suite runs every adapter against recorded responses (no network), the router's fallbacks, retries, rate limits and cache, pack building, the scoring and label math, the citation checker and the journal. Live smoke packs built against the free sources are in `tests/core/fixtures/live/` with a note on what answered.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). To report a security problem, read [SECURITY.md](SECURITY.md) first.
 
 ## Credits
 

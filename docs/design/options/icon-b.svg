@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <title>Mosaic, icon B (Ceramic), vector master for small sizes; the 1024 px PNG is the three.js render in icon-b.scene.html</title>
+  <defs>
+    <radialGradient id="field" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#16110E"/><stop offset="1" stop-color="#0B0908"/></radialGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".18"/><stop offset=".35" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="170%" height="170%"><feDropShadow dx="18" dy="22" stdDeviation="16" flood-color="#000" flood-opacity=".7"/></filter>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#field)"/>
+  <!-- Each tile: a darker side band under a glazed top face. The amber tile stands taller. -->
+  <g filter="url(#shadow)">
+    <rect x="540" y="262" width="252" height="232" rx="44" fill="#1C1916"/><rect x="540" y="250" width="252" height="226" rx="44" fill="#2F2B27"/>
+    <rect x="232" y="560" width="252" height="232" rx="44" fill="#3F3A35"/><rect x="232" y="548" width="252" height="226" rx="44" fill="#615B54"/>
+    <rect x="540" y="560" width="252" height="232" rx="44" fill="#5E8467"/><rect x="540" y="548" width="252" height="226" rx="44" fill="#8DB396"/>
+    <rect x="232" y="246" width="252" height="248" rx="44" fill="#C7531B"/><rect x="232" y="216" width="252" height="232" rx="44" fill="#FF6E2A"/>
+  </g>
+  <g fill="url(#gloss)">
+    <rect x="540" y="250" width="252" height="226" rx="44"/><rect x="232" y="548" width="252" height="226" rx="44"/>
+    <rect x="540" y="548" width="252" height="226" rx="44"/><rect x="232" y="216" width="252" height="232" rx="44"/>
+  </g>
+</svg>

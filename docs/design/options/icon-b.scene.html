@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#080706}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+// Mosaic icon B (Ceramic): the Room's four-tile mark as glazed ceramic tiles, the amber one raised.
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const SIZE = 1024;
+const r = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+r.setPixelRatio(1); r.setSize(SIZE, SIZE);
+r.outputColorSpace = THREE.SRGBColorSpace; r.toneMapping = THREE.NeutralToneMapping; r.toneMappingExposure = 0.92;
+r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap;
+document.body.appendChild(r.domElement);
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#0B0908');
+const pmrem = new THREE.PMREMGenerator(r);
+scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.32;
+const cam = new THREE.PerspectiveCamera(13.5, 1, 0.1, 100);
+cam.position.set(0, 14.6, 8.0); cam.lookAt(0, 0.12, 0.02);
+// Slab the tiles sit on: matte, warm black.
+const ground = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshStandardMaterial({ color: '#0A0807', roughness: 0.98 }));
+ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+const glaze = (c, rough = 0.5) => new THREE.MeshPhysicalMaterial({ color: c, roughness: rough, clearcoat: 0.7, clearcoatRoughness: 0.28 });
+const T = 1.0, G = 0.24; // tile and gap, the mark's 9:2 proportion
+const tiles = [
+  { x: -1, z: -1, c: '#FF6A24', h: 0.46 },
+  { x: 1, z: -1, c: '#2E2A26', h: 0.22 },
+  { x: -1, z: 1, c: '#5E5852', h: 0.22 },
+  { x: 1, z: 1, c: '#86AE8F', h: 0.22 },
+];
+for (const t of tiles) {
+  const m = new THREE.Mesh(new RoundedBoxGeometry(T, t.h, T, 8, Math.min(0.1, t.h / 2 - 0.01)), glaze(t.c));
+  m.position.set(t.x * (T + G) / 2, t.h / 2, t.z * (T + G) / 2);
+  m.castShadow = true; m.receiveShadow = true; scene.add(m);
+}
+const key = new THREE.DirectionalLight('#FFF1E4', 2.2);
+key.position.set(-3.5, 7, 3.2); key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048); key.shadow.radius = 7; key.shadow.bias = -0.0004;
+Object.assign(key.shadow.camera, { left: -3, right: 3, top: 3, bottom: -3 });
+scene.add(key);
+const rim = new THREE.DirectionalLight('#FFB58A', 0.7); rim.position.set(4, 2.5, -4); scene.add(rim);
+scene.add(new THREE.HemisphereLight('#2A2420', '#060505', 0.35));
+// A soft pool of light under the mark, so the slab is not flat black.
+const pool = new THREE.SpotLight('#FFE2CC', 22, 16, 0.3, 1, 2); pool.position.set(0, 7, 0.6); pool.target.position.set(0, 0, 0); scene.add(pool, pool.target);
+r.render(scene, cam);
+window.__done = true;
+</script></body></html>
