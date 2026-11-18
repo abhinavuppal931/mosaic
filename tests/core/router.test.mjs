@@ -262,6 +262,20 @@ describe('keys and redaction', () => {
     clearSecrets();
   });
 
+  test('a contact from the user config is masked in error text, like one from the env', async () => {
+    clearSecrets();
+    const contact = 'Jane Doe jane.contact@example.com';
+    const failing = stub('a', () => {
+      throw new ProviderError(`a: upstream rejected client ${contact}`, { kind: 'http', provider: 'a' });
+    });
+    const r = await routerWith([failing], { config: { providers: { a: { contact } } } }).get('quote', 'X');
+    const text = JSON.stringify(r);
+    assert.ok(!text.includes('jane.contact@example.com'), text);
+    assert.match(text, /REDACTED/);
+    assert.equal(redactText(`seen ${contact}`), 'seen REDACTED');
+    clearSecrets();
+  });
+
   test('env reader: process env wins over .env.local; quotes stripped', () => {
     const dir = tmp();
     const f = path.join(dir, '.env.local');

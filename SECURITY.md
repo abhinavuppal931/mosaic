@@ -11,7 +11,7 @@
 Report it privately. Do not open a public issue.
 
 1. Open the repository on GitHub and go to the Security tab.
-2. Choose "Report a vulnerability" (GitHub private vulnerability reporting).
+2. Choose "Report a vulnerability" (GitHub private vulnerability reporting), or go straight to https://github.com/abhinavuppal931/mosaic/security/advisories/new.
 3. Say what you found, how to reproduce it and what it affects.
 
 You will get a reply from the maintainer. Please give time to fix it before you share details.

@@ -25,6 +25,7 @@ import { renderPackMarkdown } from './packs/render.mjs';
 import { readHoldings } from './packs/portfolio.mjs';
 import { checkProvider } from './lib/contract-test.mjs';
 import { isMain } from './lib/entry.mjs';
+import { redactText } from './lib/redact.mjs';
 
 const HELP = `Mosaic data CLI
 
@@ -244,7 +245,7 @@ export async function main(argv, inject = {}) {
     if (cmd === 'paths') return cmdPaths(args);
     throw usage(`unknown command "${cmd}"`);
   } catch (err) {
-    process.stderr.write(`${err.usage ? 'usage' : 'error'}: ${err.message}\n`);
+    process.stderr.write(`${err.usage ? 'usage' : 'error'}: ${redactText(err.message)}\n`);
     if (err.usage) process.stderr.write(`\n${HELP}\n`);
     return err.usage ? 64 : 1;
   }
