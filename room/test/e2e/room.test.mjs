@@ -10,7 +10,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { startServer } from '../../server.js';
 import { phases, stageTo } from '../helpers/stepper.mjs';
-import { layoutProblems } from '../helpers/checks.mjs';
+import { layoutProblems, loadAllImages } from '../helpers/checks.mjs';
 
 const EX = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'examples');
 const NVDA = path.join(EX, '2026-11-17-nvda-buy');
@@ -106,7 +106,7 @@ test('the live view follows the session files from the brief to the verdict', { 
         assert.equal(await page.locator('.turn').count(), 2);
       }
       if (ph.name === 'scores and citations') assert.equal(await page.locator('.speech .name').textContent(), 'The Chair');
-      const problems = await page.evaluate(layoutProblems);
+      const problems = (await page.evaluate(loadAllImages), await page.evaluate(layoutProblems));
       assert.deepEqual(problems, [], `${ph.name}: ${problems.join('; ')}`);
     }
     assert.deepEqual(errors, []);
@@ -241,14 +241,14 @@ test('phone: the scorecard scrolls sideways with its first column pinned, and no
     });
     assert.equal(Math.round(after.pin), Math.round(before.pin), 'the investor column stays put');
     assert.ok(after.cell < before.cell - 100, 'the scores move under it');
-    assert.deepEqual(await page.evaluate(layoutProblems), []);
+    assert.deepEqual((await page.evaluate(loadAllImages), await page.evaluate(layoutProblems)), []);
 
     await page.goto(`${r.url}/#/live`);
     await page.locator('.v-live .speech').waitFor();
     const order = await page.evaluate(() => ['.qmob', '.speech', '.seatrow'].map((s) => document.querySelector(s).getBoundingClientRect().top));
     assert.ok(order[0] < order[1] && order[1] < order[2], 'question, then the speaker, then the seat strip');
     assert.equal(await page.locator('.seatrow').evaluate((el) => getComputedStyle(el).overflowX), 'auto');
-    assert.deepEqual(await page.evaluate(layoutProblems), []);
+    assert.deepEqual((await page.evaluate(loadAllImages), await page.evaluate(layoutProblems)), []);
     assert.deepEqual(errors, []);
   } finally {
     await browser.close();
@@ -285,11 +285,7 @@ for (const ex of ['2026-11-12-cost-sell', '2026-11-15-msft-size']) {
         for (const view of ['verdict', 'live']) {
           await page.goto(`${r.url}/#/${view}`);
           await page.locator(`.v-${view}`).waitFor();
-          await page.evaluate(async () => {
-            for (const im of document.images) im.loading = 'eager';
-            await Promise.all([...document.images].map((im) => (im.complete ? null : new Promise((ok) => { im.onload = im.onerror = ok; }))));
-          });
-          assert.deepEqual(await page.evaluate(layoutProblems), [], `${view} at ${width}`);
+          assert.deepEqual((await page.evaluate(loadAllImages), await page.evaluate(layoutProblems)), [], `${view} at ${width}`);
         }
         assert.deepEqual(errors, []);
         await page.close();

@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 import { startServer } from '../server.js';
 import { startBoardServer } from './boards.mjs';
 import { stageTo } from '../test/helpers/stepper.mjs';
-import { layoutProblems } from '../test/helpers/checks.mjs';
+import { layoutProblems, loadAllImages } from '../test/helpers/checks.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOM = path.resolve(HERE, '..');
@@ -47,10 +47,7 @@ async function shoot(url, file, width, ready, { check = true } = {}) {
   await page.goto(url);
   await page.waitForSelector(ready);
   await page.evaluate(() => document.fonts.ready);
-  await page.evaluate(async () => {
-    for (const im of document.images) im.loading = 'eager';
-    await Promise.all([...document.images].map((im) => (im.complete ? null : new Promise((ok) => { im.onload = im.onerror = ok; }))));
-  });
+  await page.evaluate(loadAllImages);
   await page.waitForTimeout(600);
   const problems = check ? await page.evaluate(layoutProblems) : [];
   await page.screenshot({ path: path.join(OUT, file), fullPage: true, animations: 'disabled' });

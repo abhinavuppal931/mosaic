@@ -8,7 +8,10 @@ export function layoutProblems() {
   if (doc.scrollWidth > doc.clientWidth + 1) out.push(`page scrolls sideways by ${doc.scrollWidth - doc.clientWidth}px`);
   for (const img of document.images) {
     if (img.closest('[hidden]')) continue;
-    if (!img.complete || img.naturalWidth === 0) out.push(`broken image ${img.getAttribute('src')}`);
+    // Broken means it finished loading and has no pixels. An image still loading is not broken;
+    // callers run loadAllImages first so lazy images are loaded before the check.
+    if (img.complete && img.naturalWidth === 0) out.push(`broken image ${img.getAttribute('src')}`);
+    else if (!img.complete) out.push(`image still loading ${img.getAttribute('src')}`);
   }
   // Text that overflows its own box (clipped or spilling) where it is not meant to scroll.
   const scrollers = (el) => {
@@ -40,4 +43,10 @@ export function layoutProblems() {
     }
   }
   return [...new Set(out)];
+}
+
+/** Run inside the page (pass to page.evaluate): load every image, lazy ones included, and wait. */
+export async function loadAllImages() {
+  for (const im of document.images) im.loading = 'eager';
+  await Promise.all([...document.images].map((im) => (im.complete ? null : new Promise((ok) => { im.onload = im.onerror = ok; }))));
 }
