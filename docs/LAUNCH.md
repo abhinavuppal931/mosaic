@@ -19,7 +19,7 @@ Steps in order. Each says who does it and how to check it.
 Description (under 120 characters):
 
 ```
-A council of simulated investing legends for Claude Code. Debates your investment decision and grades it. Not advice.
+Simulated investing legends debate your decision in Claude Code and return a scored verdict. Not investment advice.
 ```
 
 That is 117 characters.

@@ -47,3 +47,12 @@ The live frame is a real Room state: the NVIDIA example paused in Round 2, while
 - **Social A, Split** (`social-a.png`, 1280 by 640): the headline on the left, and the live Room with Munger speaking on the right. Strongest at 1.91:1 on X and LinkedIn. A centred square crop loses most of the headline.
 - **Social B, Centred** (`social-b.png`): a centred mark and headline over the seats, faded behind. It shows less of the product, but it survives square and small crops.
 - `social-cards.png` shows both inside X, LinkedIn and Slack link cards, and as a 120 px square, at real display sizes. On X, the "github.com" chip sits in the bottom-left corner, so Social A keeps its attribution line above that corner.
+
+## Picks and fixes (after the blind review)
+
+The picks were Icon C, Hero A and Social B. Icon B, Hero B and Social A were dropped, and so was Icon A. The panel's fixes:
+
+- **Copy.** Every asset says "Simulated from their public work" and "Not investment advice." at a legible size, and none says a bare "Thirteen": a council seats seven, not thirteen. The marketing lines use plain words, with no "seats", "Chair" or "keeps the dissent". No frame shows a price level.
+- **Icon C.** It sits on the warm-black field, with flat tiles. The amber tile is turned 8 degrees, and the group is centred on its true bounds. Every tile is at least 3:1 against the field. `icon-c-small.svg` is the favicon and small-size cut, with the glyph at 80%. `mark.svg` is the bare mark used in every lockup.
+- **Hero A.** The frame shows Michael Burry, who is living, speaking in Round 2. The window has equal top and bottom margins. A verdict card is drawn in the Room's own style. The command chip frames the decision, and the install line sits under it.
+- **Social B.** Only the seat row sits behind the type, brightened. The centred block is 600 px wide. A verdict chip is added, and the attribution is legible, with no URL on the image.
