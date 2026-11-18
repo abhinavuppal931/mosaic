@@ -334,14 +334,25 @@ await hero(false);
   const mp4 = path.join(DOCS, 'hero-loop.mp4');
   ff(...trim, '-an', '-c:v', 'libx264', '-crf', '28', '-pix_fmt', 'yuv420p', '-movflags', '+faststart', mp4);
   const gifPath = path.join(DOCS, 'hero-loop.gif');
-  // Two-pass palette. Widest and smoothest first; step down until the GIF is under 5 MB.
-  for (const [w, fps, colors, dither] of [[720, 10, 256, 'bayer:bayer_scale=5'], [720, 10, 128, 'none'], [640, 10, 96, 'none'], [640, 8, 64, 'none']]) {
-    const pal = path.join(tmp, 'pal.png');
-    ff(...trim, '-vf', `fps=${fps},scale=${w}:-1:flags=lanczos,palettegen=max_colors=${colors}:stats_mode=diff`, pal);
-    ff(...trim, '-i', pal, '-lavfi', `fps=${fps},scale=${w}:-1:flags=lanczos[x];[x][1:v]paletteuse=dither=${dither}:diff_mode=rectangle`, gifPath);
+  // The page is static between beats, so drop duplicate frames (mpdecimate) and let the GIF hold them with longer
+  // frame delays (-fps_mode vfr). Two-pass palette. Widest and smoothest first; step down until the GIF is 2.5 MB or under.
+  // mpdecimate drops the trailing hold on the verdict, so the last frame's delay (-final_delay) is topped up afterwards.
+  const probeDur = (f) => Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', f]).toString().trim());
+  const target = Math.min(15, probeDur(mp4));
+  const pal = path.join(tmp, 'pal.png');
+  const encode = (w, fps, colors, dither, dec, finalCs) => {
+    const pre = `fps=${fps},${dec},scale=${w}:-1:flags=lanczos`;
+    ff(...trim, '-vf', `${pre},palettegen=max_colors=${colors}:stats_mode=diff`, pal);
+    ff(...trim, '-i', pal, '-fps_mode', 'vfr', '-final_delay', String(finalCs), '-lavfi', `${pre},setpts=PTS[x];[x][1:v]paletteuse=dither=${dither}:diff_mode=rectangle`, gifPath);
+  };
+  const mild = 'mpdecimate=hi=64*12:lo=64*5:frac=0.33', firm = 'mpdecimate=hi=64*40:lo=64*20:frac=0.5', firmer = 'mpdecimate=hi=64*60:lo=64*30:frac=0.8';
+  for (const [w, fps, colors, dither, dec] of [[900, 12, 96, 'bayer:bayer_scale=5', firm], [900, 12, 64, 'none', firm], [900, 12, 64, 'bayer:bayer_scale=5', firmer], [840, 12, 64, 'none', firmer], [840, 12, 64, 'none', mild]]) {
+    encode(w, fps, colors, dither, dec, 0);
+    const short = target - probeDur(gifPath);
+    if (short > 0.05) encode(w, fps, colors, dither, dec, Math.round(short * 100));
     const gif = fs.statSync(gifPath).size;
-    console.log(`hero-loop.gif at ${w}px, ${fps} fps, ${colors} colours, dither ${dither}: ${(gif / 1048576).toFixed(2)} MB`);
-    if (gif < 5 * 1048576) break;
+    console.log(`hero-loop.gif at ${w}px, ${fps} fps, ${colors} colours, dither ${dither}, ${dec}: ${(gif / 1048576).toFixed(2)} MB, ${probeDur(gifPath).toFixed(2)} s`);
+    if (gif <= 2.5 * 1048576) break;
   }
   const dur = execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', mp4]).toString().trim();
   console.log(`hero-loop.mp4  ${(fs.statSync(mp4).size / 1048576).toFixed(2)} MB, ${Number(dur).toFixed(1)} s`);
