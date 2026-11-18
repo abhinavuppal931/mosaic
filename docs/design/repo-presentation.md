@@ -56,3 +56,21 @@ The picks were Icon C, Hero A and Social B. Icon B, Hero B and Social A were dro
 - **Icon C.** It sits on the warm-black field, with flat tiles. The amber tile is turned 8 degrees, and the group is centred on its true bounds. Every tile is at least 3:1 against the field. `icon-c-small.svg` is the favicon and small-size cut, with the glyph at 80%. `mark.svg` is the bare mark used in every lockup.
 - **Hero A.** The frame shows Michael Burry, who is living, speaking in Round 2. The window has equal top and bottom margins. A verdict card is drawn in the Room's own style. The command chip frames the decision, and the install line sits under it.
 - **Social B.** Only the seat row sits behind the type, brightened. The centred block is 600 px wide. A verdict chip is added, and the attribution is legible, with no URL on the image.
+
+## Agent-led setup and the step-3 trap (ABH-339, round 3)
+
+Abs typed `/mosaic` in Windows Command Prompt and got "'/mosaic' is not recognized". A newcomer cannot tell the terminal and Claude Code apart, so the fix removes the step and adds an agent path.
+
+What the conventions say:
+
+- [Cline's MCP marketplace](https://github.com/cline/mcp-marketplace) reads a repo's README and an optional `llms-install.md` at the root, with extra setup guidance for agents. Submitters test by giving Cline only those files. It is the only named install-for-agents convention found.
+- [AGENTS.md](https://agents.md) is "a README for agents" that work on a repo's code: build, test and conventions. [Claude Code reads it](https://code.claude.com/docs/en/memory.md) as project instructions. It is for contributors, not for installing a tool, so Mosaic does not add one.
+- Plugin repos with a paste-to-agent line: [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) says "Read INSTALL.md, install caveman for me", next to the plain install commands. Most top repos give only the shell command.
+- Claude Code documents `claude "query"` as "Start interactive session with initial prompt" ([CLI reference](https://code.claude.com/docs/en/cli-reference)). It does not say that a slash command works as that prompt, so this was tested.
+- [Deep links](https://code.claude.com/docs/en/deep-links.md) (`claude-cli://open?q=...`) only pre-fill a prompt, work only after Claude Code has run once on that machine, and are stripped from GitHub READMEs. They are not a first-run path.
+
+What Mosaic does:
+
+1. **Two terminal commands.** `claude plugin install mosaic --marketplace abhinavuppal931/mosaic`, then `claude "/mosaic"`. Tested in a pseudo-terminal from a clean home on Claude Code 2.1.327: the second command starts Claude Code, runs the skill, opens the Room on the examples and asks for the decision, with no permission prompts. Nothing has to be typed inside Claude Code on the first run.
+2. **Every block is labelled**, either "In your terminal" or "Inside Claude Code". Troubleshooting covers "'/mosaic' is not recognized" and "'claude' is not recognized".
+3. **One agent line, backed by `llms-install.md` at the root.** It names Cline's convention, and the file has one path for Claude Code and one for other agents. The Claude Code path was tested end to end from a clean home, using a local copy that points at this branch. The agent checked Node and Claude Code, installed the plugin, opened the Room on the examples and told the user how to run `/mosaic`. The raw GitHub URL in the line works once the repo is public.

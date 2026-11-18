@@ -68,7 +68,7 @@ Held for a reviewer:
 - Files over 256 KiB: `docs/hero-loop.gif` (about 2.3 MB), `docs/hero-loop.mp4` (about 500 KB), `docs/social-preview.png` (about 330 KB) and `tests/core/fixtures/http/sec-companyfacts-msft.json` (about 279 KB). The twelve large Room test screenshots were removed in ABH-339.
 - Total file count: about 430 of the 512 limit (run `git ls-files | wc -l`).
 
-The security scan looks for undisclosed behavior. The README section "What Mosaic runs and sends" covers it. The source is readable. There is no minified code.
+The security scan looks for undisclosed behavior. The section "What Mosaic runs and sends" in `docs/HOW-IT-WORKS.md` covers it, and the README links to it from its FAQ. The source is readable. There is no minified code.
 
 ### Checks run on 2026-11-18
 

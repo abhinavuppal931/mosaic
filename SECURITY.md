@@ -20,7 +20,7 @@ You will get a reply from the maintainer. Please give time to fix it before you 
 
 - It runs only Node scripts that ship in the plugin. There are no npm packages, no postinstall step, no hooks and no MCP servers.
 - The Room is a local web server bound to 127.0.0.1. It makes no AI calls.
-- Network requests go only to the data sources listed in the README under "What Mosaic runs and sends", and only when building a data pack.
+- Network requests go only to the data sources listed in [What Mosaic runs and sends](docs/HOW-IT-WORKS.md#what-mosaic-runs-and-sends), and only when building a data pack.
 - There is no telemetry.
 
 ## Keys and your SEC contact

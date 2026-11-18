@@ -10,7 +10,7 @@ Steps in order. Each says who does it and how to check it.
 | 4 | Make the repo public | Abs | Open the repo link in a private browser window. |
 | 4b | Turn on private vulnerability reporting: Settings, Code security, Private vulnerability reporting, Enable. `SECURITY.md` points reporters there | Abs | The Security tab shows "Report a vulnerability". |
 | 5 | Watch the first CI run on `main` in the Actions tab across the 6 jobs (3 systems by 2 Node versions) | Abs | All 6 jobs of `test` are green. The CI badge in the README turns green. |
-| 6 | Run the README quick start once from a clean machine | Abs | `claude plugin install mosaic --marketplace abhinavuppal931/mosaic`, then `/mosaic` opens the Room on an example council. |
+| 6 | Run the README's Get started once from a clean machine, and try the "Let your agent set it up" line | Abs | In a terminal, `claude plugin install mosaic --marketplace abhinavuppal931/mosaic`, then `claude "/mosaic"`, opens the Room on an example council. The agent line, which fetches `llms-install.md` from `main`, works only once the repo is public. |
 | 7 | Tag `v0.1.0` and create the release with `.github/release-notes-0.1.0.md` | Abs | The Releases page shows v0.1.0 with those notes. Update `CHANGELOG.md` from "Unreleased" to the release date first. |
 | 8 | Submit to the plugin directory following `docs/marketplace-listing.md`. The icon is locked at the first save, so choose it first | Abs | The portal shows the submission as in review. |
 

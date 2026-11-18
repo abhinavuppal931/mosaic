@@ -20,6 +20,8 @@ Run this inside the `mosaic` folder:
 npm test
 ```
 
+The core suite runs every adapter against recorded responses (no network), the router's fallbacks, retries, rate limits and cache, pack building, the scoring and label math, the citation checker and the journal. Live smoke packs built against the free sources are in `tests/core/fixtures/live/` with a note on what answered.
+
 The Room has browser tests that need Playwright. They skip themselves without it. Run them inside the `mosaic` folder:
 
 ```bash
@@ -54,7 +56,7 @@ The rules that matter:
 
 ## Write a data provider
 
-A provider adapter is one file. The steps are in the README under "Writing a custom adapter". In short:
+A provider adapter is one file. The steps are in [Data and keys](docs/DATA.md#writing-a-custom-adapter). In short:
 
 1. Copy `data/providers/_template.mjs` and fill in `id`, `name`, `needsKey`, `keyEnv` and `capabilities`.
 2. Use `ctx.http` and `ctx.key`. Never call `fetch` or read `process.env`, so rate limits, retries, timeouts and key redaction apply.
@@ -66,6 +68,21 @@ A provider adapter is one file. The steps are in the README under "Writing a cus
    ```
 
 Before adding a provider, check its terms allow caching and use in a tool like this.
+
+## Repository layout
+
+```
+.claude-plugin/          plugin.json and marketplace.json
+skills/mosaic/           SKILL.md (the Chair's protocol) and references/
+skills/mosaic/roster.json, skills/mosaic/brains/, agents/   seats, built by /newseat
+data/                    providers/, router.mjs, packs/, lib/, cli.mjs, mosaic.config.json, series.json
+scripts/                 score.mjs, check-citations.mjs, journal.mjs and their configs
+tests/core/              node:test suite with recorded fixtures (no network)
+room/                    the Room: server.js, public/, lib/, examples/, test/
+docs/                    LAUNCH.md, marketplace-listing.md, design/, research/
+.github/                 test.yml (CI), issue forms, pull request template, release notes
+CONTRIBUTING.md, SECURITY.md, CODE_OF_CONDUCT.md, CHANGELOG.md
+```
 
 ## Style for copy
 
