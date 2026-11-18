@@ -1,10 +1,15 @@
 #!/usr/bin/env node
-// Capture the screenshots and the short council video for the feature tour page.
+// Capture the screenshots for the feature tour page, the README verdict image and the hero loop.
 //
 //   node room/scripts/tour.mjs [--out docs/tour]
 //
 // Starts the Room in-process against temporary homes (nothing of yours is touched), drives it with
-// Playwright, and writes numbered .webp files, council.gif and council.mp4 to docs/tour.
+// Playwright, and writes numbered .webp files to docs/tour plus docs/verdict.webp, docs/hero-loop.gif
+// and docs/hero-loop.mp4.
+//
+// Marketing rules, enforced here: no price level (a "$" followed by a digit) in any captured frame
+// (the user's own question in the page header is the one allowed place), and nobody who is deceased
+// or retired (Munger, Buffett) is ever the one shown speaking.
 // Needs Playwright with Chromium, ffmpeg, and python3 with PIL (WebP support). None are dependencies.
 import fs from 'node:fs';
 import os from 'node:os';
@@ -17,6 +22,8 @@ import { startServer } from '../server.js';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOM = path.resolve(HERE, '..');
 const NVDA = path.join(ROOM, 'examples', '2026-11-17-nvda-buy');
+const COST = path.join(ROOM, 'examples', '2026-11-12-cost-sell');
+const DOCS = path.resolve(OUT, '..' === '' ? '' : path.join(ROOM, '..', 'docs'));
 const i = process.argv.indexOf('--out');
 const OUT = path.resolve(i > 0 ? process.argv[i + 1] : path.join(ROOM, '..', 'docs', 'tour'));
 fs.mkdirSync(OUT, { recursive: true });
