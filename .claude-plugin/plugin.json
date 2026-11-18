@@ -3,9 +3,24 @@
   "displayName": "Mosaic",
   "version": "0.1.0",
   "description": "A council of simulated investing legends debates your investment decision over three rounds on one sourced data pack, then a Chair returns a graded verdict with the dissent kept, a pre-mortem, kill criteria and a re-check date. Free data by default, no keys needed. Education, not investment advice.",
-  "author": { "name": "Abs", "url": "https://github.com/abhinavuppal931" },
+  "author": {
+    "name": "Abs",
+    "url": "https://github.com/abhinavuppal931"
+  },
   "homepage": "https://github.com/abhinavuppal931/mosaic",
   "repository": "https://github.com/abhinavuppal931/mosaic",
   "license": "MIT",
-  "keywords": ["investing", "council", "stocks", "valuation", "thesis", "journal", "sec-edgar", "education"]
+  "keywords": [
+    "investing",
+    "council",
+    "stocks",
+    "valuation",
+    "thesis",
+    "journal",
+    "sec-edgar",
+    "education"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "supportUrl": "https://github.com/abhinavuppal931/mosaic/issues",
+  "documentationUrl": "https://github.com/abhinavuppal931/mosaic#readme"
 }

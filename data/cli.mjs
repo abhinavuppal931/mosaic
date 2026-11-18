@@ -58,7 +58,7 @@ async function cmdPack(args, inject) {
   warnProblems(ctx.problems);
   const holdings = kind === 'portfolio' ? readHoldings(path.resolve(args.portfolio)) : undefined;
   if (kind !== 'macro' && !contactSource(ctx.config, ctx.env)) {
-    process.stderr.write('Note: no SEC contact set, so EDGAR is skipped. Set MOSAIC_SEC_CONTACT or run: node data/cli.mjs setup\n');
+    process.stderr.write(`Note: no SEC contact set, so EDGAR is skipped. Set MOSAIC_SEC_CONTACT or run: node ${JSON.stringify(path.join(ctx.p.pluginRoot, 'data', 'cli.mjs'))} setup\n`);
   }
   const pack = await buildPack({ kind, router: ctx.router, config: ctx.config, series: loadSeries(), symbol: kind === 'ticker' ? args.ticker.toUpperCase() : undefined, holdings, ...(inject.now ? { now: inject.now } : {}) });
   if (args.session && args.session !== true) {

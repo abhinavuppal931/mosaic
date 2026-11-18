@@ -407,7 +407,17 @@ export function openBrowser(url) {
   }
 }
 
-const invoked = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+// Real paths, compared case-insensitively on Windows, so a symlinked folder (macOS /tmp, a linked
+// home) or a drive-letter case difference still starts the server instead of exiting silently.
+const real = (p) => {
+  try {
+    return fs.realpathSync(p);
+  } catch {
+    return path.resolve(p);
+  }
+};
+const same = (a, b) => (process.platform === 'win32' ? a.toLowerCase() === b.toLowerCase() : a === b);
+const invoked = Boolean(process.argv[1]) && same(real(path.resolve(process.argv[1])), real(fileURLToPath(import.meta.url)));
 if (invoked) {
   const argv = process.argv.slice(2);
   const o = parseOptions(argv);
