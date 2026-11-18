@@ -90,7 +90,7 @@ It also stress-tests a thesis, reviews a portfolio for concentration and ruin ri
 
 ## FAQ
 
-**Is this investment advice?** No. Mosaic grades how a decision was made, never the security. It sets no price targets and suggests no position sizes.
+**Is this investment advice?** No. Mosaic grades how a decision was made, never the security. It sets no price targets, and any sizing is shown as education about how much loss you could survive, not a recommendation.
 
 **Does it cost anything?** Mosaic is free. It runs on your Claude Code plan, and a full council uses three sub-agent runs per investor. `--quick` costs less.
 
