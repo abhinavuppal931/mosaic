@@ -64,9 +64,9 @@ Warnings:
 Held for a reviewer:
 
 - Look-alike or brand names. Real investors' names are used as simulated seats, with disclaimers. Expect a human review.
-- Non-text binaries: seat portraits in `room/public/img/*.jpg`, fonts in `room/public/fonts/*.woff2`, `docs/design/assets`, and `room/test/screens/*.png`.
-- Files over 256 KiB: twelve PNGs in `room/test/screens` and `tests/core/fixtures/http/sec-companyfacts-msft.json` (about 279 KB).
-- Total file count: 395 of the 512 limit.
+- Non-text binaries: seat portraits in `room/public/img/*.jpg`, fonts in `room/public/fonts/*.woff2`, `docs/design/assets`, the README and tour images in `docs/` and `docs/tour/`, and the icon.
+- Files over 256 KiB: `docs/hero-loop.gif` (about 4.2 MB), `docs/hero-loop.mp4` (about 540 KB), `docs/social-preview.png` (about 330 KB) and `tests/core/fixtures/http/sec-companyfacts-msft.json` (about 279 KB). The twelve large Room test screenshots were removed in ABH-339.
+- Total file count: about 430 of the 512 limit (run `git ls-files | wc -l`).
 
 The security scan looks for undisclosed behavior. The README section "What Mosaic runs and sends" covers it. The source is readable. There is no minified code.
 
@@ -78,7 +78,7 @@ Run each from the repo root.
 git ls-files | wc -l
 ```
 
-Result: 395.
+Result: 395 on 2026-11-18 before ABH-339; about 430 after it.
 
 ```bash
 git ls-files -s | awk '$1==120000'
@@ -142,7 +142,7 @@ Optional directory fields `plugin.json` can carry: `icon`, `documentationUrl`, `
   - No personal data leaves the machine, except the SEC contact in the User-Agent sent to sec.gov.
   - There is no telemetry.
   - Keys stay local.
-- Decide whether to drop `room/test/screens/*.png` from the repo, to avoid the large-binary review hold.
+- Decide whether to keep `docs/hero-loop.gif` in the repo or host it as a GitHub attachment and link it from the README, to avoid the large-binary review hold. The twelve large Room test screenshots are already gone.
 - Decide on a `supportUrl` (GitHub issues) and a `privacyPolicyUrl` (his website) if the portal asks.
 
 ## Sources

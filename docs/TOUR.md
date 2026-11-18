@@ -2,9 +2,9 @@
 
 What a council looks like, from install to a verdict you can share. Every screen below was captured from the real Room, using the three example councils that ship in `room/examples/`. To capture them again, run `npm run tour --prefix room` inside the clone.
 
-![A council playing in the Room: seats take turns, scores update, and the verdict lands](tour/council.gif)
+![A council playing live in the Room: Howard Marks, Michael Burry and Nassim Taleb take turns on whether to sell some of a Costco position, then the verdict appears: Conviction earned](hero-loop.gif)
 
-The same recording as a video: [council.mp4](tour/council.mp4).
+The same recording as a video: [hero-loop.mp4](hero-loop.mp4).
 
 ## 1. Install
 
@@ -28,21 +28,21 @@ The journal page lists all three examples: a buy (NVIDIA), a sell (Costco) and a
 
 ## 3. Round 1, blind
 
-You describe the decision in plain words, for example `/mosaic should I buy NVIDIA at $182 for a three-year hold?`. The Chair builds one sourced fact sheet. Then every seat answers at the same time, without knowing which way you lean.
+You describe the decision in plain words, for example `/mosaic I plan to sell some of my Costco position after a 60% year`. The Chair builds one sourced fact sheet. Then every seat answers at the same time, without knowing which way you lean.
 
-![Round 1: each seat gives an opening view from the evidence alone](tour/04-round-1.webp)
+![Round 1 on the Costco decision: Nassim Taleb gives his opening view from the evidence alone](tour/04-round-1.webp)
 
 ## 4. The debate
 
 In Round 2 the Chair reveals your lean, and the seats answer each other's strongest point. The speaker is lit, and each fact chip under a line shows the number it cites from the fact sheet; hover to see its source. "The mosaic so far" updates as scores move.
 
-![Round 2: Munger answers Druckenmiller while the score grid updates](tour/03-live-debate.webp)
+![Round 2: Michael Burry answers Warren Buffett while the score grid updates](tour/03-live-debate.webp)
 
 ## 5. The verdict
 
 After Round 3, the Chair returns a graded verdict. It shows what the council would do, how close the vote was, how strong the evidence is, how split the seats were, and how far your lean pulled the scores. Each seat's vote is derived from its own scores.
 
-![The verdict: Proceed with conditions, with the council score, evidence, agreement and bias check](tour/05-verdict.webp)
+![The verdict on the Costco decision: Conviction earned, sell about a third, with the council score, evidence, agreement and bias check](tour/05-verdict.webp)
 
 The full page adds the scorecard, the strongest objection, how this could go wrong (the pre-mortem), what would change the call (the kill criteria) and the next check-in date. [See the whole page](tour/06-verdict-full.webp).
 
@@ -54,9 +54,9 @@ Save a verdict and it joins your journal, with its next check-in date.
 
 ![The journal with a saved NVIDIA thesis and its next check-in](tour/08-journal.webp)
 
-When results or news arrive, `/mosaic recheck NVDA` runs a quick council on what changed since the last fact sheet, tripped kill criteria first.
+When results or news arrive, `/mosaic recheck COST` runs a quick council on what changed since the last fact sheet, tripped kill criteria first.
 
-![The recheck banner on a verdict, with the /mosaic recheck NVDA command](tour/09-recheck.webp)
+![The recheck banner on a verdict, with the /mosaic recheck COST command](tour/09-recheck.webp)
 
 ## 7. Share it
 

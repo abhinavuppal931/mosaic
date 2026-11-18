@@ -45,7 +45,7 @@ Research done on 2026-11-18 from each repo's raw README and its GitHub page. Ima
 
 The live frame is a real Room state: the NVIDIA example paused in Round 2, while Munger answers Druckenmiller. The verdict frame is the same example finished.
 - **Social A, Split** (`social-a.png`, 1280 by 640): the headline on the left, and the live Room with Munger speaking on the right. Strongest at 1.91:1 on X and LinkedIn. A centred square crop loses most of the headline.
-- **Social B, Centred** (`social-b.png`): a centred mark and headline over the seats, faded behind. It shows less of the product, but it survives square and small crops.
+- **Social B, Centred** (now `docs/social-preview.png`): a centred mark and headline over the seats, faded behind. It shows less of the product, but it survives square and small crops.
 - `social-cards.png` shows both inside X, LinkedIn and Slack link cards, and as a 120 px square, at real display sizes. On X, the "github.com" chip sits in the bottom-left corner, so Social A keeps its attribution line above that corner.
 
 ## Picks and fixes (after the blind review)
