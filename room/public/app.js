@@ -601,12 +601,17 @@ async function shareCanvas() {
   const LW = Math.round((W * 1.15) / 2.15);
   const P = 48;
   // Mark and byline.
-  const sq = [['#FF7A38', 0, 0], ['#3A3733', 1, 0], ['#6C6660', 0, 1], ['#A3C4AA', 1, 1]];
-  for (const [col, x, y] of sq) {
+  // The Mosaic mark (docs/mark.svg): the amber tile is turned 8 degrees and nudged out of line.
+  const sq = [['#9A9187', 0, 0, 0], ['#FF7A38', 1, 0, 8], ['#6F6860', 0, 1, 0], ['#A3C4AA', 1, 1, 0]];
+  for (const [col, x, y, turn] of sq) {
+    c.save();
     c.fillStyle = col;
+    c.translate(P + x * 14 + 6 + (turn ? 1 : 0), P + y * 14 + 6 - (turn ? 1 : 0));
+    c.rotate((turn * Math.PI) / 180);
     c.beginPath();
-    c.roundRect(P + x * 14, P + y * 14, 12, 12, 3);
+    c.roundRect(-6, -6, 12, 12, 3);
     c.fill();
+    c.restore();
   }
   c.textBaseline = 'alphabetic';
   c.fillStyle = '#9A938A';
