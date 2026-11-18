@@ -59,7 +59,7 @@ Warnings:
 | Requirement | Status | Note |
 |---|---|---|
 | Description, author and version set | Yes | |
-| Icon | Yes, `.claude-plugin/icon.png`, 1024 px, drawn from the Room's brand mark | Needs Abs's approval before the first portal save |
+| Icon | Yes. `.claude-plugin/icon.png` (1024 px) with its SVG master `.claude-plugin/icon.svg`: Icon C from ABH-339, picked by the blind review | Needs Abs's approval before the first portal save, because the icon cannot be changed after that |
 
 Held for a reviewer:
 

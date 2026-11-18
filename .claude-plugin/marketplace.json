@@ -6,7 +6,7 @@
     {
       "name": "mosaic",
       "source": "./",
-      "description": "A council of simulated investing legends that debates your investment decision on one sourced data pack and returns a graded verdict with the dissent kept. Education, not investment advice.",
+      "description": "Investing legends, simulated from their public work, debate your investment decision and return a scored verdict that shows where they disagree. Not investment advice.",
       "version": "0.1.0",
       "category": "finance",
       "homepage": "https://github.com/abhinavuppal931/mosaic"

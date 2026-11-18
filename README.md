@@ -1,20 +1,26 @@
 <div align="center">
 
-<!-- HERO: replaced in ABH-339 phase 2 -->
-<!-- <img src="docs/hero.png" alt="The Mosaic Room playing a council live: thirteen investor seats, a debate in progress and the verdict panel" width="860"> -->
+<img src="docs/mark.svg" alt="" width="64">
 
 # Mosaic
 
-**Bring an investment decision. Thirteen simulated investing legends debate it from one sourced fact sheet and return a graded verdict that keeps the dissent.**
+**Investing legends debate your decision.**
+
+Simulated from their public work, with a scored verdict that shows where they disagree.<br>
+Free plugin for Claude Code. Not investment advice.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![dependencies: zero](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)](package.json)
 [![Claude Code: plugin](https://img.shields.io/badge/Claude%20Code-plugin-orange.svg)](#quick-start)
 [![CI](https://github.com/abhinavuppal931/mosaic/actions/workflows/test.yml/badge.svg)](https://github.com/abhinavuppal931/mosaic/actions/workflows/test.yml)
 
+<img src="docs/hero.webp" alt="Mosaic in Claude Code: simulated investing legends debate a plan to buy NVIDIA at $182 for a three-year hold. Michael Burry's seat is speaking in the live Room, and the council's verdict reads Proceed with conditions, 6.3 out of 10. Not investment advice." width="100%">
+
+<img src="docs/hero-loop.gif" alt="A council playing live in the Room: Howard Marks, Michael Burry and Nassim Taleb take turns on whether to sell some of a Costco position, then the verdict appears: Conviction earned, sell a third." width="100%">
+
 </div>
 
-A council of investing legends for Claude Code. Thirteen simulated investors (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry by default; Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee on call) argue your decision over three rounds. A Chair returns a graded verdict that keeps the dissent, with a pre-mortem, kill criteria and a date to re-check, and remembers it for next time.
+Mosaic seats a council of simulated investors in Claude Code: seven by default (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry), from a roster of thirteen (Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee are on call). They argue your decision over three rounds from one sourced fact sheet. The Chair returns a scored verdict that shows where they disagree, with a pre-mortem, kill criteria and a date to re-check, and remembers it for next time.
 
 > **Mosaic grades how a decision was made. It is not investment advice.** Every seat is a simulation built from that investor's public work. It is not the person, is not affiliated with or endorsed by them, and does not speak for them. Verbatim quotes appear only with a source id. Mosaic grades your reasoning and decision process, never a security: no price targets (valuation is a range and "what the price implies"), and position sizing appears only as education about survivable loss. Numbers carry their as-of dates; verify them against the filings before acting.
 
@@ -150,6 +156,8 @@ Verdict labels grade the decision: **CONVICTION EARNED**, **PROCEED WITH CONDITI
 ## The Room
 
 The Room is a local web page that plays a council live, then shows the verdict. It reads the session files the council writes and makes no AI calls. It needs Node 20 or later and nothing else.
+
+<img src="docs/verdict.webp" alt="The verdict screen for the Costco example: Conviction earned. The council would sell about a third of the position. It shows the council score, how strong the evidence is, how split the seats were and the bias check. Not investment advice." width="100%">
 
 In Claude Code, `/mosaic room` starts it. Without Claude Code, run this inside the `mosaic` folder:
 

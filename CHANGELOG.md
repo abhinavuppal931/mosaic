@@ -6,7 +6,7 @@ All notable changes are listed here. The format follows [Keep a Changelog](https
 
 ### Added
 
-- The council protocol: thirteen simulated investing legends (seven by default, six on call) debate a decision over three rounds. Round 1 is blind to your lean, Round 2 reveals it and opens the debate, Round 3 rescores. A Chair returns a graded verdict that keeps the dissent, with a pre-mortem, kill criteria and a date to re-check.
+- The council protocol: thirteen simulated investing legends (seven by default, six on call) debate a decision over three rounds. Round 1 is blind to your lean, Round 2 reveals it and opens the debate, Round 3 rescores. A Chair returns a scored verdict that shows where the seats disagree, with a pre-mortem, kill criteria and a date to re-check.
 - Modes: full council, `--quick`, `--seats`, `--all`, `ask <seat>`, `board`, `recheck`, `journal` and `room`.
 - A sourced data pack that every seat argues from. Every fact has an id, a source, an as-of date and a status. Missing data stays visibly missing.
 - Free data by default: SEC EDGAR, Yahoo chart endpoint (unofficial, best effort), US Treasury, New York Fed and BLS.
