@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mosaic B6, investor spotlight</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:wght@700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:Switzer;src:url(/_blob/a645f6963e7be6bfb024c053ee9427c9) format("woff2");font-weight:400}
+@font-face{font-family:Switzer;src:url(/_blob/acb4b43caab20e8afde76ac2b8e09526) format("woff2");font-weight:500}
+@font-face{font-family:Switzer;src:url(/_blob/7c6c1f7521c97fd99b1a8cb8e4602335) format("woff2");font-weight:600}
+body{margin:0;background:#080706}
+.btn{font:500 13px Switzer,sans-serif;border-radius:9px;padding:8px 14px;cursor:pointer;white-space:nowrap;transition:background .2s ease,border-color .2s ease,color .2s ease}
+.btn-ghost{color:#D9D3CA;background:transparent;border:1px solid rgba(255,255,255,0.12)}.btn-ghost:hover{color:#F5F2EC;background:rgba(255,255,255,0.05)}
+.btn-primary{color:#141210;background:#F3F1EC;border:1px solid #F3F1EC}.btn-primary:hover{background:#FFFFFF}
+.card{background:#11100E;border:1px solid rgba(255,255,255,0.06);border-radius:18px}
+.seat{position:relative;font:inherit;color:inherit;text-align:center;cursor:pointer;background:#11100E;border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:9px;transition:border-color .2s ease,background .2s ease,opacity .25s ease}
+.seat:hover{border-color:rgba(255,255,255,0.18);background:#15130F}
+.seat:focus-visible,.ibtn:focus-visible,.btn:focus-visible{outline:2px solid #F3F1EC;outline-offset:2px}
+.seat[aria-expanded="true"]{border-color:rgba(243,241,236,0.6);background:#181613}
+.dim .seat[aria-expanded="false"]{opacity:.72}
+.dim .seat[aria-expanded="false"]:hover{opacity:1}
+.seat .notch{display:none}
+.seat[aria-expanded="true"] .notch{display:block;position:absolute;left:50%;bottom:-27px;width:14px;height:14px;transform:translateX(-50%) rotate(45deg);background:#13120F;border-left:1px solid rgba(243,241,236,0.22);border-top:1px solid rgba(243,241,236,0.22);z-index:2}
+.seat .more{font-size:12px;color:#A39C92;display:flex;align-items:center;gap:4px}
+.seat:hover .more,.seat[aria-expanded="true"] .more{color:#F5F2EC}
+.ibtn{width:40px;height:40px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.10);color:#D9D3CA;cursor:pointer;padding:0;transition:background .2s ease}
+.ibtn:hover{background:rgba(255,255,255,0.06)}
+.seats{position:relative;z-index:2}.panel{position:relative;z-index:1;background:#13120F;border:1px solid rgba(243,241,236,0.22);border-radius:20px;padding:26px 28px 22px;display:flex;flex-direction:column;gap:24px}
+@keyframes rise{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}.steps::before{content:"";position:absolute;left:11px;right:0;top:11px;height:1px;background:rgba(255,255,255,0.12)}
+.step{position:relative;display:flex;flex-direction:column;gap:10px}.step .node{box-shadow:0 0 0 5px #13120F;flex:none}
+.lbl{font-size:12px;color:#A39C92}
+.fchip>span{white-space:nowrap}.fchip{flex-wrap:wrap;row-gap:2px;max-width:100%;box-sizing:border-box}
+.fchip{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:#B5AEA4;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:4px 8px}
+.box{background:#0B0A09;border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.ptop{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.irow{display:grid;grid-template-columns:172px minmax(0,1fr) 40px;grid-template-areas:"l t v";align-items:center;gap:6px 14px}
+.irow .l{grid-area:l;display:flex;flex-direction:column;gap:2px;min-width:0}
+.irow .t{grid-area:t;position:relative;height:24px}
+.irow .v{grid-area:v;display:flex;flex-direction:column;align-items:flex-end;gap:1px}
+.scale{display:grid;grid-template-columns:172px minmax(0,1fr) 40px;gap:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#8A837A}
+.scale .t{grid-column:2;display:flex;justify-content:space-between}
+.mrow{display:grid;grid-template-columns:104px minmax(0,1fr) 28px;align-items:center;gap:10px}
+.mrow .tr{position:relative;height:16px}
+.rmini{display:flex;flex-direction:column;gap:8px;padding-top:4px}
+
+::selection{background:rgba(255,122,56,0.30);color:#F5F2EC}
+.cv{font-weight:600;color:#F5F2EC;font-variant-numeric:tabular-nums}
+.num{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;font-variant-numeric:tabular-nums}
+.press{transition:border-color .2s ease,background .2s ease,color .2s ease,opacity .25s ease,transform .16s cubic-bezier(.23,1,.32,1)}
+.vcard,.seat,.ibtn,.tab,.btn{transition:border-color .2s ease,background .2s ease,color .2s ease,opacity .25s ease,transform .16s cubic-bezier(.23,1,.32,1)}
+.vcard:active,.seat:active{transform:scale(0.98)}
+.ibtn:active,.btn:active,.tab:active{transform:scale(0.96)}
+@keyframes swA{from{opacity:0;transform:translateY(6px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+@keyframes swB{from{opacity:0;transform:translateY(6px);filter:blur(3px)}to{opacity:1;transform:none;filter:none}}
+@keyframes fadeA{from{opacity:0}to{opacity:1}}
+@keyframes fadeB{from{opacity:0}to{opacity:1}}
+.sw0{animation:swA .26s cubic-bezier(.23,1,.32,1) both}
+.sw1{animation:swB .26s cubic-bezier(.23,1,.32,1) both}
+
+.num{font-family:inherit;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
+.scale{font-family:inherit!important;font-size:11px!important;color:#A39C92!important;font-variant-numeric:tabular-nums}
+.scale .t>span:last-child{text-align:right}
+.mscale{display:grid;grid-template-columns:104px minmax(0,1fr) 28px;gap:10px;font-size:11px;color:#A39C92;font-variant-numeric:tabular-nums}
+.mscale .t{grid-column:2;display:flex;justify-content:space-between}
+.key{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#A39C92}
+.key>span{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.flink{color:#D4CDC3;text-decoration:underline;text-decoration-color:rgba(245,242,236,0.3);text-underline-offset:3px;transition:text-decoration-color .2s ease,color .2s ease}
+.flink:hover{color:#F5F2EC;text-decoration-color:rgba(245,242,236,0.8)}
+.flink:focus-visible{outline:2px solid #F3F1EC;outline-offset:2px;border-radius:3px}
+@media (max-width:760px){
+.hdr{padding:14px 16px!important}.hdr .crumb,.hdr .hide-sm{display:none!important}
+.wrap{padding:0 16px 32px!important}
+.hero h1{font-size:38px!important}
+.seats{display:flex!important;overflow-x:auto;scrollbar-width:none;padding-bottom:22px!important;margin-bottom:-12px}
+.seats>*{flex:0 0 112px}
+.panel{padding:20px 16px 18px;border-radius:18px}
+.seats{padding-bottom:30px!important;margin-bottom:-20px}.seat[aria-expanded="true"] .notch{bottom:-29px}
+.ptop{flex-wrap:nowrap;position:sticky;top:0;z-index:3;background:#13120F;margin:-20px -16px 0;padding:14px 16px 12px;border-radius:18px 18px 0 0;border-bottom:1px solid rgba(255,255,255,0.06)}
+.ptop img{width:40px!important;height:40px!important}
+.ptop .pname{font-size:17px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.ptop .plens{display:none}
+.ptop .psub{font-size:12px!important;white-space:nowrap}
+.ptop .pid{gap:10px!important}
+.ptop .pname{display:none}.ptop .pshort{display:inline!important;font-size:17px;font-weight:600;letter-spacing:-0.02em;white-space:nowrap}
+.steps::before{display:none}
+.mrow,.mscale{grid-template-columns:88px minmax(0,1fr) 24px}
+.cols,.steps,.duo{grid-template-columns:minmax(0,1fr)}.steps{gap:22px}.steps::before{left:11px;right:auto;top:11px;bottom:11px;width:1px;height:auto}.step{padding-left:0}
+.cols{gap:24px}
+.ibtn{width:44px;height:44px}
+.irow{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"l v" "t t"}
+.irow .v{flex-direction:row;align-items:baseline;gap:8px}
+.scale{grid-template-columns:minmax(0,1fr)}.scale .t{grid-column:1}
+}
+
+@media (prefers-reduced-motion:reduce){
+.sw0{animation:fadeA .2s ease both}.sw1{animation:fadeB .2s ease both}
+.vcard:active,.seat:active,.ibtn:active,.btn:active,.tab:active{transform:none}
+
+}
+</style>
+</helmet>
+<div style="min-height: 1900px; background: radial-gradient(80% 36% at 22% 0%, rgba(255,186,140,0.06), rgba(255,186,140,0) 60%), #080706; color: #F5F2EC; font-family: Switzer, system-ui, sans-serif; -webkit-font-smoothing: antialiased;">
+
+  <header class="hdr" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 40px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <div style="display: flex; align-items: center; gap: 18px; min-width: 0;">
+      <span style="display: flex; align-items: center; gap: 10px;">
+        <span aria-hidden="true" style="display: grid; grid-template-columns: repeat(2, 9px); gap: 2px;">
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #FF7A38;"></span>
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #3A3733;"></span>
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #6C6660;"></span>
+          <span style="width: 9px; height: 9px; border-radius: 2px; background: #A3C4AA;"></span>
+        </span>
+        <span style="font-family: 'Brygada 1918', serif; font-weight: 700; font-size: 21px;">Mosaic</span>
+      </span>
+      <span class="crumb" style="font-size: 13px; color: #A39C92; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Councils  /  Buy NVIDIA at $182 for a three-year hold?</span>
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button type="button" class="btn btn-ghost hide-sm">Save to journal</button>
+      <button type="button" class="btn btn-ghost">Share</button>
+      <button type="button" class="btn btn-primary">Download PDF</button>
+    </div>
+  </header>
+
+  <main class="wrap" style="max-width: 1240px; margin: 0 auto; padding: 0 40px 48px; display: flex; flex-direction: column; gap: 24px;">
+    <section class="hero" style="display: flex; flex-direction: column; gap: 14px; padding-top: 44px; max-width: 820px;">
+      <span style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: #A39C92;">
+        <span style="display: inline-flex; align-items: center; gap: 7px; color: #DCE9DF; background: rgba(163,196,170,0.10); border: 1px solid rgba(163,196,170,0.22); border-radius: 7px; padding: 3px 9px; font-weight: 500;"><span style="width: 6px; height: 6px; border-radius: 3px; background: #A3C4AA;"></span>Council verdict</span>
+        17 November 2026  ·  7 investors  ·  3 rounds
+      </span>
+      <h1 style="margin: 0; font-weight: 600; font-size: 56px; line-height: 1.02; letter-spacing: -0.038em;">Proceed with conditions</h1>
+      <p style="margin: 0; font-size: 18px; line-height: 1.5; color: #D4CDC3;">The council would start with a small position in NVIDIA, and add more only if its data center sales keep growing faster than 40% a year for the next two quarters.</p>
+    </section>
+
+    <section aria-labelledby="seats-h" style="display: flex; flex-direction: column; gap: 12px; padding-top: 12px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+        <h2 id="seats-h" style="margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;">How each investor voted on the plan</h2>
+        <span style="font-size: 13px; color: #A39C92;">Select an investor to open their reasoning here.</span>
+      </div>
+      <span style="font-size: 13px; line-height: 1.5; color: #A39C92; margin-top: -4px;">Each investor scored all four choices from 0 to 10, then voted on the council’s plan.</span>
+      <div class="{{seatsClass}}" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px; padding-bottom: 8px;">
+        <sc-for list="{{cards}}" as="v" hint-placeholder-count="7">
+          <button type="button" class="seat" aria-expanded="{{v.expanded}}" aria-controls="spotlight" aria-label="{{v.aria}}" onClick="{{v.toggle}}">
+            <img src="{{v.img}}" alt="" style="width: 64px; height: 64px; border-radius: 32px; object-fit: cover; object-position: 50% 22%; box-shadow: 0 0 0 1px rgba(255,255,255,0.10);">
+            <span style="font-size: 13px; font-weight: 600;">{{v.short}}</span>
+            <span style="{{v.chip}}">{{v.stance}}</span>
+            <span class="more">{{v.more}}</span>
+            <span class="notch" aria-hidden="true"></span>
+          </button>
+        </sc-for>
+      </div>
+
+      <sc-if value="{{open}}" hint-placeholder-val="{{true}}">
+        <div id="spotlight" class="{{panelClass}}" role="region" aria-label="{{d.name}}, reasoning">
+          <div class="ptop">
+            <div class="pid" style="display: flex; gap: 16px; align-items: center; min-width: 0;">
+              <img src="{{d.img}}" alt="" style="width: 56px; height: 56px; border-radius: 28px; object-fit: cover; object-position: 50% 22%; box-shadow: 0 0 0 1px rgba(255,255,255,0.12); flex-shrink: 0;">
+              <div style="display: flex; flex-direction: column; gap: 5px; min-width: 0;">
+                <span style="display: flex; align-items: center; gap: 6px 10px; flex-wrap: wrap; min-width: 0;"><span class="pname" style="font-size: 22px; font-weight: 600; letter-spacing: -0.02em;">{{d.name}}</span><span class="pshort" style="display: none;">{{d.short}}</span><span style="{{d.chip}}">{{d.stance}}</span></span>
+                <span class="psub" style="font-size: 13px; color: #A39C92;">Simulated<span class="plens"> investor</span>  ·  {{pos}} of 7<span class="plens">  ·  {{d.lens}}</span></span>
+              </div>
+            </div>
+            <span style="display: flex; gap: 8px; align-items: center; flex-shrink: 0;">
+              <button type="button" class="ibtn" aria-label="Previous investor" onClick="{{prev}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+              <button type="button" class="ibtn" aria-label="Next investor" onClick="{{next}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
+              <button type="button" class="ibtn" aria-label="Close" onClick="{{close}}"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+            </span>
+          </div>
+
+          <div class="cols">
+            <div style="display: flex; flex-direction: column; gap: 22px;">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <span style="font-size: 24px; font-weight: 500; line-height: 1.35; letter-spacing: -0.02em;">“{{d.line}}”</span>
+                <span class="lbl">Simulated, written from his public work</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <span style="font-size: 14px; line-height: 1.5; color: #D4CDC3;">{{d.bridge}}</span>
+                <sc-if value="{{d.hasAmend}}" hint-placeholder-val="{{true}}">
+                  <div class="box">
+                    <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px;"><span class="lbl">The condition he asked for</span><span style="{{d.amendStateS}}">{{d.amendState}}</span></span>
+                    <span style="font-size: 15px; line-height: 1.5;">{{d.amend}}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{d.hasDissent}}" hint-placeholder-val="{{false}}">
+                  <div class="box">
+                    <span class="lbl">Why he voted against</span>
+                    <span style="font-size: 15px; line-height: 1.5;">{{d.amend}}</span>
+                  </div>
+                </sc-if>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <span style="display: flex; flex-direction: column; gap: 2px;"><h3 style="margin: 0; font-size: 14px; font-weight: 600;">How he scored the choices</h3><span class="lbl">0 rules a choice out, 10 is a strong yes.</span></span>
+                  <span class="key">
+                <span><span style="width: 12px; height: 12px; border-radius: 6px; background: #FF7A38;"></span>Final score</span>
+                <sc-if value="{{d.hasMoves}}" hint-placeholder-val="{{true}}"><span><span style="width: 12px; height: 12px; border-radius: 6px; box-sizing: border-box; border: 2px solid #9A938A; background: #13120F;"></span>Round 1</span></sc-if><span><span style="width: 2px; height: 14px; border-radius: 1px; background: #9A938A;"></span>Council</span>
+              </span>
+                </div>
+                <sc-for list="{{d.rows}}" as="r" hint-placeholder-count="4">
+              <div class="irow" role="img" aria-label="{{r.aria}}">
+                <span class="l"><span style="{{r.ls}}">{{r.label}}</span><span style="font-size: 12px; color: #A39C92;">{{r.meta}}</span></span>
+                <span class="t">
+                  <span style="position: absolute; left: 0; right: 0; top: 11px; height: 2px; border-radius: 1px; background: rgba(255,255,255,0.10);"></span>
+                  <span style="{{r.link}}"></span>
+                  <span style="{{r.ring}}"></span>
+                  <span style="{{r.dot}}"></span>
+                  <span style="{{r.tick}}"></span>
+                </span>
+                <span class="v"><span class="num">{{r.v}}</span></span>
+              </div>
+            </sc-for>
+                <div class="scale" aria-hidden="true"><span class="t"><span>0  Rules it out</span><span>Strong yes  10</span></span></div>
+                <sc-if value="{{d.noMoves}}" hint-placeholder-val="{{false}}">
+                  <span style="font-size: 13px; color: #A39C92;">He kept every score from round 1 to the final vote.</span>
+                </sc-if>
+                <sc-if value="{{d.hasWeight}}" hint-placeholder-val="{{false}}">
+                  <span style="font-size: 13px; color: #A39C92;">{{d.weightNote}}</span>
+                </sc-if>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 18px;">
+              <h3 style="margin: 0; font-size: 14px; font-weight: 600;">His case</h3>
+              <sc-for list="{{d.why}}" as="w" hint-placeholder-count="3">
+                <div style="display: flex; gap: 12px;">
+                  <span style="width: 22px; height: 22px; border-radius: 11px; background: rgba(255,255,255,0.06); color: #B5AEA4; font-size: 11px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">{{w.n}}</span>
+                  <span style="display: flex; flex-direction: column; gap: 8px; min-width: 0;">
+                    <span style="font-size: 14px; line-height: 1.55; color: #D4CDC3;">{{w.t}}</span>
+                    <span style="display: flex; gap: 6px; flex-wrap: wrap;">
+                      <sc-for list="{{w.chips}}" as="c" hint-placeholder-count="1"><span class="fchip">{{c.label}}<span style="{{c.cvS}}">{{c.value}}</span></span></sc-for>
+                    </span>
+                  </span>
+                </div>
+              </sc-for>
+              <div class="duo">
+                <div class="box">
+                  <span class="lbl">The risk he sees</span>
+                  <span style="font-size: 14px; line-height: 1.5;">{{d.risk}}</span>
+                </div>
+                <div class="box">
+                  <span class="lbl">He would be wrong if</span>
+                  <span style="font-size: 14px; line-height: 1.5;">{{d.wrong}}</span>
+                  <sc-if value="{{d.hasNow}}" hint-placeholder-val="{{true}}"><span class="fchip" style="align-self: flex-start; margin-top: 4px;">{{d.nowLabel}}<span class="cv">{{d.nowValue}}</span></span></sc-if>
+                </div>
+              </div>
+              <sc-if value="{{d.hasMoves}}" hint-placeholder-val="{{true}}">
+                <div class="box" style="gap: 10px;">
+                  <span class="lbl">Where he changed his mind</span>
+                  <sc-for list="{{d.moves}}" as="m" hint-placeholder-count="1">
+                    <span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 14px; font-weight: 500;">{{m.head}}</span><sc-if value="{{m.hasWhy}}" hint-placeholder-val="{{true}}"><span style="font-size: 13px; color: #B5AEA4; line-height: 1.45;">{{m.why}}</span></sc-if></span>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <span style="display: flex; flex-direction: column; gap: 10px;"><h3 style="margin: 0; font-size: 14px; font-weight: 600;">How he got there</h3><span class="key"><span><span style="width: 10px; height: 10px; border-radius: 5px; background: #FF7A38;"></span>His score</span><span><span style="width: 10px; height: 10px; border-radius: 5px; box-sizing: border-box; border: 1.5px solid #9A938A; background: #13120F;"></span>Round before</span><span><span style="width: 2px; height: 12px; border-radius: 1px; background: #9A938A;"></span>Council, final round</span></span></span>
+            <ol class="steps" style="list-style: none; margin: 0; padding: 0;">
+              <li class="step">
+                <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;"><span class="node" style="width: 22px; height: 22px; border-radius: 11px; background: #3A3733; color: #F5F2EC; font-size: 11px; display: flex; align-items: center; justify-content: center;">1</span><span style="display: flex; flex-direction: column;"><span style="font-size: 14px; font-weight: 600;">Opening</span><span class="lbl">Written alone, before he read the other investors</span></span></span>
+                <div class="rmini"><sc-for list="{{d.r1}}" as="x" hint-placeholder-count="4"><div class="mrow"><span style="{{x.ls}}">{{x.label}}</span><span class="tr"><span style="position: absolute; left: 0; right: 0; top: 7px; height: 2px; border-radius: 1px; background: rgba(255,255,255,0.08);"></span><span style="{{x.link}}"></span><span style="{{x.from}}"></span><span style="{{x.dot}}"></span><span style="{{x.tick}}"></span></span><span style="{{x.vs}}">{{x.v}}</span></div></sc-for><div class="mscale" aria-hidden="true"><span class="t"><span>0</span><span>10</span></span></div></div>
+                <span style="font-size: 14px; line-height: 1.55; color: #D4CDC3;">{{d.call}}</span>
+              </li>
+              <li class="step">
+                <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;"><span class="node" style="width: 22px; height: 22px; border-radius: 11px; background: #6C6660; color: #F5F2EC; font-size: 11px; display: flex; align-items: center; justify-content: center;">2</span><span style="display: flex; flex-direction: column;"><span style="font-size: 14px; font-weight: 600;">Debate</span><span class="lbl">After reading the other investors</span></span></span>
+                <div class="rmini"><sc-for list="{{d.r2}}" as="x" hint-placeholder-count="4"><div class="mrow"><span style="{{x.ls}}">{{x.label}}</span><span class="tr"><span style="position: absolute; left: 0; right: 0; top: 7px; height: 2px; border-radius: 1px; background: rgba(255,255,255,0.08);"></span><span style="{{x.link}}"></span><span style="{{x.from}}"></span><span style="{{x.dot}}"></span><span style="{{x.tick}}"></span></span><span style="{{x.vs}}">{{x.v}}</span></div></sc-for><div class="mscale" aria-hidden="true"><span class="t"><span>0</span><span>10</span></span></div></div>
+                <span style="display: flex; gap: 10px; align-items: flex-start;"><img src="{{d.vsImg}}" alt="" style="width: 24px; height: 24px; border-radius: 12px; object-fit: cover; object-position: 50% 22%; flex-shrink: 0; margin-top: 1px;"><span style="display: flex; flex-direction: column; gap: 3px;"><span class="lbl">His sharpest disagreement, with {{d.vsShort}}</span><span style="font-size: 14px; line-height: 1.55; color: #D4CDC3;">{{d.dis}}</span></span></span>
+                <span style="display: flex; flex-direction: column; gap: 3px;"><span class="lbl">What he conceded</span><span style="font-size: 14px; line-height: 1.55; color: #D4CDC3;">{{d.con}}</span></span>
+                <span style="display: flex; flex-direction: column; gap: 3px;"><span class="lbl">On whether the AI boom lasts</span><span style="font-size: 14px; line-height: 1.55; color: #D4CDC3;">{{d.crux}}</span></span>
+              </li>
+              <li class="step">
+                <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 12px;"><span class="node" style="width: 22px; height: 22px; border-radius: 11px; background: #F3F1EC; color: #141210; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center;">3</span><span style="display: flex; flex-direction: column;"><span style="font-size: 14px; font-weight: 600;">Final vote</span><span class="lbl">{{d.stance}}</span></span></span>
+                <div class="rmini"><sc-for list="{{d.r3}}" as="x" hint-placeholder-count="4"><div class="mrow"><span style="{{x.ls}}">{{x.label}}</span><span class="tr"><span style="position: absolute; left: 0; right: 0; top: 7px; height: 2px; border-radius: 1px; background: rgba(255,255,255,0.08);"></span><span style="{{x.link}}"></span><span style="{{x.from}}"></span><span style="{{x.dot}}"></span><span style="{{x.tick}}"></span></span><span style="{{x.vs}}">{{x.v}}</span></div></sc-for><div class="mscale" aria-hidden="true"><span class="t"><span>0</span><span>10</span></span></div></div>
+                <span style="font-size: 14px; line-height: 1.55; color: #D4CDC3;">{{d.r3moves}}</span>
+              </li>
+            </ol>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06);">
+            <span style="display: flex; flex-direction: column; gap: 4px; max-width: 620px;"><span class="lbl">His question for you</span><span style="font-size: 17px; font-weight: 500; line-height: 1.45; letter-spacing: -0.01em;">{{d.q}}</span></span>
+            <span style="display: flex; flex-direction: column; gap: 3px;"><span style="font-size: 12px; color: #A39C92;">His reasoning uses <a class="flink" href="#facts">{{d.citedN}}</a>.</span><span style="font-size: 12px; color: #9A938A;">{{d.disclaimer}}</span></span>
+          </div>
+        </div>
+      </sc-if>
+    </section>
+
+    <section class="card" style="padding: 22px 24px; display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <h2 style="margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;">How the council scored the choices</h2>
+        <span style="font-size: 13px; color: #D4CDC3;">{{councilLead}}</span>
+      </div>
+      <sc-for list="{{council}}" as="r" hint-placeholder-count="4">
+        <div class="irow" role="img" aria-label="{{r.aria}}">
+          <span class="l"><span style="{{r.ls}}">{{r.label}}</span><span style="font-size: 12px; color: #A39C92;">{{r.meta}}</span></span>
+          <span class="t"><span style="position: absolute; left: 0; right: 0; top: 9px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.07);"></span><span style="{{r.bar}}"></span></span>
+          <span class="v"><span class="num">{{r.v}}</span></span>
+        </div>
+      </sc-for>
+      <div class="scale" aria-hidden="true"><span class="t"><span>0  Rules it out</span><span>Strong yes  10</span></span></div>
+      <span style="font-size: 12px; line-height: 1.5; color: #9A938A;">{{councilNote}}</span>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { seat: 0, open: true }; }
+  renderVals() {
+    const P = { buffett: '/_blob/c1d510d50623727a52cf24e266cb2f7d', munger: '/_blob/343d8fbfd84bc2af4cc2b71933b4e6cf', damodaran: '/_blob/dcd65421fd24e1e498a0b77279f7fa2f', marks: '/_blob/74b184f2496753cd8977f835545d9927', taleb: '/_blob/71978e7b22b129dcdf5140592dd3210a', druckenmiller: '/_blob/76a13c67ce697cc255b603777754ac63', burry: '/_blob/124646476f6ad834f8da7e4c7c4b7c38' };
+    const OPT = ['Buy all now', 'Start small', 'Wait for $150', 'Pass'];
+    const COUNCIL = [3.6, 6.3, 6.1, 3.8];
+    const REC = 1;
+    const F = {
+      F002: ['Share price', '$182'], F006: ['Data center sales growth', '56%'], F008: ['Top four customers, share of data center sales', '46%'],
+      F009: ['Gross margin', '72.4%'], F012: ['Return on invested capital', '74%'], F014: ['Free cash flow yield', '1.8%'],
+      F018: ['Cash flow growth the price implies, next five years', '24% a year'], F019: ['Value per share, cautious case', '$150'], F021: ['Value per share, hopeful case', '$205'],
+      F029: ['Largest fall on record', '66%'], F030: ['Largest fall in three years', '37%'], F033: ['Price above its 200-day average', '8%'], F035: ['Policy interest rate', '3.63%']
+    };
+    const VC = { 'Agrees': ['#A3C4AA', 'rgba(163,196,170,0.12)'], 'Partly agrees': ['#E8C88F', 'rgba(232,200,143,0.11)'], 'Disagrees': ['#E0A99B', 'rgba(185,122,108,0.16)'] };
+    // Every string below is taken from the example council's round files (room/examples/2026-11-17-nvda-buy), turned to the third person.
+    const SEATS = [
+      { k: 'buffett', name: 'Warren Buffett', short: 'Buffett', lens: 'Moat and owner economics', w: 2, agree: 'Partly agrees', own: 'Endorse with amendment', line: 'Buy the business, not the excitement.', facts: 6,
+        r: [[3, 5, 7, 3], [4, 5, 7, 3], [4, 6, 7, 3]],
+        call: 'Wait for $150. A wonderful business, but he would wait for a price that leaves room for error.',
+        why: [['It is an exceptional business, earning 74% on the capital invested in it.', ['F012']], ['At $182 the price already asks for years of growth. A wonderful business can still be a poor purchase.', ['F002', 'F018']], ['Four customers buy 46% of data center sales, a dependence he wants to understand better.', ['F008']]],
+        risk: 'Paying a full price at the top of a spending cycle.', wrong: 'Gross margin holds above 70% through the next two reports.', now: ['Gross margin now', '72.4%'], q: 'Would you be happy owning this if the market closed for five years?',
+        amend: 'Add more only after two quarters of proof, not one.', kind: 'amend', adopted: true,
+        vs: 'druckenmiller', dis: 'Owning it early only helps if the price leaves room for error. At $182 it leaves little.', con: 'Druckenmiller is right that earnings are growing faster than he assumed.', crux: 'Demand is real. The price is the question.',
+        moves: [[2, 0, 3, 4, 'Earnings are growing faster than he assumed.'], [3, 1, 5, 6, '']] },
+      { k: 'munger', name: 'Charlie Munger', short: 'Munger', lens: 'Folly check', w: 2, agree: 'Partly agrees', own: 'Endorse with amendment', line: 'Know your exit before you enter.', facts: 3,
+        r: [[2, 6, 7, 4], [3, 6, 7, 4], [3, 6, 7, 4]],
+        call: 'Wait for $150. Superb economics, crowded trade.',
+        why: [['Invert it. This goes wrong if the biggest buyers all stop at once, and four of them make up 46% of data center sales.', ['F008']], ['The economics are superb, with returns on capital of 74%.', ['F012']], ['Envy of other people’s gains is a poor reason to buy.', []]],
+        risk: 'Big tech buys because its rivals buy, until it does not.', wrong: 'Data center sales keep growing above 40% a year for four more quarters.', now: ['Data center growth now', '56%'], q: 'What would make you sell?',
+        amend: 'Write down now what would make you sell.', kind: 'amend', adopted: false,
+        vs: 'druckenmiller', dis: 'Momentum is the crowd’s opinion. Four customers at 46% of data center sales is the risk nobody wants to price.', con: 'The returns on capital are as good as any he has seen.', crux: 'A boom that will cool.',
+        moves: [[2, 0, 2, 3, 'The business is better than the crowd deserves.']] },
+      { k: 'damodaran', name: 'Aswath Damodaran', short: 'Damodaran', lens: 'Value against price', w: 3, agree: 'Agrees', own: 'Endorse', line: 'Value is a range. Pay inside it.', facts: 4,
+        r: [[4, 7, 5, 3], [4, 7, 5, 3], [4, 7, 5, 3]],
+        call: 'Start small. A starter position, priced inside his range.',
+        why: [['He values it at $150 to $205 a share. At $182 you are paying for most of the good story already, which argues for a starter, not a pass.', ['F019', 'F021']], ['The price assumes about 24% growth a year for five years. Possible, but it leaves no room for error.', ['F018']], ['Margins of 72% will draw rivals. His story has them falling toward 65% over a decade.', ['F009']]],
+        risk: 'Margins fall faster than his story assumes.', wrong: 'Gross margin falls below 70% within a year.', now: ['Gross margin now', '72.4%'], q: 'Which part of the growth story do you believe, and why?',
+        amend: '', kind: '', adopted: false,
+        vs: 'druckenmiller', dis: 'Momentum is not a valuation. At $182 you are paying for most of the good story already.', con: 'Marks is right that the cycle is a risk. He holds firm on price.', crux: 'Here to stay, but priced as if nothing can go wrong.',
+        moves: [] },
+      { k: 'marks', name: 'Howard Marks', short: 'Marks', lens: 'Risk and the cycle', w: 2, agree: 'Partly agrees', own: 'Endorse with amendment', line: 'The best time to be careful is when everyone else is not.', facts: 4,
+        r: [[3, 6, 7, 4], [3, 6, 7, 4], [3, 6, 7, 4]],
+        call: 'Wait for $150. Late in an exuberant cycle, patience is the edge.',
+        why: [['When everyone agrees a company will win, the price usually says so already. Here it assumes 24% growth a year for five years.', ['F018']], ['Falling interest rates feed the optimism more than the business.', ['F035']], ['It fell 37% within the last three years, and it can again.', ['F030']]],
+        risk: 'Buying where the pendulum swings furthest.', wrong: 'The price falls back toward the cautious-case value of $150.', now: ['Share price now', '$182'], q: 'How would you feel if it halved the month after you bought?',
+        amend: 'Keep the starter small enough that a fall to $150 would not shake you.', kind: 'amend', adopted: true,
+        vs: 'druckenmiller', dis: 'Cheaper money pushes the pendulum further. It does not change what the price assumes.', con: 'Damodaran’s range is fair, and a starter inside it is defensible.', crux: 'A boom that will cool. The question is when.',
+        moves: [] },
+      { k: 'taleb', name: 'Nassim Taleb', short: 'Taleb', lens: 'Ruin and convexity', w: 2, agree: 'Agrees', own: 'Endorse', line: 'Survive first. Size so the worst case is a lesson.', facts: 1,
+        r: [[1, 7, 6, 5], [2, 7, 6, 5], [2, 7, 6, 5]],
+        call: 'Start small, sized so the worst case is survivable.',
+        why: [['The record already holds a 66% fall. Plan for a bigger one.', ['F029']], ['A small starter caps the loss and keeps the upside open.', []], ['A full position now is a bet on averages in a business that runs on spending booms.', []]],
+        risk: 'A concentrated position at a crowded moment.', wrong: 'The position is small enough that a halving costs you little.', now: null, q: 'What share of everything you own would this be?',
+        amend: '', kind: '', adopted: false,
+        vs: 'druckenmiller', dis: 'Being early is fine with a small position and fatal with a big one. The record holds a 66% fall.', con: 'Nothing. The fall on record stands, and size is the only defence.', crux: 'It does not matter which side is right if the position is small.',
+        moves: [[2, 0, 1, 2, '']] },
+      { k: 'druckenmiller', name: 'Stan Druckenmiller', short: 'Druckenmiller', lens: 'Macro and timing', w: 2, agree: 'Agrees', own: 'Endorse', line: 'Own it while money is easy, and watch the central bank.', facts: 3,
+        r: [[8, 8, 4, 2], [7, 8, 4, 2], [7, 8, 4, 2]],
+        call: 'Buy now or start small. He would rather own it early than late.',
+        why: [['Money is getting cheaper and the trend is still up, with the price 8% above its 200-day average.', ['F035', 'F033']], ['Data center sales grew 56%. Earnings are rising faster than the price.', ['F006']], ['Waiting for $150 is waiting for a price the market may never give you.', []]],
+        risk: 'The central bank turns, or the spending cycle peaks.', wrong: 'The price falls below its 200-day average and stays there.', now: ['Price above its 200-day average now', '8%'], q: 'Can you act fast if the trend breaks?',
+        amend: '', kind: '', adopted: false,
+        vs: 'burry', dis: 'Money is getting cheaper and the trend is still up. Better to own it early than wait for a price the market may never give you.', con: 'Taleb is right on size. If he is wrong the fall could be 40%, so a small start beats a full position.', crux: 'Here to stay for at least the next 18 months.',
+        moves: [[2, 0, 8, 7, 'Taleb’s point on size stands.']] },
+      { k: 'burry', name: 'Michael Burry', short: 'Burry', lens: 'The bear case', w: 2, agree: 'Disagrees', own: 'Dissent', line: 'Spending booms like this can end in a single quarter.', facts: 3,
+        r: [[2, 3, 7, 6], [2, 4, 7, 6], [2, 4, 7, 6]],
+        call: 'Wait or pass. The crowd is paying for a boom.',
+        why: [['The four biggest customers make up 46% of data center sales. When a few buyers set demand, it can vanish in a quarter.', ['F008']], ['The price assumes 24% growth a year for five years.', ['F018']], ['A free cash flow yield of 1.8% pays little for the risk.', ['F014']]],
+        risk: 'Big tech pauses its AI spending.', wrong: 'The four biggest customers fall below 40% of data center sales.', now: ['Top four customers now', '46%'], q: 'Who are the four customers, and what do they plan to spend next year?',
+        amend: 'People are paying for a spending boom as if it will last forever.', kind: 'dissent', adopted: false,
+        vs: 'druckenmiller', dis: 'Cheap money explains this price, not the business.', con: 'A small starter does cap the damage, as Taleb says. The price still assumes 24% growth a year.', crux: 'A boom that will cool.',
+        moves: [[2, 1, 3, 4, 'A small position caps the loss.']] }
+    ];
+    const byK = {}; SEATS.forEach((s) => { byK[s.k] = s; });
+    const chipStyle = (v) => `font-size:12px;font-weight:500;border-radius:7px;padding:4px 9px;white-space:nowrap;color:${VC[v][0]};background:${VC[v][1]};`;
+    const BAR = '#C9C2B8';
+    const instrumentRow = (label, v, i, opts) => ({
+      label, v: String(v), sub: opts.sub || '', tag: opts.tag || '',
+      meta: opts.meta != null ? opts.meta : (opts.tag || ''),
+      ls: `font-size:13px;white-space:nowrap;color:${opts.strong ? '#F5F2EC' : '#B5AEA4'};${opts.strong ? 'font-weight:600;' : ''}`,
+      bar: `position:absolute;left:0;top:9px;height:6px;border-radius:3px;width:100%;transform-origin:0 50%;transform:scaleX(${v / 10});background:${opts.fill || BAR};transition:transform .5s cubic-bezier(.32,.72,0,1);`,
+      ghost: opts.ghost != null ? `position:absolute;top:6px;left:calc(${opts.ghost * 10}% - 6px);width:12px;height:12px;border-radius:6px;box-sizing:border-box;border:2px solid #F5F2EC;background:#0F0E0C;box-shadow:0 0 0 2px #0F0E0C;` : 'display:none;',
+      tick: opts.tick != null ? `position:absolute;top:2px;left:calc(${opts.tick * 10}% - 1.5px);width:3px;height:20px;border-radius:1.5px;background:#FF7A38;box-shadow:0 0 0 1.5px #0F0E0C;` : 'display:none;',
+      aria: opts.aria || ''
+    });
+    const councilRows = OPT.map((label, i) => instrumentRow(label, COUNCIL[i], i, { strong: i === REC, tag: i === REC ? 'The council’s pick' : '', aria: `${label}: the council scored ${COUNCIL[i].toFixed(1)} out of 10.` }));
+    councilRows.forEach((r, i) => { r.v = COUNCIL[i].toFixed(1); });
+    const mini = (arr, prev) => OPT.map((label, i) => {
+      const changed = prev && prev[i] !== arr[i];
+      return {
+        label, v: String(arr[i]), note: changed ? `${prev[i]} to ${arr[i]}` : '',
+        ls: `font-size:12px;white-space:nowrap;color:${changed ? '#F5F2EC' : '#9A938A'};${changed ? 'font-weight:500;' : ''}`,
+        dot: `position:absolute;top:3px;left:calc(${arr[i] * 10}% - 5px);width:10px;height:10px;border-radius:5px;background:${changed ? '#F5F2EC' : '#8A837A'};`,
+        from: changed ? `position:absolute;top:3px;left:calc(${prev[i] * 10}% - 5px);width:10px;height:10px;border-radius:5px;box-sizing:border-box;border:1.5px solid #8A837A;` : 'display:none;',
+        vs: `font-family:'JetBrains Mono',monospace;font-size:12px;text-align:right;color:${changed ? '#F5F2EC' : '#9A938A'};`
+      };
+    });
+    const view = (s) => {
+      const fin = s.r[2], start = s.r[0];
+      const top = fin.indexOf(Math.max(...fin));
+      const rows = OPT.map((label, i) => {
+        const moved = start[i] !== fin[i];
+        return instrumentRow(label, fin[i], i, {
+          strong: i === top, ghost: moved ? start[i] : null, tick: COUNCIL[i], sub: `council ${COUNCIL[i].toFixed(1)}`,
+          tag: i === top && i === REC ? 'His top score, and the council’s pick' : i === top ? 'His top score' : i === REC ? 'The council’s pick' : '',
+          meta: `Council ${COUNCIL[i].toFixed(1)}${i === REC ? ', its pick' : ''}${i === top ? ' · His top score' : ''}`,
+          aria: `${label}: ${s.short} scored ${fin[i]} out of 10${moved ? `, ${fin[i] > start[i] ? 'up' : 'down'} from ${start[i]} in round 1` : ''}. The council scored ${COUNCIL[i].toFixed(1)}.`
+        });
+      });
+      const condition = s.kind === 'amend' ? ', with his condition' : '';
+      const bridge = s.kind === 'dissent'
+        ? `His top score is ${OPT[top]}, and he voted against the plan in the final round.`
+        : top === REC
+          ? `Start small is his top score too, and he backed the plan in the final round${condition}.`
+          : `His top score is still ${OPT[top]}, but he backed Start small in the final round${condition}.`;
+      const moves = s.moves.map(([r, o, a, b, why]) => ({ head: `${OPT[o]}, ${a} to ${b}, in round ${r}`, why: why || 'No reason given in his round notes.', whyS: why ? 'font-size:13px;color:#B5AEA4;line-height:1.45;' : 'font-size:13px;color:#77716A;line-height:1.45;' }));
+      const why = s.why.map(([t, fs], i) => ({ n: String(i + 1), t, chips: fs.map((f) => ({ label: F[f][0], value: F[f][1] })) }));
+      const vs = byK[s.vs];
+      const moveText = (r) => s.moves.filter((m) => m[0] === r).map(([, o, a, b]) => `He moved ${OPT[o]} from ${a} to ${b}.`).join(' ');
+      return {
+        img: P[s.k], name: s.name, short: s.short, lens: s.lens, line: s.line, agree: s.agree, chip: chipStyle(s.agree),
+        weightNote: s.w === 3 ? 'His score counts a little more, as the valuation specialist.' : '', hasWeight: s.w === 3,
+        bridge, rows, moves, hasMoves: moves.length > 0, noMoves: moves.length === 0, why, risk: s.risk, wrong: s.wrong, q: s.q,
+        hasNow: !!s.now, nowLabel: s.now ? s.now[0] : '', nowValue: s.now ? s.now[1] : '',
+        hasAmend: s.kind === 'amend', hasDissent: s.kind === 'dissent', amend: s.amend,
+        amendState: s.adopted ? 'Adopted by the council' : 'Not adopted', amendStateS: s.adopted ? 'font-size:12px;font-weight:500;color:#A3C4AA;white-space:nowrap;' : 'font-size:12px;color:#9A938A;white-space:nowrap;',
+        call: s.call, r1: mini(s.r[0]), r2: mini(s.r[1], s.r[0]), r3: mini(s.r[2], s.r[1]),
+        vsImg: P[vs.k], vsShort: vs.short, dis: s.dis, con: s.con, crux: s.crux,
+        r2moves: moveText(2) || 'He held his scores.', r3moves: moveText(3) || 'No change from round 2.',
+        cited: `${s.facts} ${s.facts === 1 ? 'fact' : 'facts'} from the council’s fact sheet`,
+        disclaimer: `A simulation built from ${s.name}’s public work. Not his views, and not investment advice.`
+      };
+    };
+    // A6 and B6 only. The boards before them keep view() and councilRows above.
+    const ACC = '#FF7A38';
+    const stance6 = (s) => s.kind === 'dissent' ? 'Against the plan' : s.kind === 'amend' ? 'With a condition' : 'Backs the plan';
+    const unweighted = OPT.map((_, i) => SEATS.reduce((a, s) => a + s.r[2][i], 0) / SEATS.length);
+    const order6 = COUNCIL.map((v, i) => i).sort((a, b) => COUNCIL[b] - COUNCIL[a]);
+    const second6 = order6[1];
+    const council6 = OPT.map((label, i) => instrumentRow(label, COUNCIL[i], i, {
+      strong: i === REC, tag: i === REC ? 'The council’s pick' : '', fill: i === REC ? '#F3F1EC' : '#8A837A',
+      aria: `${label}: the council scored ${COUNCIL[i].toFixed(1)} out of 10.`
+    }));
+    council6.forEach((r, i) => { r.v = COUNCIL[i].toFixed(1); });
+    const councilLead6 = `${OPT[REC]} leads ${OPT[second6]} by ${(Number(COUNCIL[REC].toFixed(1)) - Number(COUNCIL[second6].toFixed(1))).toFixed(1)}.`;
+    const councilNote6 = `A weighted average of the seven final scores. Damodaran’s counts 1.5 times, as the valuation specialist. Unweighted, ${OPT[REC]} still leads, ${unweighted[REC].toFixed(2)} to ${unweighted[second6].toFixed(2)}.`;
+    const dotRow6 = (label, fin, start, c, bg, opts) => {
+      const moved = start !== fin, lo = Math.min(start, fin), hi = Math.max(start, fin);
+      return {
+        label, v: String(fin), meta: opts.meta || '',
+        ls: `font-size:13px;white-space:nowrap;color:${opts.strong ? '#F5F2EC' : '#B5AEA4'};${opts.strong ? 'font-weight:600;' : ''}`,
+        tick: `position:absolute;top:3px;left:calc(${c * 10}% - 1px);width:2px;height:18px;border-radius:1px;background:#9A938A;box-shadow:0 0 0 1px ${bg};`,
+        link: moved ? `position:absolute;top:11px;height:2px;left:${lo * 10}%;width:${(hi - lo) * 10}%;background:rgba(255,122,56,0.5);` : 'display:none;',
+        ring: moved ? `position:absolute;top:6px;left:calc(${start * 10}% - 6px);width:12px;height:12px;border-radius:6px;box-sizing:border-box;border:2px solid #9A938A;background:${bg};` : 'display:none;',
+        dot: `position:absolute;top:5px;left:calc(${fin * 10}% - 7px);width:14px;height:14px;border-radius:7px;background:${ACC};box-shadow:0 0 0 2px ${bg};`,
+        aria: opts.aria || ''
+      };
+    };
+    const mini6 = (arr, prev, bg, withCouncil) => OPT.map((label, i) => {
+      const changed = prev && prev[i] !== arr[i];
+      return {
+        label, v: String(arr[i]),
+        ls: `font-size:12px;white-space:nowrap;color:${changed ? '#F5F2EC' : '#9A938A'};${changed ? 'font-weight:500;' : ''}`,
+        tick: withCouncil ? `position:absolute;top:1px;left:calc(${COUNCIL[i] * 10}% - 1px);width:2px;height:14px;border-radius:1px;background:#9A938A;box-shadow:0 0 0 1px ${bg};` : 'display:none;',
+        link: changed ? `position:absolute;top:7px;height:2px;left:${Math.min(prev[i], arr[i]) * 10}%;width:${Math.abs(arr[i] - prev[i]) * 10}%;background:rgba(255,122,56,0.5);` : 'display:none;',
+        dot: `position:absolute;top:3px;left:calc(${arr[i] * 10}% - 5px);width:10px;height:10px;border-radius:5px;background:${ACC};box-shadow:0 0 0 2px ${bg};`,
+        from: changed ? `position:absolute;top:3px;left:calc(${prev[i] * 10}% - 5px);width:10px;height:10px;border-radius:5px;box-sizing:border-box;border:1.5px solid #9A938A;background:${bg};` : 'display:none;',
+        vs: `font-size:12px;text-align:right;font-variant-numeric:tabular-nums;color:${changed ? '#F5F2EC' : '#9A938A'};${changed ? 'font-weight:600;' : ''}`
+      };
+    });
+    const cvS6 = 'font-weight:600;color:#F5F2EC;font-variant-numeric:tabular-nums;';
+    const view6 = (s, bg) => {
+      const b = view(s), fin = s.r[2], start = s.r[0];
+      const top = fin.indexOf(Math.max(...fin));
+      const fix = (t) => s.k === 'damodaran' ? t.replace('Margins of 72% ', 'Margins of 72.4% ') : t;
+      const why = s.why.map(([t, fs], i) => {
+        const text = fix(t);
+        return { n: String(i + 1), t: text, chips: fs.map((f) => ({ label: F[f][0], value: F[f][1], cvS: cvS6 })) };
+      });
+      return Object.assign(b, {
+        stance: stance6(s), why,
+        rows: OPT.map((label, i) => dotRow6(label, fin[i], start[i], COUNCIL[i], bg, {
+          strong: i === top, meta: `Council ${COUNCIL[i].toFixed(1)}`,
+          aria: `${label}: ${s.short} scored ${fin[i]} out of 10${start[i] !== fin[i] ? `, ${fin[i] > start[i] ? 'up' : 'down'} from ${start[i]} in round 1` : ''}. The council scored ${COUNCIL[i].toFixed(1)}.`
+        })),
+        moves: b.moves.map((m, j) => ({ head: m.head, why: s.moves[j][4], hasWhy: !!s.moves[j][4] })),
+        weightNote: s.w === 3 ? 'His score counts 1.5 times in the council average, as the valuation specialist.' : '',
+        r1: mini6(s.r[0], null, bg, false), r2: mini6(s.r[1], s.r[0], bg, false), r3: mini6(s.r[2], s.r[1], bg, true),
+        citedN: `${s.facts} ${s.facts === 1 ? 'fact' : 'facts'} from the council’s fact sheet`
+      });
+    };
+    const cards6 = () => SEATS.map((s) => ({ s, stance: stance6(s), chip: chipStyle(s.agree) }));
+
+    const i = this.state.seat;
+    const d = view6(SEATS[i], '#13120F');
+    const go = (n) => this.setState({ seat: (n + SEATS.length) % SEATS.length, open: true });
+    const cards = SEATS.map((s, j) => {
+      const on = this.state.open && j === i;
+      return {
+        img: P[s.k], short: s.short, agree: s.agree, stance: stance6(s), chip: chipStyle(s.agree),
+        expanded: on ? 'true' : 'false', more: on ? 'Showing below' : 'Reasoning',
+        aria: `${s.name}: ${stance6(s).toLowerCase()}. ${on ? 'Hide' : 'Show'} reasoning.`,
+        toggle: () => this.setState(on ? { open: false } : { seat: j, open: true })
+      };
+    });
+    return {
+      d, cards, council: council6, councilLead: councilLead6, councilNote: councilNote6, pos: String(i + 1), panelClass: 'panel sw' + (i % 2), open: this.state.open, seatsClass: this.state.open ? 'seats dim' : 'seats',
+      prev: () => go(i - 1), next: () => go(i + 1), close: () => this.setState({ open: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

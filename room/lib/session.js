@@ -78,6 +78,7 @@ export function parseCard(text) {
     question: f['QUESTION FOR THE INVESTOR'] ?? null,
     disagree: f['I DISAGREE MOST WITH'] ?? null,
     concede: f['I CONCEDE'] ?? null,
+    onCruxes: f['ON THE CRUXES'] ?? null,
     moved: f.MOVED ?? null,
     conditions: f['CONDITIONS FOR YES'] ?? null,
     vote: f.VOTE ?? null,

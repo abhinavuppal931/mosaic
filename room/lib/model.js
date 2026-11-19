@@ -1,7 +1,7 @@
 // Turn a parsed session (lib/session.js) into everything the page shows. Pure functions,
 // shared by the server, the journal and the tests. Every number comes from the seats' option
 // scores in the round files; nothing here is typed in by hand.
-import { seatInfo } from './seats.js';
+import { seatInfo, SEATS } from './seats.js';
 import * as C from './copy.js';
 
 export const STEPS = ['Brief', 'Data', 'Round 1, blind', 'Round 2, debate', 'Round 3, final scores', 'Vote', 'Verdict'];
@@ -407,6 +407,192 @@ function unitedNote(recO, lo, hi, n, unscored) {
   return `${range} ${C.joinNames(unscored.map((x) => x.short))} did not score this option.`;
 }
 
+/* ---------- The investor spotlight (B6) ---------- */
+
+/** "Endorse with amendment" -> "amend". The VOTE words only name the stance; the colour stays the score-derived agreement. */
+export function stanceOf(vote) {
+  const v = String(vote || '').toLowerCase();
+  if (!v.trim()) return null;
+  if (/dissent|against|reject|oppose/.test(v)) return 'dissent';
+  if (/amend|condition/.test(v)) return 'amend';
+  if (/endorse|support|back|yes|for\b/.test(v)) return 'endorse';
+  return null;
+}
+export const STANCE_TEXT = { endorse: 'Backs the plan', amend: 'With a condition', dissent: 'Against the plan' };
+
+const timesText = (r) => (Math.abs(r - 2) < 0.01 ? 'twice' : `${String(Math.round(r * 100) / 100)} times`);
+/** "The valuation specialist; the call turns on..." -> "the valuation specialist" (only a noun phrase reads after "as"). */
+const asReason = (reason) => {
+  const r = C.lowerFirst(C.clean(reason || '').split(/[;.,]/)[0].trim());
+  return /^(the|a|an)\s/.test(r) ? `, as ${r}` : '';
+};
+
+/** One summary row: the final score (dot), round 1 (ring, joined by a line when it moved) and the council (tick). */
+export function dotRow(label, fin, start, council, opts = {}) {
+  const moved = isNum(start) && isNum(fin) && start !== fin;
+  return {
+    label, v: isNum(fin) ? String(fin) : '', fin, start: moved ? start : null, moved, council, councilText: C.f1(council),
+    lo: moved ? Math.min(start, fin) : null, hi: moved ? Math.max(start, fin) : null, strong: Boolean(opts.strong),
+    aria: `${opts.who} scored ${label} ${fin} out of 10${moved ? `, ${fin > start ? 'up' : 'down'} from ${start} in round 1` : ''}. The council scored ${C.f1(council)}.`,
+  };
+}
+
+/**
+ * Everything the investor spotlight shows for each seat, from the round cards, the cruxes and the
+ * verdict: the stance, the summary dot rows against the council, the case, the moves and each round.
+ */
+export function spotlight(ctx, { final, scored, rec, agreement }) {
+  const { s, council, seats, options, factsById, info } = ctx;
+  const rounds = roundNums(s.rounds);
+  const last = rounds[rounds.length - 1];
+  const score = (id) => scored.find((x) => x.id === id)?.score;
+  const jurySize = jury(options, final).length;
+  const minW = Math.min(...seats.map((y) => y.weight));
+  const heavier = seats.filter((x) => x.weight > minW);
+  const crux = s.cruxes?.cruxes?.[0]?.question ? C.sentence(s.cruxes.cruxes[0].question) : '';
+  const amendments = Array.isArray(s.verdict?.amendments) ? s.verdict.amendments : null;
+  const recO = options.find((o) => o.id === rec);
+  const hasVotes = seats.some((x) => stanceOf(s.rounds[last]?.find((c) => c.seat === x.key)?.vote));
+  const fact = (id) => {
+    const f = factsById.get(id);
+    return f && f.value !== null && f.value !== undefined ? { label: C.factLabel(f), value: C.factValue(f), title: factView(f).title } : null;
+  };
+  const factsIn = (raw) => [...new Set(String(raw || '').match(/\bF\d{3,4}\b/g) || [])].map(fact).filter(Boolean);
+
+  const panels = seats.map((x, i) => {
+    const p = C.pronouns(Boolean(SEATS[x.key]));
+    const P = { He: C.capFirst(p.he), His: C.capFirst(p.his) };
+    const tell = (t) => C.capFirst(C.thirdPerson(C.sentence(t), p));
+    const cards = rounds.map((n) => ({ n, card: s.rounds[n].find((c) => c.seat === x.key) || null })).filter((r) => r.card);
+    const first = cards[0]?.card || null;
+    const lastCard = cards[cards.length - 1]?.card || null;
+    const st = final[x.key];
+    const abstain = Boolean(!st || st.abstain);
+    const a = agreement[x.key];
+    const kind = abstain ? null : stanceOf(s.rounds[last]?.find((c) => c.seat === x.key)?.vote);
+    const stance = abstain ? 'Too hard to call' : kind ? STANCE_TEXT[kind] : a ? AGREEMENT_TEXT[a] : 'No vote';
+    const startSt = stateAt(s.rounds, rounds[0])[x.key];
+    const start = startSt && !startSt.abstain ? startSt.scores : {};
+    const fin = !abstain ? st.scores : {};
+    const top = !abstain ? seatTop(fin, options, rec) : null;
+    const topStart = Object.keys(start).length ? seatTop(start, options, rec) : null;
+    const topO = options.find((o) => o.id === top);
+
+    let bridge = '';
+    const condition = kind === 'amend' ? ', with his condition'.replace('his', p.his) : '';
+    if (abstain) bridge = `${P.He} called it too hard and did not score the choices.`;
+    else if (kind === 'dissent') bridge = `${P.His} top score is ${topO.label}, and ${p.he} voted against the plan in the final round.`;
+    else if (kind && top === rec) bridge = `${topO.label} is ${p.his} top score too, and ${p.he} backed the plan in the final round${condition}.`;
+    else if (kind) bridge = `${P.His} top score is ${top === topStart ? 'still ' : ''}${topO.label}, but ${p.he} backed ${recO.label} in the final round${condition}.`;
+    else if (top === rec) bridge = `${topO.label} is ${p.his} top score, the same as the council’s pick.`;
+    else bridge = `${P.His} top score is ${topO.label}. The council picked ${recO.label}.`;
+
+    let cond = null;
+    const amendText = lastCard?.amendment ? tell(lastCard.amendment) : '';
+    if (kind === 'amend' && amendText) {
+      const listed = amendments?.find((m) => m.seat === x.key);
+      cond = { kind: 'amend', label: `The condition ${p.he} asked for`, text: amendText, state: amendments ? (listed?.adopted ? 'Adopted by the council' : 'Not adopted') : '', adopted: Boolean(listed?.adopted) };
+    } else if (kind === 'dissent' && amendText) cond = { kind: 'dissent', label: `Why ${p.he} voted against`, text: amendText };
+
+    const rows = abstain ? [] : options.map((o) => dotRow(o.label, fin[o.id], start[o.id], score(o.id), { strong: o.id === top, who: x.short }));
+    const hasMoves = rows.some((r) => r.moved);
+
+    let councilNote;
+    if (heavier.includes(x)) councilNote = `${P.His} score counts ${timesText(x.weight / minW)} in the council average${asReason(council.weights?.[x.key]?.reason)}.`;
+    else if (heavier.length === 1) councilNote = `The council score is a weighted average of the ${C.word(jurySize)} final scores. ${heavier[0].short}’s counts ${timesText(heavier[0].weight / minW)}${asReason(council.weights?.[heavier[0].key]?.reason)}.`;
+    else if (heavier.length > 1) councilNote = `The council score is a weighted average of the ${C.word(jurySize)} final scores. Scores from ${C.joinNames(heavier.map((y) => y.short))} count more.`;
+    else councilNote = `The council score is the average of the ${C.word(jurySize)} final scores.`;
+
+    // Where the seat changed its mind: every option that moved between one round and the next.
+    const moves = [];
+    for (let k = 1; k < rounds.length; k += 1) {
+      const a0 = stateAt(s.rounds, rounds[k - 1])[x.key], b0 = stateAt(s.rounds, rounds[k])[x.key];
+      if (!a0 || !b0 || a0.abstain || b0.abstain) continue;
+      const card = s.rounds[rounds[k]].find((c) => c.seat === x.key);
+      // The reason in MOVED ("yes, B from 8 to 9, because ...") belongs to the option it names first.
+      const movedText = String(card?.moved || '');
+      const because = movedText.match(/\bbecause\s+(.+)$/i)?.[1];
+      const named = movedText.match(/\b([A-H])\s+from\b/)?.[1];
+      const roundMoves = [];
+      for (const o of options) {
+        const u = a0.scores[o.id], w = b0.scores[o.id];
+        if (!isNum(u) || !isNum(w) || u === w) continue;
+        roundMoves.push({ round: rounds[k], id: o.id, from: u, to: w, head: `${o.label}, ${u} to ${w}, in round ${rounds[k]}`, why: '' });
+      }
+      if (because && roundMoves.length) (roundMoves.find((m) => m.id === named) || roundMoves[0]).why = tell(because);
+      moves.push(...roundMoves);
+    }
+
+    // The rounds, as steps: mini dot rows against the round before, the council on the last one.
+    const steps = cards.map(({ n, card }, k) => {
+      const now = stateAt(s.rounds, n)[x.key];
+      const before = k ? stateAt(s.rounds, cards[k - 1].n)[x.key] : null;
+      const isLast = k === cards.length - 1;
+      const scoresNow = now && !now.abstain ? now.scores : null;
+      const prev = before && !before.abstain ? before.scores : null;
+      const mini = scoresNow ? options.map((o) => {
+        const v = scoresNow[o.id], u = prev?.[o.id];
+        const changed = isNum(u) && isNum(v) && u !== v;
+        return { label: o.label, v: isNum(v) ? String(v) : '', at: v, from: changed ? u : null, changed, council: isLast && rounds.length > 1 ? score(o.id) : null };
+      }) : [];
+      const blocks = [];
+      if (card.abstain) blocks.push({ text: tell(card.whyTooHard || card.oneLine || 'Too hard to call from this seat.') });
+      else if (n === rounds[0]) blocks.push({ text: tell(C.spellOptions(C.clean(card.call || card.why[0] || ''), options)) });
+      else if (n === 3 || (isLast && !card.disagree && !card.concede)) {
+        // The final vote: what moved since the round before.
+        const ms = moves.filter((m) => m.round === n).map((m) => `${P.He} moved ${options.find((o) => o.id === m.id).label} from ${m.from} to ${m.to}.`);
+        blocks.push({ text: ms.join(' ') || `No change from round ${cards[k - 1]?.n ?? n - 1}.` });
+      } else {
+        const vs = card.answering ? info(card.answering) : null;
+        if (card.rebuttal || card.disagree) blocks.push({ label: vs ? `${P.His} sharpest disagreement, with ${vs.short}` : `${P.His} sharpest disagreement`, text: tell(card.rebuttal || card.disagree), face: vs ? { key: vs.key, img: vs.img, initials: vs.initials, name: vs.name } : null });
+        if (card.concede) blocks.push({ label: `What ${p.he} conceded`, text: tell(card.concede) });
+        if (card.onCruxes) blocks.push({ label: crux || 'On the big disagreement', text: tell(card.onCruxes) });
+        if (isLast) {
+          const ms = moves.filter((m) => m.round === n).map((m) => `${P.He} moved ${options.find((o) => o.id === m.id).label} from ${m.from} to ${m.to}.`);
+          if (ms.length) blocks.push({ text: ms.join(' ') });
+        }
+      }
+      const title = n === rounds[0] ? 'Opening' : n === 3 || (n === last && card.vote) ? 'Final vote' : 'Debate';
+      const sub = title === 'Opening' ? `Written alone, before ${p.he} read the other investors` : title === 'Debate' ? 'After reading the other investors' : stance;
+      return { n: k + 1, round: n, title, sub, mini, council: mini.some((m) => m.council !== null), blocks, final: isLast };
+    });
+
+    const used = new Set();
+    for (const { card } of cards) for (const id of card.factIds || []) if (fact(id)) used.add(id);
+    const wrongRaw = first?.wrongIf || '';
+    const nowF = factsIn(wrongRaw)[0] || null;
+    const line = lastCard?.oneLine || s.verdict?.share_line?.seat_lines?.[x.key] || first?.call || first?.whyTooHard || '';
+
+    return {
+      key: x.key, name: x.name, short: x.short, img: x.img, initials: x.initials, role: x.role,
+      pos: i + 1, total: seats.length, abstain,
+      stance, stanceKind: kind, agreement: a, agreementText: a ? AGREEMENT_TEXT[a] : 'No vote', cls: agreementClass(a),
+      line: C.sentence(line === first?.call ? C.spellOptions(C.clean(line), options) : line).replace(/[^.!?]$/, (m) => `${m}.`),
+      bridge, condition: cond,
+      rows, hasMoves, keptNote: !abstain && !hasMoves && rounds.length > 1 ? `${P.He} kept every score from round 1 to the final ${hasVotes ? 'vote' : 'round'}.` : '',
+      councilNote,
+      why: (first?.why || []).map((t) => ({ text: tell(t), chips: factsIn(t) })),
+      risk: first?.risk ? tell(first.risk) : '',
+      wrong: wrongRaw ? tell(wrongRaw) : '',
+      now: nowF ? { label: nowF.label.split(',')[0].length <= 28 ? `${nowF.label.split(',')[0]} now` : 'Today', value: nowF.value, title: nowF.title } : null,
+      moves,
+      steps,
+      question: first?.question ? C.sentence(first.question) : '',
+      facts: used.size,
+      factsText: `${used.size} ${used.size === 1 ? 'fact' : 'facts'} from the council’s fact sheet`,
+      disclaimer: `A simulation built from ${x.name}’s public work. Not ${p.his} views, and not investment advice.`,
+      labels: { line: `Simulated, written from ${p.his} public work`, scored: `How ${p.he} scored the choices`, case: `${P.His} case`, risk: `The risk ${p.he} sees`, wrong: `${P.He} would be wrong if`, moves: `Where ${p.he} changed ${p.his} mind`, rounds: `How ${p.he} got there`, his: `${P.His} score`, question: `${P.His} question for you`, uses: `${P.His} reasoning uses` },
+    };
+  });
+
+  return {
+    heading: hasVotes ? 'How each investor voted on the plan' : 'Where each investor landed',
+    hint: 'Select an investor to open their reasoning here.',
+    sub: `Each investor scored all ${C.word(options.length)} choices from 0 to 10, ${hasVotes ? 'then voted on the council’s plan' : 'then the council picked a plan'}.`,
+    panels,
+  };
+}
+
 /** The verdict view. Null until verdict.json exists. */
 export function verdictView(ctx, problems) {
   const { s, council, seats, options, info, ev, cfg, recheck } = ctx;
@@ -565,6 +751,7 @@ export function verdictView(ctx, problems) {
       tiles,
     },
     counts,
+    spotlight: spotlight(ctx, { final, scored, rec, agreement }),
     sources: { lines: sourceLines(s.pack), notConnected: ev.notConnectedText },
   };
 }

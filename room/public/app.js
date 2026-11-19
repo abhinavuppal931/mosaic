@@ -24,6 +24,8 @@ const ICONS = {
   copy: '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
   play: '<polygon points="6 3 20 12 6 21 6 3"/>',
   square: '<rect width="14" height="14" x="5" y="5" rx="2"/>',
+  chevronLeft: '<path d="m15 18-6-6 6-6"/>',
+  chevronRight: '<path d="m9 18 6-6-6-6"/>',
   arrowLeft: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
   arrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   lock: '<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
@@ -53,6 +55,10 @@ const S = {
   journal: null,
   drawer: false,
   saving: false,
+  seat: null, // the investor open in the spotlight (verdict view), from the hash
+  seatFx: null, // what to do after the next render: scroll to the panel, focus the heading or a card
+  animSeat: null,
+  swap: 0,
 };
 
 /* ---------------- Data ---------------- */
@@ -108,7 +114,7 @@ async function loadJournal() {
 
 /* ---------------- Routing ---------------- */
 
-async function loadExample(name) {
+async function loadExample(name, seat = null) {
   try {
     const r = await fetch(`/api/examples/${encodeURIComponent(name)}`);
     if (!r.ok) throw new Error('not found');
@@ -117,33 +123,83 @@ async function loadExample(name) {
     S.data = st;
     S.view = st.model?.verdict ? 'verdict' : 'live';
     S.userChose = true;
+    S.seat = seat;
+    if (seat) S.seatFx = { scroll: true, focus: 'panel', force: true };
     stopReplay();
-    render();
     window.scrollTo(0, 0);
+    render();
   } catch {
     location.hash = '#/journal';
   }
 }
 
+/** The hash of the verdict with an investor open (or closed, with no key): #/verdict/buffett, #/example/<name>/buffett. */
+function seatHash(key) {
+  const base = S.example ? `#/example/${S.example}` : '#/verdict';
+  return key ? `${base}/${key}` : base;
+}
+
+/** Open, switch or close the spotlight from the hash, without reloading the view. */
+function setSeat(key, fx) {
+  const prev = S.seat;
+  S.seat = key || null;
+  S.navKey = undefined;
+  S.userChose = true;
+  if (S.seat === prev) return (S.pendingFx = null);
+  S.seatFx = fx || (S.seat ? { scroll: true, focus: 'panel' } : { focus: 'card', key: prev });
+  render();
+}
+
+/** A page opened on an investor's hash gets a closed entry under it, so Back closes the panel. */
+function deepLink(base) {
+  if (S.booted) return;
+  const full = location.hash;
+  history.replaceState(null, '', base);
+  history.pushState(null, '', full);
+}
+
 function route() {
   const v = location.hash.replace(/^#\/?/, '');
-  const ex = v.match(/^example\/([\w.-]+)$/);
-  if (ex) return loadExample(ex[1]);
+  S.navKey = undefined;
+  const first = !S.booted;
+  S.booted = true;
+  if (first) {
+    const m = v.match(/^(example\/[\w.-]+|verdict)\/[\w-]+$/);
+    if (m) {
+      S.booted = false;
+      deepLink(`#/${m[1]}`);
+      S.booted = true;
+    }
+  }
+  const ex = v.match(/^example\/([\w.-]+)(?:\/([\w-]+))?$/);
+  if (ex) {
+    if (S.example === ex[1] && S.data?.model) return setSeat(ex[2] || null, S.pendingFx);
+    return loadExample(ex[1], ex[2] || null);
+  }
   if (!v && S.example) {
     S.example = null;
     S.data = S.live;
   }
-  if (v === 'live' || v === 'verdict' || v === 'journal') {
+  const vs = v.match(/^verdict(?:\/([\w-]+))?$/);
+  if (vs && S.view === 'verdict' && S.data?.ok && S.data.model?.verdict) return setSeat(vs[1] || null, S.pendingFx);
+  if (vs) {
+    S.view = 'verdict';
+    S.userChose = true;
+    S.seat = vs[1] || null;
+    if (S.seat) S.seatFx = { scroll: true, focus: 'panel', force: true };
+  } else if (v === 'live' || v === 'journal') {
     S.view = v;
     S.userChose = true;
+    S.seat = null;
   } else {
     S.userChose = false;
     S.view = S.data?.model?.verdict ? 'verdict' : 'live';
+    S.seat = null;
   }
   if (S.view === 'journal') loadJournal();
   if (S.view !== 'live') stopReplay();
-  render();
   window.scrollTo(0, 0);
+  render();
 }
 window.addEventListener('hashchange', route);
 
@@ -169,6 +225,10 @@ function render() {
 
 function afterRender() {
   if (S.view === 'live') layoutStage();
+  if (S.view === 'verdict') {
+    afterSeat();
+    markStuck();
+  }
   renderDrawer();
 }
 
@@ -341,6 +401,17 @@ function layoutStage() {
     beam.style.height = `${live.y + 0.28 * H}px`;
   }
 }
+/** Mark the spotlight while its header is stuck to the top, so the header gets an edge. */
+let stickRaf;
+function markStuck() {
+  const p = $('#spotlight');
+  if (p) p.classList.toggle('stuck', p.getBoundingClientRect().top < 0);
+}
+window.addEventListener('scroll', () => {
+  cancelAnimationFrame(stickRaf);
+  stickRaf = requestAnimationFrame(markStuck);
+}, { passive: true });
+
 let rz;
 window.addEventListener('resize', () => {
   cancelAnimationFrame(rz);
@@ -384,7 +455,6 @@ function verdictView(m, d) {
     ? `<span class="big">None</span><span class="note">${h(st.bias.note)}</span>`
     : `<span class="big">${h(st.bias.word)}</span><div class="bars">${bars([{ label: 'Before', v: st.bias.before, pct: st.bias.beforePct, cls: 'before' }, { label: 'After', v: st.bias.after, pct: st.bias.afterPct, cls: 'after' }])}</div><span class="note">${h(st.bias.note)}</span>`;
 
-  const votes = v.votes.map((r) => `<div class="card vote">${face(r, 'av', `${r.name}, simulated seat`)}<span class="nm">${h(r.short)}</span><span class="agree ${h(r.cls)}">${h(r.vote)}</span><span class="why">${h(r.note)}</span></div>`).join('');
   const sc = v.scorecard;
   const cls = (c) => ['n', c.rec ? 'rec' : '', c.v === null ? '' : c.v >= 7 ? 'hi' : c.v <= 3 ? 'lo' : c.v >= 5 ? 'mid' : ''].join(' ').trim();
   const rows = sc.rows.map((r) => `<tr><th scope="row"><span class="who">${face(r, '', '')}<span class="fn">${h(r.name)}</span><span class="sn">${h(r.short)}</span></span></th>${r.cells.map((c) => `<td class="${cls(c)}">${c.v ?? '<span class="sr">No score</span>'}</td>`).join('')}<td class="st"><span class="agree ${h(r.cls)}" title="${h(r.note)}">${h(r.vote)}</span></td></tr>`).join('');
@@ -421,7 +491,7 @@ function verdictView(m, d) {
       <div class="card stat"><span class="k">Your bias check</span>${bias}</div>
     </section>
     ${v.banner ? `<div class="banner"><span><i></i>${h(v.banner)}</span><button type="button" class="cmd" data-act="cmd" title="Copy the command">${h(v.cmd)}</button></div>` : ''}
-    <section class="votes" aria-label="Where each investor landed" style="--n:${n}">${votes}</section>
+    ${spotlightSection(v, n)}
     <section class="card sec" aria-label="How each investor scored the choices">
       <div class="sec-h"><h2>How each investor scored the choices</h2><span class="sub">${h(sc.note)}</span></div>
       <div class="scroller" tabindex="0" aria-label="Scores table, scrolls sideways"><table class="score">
@@ -454,6 +524,146 @@ function verdictView(m, d) {
   </main>
   <footer class="foot"><span>The investors are simulations built from their public work. Not affiliated with or endorsed by them.</span><span>Grades a decision process. Not investment advice.</span></footer>
   </div>`;
+}
+
+/* ---------- Investor spotlight (B6) ---------- */
+
+/** The cards row, with the open investor's reasoning in place under it. */
+function spotlightSection(v, n) {
+  const sp = v.spotlight;
+  const open = sp.panels.find((p) => p.key === S.seat) || null;
+  if (!open) S.seat = null;
+  const cards = sp.panels.map((p) => {
+    const on = open?.key === p.key;
+    const aria = `${p.name}: ${p.stance.toLowerCase()}${p.agreementText && p.agreementText !== p.stance ? `, ${p.agreementText.toLowerCase()} by the scores` : ''}. ${on ? 'Hide' : 'Show'} reasoning.`;
+    return `<button type="button" class="card vote" data-act="seat" data-key="${h(p.key)}" aria-expanded="${on}" aria-controls="spotlight" aria-label="${h(aria)}" title="${h(`${p.agreementText}. ${v.votes.find((r) => r.key === p.key)?.note || ''}`)}">
+      ${face(p, 'av', '')}<span class="nm">${h(p.short)}</span><span class="agree ${h(p.cls)}">${h(p.stance)}</span><span class="more">${on ? 'Showing below' : 'Reasoning'}</span><span class="notch" aria-hidden="true"></span>
+    </button>`;
+  }).join('');
+  let anim = '';
+  if (open && open.key !== S.animSeat) anim = ` sw${(S.swap ^= 1)}`;
+  S.animSeat = open?.key || null;
+  return `<section class="sp-sec" aria-labelledby="seats-h">
+    <div class="sp-h"><h2 id="seats-h">${h(sp.heading)}</h2><span class="hint">${h(sp.hint)}</span></div>
+    <span class="sp-sub">${h(sp.sub)}</span>
+    <div class="votes sp-cards${open ? ' dim' : ''}" style="--n:${n}">${cards}</div>
+    ${open ? spotPanel(open, anim) : ''}
+  </section>`;
+}
+
+const pct = (x) => `${Math.max(0, Math.min(10, Number(x))) * 10}%`;
+
+/** A summary dot row: dot for the final score, ring for round 1 joined by a line, grey council tick. */
+function dotRow(r) {
+  return `<div class="irow${r.strong ? ' strong' : ''}" role="img" aria-label="${h(r.aria)}">
+    <span class="l"><span class="o">${h(r.label)}</span><span class="m">Council ${h(r.councilText)}</span></span>
+    <span class="t"><span class="dtrack"></span>${r.moved ? `<span class="dlink" style="left:${pct(r.lo)};width:${(r.hi - r.lo) * 10}%"></span><span class="dring" style="left:${pct(r.start)}"></span>` : ''}${r.fin !== null && r.fin !== undefined ? `<span class="ddot" style="left:${pct(r.fin)}"></span>` : ''}<span class="dtick" style="left:${pct(r.council)}"></span></span>
+    <span class="v">${h(r.v)}</span>
+  </div>`;
+}
+
+function miniRows(step) {
+  if (!step.mini.length) return '';
+  const rows = step.mini.map((x) => `<div class="mrow${x.changed ? ' ch' : ''}"><span class="o">${h(x.label)}</span><span class="tr"><span class="dtrack"></span>${x.changed ? `<span class="dlink" style="left:${pct(Math.min(x.from, x.at))};width:${Math.abs(x.at - x.from) * 10}%"></span><span class="dring" style="left:${pct(x.from)}"></span>` : ''}${x.v !== '' ? `<span class="ddot" style="left:${pct(x.at)}"></span>` : ''}${x.council !== null ? `<span class="dtick" style="left:${pct(x.council)}"></span>` : ''}</span><span class="v">${h(x.v)}</span></div>`).join('');
+  return `<div class="rmini" aria-hidden="true">${rows}<div class="mscale"><span class="t"><span>0</span><span>10</span></span></div></div>`;
+}
+
+function spotPanel(p, anim) {
+  const L = p.labels;
+  const cond = p.condition
+    ? `<div class="sp-box">${p.condition.kind === 'amend' ? `<span class="row"><span class="sp-lbl">${h(p.condition.label)}</span>${p.condition.state ? `<span class="state${p.condition.adopted ? ' on' : ''}">${h(p.condition.state)}</span>` : ''}</span>` : `<span class="sp-lbl">${h(p.condition.label)}</span>`}<span class="t15">${h(p.condition.text)}</span></div>`
+    : '';
+  const scored = p.rows.length
+    ? `<div class="sp-grp sc">
+        <div class="sp-grp" style="gap:8px"><span style="display:flex;flex-direction:column;gap:2px"><h4 class="sp-h3">${h(L.scored)}</h4><span class="sp-lbl">0 rules a choice out, 10 is a strong yes.</span></span>
+        <span class="sp-key"><span><i class="fin"></i>Final score</span>${p.hasMoves ? '<span><i class="ring"></i>Round 1</span>' : ''}<span><i class="tick"></i>Council</span></span></div>
+        ${p.rows.map(dotRow).join('')}
+        <div class="dscale" aria-hidden="true"><span class="t"><span>0  Rules it out</span><span>Strong yes  10</span></span></div>
+        ${p.keptNote ? `<span class="sp-note">${h(p.keptNote)}</span>` : ''}
+        <span class="sp-note">${h(p.councilNote)}</span>
+      </div>`
+    : `<p class="sp-note">${h(p.councilNote)}</p>`;
+  const why = p.why.map((w, i) => `<div class="sp-why"><span class="n">${i + 1}</span><span class="tx"><span>${h(w.text)}</span>${w.chips.length ? `<span class="sp-chips">${w.chips.map((c) => `<span class="fchip" title="${h(c.title)}">${h(c.label)}<b>${h(c.value)}</b></span>`).join('')}</span>` : ''}</span></div>`).join('');
+  const duo = p.risk || p.wrong
+    ? `<div class="sp-duo">${p.risk ? `<div class="sp-box"><span class="sp-lbl">${h(L.risk)}</span><span class="t14">${h(p.risk)}</span></div>` : ''}${p.wrong ? `<div class="sp-box"><span class="sp-lbl">${h(L.wrong)}</span><span class="t14">${h(p.wrong)}</span>${p.now ? `<span class="fchip" title="${h(p.now.title)}">${h(p.now.label)}<b>${h(p.now.value)}</b></span>` : ''}</div>` : ''}</div>`
+    : '';
+  const moves = p.moves.length
+    ? `<div class="sp-box mv"><span class="sp-lbl">${h(L.moves)}</span>${p.moves.map((m) => `<span class="mvi"><b>${h(m.head)}</b>${m.why ? `<span>${h(m.why)}</span>` : ''}</span>`).join('')}</div>`
+    : '';
+  const steps = p.steps.map((st) => `<li class="rstep${st.final ? ' final' : ''}">
+      <span class="head"><span class="node">${st.n}</span><span class="ttl"><b>${h(st.title)}</b><span class="sp-lbl">${h(st.sub)}</span></span></span>
+      ${miniRows(st)}
+      ${st.blocks.map((b) => (b.face
+        ? `<span class="blk face">${face(b.face, 'av', '')}<span class="in"><span class="sp-lbl">${h(b.label)}</span><span class="say">${h(b.text)}</span></span></span>`
+        : `<span class="blk">${b.label ? `<span class="sp-lbl">${h(b.label)}</span>` : ''}<span class="say">${h(b.text)}</span></span>`)).join('')}
+    </li>`).join('');
+  const hasCouncil = p.steps.some((st) => st.council);
+  return `<div id="spotlight" class="spot${anim}" role="region" aria-label="${h(p.name)}, reasoning" data-key="${h(p.key)}">
+    <div class="sp-top">
+      <div class="sp-id">${face(p, 'av', '')}<div class="tx">
+        <span class="nmrow"><h3 class="sp-name" id="spot-name" tabindex="-1"><span class="full">${h(p.name)}</span><span class="short">${h(p.short)}</span></h3><span class="agree ${h(p.cls)}">${h(p.stance)}</span></span>
+        <span class="psub">Simulated<span class="lens"> investor</span>  ·  ${p.pos} of ${p.total}${p.role ? `<span class="lens">  ·  ${h(p.role)}</span>` : ''}</span>
+      </div></div>
+      <span class="sp-ctl"><button type="button" class="ibtn" data-act="seat-prev" aria-label="Previous investor">${icon('chevronLeft')}</button><button type="button" class="ibtn" data-act="seat-next" aria-label="Next investor">${icon('chevronRight')}</button><button type="button" class="ibtn" data-act="seat-close" aria-label="Close">${icon('x')}</button></span>
+    </div>
+    <div class="sp-cols">
+      <div class="sp-col">
+        ${p.line ? `<div class="sp-grp q"><p class="sp-quote">“${h(p.line.replace(/[.]$/, '.'))}”</p><span class="sp-lbl">${h(L.line)}</span></div>` : ''}
+        <div class="sp-grp"><p class="sp-p">${h(p.bridge)}</p>${cond}</div>
+        ${scored}
+      </div>
+      <div class="sp-col r">
+        ${why ? `<h4 class="sp-h3">${h(L.case)}</h4>${why}` : ''}
+        ${duo}
+        ${moves}
+      </div>
+    </div>
+    ${steps ? `<div class="sp-rounds"><span class="hd"><h4 class="sp-h3">${h(L.rounds)}</h4><span class="sp-key sm"><span><i class="fin"></i>${h(L.his)}</span><span><i class="ring"></i>Round before</span>${hasCouncil ? '<span><i class="tick"></i>Council, final round</span>' : ''}</span></span><ol class="rsteps" style="--k:${p.steps.length}">${steps}</ol></div>` : ''}
+    <div class="sp-foot">
+      ${p.question ? `<span class="qq"><span class="sp-lbl">${h(L.question)}</span><b>${h(p.question)}</b></span>` : ''}
+      <span class="src"><span>${h(L.uses)} <button type="button" class="flink" data-act="sources" aria-haspopup="dialog">${h(p.factsText)}</button>.</span><span class="dis">${h(p.disclaimer)}</span></span>
+    </div>
+  </div>`;
+}
+
+/** Move to another investor (by offset), or open or close one, through the hash so Back works. */
+function goSeat(key, fx) {
+  S.pendingFx = fx || null;
+  S.navKey = key || null; // where the hash is heading, so a quick second key press steps from there
+  const target = seatHash(key);
+  if (location.hash === target) return;
+  location.hash = target;
+}
+function stepSeat(d) {
+  const panels = S.data?.model?.verdict?.spotlight?.panels || [];
+  const i = panels.findIndex((p) => p.key === (S.navKey !== undefined ? S.navKey : S.seat));
+  if (i < 0 || !panels.length) return;
+  goSeat(panels[(i + d + panels.length) % panels.length].key, { scroll: true, focus: 'panel' });
+}
+
+/** After a render: scroll the panel's top into view, keep the selected card in the strip, and move focus. */
+function afterSeat() {
+  const fx = S.seatFx;
+  S.seatFx = null;
+  S.pendingFx = null;
+  if (!fx) return;
+  const panel = $('#spotlight');
+  const strip = $('.sp-cards');
+  const card = strip && $(`.vote[data-key="${CSS.escape(S.seat || fx.key || '')}"]`, strip);
+  if (card && strip.scrollWidth > strip.clientWidth) {
+    const left = card.offsetLeft - (strip.clientWidth - card.offsetWidth) / 2;
+    strip.scrollTo({ left: Math.max(0, left), behavior: reduced() ? 'auto' : 'smooth' });
+  }
+  if (panel && fx.scroll) {
+    const top = panel.getBoundingClientRect().top;
+    if (fx.force || top < 0 || top > window.innerHeight - 200) window.scrollTo({ top: window.scrollY + top - 12, behavior: reduced() || fx.force ? 'auto' : 'smooth' });
+  }
+  if (fx.focus === 'panel') $('#spot-name')?.focus({ preventScroll: true });
+  else if (fx.focus === 'card' && card) {
+    const r = card.getBoundingClientRect();
+    if (r.top < 0 || r.bottom > window.innerHeight) window.scrollTo({ top: window.scrollY + r.top - 80, behavior: 'auto' });
+    card.focus({ preventScroll: true });
+  }
 }
 
 /* ---------- Journal ---------- */
@@ -784,7 +994,11 @@ document.addEventListener('click', (e) => {
   const el = e.target.closest('[data-act]');
   if (!el) return;
   const act = el.dataset.act;
-  if (act === 'sources') openDrawer();
+  if (act === 'seat') goSeat(el.dataset.key === S.seat ? null : el.dataset.key, el.dataset.key === S.seat ? { focus: 'card', key: S.seat } : { scroll: true, focus: 'panel' });
+  else if (act === 'seat-prev') stepSeat(-1);
+  else if (act === 'seat-next') stepSeat(1);
+  else if (act === 'seat-close') goSeat(null, { focus: 'card', key: S.seat });
+  else if (act === 'sources') openDrawer();
   else if (act === 'close-drawer') closeDrawer();
   else if (act === 'save') save();
   else if (act === 'share') share().catch(() => toast('The share card could not be made.', false));
@@ -796,6 +1010,13 @@ document.addEventListener('click', (e) => {
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && S.drawer) return closeDrawer();
+  if (S.view === 'verdict' && S.seat && !S.drawer && !e.altKey && !e.ctrlKey && !e.metaKey && !e.target.closest('input, textarea, select, .scroller')) {
+    if (e.key === 'Escape') return goSeat(null, { focus: 'card', key: S.seat });
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      return stepSeat(e.key === 'ArrowRight' ? 1 : -1);
+    }
+  }
   if (S.drawer && e.key === 'Tab') {
     const f = [...$('#drawer').querySelectorAll('button, [tabindex="0"]')];
     if (f.length) {

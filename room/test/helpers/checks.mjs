@@ -35,7 +35,7 @@ export function layoutProblems() {
       out.push(`text clipped in <${el.tagName.toLowerCase()} class="${el.className}">: "${el.textContent.trim().slice(0, 60)}"`);
     }
     // Spilling out of the nearest card or panel.
-    const box = el.closest('.card, .panel, .lean-card, .speech, .banner, .sources, .checkin, .vote, .tile, .fact, .chip, .agree, .btn');
+    const box = el.closest('.card, .panel, .spot, .sp-box, .fchip, .lean-card, .speech, .banner, .sources, .checkin, .vote, .tile, .fact, .chip, .agree, .btn');
     if (box && box !== el && !scrollers(el)) {
       const a = el.getBoundingClientRect();
       const b = box.getBoundingClientRect();
