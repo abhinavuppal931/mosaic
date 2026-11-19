@@ -203,3 +203,64 @@ export function horizonYears(h) {
 
 const OPS = { '<': 'Under', '<=': 'At or under', '>': 'Over', '>=': 'At or over' };
 export const opWord = (op) => OPS[op] || '';
+
+/* ---------- The investor spotlight: a seat's own words, retold ---------- */
+
+/** Pronouns for a seat. The Room's own seat table is all men; any other seat reads "they". */
+export const pronouns = (known) => (known
+  ? { he: 'he', his: 'his', him: 'him', is: 'is', has: 'has', was: 'was', does: 'does', s: true }
+  : { he: 'they', his: 'their', him: 'them', is: 'are', has: 'have', was: 'were', does: 'do', s: false });
+
+const MODALS = new Set(['would', 'will', 'can', 'cannot', 'could', 'should', 'must', 'might', 'may', 'did', 'had', 'shall']);
+const ADVERBS = new Set(['still', 'also', 'only', 'never', 'always', 'just', 'really', 'now', 'often', 'rarely', 'usually', 'simply', 'even', 'already', 'certainly', 'probably']);
+const PAST = new Set(['thought', 'said', 'saw', 'held', 'kept', 'made', 'took', 'got', 'bought', 'sold', 'found', 'felt', 'knew', 'ran', 'put', 'set', 'cut', 'let', 'meant', 'left', 'lost', 'met', 'paid', 'spent', 'told', 'won', 'wrote', 'came', 'went', 'gave', 'began', 'chose', 'fell', 'grew', 'heard', 'led', 'rose', 'stood', 'understood', 'read', 'drew', 'built', 'brought', 'caught', 'taught', 'sought']);
+
+/** "value" -> "values", "watch" -> "watches", "buy" -> "buys", "carry" -> "carries". */
+function third(verb) {
+  if (/(s|sh|ch|x|z|o)$/.test(verb)) return `${verb}es`;
+  if (/[^aeiou]y$/.test(verb)) return `${verb.slice(0, -1)}ies`;
+  return `${verb}s`;
+}
+
+/**
+ * Retell a seat's first-person line in the third person, as the board does: "I value it" ->
+ * "he values it", "my story" -> "his story", "If I am wrong" -> "If he is wrong". Modal and past
+ * verbs keep their form; "you" (the investor) is left alone.
+ */
+export function thirdPerson(text, p = pronouns(true)) {
+  const cap = (w, like) => (/^[A-Z]/.test(like) ? capFirst(w) : w);
+  let s = String(text || '');
+  s = s.replace(/\bI'm\b/g, `${p.he} ${p.is}`).replace(/\bI've\b/g, `${p.he} ${p.has}`).replace(/\bI'd\b/g, `${p.he} would`).replace(/\bI'll\b/g, `${p.he} will`);
+  s = s.replace(/\bI don't\b/g, `${p.he} ${p.s ? "doesn't" : "don't"}`);
+  s = s.replace(/\bI((?:\s+(?:[a-z]+))+)/g, (all, rest) => {
+    const words = rest.trim().split(/\s+/);
+    let i = 0;
+    while (i < words.length - 1 && ADVERBS.has(words[i])) i += 1;
+    const w = words[i];
+    let v = w;
+    if (w === 'am') v = p.is;
+    else if (w === 'was') v = p.was;
+    else if (w === 'have') v = p.has;
+    else if (w === 'do') v = p.does;
+    else if (p.s && !MODALS.has(w) && !PAST.has(w) && !/ed$/.test(w) && /^[a-z]+$/.test(w)) v = third(w);
+    words[i] = v;
+    return ` ${p.he} ${words.join(' ')}`.replace(/^ /, '');
+  });
+  s = s.replace(/\bmyself\b/gi, (m) => cap(p.s ? 'himself' : 'themselves', m)).replace(/\bmy\b/gi, (m) => cap(p.his, m)).replace(/\bmine\b/gi, (m) => cap(p.s ? 'his' : 'theirs', m)).replace(/\bme\b/g, p.him);
+  // A sentence that now opens with the pronoun gets its capital back.
+  s = s.replace(/(^|[.!?]\s+)(he|they|his|their)\b/g, (m, a, b) => a + capFirst(b));
+  return s;
+}
+
+/**
+ * Spell out the option letters a call opens with: "C. A wonderful business" -> "Wait for $150.
+ * A wonderful business"; "A or B. ..." -> "Buy all now or start small. ...".
+ */
+export function spellOptions(text, options) {
+  const label = (id) => options.find((o) => o.id === id)?.label;
+  return String(text || '').replace(/^\s*([A-H])((?:\s*(?:,|or|and)\s*[A-H]\b)*)(?=[.,;:])/, (all, first, rest) => {
+    if (!label(first)) return all;
+    const more = rest.replace(/\b([A-H])\b/g, (m, id) => (label(id) ? lowerFirst(label(id)) : m));
+    return capFirst(label(first)) + more;
+  });
+}

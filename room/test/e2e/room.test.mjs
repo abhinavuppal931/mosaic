@@ -136,7 +136,10 @@ test('every control on the verdict works', { skip, timeout: 90_000 }, async () =
 
     // Every number on screen comes from the seat arrays.
     assert.deepEqual(await page.locator('.score tfoot td.n').allTextContents(), ['3.6', '6.3', '6.1', '3.8']);
-    assert.deepEqual(await page.locator('.votes .agree').allTextContents(), ['Partly agrees', 'Partly agrees', 'Agrees', 'Partly agrees', 'Agrees', 'Agrees', 'Disagrees']);
+    // The cards name each final-round stance, coloured by the score-derived agreement, which the scorecard spells out.
+    assert.deepEqual(await page.locator('.votes .agree').allTextContents(), ['With a condition', 'With a condition', 'Backs the plan', 'With a condition', 'Backs the plan', 'Backs the plan', 'Against the plan']);
+    assert.deepEqual(await page.locator('.votes .agree').evaluateAll((els) => els.map((e) => e.classList[1])), ['partly', 'partly', 'agrees', 'partly', 'agrees', 'agrees', 'disagrees']);
+    assert.deepEqual(await page.locator('.score .st .agree').allTextContents(), ['Partly agrees', 'Partly agrees', 'Agrees', 'Partly agrees', 'Agrees', 'Agrees', 'Disagrees']);
     assert.equal(await page.locator('.ticks i.on').count(), 39);
     assert.equal(await page.locator('.ticks i').count(), 41);
     assert.equal(await page.locator('.dotplot .dot').count(), 7);
