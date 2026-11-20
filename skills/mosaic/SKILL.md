@@ -2,7 +2,7 @@
 name: mosaic
 description: Use when an investor wants a buy, add, hold, trim or sell decision, an investment thesis, a portfolio's risk, or a macro question debated by a council of simulated investing legends, or says "mosaic", "convene the council", "what would Buffett, Munger or Taleb say", "stress test my thesis", "should I buy/sell X", "recheck NVDA", or "show my journal". Seats built from each investor's public work (Buffett, Munger, Damodaran, Marks, Taleb, Druckenmiller and Burry by default; Lynch, Ackman, Kantesaria, Sleep, Mauboussin and Tom Lee on call) argue over three rounds from one sourced data pack; the Chair returns a graded verdict with the dissent kept, a pre-mortem, kill criteria and a re-check date, then journals it. Also one-seat consults ("ask taleb ..."), board settings, rechecks and the thesis journal. Education, not investment advice.
 allowed-tools: Bash(node "${CLAUDE_PLUGIN_ROOT}/data/cli.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/score.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/check-citations.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs":*) Bash(node "${CLAUDE_PLUGIN_ROOT}/room/server.js":*) Read(~/.mosaic/**) Write(~/.mosaic/**) Edit(~/.mosaic/**)
-argument-hint: "<decision, thesis, holdings or question> [--quick] [--all] [--seats buffett,taleb,...] | ask <seat> <question> | board | recheck <TICKER> | journal | room"
+argument-hint: "<decision, thesis, holdings or question> [--quick] [--all] [--seats buffett,taleb,...] | ask <seat> <question> | board | profile | recheck <TICKER> | journal | room"
 ---
 
 # Mosaic: the council
@@ -22,7 +22,7 @@ You are the **Chair**. You never argue a side and never add your own view. You r
 
   Use the printed `home`, `sessions` and `journal` folders for the rest of the run and pass `--home "<home>"` to every Mosaic command. The home is `~/.mosaic` for a new install, clone or marketplace alike (an older clone or plugin data folder that already holds sessions keeps being used, and `MOSAIC_HOME` overrides it). It survives plugin updates.
 - **Run every command on its own**: one `node ...` command per Bash call, with no `cd`, `&&`, pipes, `;` or shell variables, and always quote paths (they may contain spaces). This skill pre-approves exactly `node "${CLAUDE_PLUGIN_ROOT}/<script>" ...` for its five scripts (`data/cli.mjs`, `scripts/score.mjs`, `scripts/check-citations.mjs`, `scripts/journal.mjs`, `room/server.js`) and file writes under `~/.mosaic`, so commands written exactly this way, with the quoted plugin root first, run without asking the user; anything else asks.
-- References (read once before the first council): `references/intake.md`, `references/seats.md`, `references/round-prompts.md`, `references/scoring.md`, `references/report-template.md`, `references/live-room.md`. They sit next to this file.
+- References (read once before the first council): `references/onboarding.md`, `references/intake.md`, `references/seats.md`, `references/round-prompts.md`, `references/scoring.md`, `references/report-template.md`, `references/live-room.md`. They sit next to this file.
 - The roster: `skills/mosaic/roster.json` under the plugin root. Seat agents: `agents/seat-<key>.md`. Brains: `skills/mosaic/brains/<slug>/`.
 
 ## Commands
@@ -31,13 +31,14 @@ Parse the arguments in `$ARGUMENTS`.
 
 | Input | What runs |
 |---|---|
-| `/mosaic` (nothing else) | First run: the check below, start the Room (it shows finished example councils until there is one of the user's own), then ask for the decision in one line |
-| `/mosaic <anything>` | Full council: first-run check, intake, data pack, board, three rounds, verdict, journal |
+| `/mosaic` (nothing else) | The check below and start the Room (it shows finished example councils until there is one of the user's own). The first time, ask the onboarding questions (`references/onboarding.md`). Then ask for the decision in one line |
+| `/mosaic <anything>` | Full council (or a quick one when the user's profile says so): first-run check, intake, data pack, board, three rounds, verdict, journal |
 | `--quick` | Four seats including at least one guard; Rounds 1 and 2; Round 3 only if `score.mjs` says the scores did not converge |
 | `--seats a,b,c` | Exactly those seats (keys from the roster), three rounds. If Taleb or Burry is left out, warn once that a guard is missing, then proceed |
 | `--all` | Every seat with an agent file, capped at nine (keep the guards, then the highest weights) |
 | `ask <seat> <question>` | One seat, one answer, single-seat prompt, no scoring, no session needed |
 | `board` | Show and change the default board and the ask/auto/default setting (below). No council |
+| `profile` | Show the user's preferences and ask the onboarding questions again (`references/onboarding.md`). No council |
 | `recheck <TICKER>` | Quick council against the journal entry, leading with what changed since the last pack |
 | `journal` | `node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs" list --home <home>`: tracked theses, verdicts, next re-check, DUE flags |
 | `room` | Start the Room (see "The Room") |
@@ -52,14 +53,15 @@ It prints a "First-run check" block and ends with "Ready." (exit 0) or the items
 
 - **Node.js FIX**: stop. Tell the user the next step it printed, word for word. Nothing else in Mosaic runs without Node 20 or later.
 - **Mosaic home FIX**: stop and give the next step it printed.
-- **SEC contact FIX**: a macro question does not need it, so go on. For a ticker or portfolio council, ask the user once in chat for their name and email ("The SEC asks every client to identify itself; this is sent only to sec.gov"), then write `{ "providers": { "sec-edgar": { "contact": "<name> <email>" } } }` into `<home>/mosaic.config.json` with your file tools (merge with what is there) and run the check again. If they would rather not, go on: the pack will show filings as missing.
-- **Ready**: say nothing about the check and go straight to intake.
+- **SEC contact FIX**: a macro question does not need it, so go on. On a bare `/mosaic` with a `NEW` preferences line, leave it to the onboarding follow-up, which asks only when the user's answers need it. For a ticker or portfolio council, ask the user once in chat for their name and email ("The SEC asks every client to identify itself; this is sent only to sec.gov"), then write `{ "providers": { "sec-edgar": { "contact": "<name> <email>" } } }` into `<home>/mosaic.config.json` with your file tools (merge with what is there) and run the check again. If they would rather not, go on: the pack will show filings as missing.
+- **Ready**: say nothing about the check and go straight on.
+- **Your preferences** is information only and never stops a council. `NEW`: run onboarding as `references/onboarding.md` says for what the user typed (a bare `/mosaic` gets the onboarding batch; a request goes straight to intake with at most one onboarding question folded in). `ok`: read `<home>/profile.json` once and apply it for the rest of the run ("Using the profile" in `onboarding.md`). What the user says in this run always wins over the profile.
 
 Run the check again only when the user says they fixed something.
 
 ## Step 1: Intake and brief
 
-Follow `references/intake.md`. In short: classify the job (decision, stress test, portfolio review, macro question), build the options, and fill the brief (under 300 words): decision, options, horizon, position context (owned, cost basis relative to today's price, share of portfolio as a percent), what triggered the decision today, and the lean with its reason. Ask for missing items in **one** AskUserQuestion batch (at most four questions; the board question goes in the same batch). If the user says "just run it", state assumptions and mark them `(assumed)`.
+Follow `references/intake.md`. In short: classify the job (decision, stress test, portfolio review, macro question), build the options, and fill the brief (under 300 words): decision, options, horizon, position context (owned, cost basis relative to today's price, share of portfolio as a percent), what triggered the decision today, and the lean with its reason. Ask for missing items in **one** AskUserQuestion batch (at most four questions; the board question goes in the same batch). The profile fills what it can first: its horizon (marked `(from your profile)`), its council size, and its focus as the tie-breaker between jobs, so those are not asked again. If the user says "just run it", state assumptions and mark them `(assumed)`.
 
 Record the **trigger** in the brief. Keep the **lean** out of every file the seats can read until Round 2: hold it in your own notes, and write it to `lean.json` only after Round 1 is saved. Quote the user's own words for the bias scan (FOMO, anchoring on cost basis, sunk cost, recency).
 
@@ -84,7 +86,7 @@ Record the **trigger** in the brief. Keep the **lean** out of every file the sea
 Pick seats and weights per `references/seats.md` and the board setting in `roster.json`:
 
 1. `--seats` or `--all` on this run wins.
-2. Otherwise `"board"` in `roster.json`: `"ask"` recommends a board and asks (one AskUserQuestion, header "Board": Recommended board (Recommended), Default board, Everyone when nine or fewer); `"auto"` seats the recommendation and says who and why in one line; `"default"` seats the `"default"` list.
+2. Otherwise `"board"` in the user's profile, when set, and else `"board"` in `roster.json`: `"ask"` recommends a board and asks (one AskUserQuestion, header "Board": Recommended board (Recommended), Default board, Everyone when nine or fewer); `"auto"` seats the recommendation and says who and why in one line; `"default"` seats the `"default"` list.
 3. Taleb (ruin guard) and Burry (bear guard) sit on every council unless the user names seats without them.
 4. Every seat needs an agent file (`agents/seat-<key>.md`) and a brain folder. Skip and name any that do not have both.
 5. Weights 1 to 3 per seat with a one-line reason; exactly one or two seats at 3.
@@ -131,7 +133,7 @@ It checks every quoted line attributed to a source id against that seat's brain 
 3. Check the verdict: run `check-citations.mjs` again, now that `verdict.md` exists. Remove every quote or fact id it fails, rerun until it passes, and list what you removed in `verdict.json` `removed_by_citation_check`.
 4. Write `verdict.json` last (the Room treats it as the end of the council), then run `check-citations.mjs` once more: it also reads every string in `verdict.json`.
 5. Journal it: `node "${CLAUDE_PLUGIN_ROOT}/scripts/journal.mjs" add "<session>" --home "<home>"`.
-6. Chat summary, under 200 words: the label and the council's call, then on the next line exactly "Mosaic grades how a decision was made. It is not investment advice.", then option scores on one line, the three arguments that carried the room (one line each, with the seat), the sharpest dissent (one line, with the seat), kill criteria, the re-check date, evidence quality and lean pull, and the path to `verdict.md`.
+6. Chat summary, under 200 words, shaped by the profile's experience (`onboarding.md`, "Using the profile"; it never changes the council or the scores): the label and the council's call, then on the next line exactly "Mosaic grades how a decision was made. It is not investment advice.", then option scores on one line, the three arguments that carried the room (one line each, with the seat), the sharpest dissent (one line, with the seat), kill criteria, the re-check date, evidence quality and lean pull, and the path to `verdict.md`.
 
 ## Recheck (`recheck <TICKER>`)
 
@@ -142,7 +144,7 @@ It checks every quoted line attributed to a source id against that seat's brain 
 
 ## Board settings (`board`)
 
-Show the roster as a short table (seat, role, default board or on call), then the current setting in plain words. Ask what to change with AskUserQuestion when the user has not said. Edit only `"board"` and `"default"` in `roster.json`; keep one to nine seats on the default board, always using keys that exist. Never remove a seat from `"seats"`.
+Show the roster as a short table (seat, role, default board or on call), then the current setting in plain words. Ask what to change with AskUserQuestion when the user has not said. Save the ask/auto/default setting as `"board"` in `<home>/profile.json` (it survives plugin updates; create the file as `onboarding.md` describes if there is none). Edit only `"default"` in `roster.json`; keep one to nine seats on the default board, always using keys that exist. Never remove a seat from `"seats"`.
 
 ## The Room (`room`)
 

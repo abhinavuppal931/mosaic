@@ -6,7 +6,7 @@ From your first run to a verdict you can share, in one minute. To install it, se
 
 ## 1. First run
 
-`/mosaic` checks your setup, then opens the Room on a finished example, so there is something to see straight away.
+`/mosaic` checks your setup, then opens the Room on a finished example, so there is something to see straight away. The first time, it asks four quick questions (how much you know, what you want help with, how long you usually hold, and how big a council you want), so later councils ask less and explain at your level. Skip any of them; `/mosaic profile` changes them later.
 
 ![The Room on first run, showing the finished NVIDIA example verdict](tour/01-first-run.webp)
 
