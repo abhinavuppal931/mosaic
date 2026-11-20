@@ -49,6 +49,8 @@ Always include a `none` option. If the user brought one idea, add the smaller ve
 
 Use one AskUserQuestion call for everything missing (at most four questions), in this order of priority: the lean, position context, horizon, the board. Do not ask for what the pack already knows (prices, financials, dates). If the user says "just run it", fill gaps with assumptions and say so.
 
+The user's profile (`<home>/profile.json`, see `onboarding.md`) answers some of these up front: its horizon (unless it is `ask`) goes into the brief marked `(from your profile)`, its council size picks the mode, and its board setting picks the board, so do not ask for those again. On a user's first council with no profile yet, add the onboarding Experience question if the batch has a free slot.
+
 ## 5. Behavioral scan
 
 While reading the request, note sentences that suggest:

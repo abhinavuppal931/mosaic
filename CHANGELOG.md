@@ -16,3 +16,4 @@ All notable changes are listed here. The format follows [Keep a Changelog](https
 - The Room: a local web app that plays a council live, then shows the verdict, the journal, a share card and a PDF. Three finished example councils (NVIDIA buy, Costco sell, Microsoft sizing).
 - `/newseat`: builds a new seat from free public sources.
 - First-run setup: a first-run check, the example councils, the `~/.mosaic` home for sessions, journal and keys, and a one-line install.
+- Onboarding: the first `/mosaic` asks four quick, skippable questions (experience, what you want help with, usual horizon, council size) and saves them to `~/.mosaic/profile.json`. Every later council uses them, so it asks less and explains at the right level. `/mosaic profile` changes them.

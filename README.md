@@ -40,7 +40,7 @@ claude plugin install mosaic --marketplace abhinavuppal931/mosaic
 claude "/mosaic"
 ```
 
-The second command starts Claude Code and runs Mosaic. It checks your setup, opens the Room in your browser on a finished example council, and asks for your decision.
+The second command starts Claude Code and runs Mosaic. It checks your setup, opens the Room in your browser on a finished example council, asks four quick questions so the council fits how you invest (skip any you like), and then asks for your decision.
 
 Next time, start Claude Code with `claude`, then type `/mosaic` **inside Claude Code**, at its `>` prompt, not in the terminal.
 
@@ -83,6 +83,7 @@ Type these **inside Claude Code**:
 | `/mosaic recheck NVDA` | A quick council on what changed since your last verdict |
 | `/mosaic journal` | Your saved decisions and when to look at each again |
 | `/mosaic board` | Choose which investors sit on your council by default |
+| `/mosaic profile` | See or change your answers to the first-run questions |
 | `/mosaic room` | Open the Room |
 | `/newseat <investor>` | Add an investor of your own, built from their public work |
 

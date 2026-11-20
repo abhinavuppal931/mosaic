@@ -17,6 +17,7 @@ import readline from 'node:readline/promises';
 import { parseArgs } from './lib/args.mjs';
 import { paths as resolvePaths } from './lib/paths.mjs';
 import { loadConfig, loadSeries, writeUserConfigValue } from './lib/config.mjs';
+import { readProfile, profileSummary } from './lib/profile.mjs';
 import { createEnv } from './lib/env.mjs';
 import { loadAdapters } from './providers/index.mjs';
 import { createRouter } from './router.mjs';
@@ -173,7 +174,14 @@ export function firstRunCheck(p, config, env, { nodeVersion = process.versions.n
   items.push(src
     ? { name: 'SEC contact', ok: true, detail: src === 'env' ? `set (${config.providers['sec-edgar'].contactEnv})` : 'set (user config)' }
     : { name: 'SEC contact', ok: false, detail: 'not set; company filings are skipped until it is (macro questions work without it)', next: `Let /mosaic ask for your name and email now, or run node ${cli} setup in a terminal.` });
-  return { ready: items.every((i) => i.ok), items };
+  // Preferences never block a council: a missing profile only means /mosaic asks its first-run questions.
+  const pr = readProfile(p.home);
+  items.push(pr.state === 'ok'
+    ? { name: 'Your preferences', ok: true, info: true, label: 'ok', detail: profileSummary(pr.profile) }
+    : pr.state === 'broken'
+      ? { name: 'Your preferences', ok: true, info: true, label: 'NEW', detail: `${pr.file} could not be read (${pr.error}); /mosaic asks the first-run questions again` }
+      : { name: 'Your preferences', ok: true, info: true, label: 'NEW', detail: 'not set yet; /mosaic asks a few quick questions the first time' });
+  return { ready: items.every((i) => i.ok), items, profile: pr.state };
 }
 
 function status(p, config) {
@@ -181,7 +189,7 @@ function status(p, config) {
   const check = firstRunCheck(p, config, env);
   console.log('First-run check');
   for (const i of check.items) {
-    console.log(`  ${i.name.padEnd(24)} ${i.ok ? 'ok' : 'FIX'}  ${i.detail}`);
+    console.log(`  ${i.name.padEnd(24)} ${i.label || (i.ok ? 'ok' : 'FIX')}  ${i.detail}`);
     if (i.next) console.log(`  ${''.padEnd(24)} next step: ${i.next}`);
   }
   const fix = check.items.filter((i) => !i.ok).length;

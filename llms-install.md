@@ -29,7 +29,7 @@ Follow the path that matches the agent you are. Run each command on its own, and
    - If port 4731 is taken by something else, it moves to the next free port and prints that link instead.
 6. **Hand over.** The plugin's `/mosaic` command works in a new Claude Code session, or after reloading plugins in this one. Tell the person, in plain words:
    - "Type `/reload-plugins`, then `/mosaic`. Or, in a new terminal, run `claude "/mosaic"`."
-   - `/mosaic` checks their setup, then asks for their decision. For example: `/mosaic I plan to buy NVIDIA for a three-year hold`.
+   - `/mosaic` checks their setup, asks four quick questions so the council fits them (each can be skipped), then asks for their decision. For example: `/mosaic I plan to buy NVIDIA for a three-year hold`.
    - The first time, it asks for a name and email for the SEC, which asks every client to identify itself. Both are sent only to sec.gov.
 
 Do not ask the person for API keys. Mosaic works with free data sources by default.
@@ -65,7 +65,7 @@ A council runs inside Claude Code. You can still show the person what Mosaic loo
 ## Check it worked
 
 - The Room link opens a page with a finished council. The Journal page lists three example councils.
-- In Claude Code, `/mosaic` (or `/mosaic:mosaic`) starts with a first-run check and then asks for a decision.
+- In Claude Code, `/mosaic` (or `/mosaic:mosaic`) starts with a first-run check, asks four quick questions the first time, and then asks for a decision.
 
 ## If something fails
 
